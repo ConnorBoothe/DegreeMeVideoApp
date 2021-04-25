@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+#root{
+  /* min-height:100vh; */
+  /* width:80%!important; */
+  background-color: #282c34;
+  overflow-x: hidden!important;
+
+}
+.App {
+  min-height:100vh;
+  overflow-x: hidden!important;
+  
+}
+body {
+  width:100%;
+  overflow-x: hidden!important;
+}

@@ -1,0 +1,20 @@
+.progress-container {
+    background-color:#d4d4d4!important;
+    width:300px!important;
+}
+.progressBar {
+    /* width:50%; */
+    height:15px;
+    background-color:#d4d4d4!important;
+    border-radius:5px;
+}
+.upload-status {
+    background-color:#5cb85c!important;
+    color:#5cb85c!important;
+    height:15px;
+    border-radius:5px;
+}
+.progress-text {
+    text-align:right;
+    width:300px
+}

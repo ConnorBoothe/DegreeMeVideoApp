@@ -1,0 +1,64 @@
+.video-upload-container {
+    width:30%;
+    min-width:200px;
+    margin-left:auto;
+    margin-right:auto;
+    display:inline-block;
+    text-align:center!important;
+    margin-top:70px;
+}
+.description{
+    width:100%;
+    outline:0;
+    border-radius:10px;
+}
+.upload-link {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.video-upload-container ul {
+    text-align:center!important;
+    padding:0!important;
+
+}
+.video-upload-container ul li {
+    list-style-type:none;
+    width:100%;
+    text-align:left;
+}
+.video-upload-container ul li p {
+    color:white;
+    margin-top:5px;
+    margin-bottom:0px;
+    text-align:left;
+}
+.video-upload-container ul li input {
+    border-radius:10px;
+    height:35px;
+    width:100%;
+    outline:none!important;
+    border:none;
+}
+.video-upload-title {
+    color:white;
+    font-size:25px;
+}
+.add-video{
+    width:100%;
+    border-radius:20px;
+}
+.uploading {
+    display:inline-block;
+}
+.not-uploading {
+    display:none;
+}
+.error{
+    color:#dc3545!important;
+    text-align:center!important;
+    padding-top:10px!important;
+    font-size:20px;
+}
+.file-input{
+    color:white;
+}
