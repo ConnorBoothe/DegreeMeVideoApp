@@ -1,14 +1,14 @@
 import './App.css';
-import Header from './Header';
-import VideoUploader from './VideoUploader';
+import Header from './components/Header';
+import VideoUploader from './components/VideoUploader';
 function App() {
   return (
-    
+
     <div className="App">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
       <Header />
-    <VideoUploader />
+      <VideoUploader />
     </div>
   );
 }
