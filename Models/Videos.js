@@ -23,8 +23,8 @@ module.exports = class Videos {
       Link, Tags){
         return new Promise((resolve, reject)=>{
           var tags =[];
-          for(x in Tags) {
-            tags.push({"Name": tags[x]});
+          for(var x = 0; x < Tags.length;x++) {
+            tags.push({"Name": Tags[x]});
           }
           var video = new VideosDB({
             Creator: Creator,
@@ -36,9 +36,11 @@ module.exports = class Videos {
           })
           video.save()
           .then(()=>{
+            console.log(video)
             resolve(video)
           })
           .catch((err)=>{
+            console.log(err)
             reject(err)
           })
       })
