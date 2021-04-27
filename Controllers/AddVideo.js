@@ -23,7 +23,9 @@ check('Link').isString().escape(),
 
 function(req, res){
     const errors = validationResult(req);
+    console.log("Adding video")
     if (!errors.isEmpty()) {
+        console.log(errors)
       return res.status(400).json({ errors: errors.array() });
     }
     else {
@@ -37,9 +39,11 @@ function(req, res){
             req.body.tags
             )
          .then(function(video){
+             console.log(video)
              res.json(video)
          })
          .catch((err)=>{
+             console.log(err)
              res.json(err)
          })
     }
