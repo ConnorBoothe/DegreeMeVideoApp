@@ -7,7 +7,16 @@ app.use(cors());
 
 //API Controllers
 app.use([
-    require("./Controllers/AddVideo")
+    require("./Controllers/AddVideo"),
+    require("./Controllers/Login"),
+    require("./Controllers/AddComment"),
+    require("./Controllers/AddReview"),
+    require("./Controllers/AddUser"),
+    require("./Controllers/GetCreatorReviews"),
+    require("./Controllers/GetVideoComments"),
+    require("./Controllers/GetCommentById"),
+    require("./Controllers/GetVideoById"),
+    require("./Controllers/AddLike")
 ]); 
 
 //Wildcard route
