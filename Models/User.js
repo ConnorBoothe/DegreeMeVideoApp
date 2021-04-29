@@ -10,6 +10,7 @@ var UserSchema = new Schema({
     Last_Name:{type:String, required: true},
     Email:{type:String, required:true},
     Password:{type:String, required:true},
+    Image:{type:String, required:true},
     Subscription_Level: {type:String, required:true},
     Verification_Code: {type:Number, required:true},
     Account_Verified: {type:Boolean, required:true},
@@ -21,13 +22,14 @@ var UserDB = mongoose.model('User',UserSchema);
 module.exports = class User {
      //add user to db
      addUser(First_Name, Last_Name, Email, Password,
-      Subscription_Level, Verification_Code){
+      Image, Subscription_Level, Verification_Code){
         return new Promise((resolve, reject)=>{
           var user = new UserDB({
             First_Name: First_Name,
             Last_Name: Last_Name,
             Email: Email,
             Password: Password,
+            Image: Image,
             Subscription_Level: Subscription_Level,
             Verification_Code: Verification_Code,
             Account_Verified: false
@@ -56,14 +58,10 @@ module.exports = class User {
         .updateOne({Subscription_Level: SubscriptionLevel});
     }
     //attempt to login user
-    login(Email, Password){
+    login(Email){
         return UserDB.find(
           {
-            $and:
-              [{
-                Email: Email,
-                Password: Password
-              }]
+            Email: Email,
           }
           );
     }
