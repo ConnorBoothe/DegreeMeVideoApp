@@ -48,7 +48,7 @@ module.exports = class Comment {
         .sort({ Date: 1})
      }
     //get comment by id
-    getCommentByVideoId(id){
+    getCommentById(id){
         return CommentsDB.findOne({ _id: id });
      }
 }
