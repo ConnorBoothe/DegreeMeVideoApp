@@ -8,7 +8,8 @@ var Tags = new Schema({
 });
 var Likes = new Schema({
   UserId: {type:String, required:true},
-  Name: {type:String, required:true},
+  First_Name: {type:String, required:true},
+  Last_Name: {type:String, required:true},
   Image: {type:String, required:true}
 });
 var VideoSchema = new Schema({
@@ -55,7 +56,7 @@ module.exports = class Videos {
       })
      }
      //add like to video
-     addLike(VideoId, UserId, Name, Image){
+     addLike(VideoId, UserId, First_Name, Last_Name, Image){
         return new Promise((resolve, reject)=>{
           //find video by id
           VideosDB.findOne({_id: VideoId})
@@ -64,7 +65,8 @@ module.exports = class Videos {
             //model
             var like = {
               UserId: UserId,
-              Name: Name,
+              First_Name: First_Name,
+              Last_Name: Last_Name,
               Image: Image
             };
             video.likes.push(like);
@@ -80,5 +82,9 @@ module.exports = class Videos {
           })
          
         });
-      }
+    }
+    //get video by id
+    getVideoById(id){
+      return VideosDB.findOne({_id: id});
+    }
 }
