@@ -5,6 +5,7 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopolo
 var Schema = mongoose.Schema;
 var ReviewSchema = new Schema({
     Creator_Id:{type:String, required: true},
+    Author_Id:{type:String, required: true},
     Author_First_Name:{type:String, required: true},
     Author_Last_Name:{type:String, required: true},
     Author_Img:{type:String, required: true},
@@ -15,11 +16,12 @@ var ReviewsDB= mongoose.model('Reviews', ReviewSchema);
 
 module.exports = class Reviews {
      //add review to db
-     addReview(Creator_Id, Author_First_Name, Author_Last_Name,
-      Author_Img, Message, Date){
+     addReview(Creator_Id, Author_Id, Author_First_Name,
+         Author_Last_Name, Author_Img, Message, Date){
         return new Promise((resolve, reject)=>{
           var review = new ReviewsDB({
             Creator_Id: Creator_Id,
+            Author_Id: Author_Id,
             Author_First_Name: Author_First_Name,
             Author_Last_Name: Author_Last_Name,
             Author_Img: Author_Img,
