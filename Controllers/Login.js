@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const mongoose = require("mongoose");
-
 const {
     check,
     validationResult
@@ -37,7 +35,7 @@ router.post('/API/Login',
     check('Password').isString().escape(),
     function(req, res){
         const errors = validationResult(req);
-        console.log("Adding user")
+        console.log("Log in")
         if (!errors.isEmpty()) {
             console.log(errors)
             return res.status(400).json({ errors: errors.array() });
@@ -45,13 +43,14 @@ router.post('/API/Login',
         else {
             users.login(req.body.Email)
             .then((user)=>{
-                if(user.length > 0) {
+                if(user) {
                     //decrypt password and compare to user input
                     bcrypt.compare(
                         req.body.Password,
                         user.Password,
                         function (err, match) {
                             //password matches
+                            console.log(match)
                             if(match){
                                 req.session.user = user;
                                 res.json(user)
@@ -60,6 +59,10 @@ router.post('/API/Login',
                                 res.json(false)
                             }
                     })
+                }
+                else {
+                    console.log("User not found")
+                    res.json(false)
                 }
                 
             })
