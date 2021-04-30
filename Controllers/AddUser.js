@@ -20,9 +20,6 @@ router.post('/API/AddUser',
     check('Last_Name').isString().escape(),
     check('Email').isString().isEmail().escape(),
     check('Password').isString().escape(),
-    check('Image').isString().escape(),
-    check('Subscription_Level').isString().escape(),
-    check('Verification_Code').isNumeric(),
     function(req, res){
         const errors = validationResult(req);
         console.log("Adding user")
@@ -33,16 +30,14 @@ router.post('/API/AddUser',
         else {
             //add video to DB if validation succeeds
             //encrypt password
-            bcrypt.hash(pw, 8)
+            console.log(req.body)
+            bcrypt.hash(req.body.Password, 8)
             .then((hash)=>{
                 users.addUser(
                     req.body.First_Name, 
                     req.body.Last_Name,
                     req.body.Email,
-                    hash,
-                    req.body.Image,
-                    req.body.Subscription_Level,
-                    req.body.Verification_Code
+                    hash
                     )
                 .then(function(user){
                     console.log(user)
