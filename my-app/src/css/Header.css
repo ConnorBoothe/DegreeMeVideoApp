@@ -1,6 +1,5 @@
 .site-logo {
     width:120px;
-    margin-top:10px;
 }
 .header {
     width:80%;
@@ -12,9 +11,9 @@
     right:0;
 }
 .logo-link {
-    position: absolute;
+    /* position: absolute;
     left:0;
-    top:0;
+    top:0; */
 }
 .header ul {
     margin-top:0;
@@ -23,5 +22,7 @@
     display: inline-block;
     padding:10px 60px;
     text-align:left;
-    color:white;
+}
+.header ul li a {
+    color:white!important;
 }
