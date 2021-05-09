@@ -7,19 +7,18 @@ var Schema = mongoose.Schema;
 var CommentsSchema = new Schema({
     Video_Id: {type:String, required: true},
     Author_First_Name:{type:String, required: true},
-    Author_First_Name:{type:String, required: true},
+    Author_Last_Name:{type:String, required: true},
     Author_Id:{type:String, required:true},
     Author_Img:{type:String, required:true},
     Message: {type:String, required:true},
-    Rating: {type:Number, required:true},
-    Date: {type:Date, required:true},
+    Date: {type:Date, required:true}
 }, {collection: 'Comments'});
 var CommentsDB = mongoose.model('Comments', CommentsSchema);
 
 module.exports = class Comment {
      //add comment to db
      addComment(Video_Id, Author_First_Name, Author_Last_Name,
-         Author_Id, Author_Img, Message, Rating, Date){
+         Author_Id, Author_Img, Message, Date){
         return new Promise((resolve, reject)=>{
           var comment = new CommentsDB({
             Video_Id: Video_Id,
@@ -28,7 +27,6 @@ module.exports = class Comment {
             Author_Id: Author_Id,
             Author_Img: Author_Img,
             Message: Message,
-            Rating: Rating,
             Date: Date
           })
           comment.save()
@@ -45,7 +43,7 @@ module.exports = class Comment {
      //oldest
      getCommentByVideoId(Video_Id){
         return CommentsDB.find({ Video_Id: Video_Id })
-        .sort({ Date: 1})
+        .sort({ Date: -1})
      }
     //get comment by id
     getCommentById(id){
