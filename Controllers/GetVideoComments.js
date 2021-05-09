@@ -14,8 +14,10 @@ var comments = new CommentsDB();
 router.get('/API/Comments/:id', 
     function(req, res){
         comments.getCommentByVideoId(req.params.id)
-        .then((comment)=>{
-            res.json(comment);
+        .then((comments)=>{
+            console.log("ID: ", req.params.id)
+            console.log("Comments", comments)
+            res.json(comments);
         })
         .catch((err)=>{
             console.log(err)
