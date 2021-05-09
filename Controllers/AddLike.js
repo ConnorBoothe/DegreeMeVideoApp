@@ -36,13 +36,12 @@ router.post('/API/AddLike',
     check('Subscription_Level').isString().escape(),
     check('Verification_Code').isNumeric(),
     function(req, res){
-        console.log("Adding like")
             videos.addLike(
                 req.body.VideoId, 
-                req.session.user._id,
-                req.session.user.First_Name,
-                req.session.user.Last_Name,
-                req.session.user.Image,
+                req.body.UserId,
+                req.body.First_Name,
+                req.body.Last_Name,
+                req.body.Image
             )
             .then(function(user){
                 console.log(user)
