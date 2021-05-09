@@ -38,8 +38,9 @@ class LoginForm extends Component {
         };
         fetch(api_route, requestMetadata)
         .then(res => res.json())
-        .then(()=>{
-          alert("Request complete")
+        .then((user)=>{
+          this.setState({user: user})
+          console.log(this.state.user)
         })
     }
     handleEmailChange(e) {
