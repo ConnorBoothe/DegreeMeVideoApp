@@ -1,0 +1,14 @@
+.videos-container {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    width: 85%;
+}
+.videos-container h1 {
+    text-align:left;
+}
+.home-title {
+    font-size:30px;
+    color: #d4d4d4;
+    margin-top:30px;
+}

@@ -1,0 +1,26 @@
+.comment-user { 
+    color: white;
+}
+.comment-msg {
+    color:white;
+    padding-left:40px;
+}
+.comment-item {
+    text-align: left;
+    padding-top:10px;
+    padding-bottom:10px;
+    padding-left:0px;
+}
+.comment-list {
+    margin-top:20px;
+    width:100%;
+    position: relative;
+}
+.comment-username {
+    padding-left:10px;
+    font-weight: bold;
+}
+.comment-date {
+    color: #d4d4d4;
+    float:right;
+}

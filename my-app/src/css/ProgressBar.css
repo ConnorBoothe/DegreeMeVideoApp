@@ -18,3 +18,7 @@
     text-align:right;
     width:300px
 }
+.progress-label{
+    font-size: 13px;
+    font-weight: bold;
+}

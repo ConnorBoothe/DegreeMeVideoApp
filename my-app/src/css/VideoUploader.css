@@ -74,3 +74,18 @@
     color:white;
     border:none!important;
 }
+.video-modal-label {
+    font-size:13px;
+    font-weight: bold;
+    margin-bottom:2px;
+}
+.modal-body{
+    margin-left:10%;
+}
+.thumbnail {
+    margin-top:5px;
+    margin-bottom: 15px;
+}
+.modal-title, .modal-header {
+    text-align :center!important;
+}

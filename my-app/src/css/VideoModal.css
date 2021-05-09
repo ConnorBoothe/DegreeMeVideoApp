@@ -1,0 +1,13 @@
+.video-modal-title {
+    font-size:22px;
+}
+.video-modal-description {
+    font-size:16px;
+}
+.modal-header, .modal-title, .modal-body{
+    text-align:left!important;
+    width:100%;
+}
+.modal-body{
+    margin-left:0!important;
+}

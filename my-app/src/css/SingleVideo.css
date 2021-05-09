@@ -1,0 +1,48 @@
+.single-video {
+    width: 640px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    margin-top:50px;
+}
+.-frame {
+    min-height:300px;
+    width:100%;
+    /* background-color:black; */
+}
+.video-title {
+    color:white;
+    font-size:18px;
+    text-align: left;
+}
+.creator-name, .view-count{
+    color:white;
+}
+.creator-name a {
+    color: white;
+}
+.creator-text {
+    padding-left: 10px;
+}
+.single-view-count{
+    text-align:left;
+    width:100px;
+    color:#d4d4d4;
+    position: absolute;
+    left:0;
+    font-size: 18px;
+    font-weight: bold;
+}
+.video-actions-list {
+    position:relative;
+    min-height:50px;
+}
+.creator-label {
+    font-style: italic;
+    text-align: left;
+    display:block;
+    color:#d4d4d4;
+    margin-top: 20px;
+    margin-left:40px;
+    font-size:14px;
+}

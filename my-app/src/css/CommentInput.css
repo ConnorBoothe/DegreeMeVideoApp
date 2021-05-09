@@ -1,0 +1,31 @@
+.comment-input-container {
+    text-align:left;
+    margin-bottom: 20px;
+
+}
+.comment-input {
+    width:88%;
+    background-color:#282c34;
+    border-top:0;
+    border-left:0;
+    border-right:0;
+    outline: 0;
+    color:white;
+    margin-left: 20px!important;
+}
+.comment-buttons {
+    width:60%;
+    position:absolute;
+    right:0;
+    margin-top:5px;
+    text-align: right;
+    margin-right:35px;
+}
+.comment-buttons ul li {
+    display: inline-block;
+    padding:5px;
+}
+.comment-buttons ul li button {
+    border-radius: 5px!important;
+    border:none;
+}

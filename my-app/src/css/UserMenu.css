@@ -1,0 +1,26 @@
+.user-menu ul li {
+    color:#d4d4d4;
+    padding:0px 20px;
+    cursor: pointer;
+}
+.user-image {
+    width:30px;
+}
+.user-menu {
+    position:absolute;
+    right:0;
+    top:0;
+    margin-right:80px;
+    margin-top:12px;
+}
+.notification-badge {
+    background-color:#dc3545;
+    position:absolute;
+    color:white;
+    border-radius:10px;
+    padding:1px 7px;
+    font-size:12px;
+    font-weight:bold;
+    margin-top:-30px;
+    margin-left:20px;
+}
