@@ -2,9 +2,11 @@ import React, {Component} from "react";
 import '../css/VideoUploader.css';
 import firebase from "firebase";
 import ProgressBar from "./ProgressBar";
-import TagsInput from "./TagsInput";
+import TagsInput from './TagsInput';
 import {v4 as uuid} from "uuid";
-// import ReactPlayer from "react-player";
+import {Video} from 'video-metadata-thumbnails';
+import VideoUploadModal from "./VideoUploadModal";
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 // import FileUploader from "react-firebase-file-uploader";
@@ -27,14 +29,28 @@ class VideoUploader extends Component {
             uploadProgress: 0,
             show:false,
             error:"",
-            tags:[]
+            tags:[],
+            thumbnail:"",
+            title:"",
+            description: "",
+            creator: "",
+            uploadType:"Uploading video",
+            isModalOpen: false,
+            videoId:""
         };
         this.handleChange = this.handleChange.bind(this)
         this.addTag = this.addTag.bind(this)
         this.removeTag = this.removeTag.bind(this)
+        this.createThumbnail = this.createThumbnail.bind(this)
+        this.postThumbnailToFirebase = this.postThumbnailToFirebase.bind(this)
+        this.showModal = this.showModal.bind(this)
+        this.hideModal = this.hideModal.bind(this)
+        this.handleTitleChange = this.handleTitleChange.bind(this)
+        this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
+        this.handleCreatorChange = this.handleCreatorChange.bind(this)
 
+        this.copyToClipboard = this.copyToClipboard.bind(this)
         this.Creator = React.createRef();
-        this.Title = React.createRef();
         this.Email = React.createRef();
         this.Description = React.createRef();
         this.Link = React.createRef();
@@ -67,23 +83,51 @@ class VideoUploader extends Component {
       this.tag.current.value = "";
     }
   }
+  handleTitleChange(e){
+    this.setState({title: e.target.value})
+  }
+  handleDescriptionChange(e){
+    this.setState({description: e.target.value})
+  }
+  handleCreatorChange(e){
+    this.setState({creator: e.target.value})
+  }
+  //create thumbnail from video file
+  createThumbnail() {
+    return new Promise((resolve, reject)=>{
+      this.setState({uploadType: "Creating thumbnail"});
+      const video = new Video(this.Link.current.files[0]);
+      video.getThumbnails().then((thumbnails)=>{
+        var reader = new FileReader();
+        reader.readAsDataURL(thumbnails[0].blob);
+        this.postThumbnailToFirebase(thumbnails[0].blob)
+        .then((url)=>{
+          resolve(url)
+        })
+      })
+    })
+    
+  }
   //remove tag by index
   removeTag(index){
     const newArray = this.state.tags
     newArray.splice(index,1)
     this.setState({tags: newArray});
   }
-    addVideoToDatabase(url){
+    addVideoToDatabase(videoUrl){
         const api_route = 'http://localhost:8080/API/AddVideo';
-        const postBody = {
-            Creator: this.Creator.current.value,
+        this.createThumbnail(this.Link.current.files[0])
+        .then((url)=>{
+          this.setState({uploadType: "Posting to database"});
+          const postBody = {
+            Creator: this.state.creator,
             Email: this.Email.current.value,
-            Title: this.Title.current.value,
-            Description: this.Description.current.value,
-            Link: url,
-            tags: this.state.tags
+            Title: this.state.title,
+            Description: this.state.description,
+            Link: videoUrl,
+            tags: this.state.tags,
+            Thumbnail: url
         };
-        console.log(postBody)
         const requestMetadata = {
             method: 'POST',
             headers: {
@@ -93,9 +137,50 @@ class VideoUploader extends Component {
         };
         fetch(api_route, requestMetadata)
         .then(res => res.json())
-        .then(()=>{
-          alert("Thanks! Your video has been added.")
+        .then((video)=>{
+          console.log(video)
+          this.setState({videoId: video._id})
+          this.showModal();
         })
+        .catch((err)=>{
+          console.log(err)
+          this.setState({type: "An error occurred. Please try again"})
+        })
+        })
+         
+        .catch((err)=>{
+          console.log(err)
+          this.setState({type: "An error occurred. Please try again"})
+
+        })
+        
+    }
+    postThumbnailToFirebase(image){
+      return new Promise((resolve, reject)=>{
+        const id = uuid();
+        const storageRef = firebase.storage().ref("thumbnails/"+id).put(image);
+        storageRef.on(`state_changed`,snapshot=>{
+  
+          this.uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes);
+          this.setState({uploadProgress: this.uploadProgress, uploading:true})
+        }, error=>{
+        },
+        async () => {
+          storageRef.snapshot.ref.getDownloadURL().then(async (url)=>{
+            this.setState({thumbnail: url, uploadType:"Complete"})
+            resolve(url)
+          });
+        });
+      })
+    }
+    showModal() {
+      this.setState({isModalOpen: true});
+    };
+    hideModal = () => {
+        this.setState({isModalOpen: false});
+    };
+    copyToClipboard(){
+        navigator.clipboard.writeText(window.location.href)
     }
     render(){
       const readImage =(file)=>{
@@ -109,17 +194,10 @@ class VideoUploader extends Component {
             this.uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes);
             this.setState({uploadProgress: this.uploadProgress, uploading:true})
           }, error=>{
-            // this.error = error.message;
-            // this.submitting = false;
-            // this.uploadingMedia = false;
-            // return;
           },
           async () => {
             storageRef.snapshot.ref.getDownloadURL().then(async (url)=>{
-              console.log(url)
-              //POST video data to DB
-                this.addVideoToDatabase(url)
-
+              this.addVideoToDatabase(url)
               this.uploadingMedia = false;
             });
           });
@@ -129,10 +207,10 @@ class VideoUploader extends Component {
         var isEmail = this.validateEmail(this.Email.current.value);
         var validMp4 = this.validateMp4();
         if(
-            this.Title.current.value == "" ||
-            this.Creator.current.value == "" ||
+            this.state.title == "" ||
+            this.state.creator.value == "" ||
             this.Email.current.value == "" ||
-            this.Description.current.value == "" ||
+            this.state.description == "" ||
             this.Link.current.value == ""
           ){
               console.log("empty field")
@@ -152,15 +230,20 @@ class VideoUploader extends Component {
       }
     return (
         <div className="video-upload-container">
+          <VideoUploadModal isOpen={this.state.isModalOpen}
+          showModal={this.showModal} hideModal={this.hideModal}
+          Title={this.state.title} Thumbnail={this.state.thumbnail} 
+          videoId={this.state.videoId} Description={this.state.description} 
+          Creator={this.state.creator}/>
             <h1 className="video-upload-title">Upload Video</h1>
             <ul>
                 <li>
                     <p>Title</p>
-                    <input name ="Title" ref={this.Title}/>
+                    <input name ="Title" onChange={this.handleTitleChange}/>
                 </li>
                 <li>
                     <p>Creator</p>
-                    <input name ="Creator"  ref={this.Creator}/>
+                    <input name ="Creator" onChange={this.handleCreatorChange}/>
                     </li>
                 <li>
                     <p>Email</p>
@@ -168,7 +251,7 @@ class VideoUploader extends Component {
                     </li>
                 <li>
                 <p>Description</p>
-                    <textarea className="description" name="Description"  ref={this.Description}></textarea>
+                    <textarea className="description" name="Description"  onChange={this.handleDescriptionChange}></textarea>
                 </li>
                 
                 <li className="upload-link">
@@ -182,15 +265,13 @@ class VideoUploader extends Component {
                     <button className="btn-primary add-video" onClick={addVideo}>Add Video</button>
                 </li>
                 <li>
-                    { this.state.show, <ProgressBar progress={this.uploadProgress} show={this.state.show} />}
+                    <ProgressBar progress={this.uploadProgress} show={this.state.show} 
+                      type={this.state.uploadType}/>
                 </li>
                 <li >
                   <p className="error">{this.state.error}</p>
                 </li>
-
-
             </ul>
-               {/* <ReactPlayer url="https://firebasestorage.googleapis.com/v0/b/degreeme-bd5c7.appspot.com/o/videos%2Fd6ad48d6-3d14-44be-aa97-6920c4949b3c?alt=media&token=b3d88814-9735-4620-928b-06bb0d5a0369"/> */}
         </div>
 
     );
