@@ -18,13 +18,12 @@ var comments = new CommentsDB();
 router.post('/API/AddComment', 
     check('Video_Id').isString().escape(),
     check('Author_First_Name').isString().escape(),
-    check('Author_Last_Name').isString().isEmail().escape(),
+    check('Author_Last_Name').isString().escape(),
     check('Author_Id').isString().escape(),
     check('Author_Img').isString().escape(),
     check('Message').isString().escape(),
     function(req, res){
         const errors = validationResult(req);
-        console.log("Adding comment")
         if (!errors.isEmpty()) {
             console.log(errors)
         return res.status(400).json({ errors: errors.array() });
@@ -38,7 +37,6 @@ router.post('/API/AddComment',
                 req.body.Author_Id,
                 req.body.Author_Img,
                 req.body.Message,
-                req.body.Rating,
                 new Date()
             )
             .then(function(comment){
