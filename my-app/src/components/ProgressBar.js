@@ -10,7 +10,7 @@ class ProgressBar extends Component {
         return (
 
             <div id="progress-container" className={computedClassName}>
-                <p>Upload Progress</p>
+                <p className="progress-label">{this.props.type}</p>
                 <div className="progressBar" style={{ width: 300 }}>
                     <div className="upload-status" style={{ width: 300 * this.props.progress }}><span></span></div>
                 </div>
