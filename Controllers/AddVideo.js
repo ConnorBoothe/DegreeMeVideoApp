@@ -15,11 +15,12 @@ var VideosDB = require('../Models/Videos');
 var videos = new VideosDB();
 //endpoint to add user to database
 router.post('/API/AddVideo', 
-check('Creator').isString().escape(),
-check('Email').isString().escape(),
-check('Title').isString().escape(),
-check('Description').isString().escape(),
-check('Link').isString().escape(),
+// check('Creator').isString().escape(),
+// check('Email').isString().escape(),
+// check('Title').isString().escape(),
+// check('Description').isString().escape(),
+// check('Link').isString().escape(),
+// check('Thumbnail').isString().escape(),
 
 function(req, res){
     const errors = validationResult(req);
@@ -29,14 +30,17 @@ function(req, res){
       return res.status(400).json({ errors: errors.array() });
     }
     else {
+        console.log(req.body)
         //add video to DB if validation succeeds
+        
         videos.addVideo(
             req.body.Creator, 
             req.body.Email,
             req.body.Title,
             req.body.Description,
             req.body.Link,
-            req.body.tags
+            req.body.tags,
+            req.body.Thumbnail
             )
          .then(function(video){
              console.log(video)
