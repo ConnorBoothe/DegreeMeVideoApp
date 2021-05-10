@@ -4,7 +4,7 @@ import '../css/Comments.css';
 import CommentInput from "../components/CommentInput"
 import Comment from "../components/Comment"
 
-class Video extends Component {
+class CommentList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,7 @@ class Video extends Component {
         this.handleCommentChange = this.handleCommentChange.bind(this)
         this.cancelComment = this.cancelComment.bind(this)
         this.showButtons = this.showButtons.bind(this)
-
+        this.getComments = this.getComments.bind(this)
     }
     //show cancel/add comment buttons
     showButtons(){
@@ -63,8 +63,12 @@ class Video extends Component {
         this.setState({comment: "", borderBottom:"2px solid #d4d4d4",
             showButtons:"none"});
     }
-    componentDidMount(){
-        console.log(this.props)
+    componentDidUpdate(prevProps) {
+        if(prevProps.VideoId !== this.props.VideoId){
+            this.getComments();
+          }
+    }
+    getComments(){
         const api_route = 'http://localhost:8080/API/Comments/'+window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
@@ -80,8 +84,10 @@ class Video extends Component {
         })
         .catch((err)=>{
             console.log(err)
-            alert("Error")
         });
+    }
+    componentDidMount(){
+        this.getComments();
     }
     render(){
         return (
@@ -106,4 +112,4 @@ class Video extends Component {
   }
 }
 
-export default Video;
+export default CommentList;
