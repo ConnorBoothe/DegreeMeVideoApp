@@ -6,6 +6,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // import bootstrap from "bootstrap";
 class Header extends Component {
+  isLoggedIn(){
+
+  }
   render(){
     return (
         <div>
