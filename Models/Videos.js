@@ -113,7 +113,9 @@ module.exports = class Videos {
          
         })
       })
-      
-    
+    }
+    getMatchingTitles(title){
+      return VideosDB.find({Title: {$regex: title, $options: "i"}},
+      "Title");
     }
 }
