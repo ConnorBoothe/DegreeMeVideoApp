@@ -27,3 +27,8 @@
     position:absolute;
     right:0;
 }
+.search-autocomplete {
+    width:100%;
+    background-color:#131313;
+    min-height: 50px;
+}
