@@ -25,6 +25,7 @@ class SingleVideo extends Component {
     }
     componentDidMount(){
         this.getVideo()
+        this.setState({VideoId: this.state.video._id})
     }
     addView(){
         //do not add view if the viewer is also Creator
@@ -85,6 +86,13 @@ class SingleVideo extends Component {
         })
         
     }
+    componentDidUpdate(prevProps) {
+        //if props are updated, get the new video
+        console.log("Video update", this.props.match.params.id )
+        if(prevProps.match.params.id !== this.props.match.params.id){
+          this.getVideo();
+        }
+      }
     getVideo(){
         let id = this.props.match.params.id
         const api_route = 'http://localhost:8080/API/Video/'+ id;
