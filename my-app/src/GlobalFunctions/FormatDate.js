@@ -51,5 +51,33 @@ displayDate(date) {
     }
     return hours + ":" + minutes + " " + amPm;
   }
+  displayTimeSince(date) {
+    var difference = Math.abs(new Date() - (new Date(date)));
+    var secDifference = parseInt(difference / 1000);
+    var minDifference = parseInt(secDifference / 60);
+    var hourDifference = parseInt(minDifference / 60);
+    var dayDifference = parseInt(hourDifference / 24);
+    if(secDifference < 60){
+        return secDifference + " seconds ago";
+    }
+    else if(secDifference < 120){
+        return minDifference + " minute ago";
+    }
+    else if(secDifference > 60 && minDifference < 60){
+        return minDifference + " minutes ago";
+    }
+    else if(minDifference < 120){
+        return hourDifference + " hour ago";
+    }
+    else if(minDifference > 120 && hourDifference < 24){
+        return hourDifference + " hours ago";
+    }
+    else if(hourDifference < 48){
+        return dayDifference + " day ago";
+    }
+    else{
+        return dayDifference + " days ago";
+    }
+  }
 }
 export default FormatDate;
