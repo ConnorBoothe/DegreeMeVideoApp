@@ -28,7 +28,8 @@ app.use([
     require("./Controllers/GetVideoById"),
     require("./Controllers/GetAllVideos"),
     require("./Controllers/AddLike"),
-    require("./Controllers/AddView")
+    require("./Controllers/AddView"),
+    require("./Controllers/SearchAutocomplete")
 ]); 
 
 //Wildcard route
