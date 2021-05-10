@@ -24,3 +24,18 @@
     margin-top:-30px;
     margin-left:20px;
 }
+.user-dropdown-container {
+    width:300px;
+    min-height: 200px;
+    background-color:#1b1e23;
+    margin-right:auto;
+    margin-left:auto;
+    display:inline-block;
+    border-radius: 10px;
+    position:absolute;
+}
+.user-dropdown-title {
+    font-size:20px;
+    color: white;
+    padding:10px;
+}

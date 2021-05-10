@@ -1,0 +1,22 @@
+.notification-list-container ul {
+    padding:0;
+}
+.notification-list-container ul li {
+    padding:0;
+    padding-left:5px!important;
+}
+.user-settings-menu {
+    text-align: center;
+}
+.user-settings-menu li{
+    display: block!important;
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: center;
+    font-size:16px;
+    margin-bottom:10px;
+    padding-top: 5px;
+}
+.user-settings-menu li svg {
+    margin-right:20px;
+}
