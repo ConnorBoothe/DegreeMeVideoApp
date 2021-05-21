@@ -13,8 +13,9 @@ var UserSchema = new Schema({
     Subscription_Level: {type:String, required:true},
     Verification_Code: {type:Number, required:true},
     Account_Verified: {type:Boolean, required:true},
+    Bio:{type:String},
     Stripe_Id: {type:String},
-
+    Videos:{type: Array}
 }, {collection: 'User'});
 var UserDB = mongoose.model('User',UserSchema);
 
@@ -69,17 +70,40 @@ module.exports = class User {
     //attempt to login user
     login(Email){
         console.log("Logging you in...")
-        return UserDB.findOne(
-          {
-            Email: Email,
-          }
-          );
+        console.log("Email", Email)
+        return UserDB.findOne({Email: Email});
     }
       //get user
       getUser(id){
-        return UserDB.find(
+        return UserDB.findOne(
           {
             _id:id
           });
+    }
+    updateAvatar(id, avatar){
+      return new Promise((resolve, reject)=>{
+        UserDB.findOne(
+          {
+            _id:id
+          })
+          .then((user)=>{
+            user.Image = avatar;
+            user.save()
+            resolve(user)
+          })
+      })
+    }
+    updateBio(id, bio){
+      return new Promise((resolve, reject)=>{
+        UserDB.findOne(
+          {
+            _id:id
+          })
+          .then((user)=>{
+            user.Bio = bio;
+            user.save()
+            resolve(user)
+          })
+      })
     }
 }
