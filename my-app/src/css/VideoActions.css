@@ -46,3 +46,11 @@
     margin-right:15px;
     margin-top:10px;
 }
+.already-liked {
+    position: absolute;
+    font-size:12px;
+    background-color: black;
+    margin-top:5px;
+    padding:3px;
+    border-radius: 5px;
+}

@@ -6,3 +6,36 @@
 .thumbnail{
     height:150px!important;
 }
+.creator-img {
+    width: 35px;
+    margin-right: 5px;
+    position: absolute;
+    margin-top: 8px;
+}
+.creator-name {
+    font-size: 13px;
+    margin-bottom: 0;
+    color: #d3d3d3;
+}
+.video-details {
+    margin-left:45px;
+    margin-top:5px;
+}
+.view-date-separator {
+    margin-left:5px;
+    margin-right: 5px;
+}
+.video-date {
+    float:right;
+    margin-right:7px;
+}
+.playIcon {
+    text-align: center;
+    margin-left:auto;
+    margin-right:auto;
+    width:100%;
+    position: absolute;
+    display: table-cell;
+    vertical-align: middle;
+    margin-top: 55px;
+}

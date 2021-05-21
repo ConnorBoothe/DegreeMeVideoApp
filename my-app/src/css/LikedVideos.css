@@ -1,0 +1,10 @@
+.videos-container ul li
+{
+    width:265px;
+    display: inline-block;
+    margin-left:10px;
+    margin-right: 10px;
+}
+.videos-container {
+    margin-top: 20px;
+}

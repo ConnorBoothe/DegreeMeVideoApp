@@ -1,0 +1,91 @@
+.leave-review { 
+    font-size: 14px;
+    font-weight:bold;
+    padding: 3px 5px;
+}
+.modal-content {
+    background-color: #282c34;
+}
+/*Stars styling*/
+.rating {
+    display: inline-block;
+    transform: rotateY(180deg);
+  
+    text-align: left;
+  }
+  
+  .rating input {
+    display: none;
+  }
+  
+  .rating label {
+    display: inline-block;
+    cursor: pointer;
+    width: 40px;
+  }
+  label {
+    color: #a9a9a9 !important;
+    font-family: "Open Sans", sans-serif !important;
+    font-size: 15px !important;
+  }
+  .forgotPW {
+    color: white;
+    font-size: 15px !important;
+  }
+  .rating label:before {
+    content: "\2605";
+    font-family: fontAwesome;
+    position: relative;
+    display: block;
+    font-size: 25px;
+    top: 0;
+    opacity: 0.9;
+    color: #d9d9d9;
+  }
+  .rating label:after {
+    content: "\2605";
+    font-family: fontAwesome;
+    position: absolute;
+    display: block;
+    font-size: 25px;
+    color: rgb(248, 215, 29);
+    top: 0;
+    opacity: 0;
+  }
+  .rating label:hover:after,
+  .rating label:hover ~ label:after,
+  .rating input:checked ~ label:after {
+    opacity: 1;
+  }
+  .stars {
+    margin-top: -10px !important;
+  }
+  .rating-label {
+      margin-bottom: 0;
+      font-weight: bold;
+      margin-top: 10px;
+  }
+  .review-message {
+      background-color: #131313;
+      outline:none;
+      width:100%;
+      border:0;
+      padding: 5px;
+      color: white;
+  }
+  .modal-footer {
+      border-top:0!important;
+  }
+  .reviewMsg {
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    margin-top:20px;
+  }
+  .rating-btn {
+    padding: 3px 5px;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100%;
+    margin-top:20px;
+  }

@@ -33,6 +33,7 @@
     display:inline-block;
     border-radius: 10px;
     position:absolute;
+    z-index:2;
 }
 .user-dropdown-title {
     font-size:20px;
