@@ -1,16 +1,13 @@
+const { ifError } = require("assert");
 const mongoose = require("mongoose");
+const LikesDB = require("./Likes");
+const likes = new LikesDB();
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     console.log("Connect")
 });
 var Schema = mongoose.Schema;
 var Tags = new Schema({
   Name: {type:String, required:true}
-});
-var Likes = new Schema({
-  UserId: {type:String, required:true},
-  First_Name: {type:String, required:true},
-  Last_Name: {type:String, required:true},
-  Image: {type:String, required:true}
 });
 var VideoSchema = new Schema({
     Creator_Id:{type:String, required: true},
@@ -23,34 +20,33 @@ var VideoSchema = new Schema({
     Thumbnail: {type:String, required:true},
     Views: {type:Number, required:true},
     Tags: [Tags],
-    Likes: [Likes]
-}, {collection: 'Videos'});
+    Likes: {type: Array},
+    Date:{type: Date, required: true}
+
+  }, {collection: 'Videos'});
 var VideosDB = mongoose.model('Videos',VideoSchema);
 
 module.exports = class Videos {
      //add video to db
-     addVideo(Creator, Creator_Email,
-      Title, Description, Link, Tags, Thumbnail){
-        console.log(Creator, Creator_Email,
-          Title, Description, Link, Tags, Thumbnail)
+     addVideo(Creator_Id, Creator, Creator_Email,
+      Creator_Image, Title, Description, Link, Tags, Thumbnail){
         return new Promise((resolve, reject)=>{
           var tags =[];
-          // if(Tags) {
             for(var x = 0; x < Tags.length;x++) {
               tags.push({"Name": Tags[x]});
             }
-          // }
           var video = new VideosDB({
-            Creator_Id: "Creator_Id",
+            Creator_Id: Creator_Id,
             Creator: Creator,
             Creator_Email: Creator_Email,
-            Creator_Image: "https://firebasestorage.googleapis.com/v0/b/degreeme-bd5c7.appspot.com/o/userImages%2F%40cboothe?alt=media&token=32d57150-275d-4a88-8417-090498ffeada",
+            Creator_Image: Creator_Image,
             Title: Title,
             Description: Description,
             Link: Link,
             Tags: tags, 
             Thumbnail: Thumbnail,
-            Views: 0
+            Views: 0,
+            Date:new Date()
           })
           video.save()
           .then(()=>{
@@ -63,42 +59,29 @@ module.exports = class Videos {
           })
       })
      }
-     //add like to video
-     addLike(VideoId, UserId, First_Name, Last_Name, Image){
-        return new Promise((resolve, reject)=>{
-          //find video by id
-          VideosDB.findOne({_id: VideoId})
-          .then((video)=>{
-            //create like object from params and push to video
-            //model
-            var like = {
-              UserId: UserId,
-              First_Name: First_Name,
-              Last_Name: Last_Name,
-              Image: Image
-            };
-            video.Likes.push(like);
-            video.save()
-            .then(()=>{
-              //resolve the like if successful
-              resolve(like)
-            })
-          })
-          .catch((err)=>{
-            //reject if error
-            reject(err)
-          })
-         
-        });
-    }
     //get video by id
     getVideoById(id){
-      console.log(id)
-      return VideosDB.findOne({_id: id});
+      return new Promise((resolve, reject)=>{
+        VideosDB.findOne({_id: id})
+        .then((video)=>{
+          likes.getLikesByVideo(video._id)
+          .then((likes)=>{
+            console.log("per likes", likes)
+            video.Likes = likes;
+            console.log("Likes" ,video.Likes)
+            console.log("Video", video)
+            resolve(video)
+          })
+        })
+        .catch((err)=>{
+          reject(err)
+        })
+      })
+      
     }
     //get video by id
     getAllVideos(){
-      return VideosDB.find({},"_id Views Title Thumbnail Creator").limit(4);
+      return VideosDB.find({},"_id Views Title Thumbnail Creator Creator_Image Date").limit(4);
     }
     //add view to video
     addView(id){
@@ -117,5 +100,15 @@ module.exports = class Videos {
     getMatchingTitles(title){
       return VideosDB.find({Title: {$regex: title, $options: "i"}},
       "Title");
+    }
+    //get videos given array of video ids
+    getVideosByIdArray(VideoIds){
+      console.log("ids", VideoIds)
+        return VideosDB.find({_id: {$in: VideoIds}});
+    }
+    //get creator's videos
+    getVideosByCreatorId(CreatorId){
+      console.log("creator id", CreatorId)
+      return VideosDB.find({Creator_Id: CreatorId})
     }
 }
