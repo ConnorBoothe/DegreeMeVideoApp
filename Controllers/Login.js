@@ -18,13 +18,12 @@ router.use(bodyParser.urlencoded({
 //use session with data store
 router.use(
     session({
-      store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URL,
-      }),
-      secret: "toolbox1217!",
-      resave: true,
-      saveUninitialized: true,
-      cookie: { secure: false, maxAge: 6 * 60 * 60 * 1000 },
+    //   store: MongoStore.create({
+    //     mongoUrl: process.env.MONGO_URL,
+    //   }),
+    secret: 'whatever',
+    secure: false,
+    httpOnly: false
     })
   );
 var UserDB = require('../Models/User');
@@ -41,6 +40,7 @@ router.post('/API/Login',
             return res.status(400).json({ errors: errors.array() });
         }
         else {
+            console.log("log user in")
             users.login(req.body.Email)
             .then((user)=>{
                 if(user) {
@@ -52,7 +52,9 @@ router.post('/API/Login',
                             //password matches
                             console.log(match)
                             if(match){
+                                console.log("user2", user)
                                 req.session.user = user;
+                                console.log("Session id", req.session.id)
                                 res.json(user)
                             }
                             else {

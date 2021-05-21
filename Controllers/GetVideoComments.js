@@ -16,7 +16,6 @@ router.get('/API/Comments/:id',
         comments.getCommentByVideoId(req.params.id)
         .then((comments)=>{
             console.log("ID: ", req.params.id)
-            console.log("Comments", comments)
             res.json(comments);
         })
         .catch((err)=>{
