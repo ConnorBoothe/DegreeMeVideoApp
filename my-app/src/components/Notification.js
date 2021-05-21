@@ -17,15 +17,15 @@ class Notification extends Component {
                                 <p className="unread"></p>
                             </li>
                             <li>
-                                <img className="notification-image" src="https://firebasestorage.googleapis.com/v0/b/degreeme-bd5c7.appspot.com/o/userImages%2F%40cboothe?alt=media&token=32d57150-275d-4a88-8417-090498ffeada"/>
+                                <img className="notification-image" src={this.props.userImage}/>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <div className="notification-message-container">
-                            <p className="notification-name">Connor Boothe</p>
-                            <p className="notification-message">This is the notification</p>
-                            <p className="notification-date">{formatDate.displayDate(new Date())}</p>
+                            <p className="notification-name">{this.props.name}</p>
+                            <p className="notification-message">{this.props.message}</p>
+                            <p className="notification-date">{formatDate.displayTimeSince(this.props.date)}</p>
                         </div>
                     </li>
                 </ul>

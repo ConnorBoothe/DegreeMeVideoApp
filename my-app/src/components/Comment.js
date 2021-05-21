@@ -13,7 +13,7 @@ class Video extends Component {
             <div className="comment-item">
                 <p className="comment-date">{formatDate.displayDate(new Date(this.props.Date))}</p>
 
-                <div class="comment-user">
+                <div className="comment-user">
                     <img className="user-image" src={this.props.Image}/>
                     <span className="comment-username">{this.props.Creator}</span>
                 </div>

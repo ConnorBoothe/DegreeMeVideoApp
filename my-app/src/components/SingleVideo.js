@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import CommentList from "../components/CommentList"
 import VideoActions from "../components/VideoActions";
 import ReactPlayer from "react-player";
+import Cookies from 'js-cookie';
+
 import {
     BrowserRouter as Router,
     Link
@@ -16,12 +18,12 @@ class SingleVideo extends Component {
             video: {},
             likeCount:0,
             duration:0,
-            viewText: "views"
+            viewText: "views",
+            showLikedMsg: "none"
         }
         this.getVideo = this.getVideo.bind(this)
         this.addLike = this.addLike.bind(this)
-        this.addView = this.addView.bind(this)
-
+        this.addView = this.addView.bind(this);
     }
     componentDidMount(){
         this.getVideo()
@@ -39,7 +41,7 @@ class SingleVideo extends Component {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(postBody)
+                body: JSON.stringify(postBody),
             };
             fetch(api_route, requestMetadata)
             .then(res => res.json())
@@ -60,31 +62,56 @@ class SingleVideo extends Component {
         }, 30000)
     }
     addLike(){
+        console.log(this.state.video)
         const api_route = 'http://localhost:8080/API/AddLike';
         const postBody = {
+            Creator_Id:this.state.video.Creator_Id,
             VideoId: this.state.video._id,
-            UserId: "Fake id",
-            First_Name: "Connor",
-            Last_Name: "Boothe",
-            Image: "https://firebasestorage.googleapis.com/v0/b/degreeme-bd5c7.appspot.com/o/userImages%2F%40cboothe?alt=media&token=32d57150-275d-4a88-8417-090498ffeada"
+            UserId: this.props.user._id,
+            First_Name: this.props.user.First_Name,
+            Last_Name: this.props.user.Last_Name,
+            Image: this.props.user.Image
         };
-        console.log(postBody)
         const requestMetadata = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(postBody)
+            body: JSON.stringify(postBody),
         };
         fetch(api_route, requestMetadata)
         .then(res => res.json())
         .then((res)=>{
-            console.log(res)
-            var likeCount = this.state.likeCount;
-            likeCount++;
-            this.setState({likeCount: likeCount});
+            console.log("Res: " ,res)
+            if(res != false) {
+                var likeCount = this.state.likeCount;
+                likeCount++;
+                this.setState({likeCount: likeCount});
+            }
+            else{
+                const api_route = 'http://localhost:8080/API/RemoveLike';
+                const postBody = {
+                    VideoId: this.state.video._id,
+                    UserId: this.props.user._id
+                };
+                // console.log("cookie user", JSON.parse(Cookies.get("user"))._id)
+                const requestMetadata = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postBody),
+                };
+                fetch(api_route, requestMetadata)
+                .then(res => res.json())
+                .then((res)=>{
+                    if(res.deletedCount == 1) {
+                        var likeCount = this.state.likeCount;
+                        likeCount--;
+                        this.setState({likeCount: likeCount});                    }
+                })
+            }
         })
-        
     }
     componentDidUpdate(prevProps) {
         //if props are updated, get the new video
@@ -100,11 +127,12 @@ class SingleVideo extends Component {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
                 };
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
+                console.log(result)
                 if(result.Views == 1){
                     this.setState({video: result, views:result.Views,
                         viewText: "view"})
@@ -132,16 +160,17 @@ class SingleVideo extends Component {
                     />
                     </div>
                     <div>
-                    <p className="video-title">{this.state.video.Title} </p>
+                    <p className="single-video-title">{this.state.video.Title} </p>
                     <div className="video-actions-list">
                         <p className="single-view-count">{this.state.views + " " + this.state.viewText} </p>
                         <VideoActions Likes={this.state.likeCount} 
-                        addLike={this.addLike} />
+                        addLike={this.addLike} showLikedMsg={this.state.showLikedMsg}
+                        />
                     </div>
                         <div className="sub-details">
-                            <div className="creator-name">
-                                <Link to="/User/fjeio">
-                                    <img className="user-image" src={"https://firebasestorage.googleapis.com/v0/b/degreeme-bd5c7.appspot.com/o/userImages%2F%40cboothe?alt=media&token=32d57150-275d-4a88-8417-090498ffeada"}/>
+                            <div className="single-creator-name">
+                                <Link to={"/User/"+this.state.video.Creator_Id}>
+                                    <img className="user-image" src={this.state.video.Creator_Image}/>
                                     <span className="creator-text">{this.state.video.Creator}</span>
                                 </Link>
                             </div>
@@ -149,7 +178,8 @@ class SingleVideo extends Component {
                         <p className="creator-label">Creator</p>
 
                     </div>
-                    <CommentList VideoId={this.state.video._id}/>
+                    <CommentList VideoId={this.state.video._id}
+                    user={this.props.user}/>
             </div>
                         
         );

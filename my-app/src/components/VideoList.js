@@ -4,43 +4,45 @@ import Video from "../components/Video";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
 
-class VideoRow extends Component {
+class UserVideos extends Component {
     constructor(props) {
         super(props);
-        this.getVideos = this.getVideos.bind(this)
         this.state = {
-            videos:[]
+            videos: []
         }
+        this.getUserVideos = this.getUserVideos.bind(this)
+        
     }
-    componentDidMount(){
-        this.getVideos();
-    }
-    getVideos(){
-        const api_route = 'http://localhost:8080/API/GetAllVideos';
+    getUserVideos(){
+        const api_route = 'http://localhost:8080/API/GetUserVideos/'+window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
+            }
                 };
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
-                console.log(result)
                 this.setState({videos: result})
+                console.log("Vids",this.state.videos)
             })
+      }
+    componentDidMount(){
+        this.getUserVideos();
     }
     render(){
         return (
             <div className="video-row">
                 <h1 className="text-light category">{this.props.category}</h1>
                 <ul>
-                {this.state.videos.map((video, index) => (
                     
+                {this.state.videos.map((video, index) => (
+                   
                     <li>
                         <Link to={"/Video/"+video._id}>
                             <Video Id={video._id} Title={video.Title} Thumbnail ={video.Thumbnail}
-                            Creator={video.Creator} image={video.Creator_Image} Views={video.Views}
+                            Creator={video.Creator} Views={video.Views} image={video.Creator_Image}
                             date={video.Date}/>
                         </Link>
                     </li>
@@ -51,4 +53,4 @@ class VideoRow extends Component {
   }
 }
 
-export default VideoRow;
+export default UserVideos;

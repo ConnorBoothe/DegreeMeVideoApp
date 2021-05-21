@@ -28,10 +28,10 @@ class CommentList extends Component {
         const api_route = 'http://localhost:8080/API/AddComment';
         const postBody = {
             Video_Id: this.props.VideoId,
-            Author_First_Name: "Connor",
-            Author_Last_Name: "Boothe",
-            Author_Id: "Fake id",
-            Author_Img: "https://firebasestorage.googleapis.com/v0/b/degreeme-bd5c7.appspot.com/o/userImages%2F%40cboothe?alt=media&token=32d57150-275d-4a88-8417-090498ffeada",
+            Author_First_Name: this.props.user.First_Name,
+            Author_Last_Name: this.props.user.Last_Name,
+            Author_Id: this.props.user._id,
+            Author_Img: this.props.user.Image,
             Message: this.state.comment
         };
         const requestMetadata = {
@@ -89,21 +89,28 @@ class CommentList extends Component {
     componentDidMount(){
         this.getComments();
     }
+    htmlDecode(input){
+        var e = document.createElement('textarea');
+        e.innerHTML = input;
+        // handle case of empty input
+        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+      }
     render(){
         return (
-            <div class="comment-list">
+            <div className="comment-list">
                 <CommentInput AddComment={this.addComment}
                 show={this.state.showButtons} 
                 showButtons={this.showButtons}
                 borderBottom={this.state.borderBottom}
                 CancelComment = {this.cancelComment}
                 HandleCommentChange = {this.handleCommentChange}
-                Comment={this.state.comment}/>
+                Comment={this.state.comment}
+                user={this.props.user}/>
                 {this.state.comments.map((comment, index) => (
                     <Comment 
-                    Image="https://firebasestorage.googleapis.com/v0/b/degreeme-bd5c7.appspot.com/o/userImages%2F%40cboothe?alt=media&token=32d57150-275d-4a88-8417-090498ffeada"
+                    Image={this.htmlDecode(comment.Author_Img)}
                     Creator={comment.Author_First_Name + " " + comment.Author_Last_Name} 
-                    Message={comment.Message}
+                    Message={this.htmlDecode(comment.Message)}
                     Date={comment.Date}
                     />
                 ))}

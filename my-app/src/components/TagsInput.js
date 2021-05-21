@@ -10,8 +10,9 @@ class TagsInput extends Component {
     render() {
         return (
             <div className="tags-container">
-                <p>Add tags</p>
-                <div class="tags-input-container">
+                
+                <div className="tags-input-container">
+                <p className="input-label">Add tags</p>
                     <input name="tags" className="tags-input" ref={this.props.tag} />
                     <span className="btn-primary add-tags-btn" onClick={this.props.addTag}>Add</span>
                 </div>
