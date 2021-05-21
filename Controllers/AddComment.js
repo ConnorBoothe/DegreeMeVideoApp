@@ -40,7 +40,6 @@ router.post('/API/AddComment',
                 new Date()
             )
             .then(function(comment){
-                console.log(comment)
                 res.json(comment)
             })
             .catch((err)=>{
