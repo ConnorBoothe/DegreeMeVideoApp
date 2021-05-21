@@ -34,8 +34,10 @@ function(req, res){
         //add video to DB if validation succeeds
         
         videos.addVideo(
+            req.body.Creator_Id,
             req.body.Creator, 
             req.body.Email,
+            req.body.Creator_Image,
             req.body.Title,
             req.body.Description,
             req.body.Link,

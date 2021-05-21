@@ -19,10 +19,12 @@ router.post('/API/AddReview',
     check('Creator_Id').isString().escape(),
     check('Author_Id').isString().escape(),
     check('Author_First_Name').isString().escape(),
-    check('Author_Last_Name').isString().isEmail().escape(),
+    check('Author_Last_Name').isString().escape(),
     check('Author_Img').isString().escape(),
     check('Message').isString().escape(),
+    check('Rating').isNumeric(),
     function(req, res){
+        console.log(req.body)
         const errors = validationResult(req);
         console.log("Adding review")
         if (!errors.isEmpty()) {
@@ -38,10 +40,10 @@ router.post('/API/AddReview',
                 req.body.Author_Last_Name,
                 req.body.Author_Img,
                 req.body.Message,
+                req.body.Rating,
                 new Date()
             )
             .then(function(review){
-                console.log(review)
                 res.json(review)
             })
             .catch((err)=>{

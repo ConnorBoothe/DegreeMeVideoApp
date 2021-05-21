@@ -1,8 +1,9 @@
 require("dotenv").config();
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
 const session = require("express-session");
+
+const bodyParser = require('body-parser');
 const MongoStore = require("connect-mongo");
 const {
     check,
@@ -15,41 +16,58 @@ router.use(bodyParser.urlencoded({
     saveUninitialized: true
 }));
 router.use(
-    session({
-      store: MongoStore.create({
-        mongoUrl: process.env.MONGO_URL,
-      }),
-      secret: "toolbox1217!",
-      resave: true,
-      saveUninitialized: true,
-      cookie: { secure: false, maxAge: 6 * 60 * 60 * 1000 },
-    })
-  );
-var VideoDB = require('../Models/Videos');
-var videos = new VideoDB();
+  session({
+  //   store: MongoStore.create({
+  //     mongoUrl: process.env.MONGO_URL,
+  //   }),
+  secret: 'whatever',
+  secure: false,
+  httpOnly: false
+  })
+);
+const LikesDB = require('../Models/Likes');
+const NotificationsDB = require('../Models/Notifications');
+const { resolve } = require("path");
+
+var likes = new LikesDB();
+var notifications = new NotificationsDB();
+
 //endpoint to add user to database
 router.post('/API/AddLike', 
-    check('First_Name').isString().escape(),
-    check('Last_Name').isString().escape(),
-    check('Email').isString().isEmail().escape(),
-    check('Password').isString().escape(),
-    check('Subscription_Level').isString().escape(),
-    check('Verification_Code').isNumeric(),
+    check('VideoId').isString().escape(),
     function(req, res){
-            videos.addLike(
+        console.log("Adding like")
+        console.log(req.body)
+            likes.addLike(
                 req.body.VideoId, 
                 req.body.UserId,
                 req.body.First_Name,
                 req.body.Last_Name,
                 req.body.Image
             )
-            .then(function(user){
-                console.log(user)
-                res.json(user)
+            .then(function(like){
+                if(like != false) {
+                    notifications.addNotification(
+                        req.body.Creator_Id,
+                        req.body.UserId,
+                        req.body.First_Name,
+                        req.body.Last_Name,
+                        req.body.Image,
+                        "Liked your video",
+                        req.body.VideoId
+                    )
+                        .then(()=>{
+                            res.json(like)
+                        })
+                }
+                else{
+                    resolve(like);
+                }
+                
             })
             .catch((err)=>{
-                console.log(err)
-                res.json(err)
+                // console.log(err)
+                res.json(false)
             })
 });
 module.exports = router;

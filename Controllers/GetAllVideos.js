@@ -16,7 +16,6 @@ router.get('/API/GetAllVideos',
         videos.getAllVideos()
         .then((videos)=>{
             console.log("Retrieving vids")
-            console.log(videos)
             res.json(videos);
         })
         .catch((err)=>{
