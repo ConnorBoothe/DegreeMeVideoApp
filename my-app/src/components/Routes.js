@@ -17,12 +17,13 @@ class Routes extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {}
+            user: {},
+            notifications: []
         }
         this.setUser = this.setUser.bind(this);
         this.logout = this.logout.bind(this);
         this.updateAvatar = this.updateAvatar.bind(this);
-
+        this.getNotifications = this.getNotifications.bind(this)
 
     }
     setUser(user){
@@ -34,9 +35,35 @@ class Routes extends Component {
         this.setState({user: user})
     
     }
+    getNotifications(){
+        if(Cookies.get("user")!= undefined) {
+        var user = JSON.parse(Cookies.get("user"));
+            const api_route = 'http://localhost:8080/API/GetNotifications/'+user._id;
+            const requestMetadata = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            };
+            fetch(api_route, requestMetadata)
+            .then(res => res.json())
+            .then((result)=>{
+                console.log(result)
+                this.setState({notifications: result})
+            })
+            .catch((err)=>{
+                console.log(err)
+            });
+        }
+    }
+
     componentDidMount(){
         if(Cookies.get("user")!= undefined) {
             this.setUser(JSON.parse(Cookies.get("user")))
+            this.getNotifications();
+        }
+        else{
+            
         }
     }
     logout(){
@@ -45,7 +72,8 @@ class Routes extends Component {
     render() {
         return (
         <Router>
-            <Header user={this.state.user} setUser={this.setUser} logout={this.logout} />
+            <Header user={this.state.user} setUser={this.setUser} logout={this.logout} 
+            notifications={this.state.notifications} getNotifications={this.getNotifications}/>
         <Switch>
           <Route exact path="/">
               <Redirect to="/Home" />
@@ -54,7 +82,8 @@ class Routes extends Component {
             <Route exact path="/Upload" render={props => 
             (<VideoUploader {...props} user={this.state.user} setUser={this.setUser} />)} />
             <Route exact path="/Login" render={props => 
-            (<Login {...props} user={this.state.user} setUser={this.setUser}/>)} />
+            (<Login {...props} user={this.state.user} setUser={this.setUser}
+            getNotifications={this.getNotifications}/>)} />
             <Route exact path="/CreateAccount" component={CreateAccount} />
             {/* <Route exact path="/Video/:id" component={SingleVideo} /> */}
             <Route exact path="/Video/:id" render={props => 
