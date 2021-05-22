@@ -32,7 +32,7 @@ class Review extends Component {
 
     
                     <p>{this.props.Message}</p>
-                    <p>{formatDate.displayTimeSince(this.props.Date)}</p>
+                    <p className="date">{formatDate.displayTimeSince(this.props.Date)}</p>
             </div>        
         );
   }

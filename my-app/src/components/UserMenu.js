@@ -51,6 +51,7 @@ class UserMenu extends Component {
     }
     hideMenu(){
         this.setState({showNotifications: "none"})
+        this.props.getNotifications();
     }
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
@@ -134,7 +135,8 @@ class UserMenu extends Component {
             <div className="user-dropdown-container" style={{"display": this.state.showNotifications}}>
                 <h1 className="user-dropdown-title">{this.state.menuTitle}</h1>
                 <NotificationList type={this.state.menuTitle} logout={this.props.logout}
-                hideMenu={this.hideMenu} user={this.props.user}/>
+                hideMenu={this.hideMenu} user={this.props.user} notifications={this.props.notifications}
+                getNotifications={this.props.getNotifications}/>
             </div>
         </div>
     );
