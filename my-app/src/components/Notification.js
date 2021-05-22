@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import '../css/Notification.css';
 import FormatDate from "../GlobalFunctions/FormatDate";
+import { Link } from 'react-router-dom';
+
 var formatDate = new FormatDate()
 class Notification extends Component {
     constructor(props) {
@@ -9,7 +11,8 @@ class Notification extends Component {
 
     render() {
         return (
-            <div className="notification-item" >
+            <div className="notification-item" onClick={this.props.hideMenu} >
+                <Link to={"/Video/"+this.props.VideoId}>
                 <ul className="notif-sub-list">
                     <li>
                         <ul>
@@ -29,10 +32,11 @@ class Notification extends Component {
                         </div>
                     </li>
                 </ul>
-                 
+                </Link>
                 
               
             </div>
+        
         );
     }
 }
