@@ -8,8 +8,7 @@ import Video from "../components/Video";
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/VideoRow.css';
 import '../css/LikedVideos.css';
-
-
+import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 // import bootstrap from "bootstrap";
 class LikedVideos extends Component {
@@ -24,7 +23,9 @@ componentDidMount(){
     this.getLikedVideos();
 }
 getLikedVideos(){
-    const api_route = 'http://localhost:8080/GetLikedVideos/'+this.props.user._id;
+    var user = JSON.parse(Cookies.get("user"));
+    console.log(user)
+    const api_route = 'http://localhost:8080/GetLikedVideos/'+user._id;
     const requestMetadata = {
         method: 'GET',
         headers: {
