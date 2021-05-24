@@ -64,8 +64,8 @@ class VideoUploader extends Component {
         this.hideDescChar = this.hideDescChar.bind(this)
 
         this.copyToClipboard = this.copyToClipboard.bind(this)
-        this.Creator = React.createRef();
-        this.Email = React.createRef();
+        // this.Creator = React.createRef();
+        // this.Email = React.createRef();
         this.Description = React.createRef();
         this.Link = React.createRef();
         this.tag = React.createRef();
@@ -311,7 +311,7 @@ class VideoUploader extends Component {
                     <input className="file-input" type="file" ref={this.Link}/>   
                 </li>
                 <li>
-                  <TagsInput Tag = { this.addTag } tag = { this.tag }
+                  <TagsInput addTag = {this.addTag} tag = {this.tag}
                   tags = {this.state.tags} removeTag = { this.removeTag}/>
                 </li>
                 <li>
