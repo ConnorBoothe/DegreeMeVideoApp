@@ -48,6 +48,26 @@ module.exports = class Notifications {
      getNotificationsByUserId(UserId){
         return NotificationsDB.find({UserId: UserId})
         .sort({"Date": -1})
-        
      }
+     sawNotifications(UserId){
+        return NotificationsDB.find({
+          $and: [
+            {
+              UserId: UserId,
+              Viewed: false
+            }
+          ]
+        }).updateMany({Viewed: true})
+     }
+     getUnreadCount(UserId){
+       console.log("id", UserId)
+      return NotificationsDB.find({
+        $and: [
+          {
+            UserId: UserId,
+            Viewed: false
+          }
+        ]
+      }).countDocuments()
+   }
 }
