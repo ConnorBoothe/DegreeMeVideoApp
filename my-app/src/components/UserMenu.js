@@ -14,28 +14,33 @@ class UserMenu extends Component {
             menuTitle: "Notifications",
             showUnreadCount: "block"
         }
+        console.log("props", this.props)
         this.toggleNotifications = this.toggleNotifications.bind(this);
         this.toggleAccount = this.toggleAccount.bind(this);
-        this.hideUnreadCount = this.hideUnreadCount.bind(this);
         this.hideMenu = this.hideMenu.bind(this);
         this.wrapperRef = React.createRef();
         this.handleClickOutside = this.handleClickOutside.bind(this);
         this.isLoggedIn = this.isLoggedIn.bind(this);
-
+        this.readNotifications = this.readNotifications.bind(this)
     }
     handleClickOutside(event) {
         if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
             this.setState({showNotifications: "none"});
+            this.readNotifications();
         }
+      
     }
+
     toggleNotifications(){
-        this.hideUnreadCount();
+        this.props.hideUnreadCount()
         if(this.state.showNotifications == "none"){
+            this.props.getNotifications()
             this.setState({showNotifications: "inline-block",
             menuTitle: "Notifications"
         });
         }
         else {
+            this.readNotifications();
             if(this.state.menuTitle == "Account"){
                 this.setState({menuTitle: "Notifications"});
             }
@@ -46,12 +51,9 @@ class UserMenu extends Component {
             
         }
     }
-    hideUnreadCount(){
-        this.setState({showUnreadCount: "none"})
-    }
+    
     hideMenu(){
         this.setState({showNotifications: "none"})
-        this.props.getNotifications();
     }
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
@@ -67,7 +69,9 @@ class UserMenu extends Component {
         });
         }
         else {
+           
             if(this.state.menuTitle == "Notifications"){
+                this.readNotifications();
                 this.setState({menuTitle: "Account"});
             }
             else {
@@ -76,11 +80,8 @@ class UserMenu extends Component {
             }
         }
     }
-    // componentDidUpdate(){
-    //     this.isLoggedIn()
-    // }
     testJSON(text) {
-       
+        
         try {
             JSON.parse(text);
             return true;
@@ -89,11 +90,6 @@ class UserMenu extends Component {
         }
     }
     isLoggedIn(){
-        console.log(this.props.user)
-        if(!this.testJSON(this.props.user)){
-            console.log(this.props.user)
-            // this.props.user =  JSON.parse(this.props.user)
-        }
        
         if(this.props.user.First_Name){
             var user = Cookies.get("user")
@@ -106,7 +102,9 @@ class UserMenu extends Component {
                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-bell-fill" viewBox="0 0 16 16">
                      <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
                  </svg>
-                 <p className="notification-badge" style={{display: this.state.showUnreadCount}}>9+</p>
+                 <p className="notification-badge" style={{display: this.props.showNotificationBadge}}>
+                     {this.props.notificationCount}
+                </p>
 
              </li>
                 </span>
@@ -114,11 +112,31 @@ class UserMenu extends Component {
             );
         }
         else {
+            
             return (<li>
                 <Link to="/Login"><p>Log In</p></Link>
             </li>);
         }
       }
+      readNotifications(){
+        const api_route = 'http://localhost:8080/API/SeenNotifications';
+        const postBody = {
+            user_id: this.props.user._id
+        };
+        console.log(postBody)
+        const requestMetadata = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postBody),
+        };
+        fetch(api_route, requestMetadata)
+        .then(res => res.json())
+        .then((result)=>{
+            //hide red notif badge
+        })
+    }
   render(){
     return (
         <div className="user-menu" ref={this.wrapperRef}>
@@ -136,7 +154,7 @@ class UserMenu extends Component {
                 <h1 className="user-dropdown-title">{this.state.menuTitle}</h1>
                 <NotificationList type={this.state.menuTitle} logout={this.props.logout}
                 hideMenu={this.hideMenu} user={this.props.user} notifications={this.props.notifications}
-                getNotifications={this.props.getNotifications}/>
+                />
             </div>
         </div>
     );

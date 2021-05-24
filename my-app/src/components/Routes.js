@@ -9,7 +9,7 @@ import SingleVideo from '../components/SingleVideo';
 import CreateAccount from '../components/CreateAccount';
 import User from '../components/User';
 import Settings from '../components/Settings';
-
+import Footer from "../components/Footer"
 import LikedVideos from '../components/LikedVideos';
 import Cookies from 'js-cookie';
 
@@ -18,13 +18,17 @@ class Routes extends Component {
         super(props);
         this.state = {
             user: {},
-            notifications: []
+            notifications: [],
+            showNotificationBadge: "none",
+            notificationCount: 0
         }
         this.setUser = this.setUser.bind(this);
         this.logout = this.logout.bind(this);
         this.updateAvatar = this.updateAvatar.bind(this);
         this.getNotifications = this.getNotifications.bind(this)
-
+        this.getNotificationCount = this.getNotificationCount.bind(this)
+        this.hideUnreadCount = this.hideUnreadCount.bind(this)
+        this.showUnreadCount = this.showUnreadCount.bind(this)
     }
     setUser(user){
         this.setState({user: user});
@@ -33,7 +37,36 @@ class Routes extends Component {
         var user = this.state.user;
         user.Image = avatar;
         this.setState({user: user})
-    
+    }
+    getNotificationCount(){
+        if(Cookies.get("user")!= undefined) {
+        var user = JSON.parse(Cookies.get("user"));
+        const api_route = 'http://localhost:8080/API/GetUnreadCount/'+user._id;
+        const requestMetadata = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        };
+        fetch(api_route, requestMetadata)
+        .then(res => res.json())
+        .then((result)=>{
+            if(result > 0){
+                if(result <= 9){
+                    this.setState({showNotificationBadge: "block", notificationCount: result })
+                }
+                else {
+                    this.setState({showNotificationBadge: "block", notificationCount: "9+" })
+                }
+            }
+            else{
+                this.setState({showNotificationBadge: "none", notificationCount: result})
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        });
+    }
     }
     getNotifications(){
         if(Cookies.get("user")!= undefined) {
@@ -56,11 +89,27 @@ class Routes extends Component {
             });
         }
     }
+    showUnreadCount(){
+        var unreadCount = this.state.notificationCount;
+        
+        unreadCount++;
+        if(unreadCount <= 9){
+            this.setState({showNotificationBadge: "block", notificationCount: unreadCount})
 
+        }
+        else {
+            this.setState({showNotificationBadge: "block", notificationCount: "9+"})
+
+        }
+    }
+    hideUnreadCount(){
+        this.setState({showNotificationBadge: "none", notificationCount: 0})
+    }
     componentDidMount(){
         if(Cookies.get("user")!= undefined) {
             this.setUser(JSON.parse(Cookies.get("user")))
-            this.getNotifications();
+            this.getNotificationCount();
+            // this.getNotifications();
         }
         else{
             
@@ -73,7 +122,10 @@ class Routes extends Component {
         return (
         <Router>
             <Header user={this.state.user} setUser={this.setUser} logout={this.logout} 
-            notifications={this.state.notifications} getNotifications={this.getNotifications}/>
+            notifications={this.state.notifications} getNotifications={this.getNotifications}
+            showNotificationBadge={this.state.showNotificationBadge}
+            hideUnreadCount={this.hideUnreadCount}
+            notificationCount={this.state.notificationCount}/>
         <Switch>
           <Route exact path="/">
               <Redirect to="/Home" />
@@ -82,12 +134,13 @@ class Routes extends Component {
             <Route exact path="/Upload" render={props => 
             (<VideoUploader {...props} user={this.state.user} setUser={this.setUser} />)} />
             <Route exact path="/Login" render={props => 
-            (<Login {...props} user={this.state.user} setUser={this.setUser}
-            getNotifications={this.getNotifications}/>)} />
+            (<Login {...props} user={this.state.user} setUser={this.setUser} getUnreadCount={this.getNotificationCount}
+            />)} />
             <Route exact path="/CreateAccount" component={CreateAccount} />
             {/* <Route exact path="/Video/:id" component={SingleVideo} /> */}
             <Route exact path="/Video/:id" render={props => 
-            (<SingleVideo {...props} user={this.state.user} />)} />
+            (<SingleVideo {...props} user={this.state.user} 
+            showUnreadCount={this.showUnreadCount}/>)} />
             <Route exact path="/User/:id" render={props => 
             (<User {...props} user={this.state.user}  />)} />
             <Route exact path="/Settings" render={props => 
@@ -97,6 +150,7 @@ class Routes extends Component {
             (<LikedVideos {...props} user={this.state.user} />)} />
 
         </Switch>
+        <Footer />
       </Router>
         );
     }

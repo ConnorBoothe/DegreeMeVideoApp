@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import '../css/VideoUploader.css';
+import '../css/Login.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
@@ -27,22 +28,30 @@ class LoginForm extends Component {
           return(
 <div className="video-upload-container">
             <h1 className="video-upload-title">Login</h1>
+            <div className="login-container">
             <ul>
                 <li>
-                    <p>Email</p>
+                <div className="login-input-container">
+
+                    <p className="login-label">Email</p>
                     <input type="email" name ="Email" onChange={this.handleEmailChange}/>
+                </div>
                 </li>
                 <li>
-                    <p>Password</p>
-                    <input type="password" name ="Password" onChange={this.handlePasswordChange}/>
+                    <div className="login-input-container">
+                        <p  className="login-label">Password</p>
+                        <input type="password" name ="Password" onChange={this.handlePasswordChange}/>
+                    </div>
                 </li>
                 <li>
-                    <button className="btn-primary" onClick={this.login}>Login</button>
+                    <button className="btn btn-primary login-btn" onClick={this.login}>Login</button>
                 </li>
                 <li>
                     <Router>
-                        <a href="/CreateAccount">
-                        Create an account in seconds
+                        <a href="/CreateAccount" className="create-account-link">
+                        <p>
+                            Create an account in seconds
+                        </p>
                         </a>
                     </Router>
                    </li>
@@ -50,6 +59,7 @@ class LoginForm extends Component {
                   <p className="error">{this.state.error}</p>
                 </li>
             </ul>
+            </div>
         </div>
           );
   }
@@ -70,13 +80,11 @@ class LoginForm extends Component {
         fetch(api_route, requestMetadata)
         .then(res => res.json())
         .then((user)=>{
-         console.log(user._id)
-         console.log(user)
-        this.props.setUser(user);
-         Cookies.set('user', JSON.stringify(user)) 
-         this.setState({redirect: true})
-         this.props.getNotifications()
-
+            this.props.setUser(user);
+            this.props.getUnreadCount();
+            Cookies.set('user', JSON.stringify(user)) 
+            this.setState({redirect: true})
+            this.props.getUnreadCount()
         })
     }
     handleEmailChange(e) {

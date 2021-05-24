@@ -87,6 +87,7 @@ class SingleVideo extends Component {
                 var likeCount = this.state.likeCount;
                 likeCount++;
                 this.setState({likeCount: likeCount});
+                this.props.showUnreadCount();
             }
             else{
                 const api_route = 'http://localhost:8080/API/RemoveLike';

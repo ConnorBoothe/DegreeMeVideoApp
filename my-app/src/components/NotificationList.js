@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import '../css/NotificationList.css';
 import Notification from "../components/Notification"
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 class NotificationList extends Component {
@@ -14,40 +14,45 @@ class NotificationList extends Component {
         }
     }
     componentDidMount(){
-        if(Cookies.get("user") != null) {
-            var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'http://localhost:8080/API/GetNotifications/'+user._id;
-            const requestMetadata = {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            };
-            fetch(api_route, requestMetadata)
-            .then(res => res.json())
-            .then((result)=>{
-                console.log(result)
-                this.setState({notifications: result})
-            })
-            .catch((err)=>{
-                console.log(err)
-            });
-        }
+        // if(Cookies.get("user") != null) {
+        //     var user = JSON.parse(Cookies.get("user"));
+        //     const api_route = 'http://localhost:8080/API/GetNotifications/'+user._id;
+        //     const requestMetadata = {
+        //         method: 'GET',
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         },
+        //     };
+        //     fetch(api_route, requestMetadata)
+        //     .then(res => res.json())
+        //     .then((result)=>{
+        //         console.log(result)
+        //         this.setState({notifications: result})
+        //     })
+        //     .catch((err)=>{
+        //         console.log(err)
+        //     });
+        // }
        
     }
+    
     logout(){
         this.props.logout();
         this.props.hideMenu();
          Cookies.remove("user")
+        //  return(
+        //      <Redirect to="/Home"></Redirect>
+        //  );
     }
     toggleUserMenu(){
         if(this.props.type == "Notifications") {
             return (
                 <ul>
-                    {this.state.notifications.map((video, index) => (
+                    {this.props.notifications.map((video, index) => (
                         <li><Notification userImage={video.Author_Image} 
                         name={video.Author_First_Name + " " +video.Author_Last_Name} 
-                        date={video.Date} message={video.Message}/></li>
+                        date={video.Date} message={video.Message} VideoId={video.VideoId}
+                        hideMenu={this.props.hideMenu} isRead={video.Viewed}/></li>
                     ))}
                 </ul>
             )

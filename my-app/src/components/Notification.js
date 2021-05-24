@@ -7,8 +7,21 @@ var formatDate = new FormatDate()
 class Notification extends Component {
     constructor(props) {
         super(props);
+        this.isUnread = this.isUnread.bind(this)
     }
-
+    isUnread(){
+        if(this.props.isRead){
+            return(
+                <p className="unread" style={{backgroundColor: "#1b1e23"}}></p>
+            );
+        }
+        else {
+            return(
+                <p className="unread" style={{backgroundColor: "#007bff"}}></p>
+            );
+        }
+        
+    }
     render() {
         return (
             <div className="notification-item" onClick={this.props.hideMenu} >
@@ -17,7 +30,7 @@ class Notification extends Component {
                     <li>
                         <ul>
                             <li>
-                                <p className="unread"></p>
+                                {this.isUnread()}
                             </li>
                             <li>
                                 <img className="notification-image" src={this.props.userImage}/>
