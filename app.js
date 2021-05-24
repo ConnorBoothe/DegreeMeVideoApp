@@ -51,6 +51,8 @@ app.use([
     require("./Controllers/UpdateAvatar"),
     require("./Controllers/UpdateBio"),
     require("./Controllers/GetUserReviews"),
+    require("./Controllers/SeenNotifications"),
+    require("./Controllers/GetUnreadNotificationCount"),
 
 ]); 
 
