@@ -17,14 +17,17 @@ class Header extends Component {
         <div className="header">
           <ul>
             <li className="logo-link">
-            <Link to="/Home"><img className="site-logo" src={logo} onClick={this.props.getNotifications()}/></Link></li>
+            <Link to="/Home"><img className="site-logo" src={logo} /></Link></li>
             <li className="search-li"></li>
             {/* <li className="coming-soon-text">DegreeMe Video Collection Tool</li> */}
           </ul>
           <SearchBar />
           <UserMenu user={this.props.user} logout={this.props.logout} 
           setUser={this.props.setUser} notifications={this.props.notifications}
-          getNotifications={this.props.getNotifications}/>
+          getNotifications={this.props.getNotifications}
+          hideUnreadCount={this.props.hideUnreadCount}
+          showNotificationBadge = {this.props.showNotificationBadge}
+          notificationCount = {this.props.notificationCount}/>
         </div>
         // <p>Coming soon to iOs</p>
     );
