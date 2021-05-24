@@ -20,8 +20,7 @@
 .notif-sub-list li {
     padding:0!important;
 }
-.unread {
-    background-color: #007bff;
+.unread { 
     border-radius: 10px;
     height: 10px;
     width: 10px;
