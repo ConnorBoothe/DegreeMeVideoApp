@@ -9,13 +9,21 @@ router.use(bodyParser.urlencoded({
 }));
 var VideosDB = require('../Models/Videos');
 var videos = new VideosDB();
+var ViewsDB = require('../Models/Views');
+var views = new ViewsDB();
 //endpoint to add user to database
 
 router.get('/API/Video/:id', 
     function(req, res){
         videos.getVideoById(req.params.id)
         .then((video)=>{
-            res.json(video);
+            views.getViewCountByVideoId(video._id)
+            .then((views)=>{
+                console.log("Views", views)
+                video.Views = views;
+                res.json(video);
+            })
+            
         })
         .catch((err)=>{
             console.log(err)
