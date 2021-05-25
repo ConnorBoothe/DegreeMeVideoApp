@@ -52,3 +52,14 @@
     margin-left:40px;
     font-size:14px;
 }
+.description-label {
+    text-align: left;
+    display:block;
+    color:white;
+    font-weight: bold;
+    margin-bottom: 2px;
+    font-size:14px;
+}
+.video-description {
+    text-align: left;
+}
