@@ -48,7 +48,6 @@ class CommentList extends Component {
               var newCommentsArray = new Array();
               newCommentsArray = this.state.comments;
               newCommentsArray.unshift(comment)
-              console.log(newCommentsArray)
               this.setState({comments: newCommentsArray,
                 borderBottom:"2px solid #d4d4d4",
                 showButtons:"none"})
