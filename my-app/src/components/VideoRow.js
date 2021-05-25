@@ -16,7 +16,7 @@ class VideoRow extends Component {
         this.getVideos();
     }
     getVideos(){
-        const api_route = 'http://localhost:8080/API/GetAllVideos';
+        const api_route = 'http://localhost:8080/API/GetVideoByTag/'+this.props.category;
         const requestMetadata = {
             method: 'GET',
             headers: {
