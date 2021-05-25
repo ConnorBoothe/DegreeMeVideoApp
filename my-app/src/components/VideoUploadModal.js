@@ -42,7 +42,7 @@ class VideoUploadModal extends Component {
             <p className="video-modal-description">{this.props.Description}</p>
             <p className="video-modal-label">Share</p>
             <p>
-                https://127.0.0.1/Video/{this.props.videoId}
+                http://localhost:3000/Video/{this.props.videoId}
                 <Tippy content="Copy To Clipboard">
                     <span className="copy-btn" onClick={this.props.copyToClipboard}>COPY</span>
                 </Tippy>
@@ -52,15 +52,6 @@ class VideoUploadModal extends Component {
         </Modal.Footer>
       </Modal>
       
-            {/* <ul>
-                <li onClick={this.props.copyToClipboard}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
-                        <path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/>
-                    </svg>
-                    Share
-                </li>
-                
-            </ul> */}
         </div>
     );
   }
