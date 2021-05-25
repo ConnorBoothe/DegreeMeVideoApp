@@ -4,7 +4,6 @@ import '../css/VideoUploader.css';
 class TagsInput extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
     }
    
     render() {
@@ -18,10 +17,8 @@ class TagsInput extends Component {
                 </div>
 
                 <div className="append-tags">
-                    {console.log(this.props.tags)}
                     {this.props.tags.map((tag, index) => (
                         <div className="tag-container" >
-                           
                             <p key={index} className="tag">
                             <span className="text-light remove-tag" onClick={() => this.props.removeTag(index)}>x</span>
                                 {tag}
