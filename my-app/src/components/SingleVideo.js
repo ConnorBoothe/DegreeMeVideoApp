@@ -34,6 +34,8 @@ class SingleVideo extends Component {
         setTimeout(()=>{
             const api_route = 'http://localhost:8080/API/AddView';
             const postBody = {
+                UserId: this.props.user._id,
+                CreatorId: this.state.video.Creator_Id,
                 VideoId: this.state.video._id,
             };
             const requestMetadata = {
@@ -46,18 +48,16 @@ class SingleVideo extends Component {
             fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((res)=>{
-                if(res._id){
-                    if(res.Views == 1){
-                        this.setState({ views:res.Views,
+                console.log(res)
+             
+                    if(res == 1){
+                        this.setState({ views:res,
                             viewText: "view"})
                     }
                     else {
-                        this.setState({ views:res.Views,
+                        this.setState({ views:res,
                             viewText: "views"})
                     }
-                    this.setState({views: res.Views});
-
-                }
             })
         }, 30000)
     }
@@ -177,7 +177,8 @@ class SingleVideo extends Component {
                             </div>
                         </div>
                         <p className="creator-label">Creator</p>
-
+                        <p className="description-label">Description</p>
+                        <p className="text-light video-description">{this.state.video.Description}</p>
                     </div>
                     <CommentList VideoId={this.state.video._id}
                     user={this.props.user}/>
