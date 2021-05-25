@@ -53,6 +53,9 @@ app.use([
     require("./Controllers/GetUserReviews"),
     require("./Controllers/SeenNotifications"),
     require("./Controllers/GetUnreadNotificationCount"),
+    require("./Controllers/GetCreatorTotalViews"),
+    require("./Controllers/GetVideosByTag"),
+
 
 ]); 
 
