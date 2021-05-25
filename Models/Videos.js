@@ -6,9 +6,6 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopolo
     console.log("Connect")
 });
 var Schema = mongoose.Schema;
-var Tags = new Schema({
-  Name: {type:String, required:true}
-});
 var VideoSchema = new Schema({
     Creator_Id:{type:String, required: true},
     Creator:{type:String, required: true},
@@ -19,7 +16,6 @@ var VideoSchema = new Schema({
     Link: {type:String, required:true},
     Thumbnail: {type:String, required:true},
     Views: {type:Number, required:true},
-    Tags: [Tags],
     Likes: {type: Array},
     Date:{type: Date, required: true}
 
@@ -29,12 +25,8 @@ var VideosDB = mongoose.model('Videos',VideoSchema);
 module.exports = class Videos {
      //add video to db
      addVideo(Creator_Id, Creator, Creator_Email,
-      Creator_Image, Title, Description, Link, Tags, Thumbnail){
+      Creator_Image, Title, Description, Link, Thumbnail){
         return new Promise((resolve, reject)=>{
-          var tags =[];
-            for(var x = 0; x < Tags.length;x++) {
-              tags.push({"Name": Tags[x]});
-            }
           var video = new VideosDB({
             Creator_Id: Creator_Id,
             Creator: Creator,
@@ -43,7 +35,6 @@ module.exports = class Videos {
             Title: Title,
             Description: Description,
             Link: Link,
-            Tags: tags, 
             Thumbnail: Thumbnail,
             Views: 0,
             Date:new Date()
@@ -108,7 +99,6 @@ module.exports = class Videos {
     }
     //get creator's videos
     getVideosByCreatorId(CreatorId){
-      console.log("creator id", CreatorId)
       return VideosDB.find({Creator_Id: CreatorId})
     }
 }
