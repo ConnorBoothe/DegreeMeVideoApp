@@ -25,18 +25,26 @@ router.use(
       cookie: { secure: false, maxAge: 6 * 60 * 60 * 1000 },
     })
   );
-var VideoDB = require('../Models/Videos');
-var videos = new VideoDB();
+var ViewsDB = require('../Models/Views');
+var views = new ViewsDB();
+var VideosDB = require('../Models/Videos');
+var videos = new VideosDB();
 //endpoint to add user to database
 router.post('/API/AddView', 
     function(req, res){
-            videos.addView(
+            views.addView(
+                req.body.UserId,
+                req.body.CreatorId,
                 req.body.VideoId, 
             )
-            .then(function(video){
+            .then(function(views){
+              console.log(views)
                 console.log("view added")
-                console.log(video)
-                res.json(video)
+                videos.addView(req.body.VideoId)
+                .then(()=>{
+                  res.json(views)
+                })
+               
             })
             .catch((err)=>{
                 console.log(err)
