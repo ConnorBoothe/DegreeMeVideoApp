@@ -13,6 +13,8 @@ router.use(bodyParser.urlencoded({
 }));
 var VideosDB = require('../Models/Videos');
 var videos = new VideosDB();
+var TagsDB = require('../Models/Tags');
+var tags = new TagsDB();
 //endpoint to add user to database
 router.post('/API/AddVideo', 
 // check('Creator').isString().escape(),
@@ -41,12 +43,15 @@ function(req, res){
             req.body.Title,
             req.body.Description,
             req.body.Link,
-            req.body.tags,
             req.body.Thumbnail
             )
          .then(function(video){
-             console.log(video)
-             res.json(video)
+             console.log("Add tags")
+             tags.addTags(req.body.tags, video._id)
+             .then(()=>{
+                 console.log(video)
+                res.json(video)
+             })
          })
          .catch((err)=>{
              console.log(err)
