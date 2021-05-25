@@ -10,7 +10,7 @@ router.use(bodyParser.urlencoded({
 var ReviewsDB = require('../Models/Reviews');
 var reviews = new ReviewsDB();
 //get creator reviews by id
-router.get('/API/Reviews/:id',
+router.get('/API/GetUserReviews/:id',
     function(req, res){
         reviews.getReviewByCreatorId(req.params.id)
         .then((reviews)=>{
