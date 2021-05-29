@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../css/Comments.css';
 import CommentInput from "../components/CommentInput"
 import Comment from "../components/Comment"
+import CreateAccountModal from "../components/CreateAccountModal";
 
 class CommentList extends Component {
     constructor(props) {
@@ -25,38 +26,45 @@ class CommentList extends Component {
         showButtons: "block"})
     }
     addComment() {
-        if(this.state.comment != ""){
-            const api_route = 'http://localhost:8080/API/AddComment';
-            const postBody = {
-                Video_Id: this.props.VideoId,
-                Author_First_Name: this.props.user.First_Name,
-                Author_Last_Name: this.props.user.Last_Name,
-                Author_Id: this.props.user._id,
-                Author_Img: this.props.user.Image,
-                Message: this.state.comment
-            };
-            const requestMetadata = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(postBody)
-            };
-            fetch(api_route, requestMetadata)
-            .then(res => res.json())
-            .then((comment)=>{
-              var newCommentsArray = new Array();
-              newCommentsArray = this.state.comments;
-              newCommentsArray.unshift(comment)
-              this.setState({comments: newCommentsArray,
-                borderBottom:"2px solid #d4d4d4",
-                showButtons:"none"})
-            })
-            .catch((err)=>{
-                console.log(err)
-                alert("Error")
-            })
+        if(this.props.user._id == undefined) {
+            //show modal
+            this.props.showModal();
         }
+        else {
+            if(this.state.comment != ""){
+                const api_route = 'http://localhost:8080/API/AddComment';
+                const postBody = {
+                    Video_Id: this.props.VideoId,
+                    Author_First_Name: this.props.user.First_Name,
+                    Author_Last_Name: this.props.user.Last_Name,
+                    Author_Id: this.props.user._id,
+                    Author_Img: this.props.user.Image,
+                    Message: this.state.comment
+                };
+                const requestMetadata = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postBody)
+                };
+                fetch(api_route, requestMetadata)
+                .then(res => res.json())
+                .then((comment)=>{
+                  var newCommentsArray = new Array();
+                  newCommentsArray = this.state.comments;
+                  newCommentsArray.unshift(comment)
+                  this.setState({comments: newCommentsArray,
+                    borderBottom:"2px solid #d4d4d4",
+                    showButtons:"none"})
+                })
+                .catch((err)=>{
+                    console.log(err)
+                    alert("Error")
+                })
+            }
+        }
+        
         
     }
     handleCommentChange(e){
@@ -101,6 +109,8 @@ class CommentList extends Component {
     render(){
         return (
             <div className="comment-list">
+                <CreateAccountModal isOpen={this.props.isOpen}
+                hideModal={this.props.hideModal}/>
                 <CommentInput AddComment={this.addComment}
                 show={this.state.showButtons} 
                 showButtons={this.showButtons}
