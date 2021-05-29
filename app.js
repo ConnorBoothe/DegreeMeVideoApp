@@ -55,8 +55,7 @@ app.use([
     require("./Controllers/GetUnreadNotificationCount"),
     require("./Controllers/GetCreatorTotalViews"),
     require("./Controllers/GetVideosByTag"),
-
-
+    require("./Controllers/GetVideosBySearchValue")
 ]); 
 
 //Wildcard route
