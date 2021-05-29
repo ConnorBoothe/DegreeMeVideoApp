@@ -11,6 +11,7 @@ import User from '../components/User';
 import Settings from '../components/Settings';
 import Footer from "../components/Footer"
 import LikedVideos from '../components/LikedVideos';
+import SearchResults from '../components/SearchResults'
 import Cookies from 'js-cookie';
 
 class Routes extends Component {
@@ -20,7 +21,8 @@ class Routes extends Component {
             user: {},
             notifications: [],
             showNotificationBadge: "none",
-            notificationCount: 0
+            notificationCount: 0,
+            searchValue: ""
         }
         this.setUser = this.setUser.bind(this);
         this.logout = this.logout.bind(this);
@@ -29,6 +31,9 @@ class Routes extends Component {
         this.getNotificationCount = this.getNotificationCount.bind(this)
         this.hideUnreadCount = this.hideUnreadCount.bind(this)
         this.showUnreadCount = this.showUnreadCount.bind(this)
+        this.setSearchValue = this.setSearchValue.bind(this)
+        this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this)
+
     }
     setUser(user){
         this.setState({user: user});
@@ -115,6 +120,14 @@ class Routes extends Component {
             
         }
     }
+    setSearchValue(value){
+        this.setState({searchValue: value});
+    }
+    handleAutocompleteChange(e){
+        console.log("hide")
+        this.setState({searchValue: e.target.value});
+
+    }
     logout(){
         this.setState({user: {}});
     }
@@ -125,7 +138,10 @@ class Routes extends Component {
             notifications={this.state.notifications} getNotifications={this.getNotifications}
             showNotificationBadge={this.state.showNotificationBadge}
             hideUnreadCount={this.hideUnreadCount}
-            notificationCount={this.state.notificationCount}/>
+            notificationCount={this.state.notificationCount}
+            searchValue={this.state.searchValue}
+            setSearchValue={this.setSearchValue}
+            handleAutocompleteChange={this.handleAutocompleteChange}/>
         <Switch>
           <Route exact path="/">
               <Redirect to="/Home" />
@@ -146,6 +162,8 @@ class Routes extends Component {
             <Route exact path="/Settings" render={props => 
             (<Settings {...props} user={this.state.user}
             setUser={this.setUser}  />)} />
+            <Route exact path="/SearchResults" render={props => 
+            (<SearchResults {...props} searchValue={this.state.searchValue}/>)} />
             <Route exact path="/LikedVideos" render={props => 
             (<LikedVideos {...props} user={this.state.user} />)} />
 
