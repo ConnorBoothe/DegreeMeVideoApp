@@ -21,13 +21,15 @@ class Header extends Component {
             <li className="search-li"></li>
             {/* <li className="coming-soon-text">DegreeMe Video Collection Tool</li> */}
           </ul>
-          <SearchBar />
+          <SearchBar setSearchValue={this.props.setSearchValue}
+          searchValue={this.props.searchValue}/>
           <UserMenu user={this.props.user} logout={this.props.logout} 
           setUser={this.props.setUser} notifications={this.props.notifications}
           getNotifications={this.props.getNotifications}
           hideUnreadCount={this.props.hideUnreadCount}
           showNotificationBadge = {this.props.showNotificationBadge}
-          notificationCount = {this.props.notificationCount}/>
+          notificationCount = {this.props.notificationCount}
+          handleAutocompleteChange={this.props.handleAutocompleteChange}/>
         </div>
         // <p>Coming soon to iOs</p>
     );
