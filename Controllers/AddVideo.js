@@ -43,11 +43,26 @@ function(req, res){
             req.body.Title,
             req.body.Description,
             req.body.Link,
-            req.body.Thumbnail
-            )
+            req.body.Thumbnail,
+            req.body.tags
+        )
          .then(function(video){
              console.log("Add tags")
-             tags.addTags(req.body.tags, video._id)
+             var newTags = [];
+             for(var x = 0; x < req.body.tags.length; x++){
+                if(req.body.tags[x].includes(" ")){
+                    console.log("INCLUDES SPACE")
+                    var splitArray = req.body.tags[x].split(" ");
+                    console.log(splitArray)
+                    for(var y = 0; y < splitArray.length; y++){
+                        newTags.push(splitArray[y]);
+                    }
+                }
+                else {
+                    newTags.push(req.body.tags[x]);
+                }
+            }
+             tags.addTags(newTags, video._id)
              .then(()=>{
                  console.log(video)
                 res.json(video)

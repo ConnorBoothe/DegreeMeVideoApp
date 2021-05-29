@@ -29,4 +29,14 @@ module.exports = class Tags {
     getVideoIdsByTag(Name){
         return TagsDB.find({Name: Name})
     }
+    getVideoIdsByTagArray(TagsArray){
+        var regexQueries = [];
+        for(var x = 0; x < TagsArray.length; x++) {
+            regexQueries.push({"Name": { "$regex": TagsArray[x], "$options": "i" },})
+        }
+        console.log("regex", regexQueries)
+        return TagsDB.find({ 
+            $or: regexQueries
+        }).sort({"_id": 1});
+    }
 }

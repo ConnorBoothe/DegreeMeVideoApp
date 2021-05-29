@@ -15,13 +15,14 @@ var videos = new VideosDB();
 //get videos by tag
 router.get('/API/GetVideoByTag/:tag',
     function (req, res) {
+        console.log("running search by tag")
         tags.getVideoIdsByTag(req.params.tag)
         .then((videoIds)=>{
             var videoIdArray = [];
             for(var x = 0; x < videoIds.length; x++) {
                 videoIdArray.push(videoIds[x].VideoId)
             }
-            console.log("Id array", videoIdArray)
+            console.log("Id array tag", videoIdArray)
             videos.getVideosByIdArray(videoIdArray)
             .then((videos)=>{
                 res.json(videos)
