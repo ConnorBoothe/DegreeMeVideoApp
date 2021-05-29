@@ -1,0 +1,69 @@
+.search-results-list li, .search-results-list .video-item{
+    display: block!important;
+}
+.search-results-list {
+    display: inline-block;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+.video-label {
+    margin-top: 40px;
+    font-weight: 1;
+}
+.search-value-label {
+    font-weight:bold!important;
+}
+.no-results-img {
+    width:400px;
+    margin-top:40px;
+}
+.playIcon-search-results {
+    text-align: center;
+    margin-left:30px;
+    margin-right:auto;
+    width:100%;
+    position: absolute;
+    display: table-cell;
+    vertical-align: middle;
+    margin-top: 55px;
+}
+.video-item-container {
+    width: 60%;
+    min-width: 600px;
+    position: relative;
+    margin-bottom: 20px;
+}
+.creator-img-search-result {
+    width:25px!important;
+    margin-right: 2px;
+}
+.sub-details-search-result{
+    font-size: 16px;
+    position: absolute;
+    top:0;
+    width:100%;
+    margin-left: 350px;
+}
+.thumbnail-search-result {
+    width: 320px;
+}
+.video-date-search-result {
+    margin-left: 10px;
+
+}
+.video-title-search-result {
+    font-size:18px;
+    margin-bottom:2px;
+}
+.view-count-search-result {
+    color: white;
+    font-weight: bold;
+    font-size:14px;
+    margin-bottom: 5px;
+}
+.video-description-search-result {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
