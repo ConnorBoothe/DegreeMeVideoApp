@@ -8,12 +8,21 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // import bootstrap from "bootstrap";
 class Home extends Component {
-
+  constructor(props){
+    super(props)
+  }
+  renderCreatorDashboard(){
+    if(this.props.user._id != undefined) {
+      return (
+        <CreatorDashboard />
+      );
+    }
+  }
   render(){
     return (
         <div>
-          <CreatorDashboard />
-            <div className="videos-container">
+        {this.renderCreatorDashboard()}       
+     <div className="videos-container">
               <h2 className="text-light suggested-label">Suggested Videos</h2>
                 <VideoRow category="ITSC 1212" />
                 <VideoRow category="ITSC 1213" />
