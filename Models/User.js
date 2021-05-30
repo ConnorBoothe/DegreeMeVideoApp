@@ -73,12 +73,19 @@ module.exports = class User {
         console.log("Email", Email)
         return UserDB.findOne({Email: Email});
     }
-      //get user
-      getUser(id){
-        return UserDB.findOne(
-          {
-            _id:id
-          });
+    //get user by id
+    getUser(id){
+      return UserDB.findOne(
+        {
+          _id:id
+        });
+    }
+     //get user by id
+     getUserByEmail(email){
+      return UserDB.findOne(
+        {
+          Email:email
+        });
     }
     updateAvatar(id, avatar){
       return new Promise((resolve, reject)=>{
