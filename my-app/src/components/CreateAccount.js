@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import '../css/VideoUploader.css';
+import '../css/CreateAccount.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
 
@@ -10,14 +10,19 @@ class CreateAccount extends Component {
             first_name:"",
             last_name: "",
             email:"",
-            password:""
+            password:"",
+            error: "Please fill out all fields",
+            showError: "none",
+            errorClass:"error"
         };
         this.createAccount = this.createAccount.bind(this)
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
         this.handleLastNameChange = this.handleLastNameChange.bind(this);
-
+        this.showError = this.showError.bind(this);
+        this.hideError = this.hideError.bind(this);
+        this.setError = this.setError.bind(this);
 
     }
     validateEmail(email) {
@@ -26,6 +31,18 @@ class CreateAccount extends Component {
   }
 
     createAccount(){
+      var isEmail = this.validateEmail(this.state.email);
+      if(this.state.first_name == "" ||
+      this.state.last_name == "" ||
+      this.state.email == "" ||
+      this.state.password == "" ) {
+        this.showError();
+      }
+      else if (!isEmail){
+        this.showError();
+        this.setState({error: "Not a valid email"});
+      }
+      else {
         const api_route = 'http://localhost:8080/API/AddUser';
         const postBody = {
             First_Name: this.state.first_name,
@@ -45,8 +62,23 @@ class CreateAccount extends Component {
         .then(res => res.json())
         .then((res)=>{
             console.log(res)
-          alert("Request complete")
+            if(res == "This email is already in use"){
+              this.setState({
+                errorClass: "error",
+                error: res,
+                showError: "block"
+              })
+            }
+            else{
+              this.setState({
+                errorClass: "success",
+                error: "Account Successfully Created",
+                showError: "block"
+              })
+            }
         })
+      }
+        
     }
     handleFirstNameChange(e) {
         this.setState({first_name: e.target.value});
@@ -60,35 +92,52 @@ class CreateAccount extends Component {
       handlePasswordChange(e) {
         this.setState({password: e.target.value});
       }
-
+    showError(){
+      this.setState({showError: "block"})
+    }
+    hideError(){
+      this.setState({showError: "none"})
+    }
+    setError(error){
+      this.setState({error: error})
+    }
     render(){
         
     return (
         <div className="video-upload-container">
-            <h1 className="video-upload-title">Create Account</h1>
+            <h2 className="create-account-title text-light">Create Account</h2>
             <ul>
             <li>
-                <p>First Name</p>
+            <div className="create-account-input-container">
+                <p className="create-account-input-label">First Name</p>
                 <input type="text" name ="First_Name" onChange={this.handleFirstNameChange}/>
+            </div>
             </li>
             <li>
-                    <p>Last Name</p>
+              <div className="create-account-input-container">
+              <p className="create-account-input-label">Last Name</p>
                     <input type="text" name ="Last_Name" onChange={this.handleLastNameChange}/>
-
+              </div>
                 </li>
                 <li>
-                    <p>Email</p>
+                <div className="create-account-input-container">
+                    <p className="create-account-input-label">Email</p>
                     <input type="email" name ="Email" onChange={this.handleEmailChange}/>
+               </div>
                 </li>
                 <li>
-                    <p>Password</p>
+                <div className="create-account-input-container">
+                    <p className="create-account-input-label">Password</p>
                     <input type="password" name ="Password" onChange={this.handlePasswordChange}/>
+                </div>
                 </li>
                 <li>
-                    <button className="btn-primary" onClick={this.createAccount}>Login</button>
+                    <div className="btn-container">
+                      <button className="btn btn-primary" onClick={this.createAccount}>Create Account</button>
+                    </div>
                 </li>
                 <li>
-                  <p className="error">{this.state.error}</p>
+                  <p className={this.state.errorClass} style={{display: this.state.showError}}>{this.state.error}</p>
                 </li>
             </ul>
         </div>

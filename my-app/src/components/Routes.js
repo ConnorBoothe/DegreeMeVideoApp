@@ -146,7 +146,8 @@ class Routes extends Component {
           <Route exact path="/">
               <Redirect to="/Home" />
             </Route>
-            <Route exact path="/Home" component={Home} />
+            <Route exact path="/Home" render={props => 
+            (<Home {...props} user={this.state.user} />)} />
             <Route exact path="/Upload" render={props => 
             (<VideoUploader {...props} user={this.state.user} setUser={this.setUser} />)} />
             <Route exact path="/Login" render={props => 
@@ -162,8 +163,15 @@ class Routes extends Component {
             <Route exact path="/Settings" render={props => 
             (<Settings {...props} user={this.state.user}
             setUser={this.setUser}  />)} />
-            <Route exact path="/SearchResults" render={props => 
-            (<SearchResults {...props} searchValue={this.state.searchValue}/>)} />
+            <Route
+                exact
+                path="/:id"
+                render= {props => (
+                    <Redirect to={`SearchResults/${this.state.searchValue}`} />
+                )}/>
+            <Route exact path="/SearchResults/:id" render={props => 
+            (<SearchResults {...props} searchValue={this.state.searchValue}
+            setSearchValue={this.setSearchValue}/>)} />
             <Route exact path="/LikedVideos" render={props => 
             (<LikedVideos {...props} user={this.state.user} />)} />
 
