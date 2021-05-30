@@ -5,5 +5,8 @@ class htmlDecode  {
         // handle case of empty input
         return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
       }
+      convertQueryString(input){
+        return input.replace(/%20/g, " ")
+      }
     }
     export default htmlDecode;
