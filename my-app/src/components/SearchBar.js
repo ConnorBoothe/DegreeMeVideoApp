@@ -24,7 +24,7 @@ class SearchBar extends Component {
         this.search = this.search.bind(this)
     }
     showAutocomplete(){
-        this.setState({showAutocomplete: "inline-block"})
+        this.setState({showAutocomplete: "none"})
     }
     hideAutocomplete(){
         this.setState({
@@ -67,7 +67,9 @@ class SearchBar extends Component {
             .then((res)=>{
                 console.log(res)
                 if(res.length > 0 ){
-                    this.setState({showAutocomplete: "inline-block",
+                    //temporarily keeping autocomplete hidden
+                    //until i figure out what i want to do with it
+                    this.setState({showAutocomplete: "none",
                     autocomplete: res});
                 }
                 else{
@@ -87,7 +89,7 @@ class SearchBar extends Component {
     }
     search(){
         return (
-            <Redirect to={"/SearchResults/" + this.state.searchValue}/>
+            <Redirect to="/SearchResults/jfnjgnjnfj"/>
         );
     }
   render(){

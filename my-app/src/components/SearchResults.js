@@ -1,29 +1,51 @@
 import React, {Component} from "react";
 import "../css/Settings.css";
-import AvatarCropper from "../components/AvatarCropper";
+// import AvatarCropper from "../components/AvatarCropper";
 import 'bootstrap/dist/css/bootstrap.css';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 import  "../css/SearchResults.css";
 import Video from "../components/SearchResultVideo";
 import { Link } from 'react-router-dom';
 import NoResultsImage from "../images/NoResults.svg";
+import HTMLDecode from "../GlobalFunctions/HTMLDecode";
+var htmlDecode = new HTMLDecode();
 class SearchResults extends Component {
   constructor(props){
     super(props)
     this.state = {
-        videos: []
+        videos: [],
+        searchLabel: ""
     }
     this.getVideosFromSearchValue = this.getVideosFromSearchValue.bind(this)
     this.renderResults = this.renderResults.bind(this)
+    this.setSearchLabel = this.setSearchLabel.bind(this)
+
+}
+setSearchLabel(){
+    if(this.props.searchValue != ""){
+        this.setState({searchLabel: this.props.searchValue})
+    }
+    else {
+        this.setState({searchLabel: window.location.href.split("/")[4]})
+
+    }
 }
   componentDidMount(){
       this.getVideosFromSearchValue();
+      this.setSearchLabel();
   }
 //   componentDidUpdate(){
 //     this.getVideosFromSearchValue();
 // }
   getVideosFromSearchValue(){
-    const api_route = 'http://localhost:8080/API/GetVideosBySearchValue/'+this.props.searchValue;
+        var search = "";
+      if(this.props.searchValue != "") {
+        search = this.props.searchValue;
+      }
+      else {
+          search = window.location.href.split("/")[4];
+      }
+    const api_route = 'http://localhost:8080/API/GetVideosBySearchValue/'+search;
     const requestMetadata = {
         method: 'GET',
         headers: {
@@ -66,7 +88,7 @@ class SearchResults extends Component {
     return (
         <div>
             <h2 className="text-light video-label">
-                {this.state.videos.length} results matching <span className="search-value-label">{this.props.searchValue}</span>
+                {this.state.videos.length} results matching <span className="search-value-label">{htmlDecode.convertQueryString(this.state.searchLabel)}</span>
             </h2>
             <ul className="search-results-list">
                {this.renderResults()} 
