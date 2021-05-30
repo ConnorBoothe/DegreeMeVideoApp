@@ -57,7 +57,7 @@ class CreatorDashboard extends Component {
 
                     </li>
                     <li>
-                        <h2 className="text-light">{this.state.percentageOfTotalViews *100}%</h2>
+                        <h2 className="text-light">{(this.state.percentageOfTotalViews *100).toFixed(2)}%</h2>
                         <p className="text-light dashboard-label">Percentage of total views</p>
                     </li>
                 
