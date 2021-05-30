@@ -175,7 +175,8 @@ class SingleVideo extends Component {
                     onDuration={this.duration}
                     controls
                     width="640px"
-                    hieght="auto"
+                    height="auto"
+                    playing
                     />
                     </div>
                     <div>
