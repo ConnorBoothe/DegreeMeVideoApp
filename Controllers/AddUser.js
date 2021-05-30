@@ -31,23 +31,34 @@ router.post('/API/AddUser',
             //add video to DB if validation succeeds
             //encrypt password
             console.log(req.body)
-            bcrypt.hash(req.body.Password, 8)
-            .then((hash)=>{
-                users.addUser(
-                    req.body.First_Name, 
-                    req.body.Last_Name,
-                    req.body.Email,
-                    hash
-                    )
-                .then(function(user){
-                    console.log(user)
-                    res.json(user)
-                })
+            users.getUserByEmail(req.body.Email)
+            .then((user)=>{
+                if(user == null){
+                    bcrypt.hash(req.body.Password, 8)
+                    .then((hash)=>{
+                        users.addUser(
+                            req.body.First_Name, 
+                            req.body.Last_Name,
+                            req.body.Email,
+                            hash
+                            )
+                        .then(function(user){
+                            console.log(user)
+                            res.json(user)
+                        })
+                    })
+                    .catch((err)=>{
+                        console.log(err)
+                        res.json(err)
+                    })
+                }
+                else{
+                    //email already in use
+                    console.log("email taken")
+                    res.json("This email is already in use");
+                }
             })
-            .catch((err)=>{
-                console.log(err)
-                res.json(err)
-            })
+            
         }
 });
 module.exports = router;
