@@ -7,7 +7,7 @@ import {v4 as uuid} from "uuid";
 import {Video} from 'video-metadata-thumbnails';
 import VideoUploadModal from "./VideoUploadModal";
 import Cookies from 'js-cookie';
-
+import CreateAccount from "../components/CreateAccount"
 import 'bootstrap/dist/css/bootstrap.css';
 
 // import FileUploader from "react-firebase-file-uploader";
@@ -62,7 +62,7 @@ class VideoUploader extends Component {
         this.showDescChar = this.showDescChar.bind(this)
         this.hideTitleChar = this.hideTitleChar.bind(this)
         this.hideDescChar = this.hideDescChar.bind(this)
-
+        this.renderUploader = this.renderUploader.bind(this)
         this.copyToClipboard = this.copyToClipboard.bind(this)
         // this.Creator = React.createRef();
         // this.Email = React.createRef();
@@ -137,7 +137,7 @@ class VideoUploader extends Component {
     this.setState({tags: newArray});
   }
     addVideoToDatabase(videoUrl){
-      console.log(this.props.user)
+      if(this.props.user._id != undefined) {
         const api_route = 'http://localhost:8080/API/AddVideo';
         this.createThumbnail(this.Link.current.files[0])
         .then((url)=>{
@@ -179,7 +179,106 @@ class VideoUploader extends Component {
           this.setState({type: "An error occurred. Please try again"})
 
         })
-        
+      }
+    }
+    renderUploader(){
+      if(this.props.user._id != undefined) {
+        const readImage =(file)=>{
+          // this.handleChange();
+  const id = uuid();
+  const storageRef = firebase.storage().ref("videos/"+id).put(file)
+  this.setState({uploadProgress: this.uploadProgress, show:true})
+  
+  storageRef.on(`state_changed`,snapshot=>{
+
+      this.uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes);
+      this.setState({uploadProgress: this.uploadProgress, uploading:true})
+    }, error=>{
+    },
+    async () => {
+      storageRef.snapshot.ref.getDownloadURL().then(async (url)=>{
+        this.addVideoToDatabase(url)
+        this.uploadingMedia = false;
+      });
+    });
+  console.log(file)
+}
+const addVideo =(e)=>{
+  var validMp4 = this.validateMp4();
+  if(
+      this.state.title == "" ||
+      this.state.description == "" ||
+      this.Link.current.value == ""
+    ){
+        console.log("empty field")
+        this.setState({error: "Please fill out all fields"})
+    }
+    else if(!validMp4){
+      this.setState({error: "File upload must be .mp4 format"})
+
+    }
+    else{
+     readImage(this.Link.current.files[0])
+    }
+    
+}
+return (
+  <div className="video-upload-container">
+    <VideoUploadModal isOpen={this.state.isModalOpen}
+    showModal={this.showModal} hideModal={this.hideModal}
+    Title={this.state.title} Thumbnail={this.state.thumbnail} 
+    videoId={this.state.videoId} Description={this.state.description} 
+    Creator={this.state.creator}/>
+      <h1 className="video-upload-title">Upload Video</h1>
+      <ul>
+          <li>
+              <div className="input-container">
+                <p className="input-label">Title</p>
+                <input autocomplete="off" name ="Title" onChange={this.handleTitleChange}
+                 onFocus={this.showTitleChar} onBlur={this.hideTitleChar} value={this.state.title}/>
+                <p className="char-count" style={{"display":this.state.showTitleCharCount}}>{this.state.titleCharCount}/{this.state.titleCharLimit}</p>
+              </div>
+              
+          </li>
+          <li>
+            <div className="input-container">
+              <p className="input-label">Description</p>
+                  <textarea className="description" name="Description"  onChange={this.handleDescriptionChange}
+                   onFocus={this.showDescChar} onBlur={this.hideDescChar} value={this.state.description}></textarea>
+              <p className="char-count" style={{"display":this.state.showDescCharCount}}>{this.state.descCharCount}/{this.state.descCharLimit}</p>
+            </div>
+          </li>
+          
+          <li className="upload-link">
+              <input className="file-input" type="file" ref={this.Link}/>   
+          </li>
+          <li>
+            <TagsInput addTag = {this.addTag} tag = {this.tag}
+            tags = {this.state.tags} removeTag = { this.removeTag}/>
+          </li>
+          <li>
+              <button className="btn-primary add-video" onClick={addVideo}>Upload Video</button>
+          </li>
+          <li>
+              <ProgressBar progress={this.uploadProgress} show={this.state.show} 
+                type={this.state.uploadType}/>
+          </li>
+          <li >
+            <p className="error">{this.state.error}</p>
+          </li>
+      </ul>
+  </div>
+
+);
+      }
+      else{
+        return (
+          <div>
+            <h2 className="text-light create-account-label">You must create an account to upload a video</h2>
+            <CreateAccount/>
+          </div>
+        )
+      }
     }
     componentDidMount(){
       if(Cookies.get("user")!= undefined) {
@@ -241,96 +340,8 @@ class VideoUploader extends Component {
       });
     }
     render(){
-      const readImage =(file)=>{
-                // this.handleChange();
-        const id = uuid();
-        const storageRef = firebase.storage().ref("videos/"+id).put(file)
-        this.setState({uploadProgress: this.uploadProgress, show:true})
-        
-        storageRef.on(`state_changed`,snapshot=>{
-
-            this.uploadProgress = (snapshot.bytesTransferred/snapshot.totalBytes);
-            this.setState({uploadProgress: this.uploadProgress, uploading:true})
-          }, error=>{
-          },
-          async () => {
-            storageRef.snapshot.ref.getDownloadURL().then(async (url)=>{
-              this.addVideoToDatabase(url)
-              this.uploadingMedia = false;
-            });
-          });
-        console.log(file)
-      }
-      const addVideo =(e)=>{
-        var validMp4 = this.validateMp4();
-        if(
-            this.state.title == "" ||
-            this.state.description == "" ||
-            this.Link.current.value == ""
-          ){
-              console.log("empty field")
-              this.setState({error: "Please fill out all fields"})
-          }
-          else if(!validMp4){
-            this.setState({error: "File upload must be .mp4 format"})
-
-          }
-          else{
-           readImage(this.Link.current.files[0])
-          }
-          
-      }
-    return (
-        <div className="video-upload-container">
-          <VideoUploadModal isOpen={this.state.isModalOpen}
-          showModal={this.showModal} hideModal={this.hideModal}
-          Title={this.state.title} Thumbnail={this.state.thumbnail} 
-          videoId={this.state.videoId} Description={this.state.description} 
-          Creator={this.state.creator}/>
-            <h1 className="video-upload-title">Upload Video</h1>
-            <ul>
-                <li>
-                    <div className="input-container">
-                      <p className="input-label">Title</p>
-                      <input autocomplete="off" name ="Title" onChange={this.handleTitleChange}
-                       onFocus={this.showTitleChar} onBlur={this.hideTitleChar} value={this.state.title}/>
-                      <p className="char-count" style={{"display":this.state.showTitleCharCount}}>{this.state.titleCharCount}/{this.state.titleCharLimit}</p>
-                    </div>
-                    
-                </li>
-                <li>
-                  <div className="input-container">
-                    <p className="input-label">Description</p>
-                        <textarea className="description" name="Description"  onChange={this.handleDescriptionChange}
-                         onFocus={this.showDescChar} onBlur={this.hideDescChar} value={this.state.description}></textarea>
-                    <p className="char-count" style={{"display":this.state.showDescCharCount}}>{this.state.descCharCount}/{this.state.descCharLimit}</p>
-                  </div>
-                </li>
-                
-                <li className="upload-link">
-                    <input className="file-input" type="file" ref={this.Link}/>   
-                </li>
-                <li>
-                  <TagsInput addTag = {this.addTag} tag = {this.tag}
-                  tags = {this.state.tags} removeTag = { this.removeTag}/>
-                </li>
-                <li>
-                    <button className="btn-primary add-video" onClick={addVideo}>Upload Video</button>
-                </li>
-                <li>
-                    <ProgressBar progress={this.uploadProgress} show={this.state.show} 
-                      type={this.state.uploadType}/>
-                </li>
-                <li >
-                  <p className="error">{this.state.error}</p>
-                </li>
-            </ul>
-        </div>
-
-    );
-
-
-  }
+      return this.renderUploader();
+    }
 }
 
 export default VideoUploader;
