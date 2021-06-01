@@ -20,6 +20,7 @@
     margin-right:auto;
     text-align:center;
     width:400px;
+    margin-top: 40px;
 }
 .video-label {
     margin-bottom:5px;
@@ -27,6 +28,7 @@
 }
 .actions-list {
     margin-top:20px;
+    margin-bottom:20px;
 }
 .active {
     border-bottom: 2px solid #007bff;
@@ -36,4 +38,36 @@
     margin-right: 5px;
     margin-left: 5px;
     cursor: pointer;
+}
+.video-row {
+    width: 100%;
+    min-height: 200px;
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+.video-row ul {
+    padding:0;
+    display:table-row;
+    width:100%;
+}
+.video-row ul li {
+    margin-right:30px!important;
+    display: inline-block!important;
+    flex-direction: row;
+    vertical-align: top;
+    margin-left:20px;
+    margin-right:20px;
+}
+.user-content-container {
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.video-item {
+    width:265px!important;
+    border-radius:20px;
+    text-align:left;
+    color: white;
+    display: inline-block;
+    position: relative;
 }

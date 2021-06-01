@@ -63,3 +63,13 @@
 .video-description {
     text-align: left;
 }
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .single-video {
+        width: 90%!important;
+        margin-left:auto;
+        margin-right:auto;
+        text-align:center;
+        margin-top:50px;
+    }
+  }

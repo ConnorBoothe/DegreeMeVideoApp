@@ -7,6 +7,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
+    padding-left:0;
 }
 .video-label {
     margin-top: 40px;
@@ -15,10 +16,7 @@
 .search-value-label {
     font-weight:bold!important;
 }
-.no-results-img {
-    width:400px;
-    margin-top:40px;
-}
+
 .playIcon-search-results {
     text-align: center;
     margin-left:30px;
@@ -67,3 +65,17 @@
     font-size: 16px;
     margin-bottom: 12px;
 }
+/* desktop styles */
+@media only screen and (min-width: 725px) {
+    .no-results-img {
+        width:400px;
+        margin-top:40px;
+    }
+  }
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .no-results-img {
+        width:300px;
+        margin-top:40px;
+    }
+  }

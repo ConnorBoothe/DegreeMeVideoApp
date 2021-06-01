@@ -1,5 +1,8 @@
-.site-logo {
+.desktop-logo {
     width:120px;
+}
+.mobile-logo {
+    width: 20px;
 }
 .header {
     width:80%;
@@ -11,12 +14,14 @@
     right:0;
 }
 .logo-link {
-    /* position: absolute;
-    left:0;
-    top:0; */
+    top:0;
+    padding:0!important;
+    margin-left:8%;
+    margin-top: 7px;
 }
 .header ul {
     margin-top:0;
+    padding-left: 0px;
 }
 .header ul li{
     display: inline-block;
@@ -31,3 +36,27 @@
     width:50%;
     padding:2px;
 }
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .desktop-logo {
+        display:none;
+    }
+    .logo-link {
+        top:0;
+        padding:0!important;
+        margin-left:8%;
+        margin-top: 7px;
+    }
+ }
+/* desktop styles */
+@media only screen and (min-width: 725px) {
+    .mobile-logo {
+        display:none;
+    }
+    .logo-link {
+        top:0;
+        padding:0!important;
+        margin-left:8%;
+        margin-top: 10px;
+    }
+ }

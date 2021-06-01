@@ -10,13 +10,13 @@
 }
 .video-row ul li {
     margin-right:30px;
-    width:22%;
+    /* width:22%; */
     display: table-cell;
     flex-direction: row;
     vertical-align: top;
 }
 .video-item {
-    width:265px!important;
+    width:265px;
     border-radius:20px;
     text-align:left;
     color: white;
@@ -64,3 +64,17 @@
     margin-bottom:0;
     margin-top:5px;
 }
+/* mobile styles */
+@media only screen and (max-width: 600px) {
+    .video-item {
+        width:260px;
+        border-radius:20px;
+        text-align:left;
+        color: white;
+        display: block!important;
+        position: relative;
+    }
+    .thumbnail {
+        width:300px!important;
+    }
+  }

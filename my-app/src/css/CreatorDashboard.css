@@ -26,3 +26,33 @@
     margin-bottom: 0;
     font-size: 15px;
 }
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .creator-dashboard ul li {
+        display: inline-block;
+        margin-left:2%;
+        margin-right:2%;
+        width:25%;
+    }
+    .dashboard-text{
+        font-size:25px!important;
+    } 
+    .dashboard-label {
+        font-size: 12px;
+    }
+    .creator-dashboard {
+        width: 80%!important;
+        background-color: #202020;
+        min-height: 100px;
+        margin-left:auto;
+        margin-right: auto;
+        text-align:center;
+        margin-top:50px;
+        border-radius: 10px;
+        padding-top:5px;
+    }
+    .creator-dashboard ul {
+        padding-left: 0px!important;
+    }
+ }
+ 

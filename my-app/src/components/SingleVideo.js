@@ -174,7 +174,7 @@ class SingleVideo extends Component {
                     url={this.state.video.Link}
                     onDuration={this.duration}
                     controls
-                    width="640px"
+                    width="100%"
                     height="auto"
                     playing
                     />

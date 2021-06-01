@@ -1,13 +1,13 @@
 .review-item {
-   width:50%;
+    width:50%;
     color: white;
     text-align: center;
-    background-color: #131313;
+    background-color: #202020;
     text-align:left;
     padding: 10px 20px;
     border-radius: 10px;
-    margin-bottom:10px;
-    min-width: 500px!important;
+    margin-bottom:20px;
+    min-width: 500px;
 }
 .reviews-list {
     text-align: center!important;
@@ -50,3 +50,10 @@
       font-weight: bold;
       font-size: 13px;
   }
+  @media only screen and (max-width: 725px) {
+    .review-item {
+        min-width:350px!important;
+        width:50%!important
+     }
+  }
+ 

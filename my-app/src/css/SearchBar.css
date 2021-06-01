@@ -34,3 +34,15 @@
     background-color:#131313;
     min-height: 50px;
 }
+
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .search-bar {
+        width:50%;
+        position:absolute;
+        left:0;
+        top:0;
+        margin-left:17%;
+        margin-top:8px;
+    }
+  }

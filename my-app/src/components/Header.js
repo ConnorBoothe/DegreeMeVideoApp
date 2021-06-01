@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import logo from "../images/degreeMeLogo.svg";
+import desktopLogo from "../images/degreeMeLogo.svg";
+import mobileLogo from "../images/degreeMeHashTag.svg";
 import "../css/Header.css";
 import UserMenu from "./UserMenu"
 import SearchBar from "./SearchBar"
@@ -17,7 +18,7 @@ class Header extends Component {
         <div className="header">
           <ul>
             <li className="logo-link">
-            <Link to="/Home"><img className="site-logo" src={logo} /></Link></li>
+            <Link to="/Home"><img className="site-logo desktop-logo" src={desktopLogo} /><img className="site-logo mobile-logo" src={mobileLogo} /></Link></li>
             <li className="search-li"></li>
             {/* <li className="coming-soon-text">DegreeMe Video Collection Tool</li> */}
           </ul>

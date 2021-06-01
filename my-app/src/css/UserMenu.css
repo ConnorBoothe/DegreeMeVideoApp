@@ -1,18 +1,5 @@
-.user-menu ul li {
-    color:#d4d4d4;
-    padding:0px 20px;
-    cursor: pointer;
-}
-.user-image {
-    width:30px;
-}
-.user-menu {
-    position:absolute;
-    right:0;
-    top:0;
-    margin-right:80px;
-    margin-top:12px;
-}
+
+
 .notification-badge {
     background-color:#dc3545;
     position:absolute;
@@ -44,3 +31,50 @@
     color: white;
     padding:10px;
 }
+/* desktop styles */
+@media only screen and (min-width: 725px) {
+    .user-menu ul li {
+        color:#d4d4d4;
+        padding:0px 20px;
+        cursor: pointer;
+    }
+    .mobile-search-icon{
+        display: none!important;
+    }
+    .user-menu {
+        position:absolute;
+        right:0;
+        top:0;
+        margin-right:80px;
+        margin-top:12px;
+    }
+    .upload-icon {
+        width: 24px;
+    }
+    .user-image {
+        width:30px;
+    }
+    
+  }
+  /* mobile styles */
+@media only screen and (max-width: 725px) {
+    .user-menu ul li {
+        color:#d4d4d4;
+        padding:0px 10px;
+        cursor: pointer;
+    }
+    .user-menu {
+        position:absolute;
+        right:0;
+        top:0;
+        margin-right:10px;
+        margin-top:12px;
+    }
+    .upload-icon {
+        width: 20px;
+    }
+    .user-image {
+        width:25px;
+    }
+    
+  }
