@@ -45,7 +45,6 @@ router.get('/API/GetVideosBySearchValue/:value',
         //search for those words in Tags DB and return video ids
         //get videos by id array
         var tagsArray = req.params.value.split(" ");
-        console.log(tagsArray)
         tags.getVideoIdsByTagArray(tagsArray)
         .then((videoIds)=>{
             //Possibly split tags on the backend
@@ -60,13 +59,11 @@ router.get('/API/GetVideosBySearchValue/:value',
             //Query: How to write an if statement
             //Check to see how many tags in tags DB match with the query,
             //Then, list the videos from items with most matches to items with least
-            console.log("Video id", videoIds)
             var videoIdArray = [];
             for(var x = 0; x < videoIds.length; x++) {
                 videoIdArray.push(videoIds[x].VideoId)
             }
            var idHashMap = countDuplicates(videoIdArray);
-           console.log("idHashMap", idHashMap)
             videos.getVideoResults(videoIdArray, idHashMap)
             .then((videos)=>{
                 res.json(videos)
