@@ -64,37 +64,44 @@ class AvatarCropper extends Component {
         };
       }
       postImageToDB(userId, avatar){
-        return new Promise((resolve, reject)=>{
-        const api_route = 'http://localhost:8080/API/UpdateAvatar';
-        const postBody = {
-            userId: userId,
-            avatar: avatar,
-        };
-        const requestMetadata = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postBody)
-        };
-        fetch(api_route, requestMetadata)
-        .then(res => res.json())
-        .then((user)=>{
-          resolve(user)
-        })
-      })
+          return new Promise((resolve, reject)=>{
+            const api_route = 'http://localhost:8080/API/UpdateAvatar';
+            const postBody = {
+                userId: userId,
+                avatar: avatar,
+            };
+            const requestMetadata = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postBody)
+            };
+            fetch(api_route, requestMetadata)
+            .then(res => res.json())
+            .then((user)=>{
+              resolve(user)
+            })
+          })
+        
+        
       }
     readImage= ()=>{
         this.setState({
           showUploadingText: "block",
           uploadingText: "Updating your avatar"
         })
-        const id = uuid();
+        var id = uuid();
         var metadata = {
           contentType: 'image/jpeg',
         };
+        if(Cookies.get("user")){
+          //name user avatar after email
+          var user = JSON.parse(Cookies.get("user"))
+          id = user.Email;
+        }
         const storageRef = firebase.storage().ref("avatars/"+id).put(this.base64ImageToBlob(this.state.preview), metadata)
-     
+
         storageRef.on(`state_changed`,snapshot=>{
           console.log(snapshot)
         }, error=>{
