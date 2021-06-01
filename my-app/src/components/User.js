@@ -1,8 +1,9 @@
 import React, {Component} from "react";
-import "../css/User.css";
+// import "../css/User.css";
 import VideoList from "../components/VideoList";
 import ReviewModal from "../components/ReviewModal"
 import ReviewsList from "../components/ReviewsList"
+// import "../css/VideoRow.css"
 import 'bootstrap/dist/css/bootstrap.css';
 
 class User extends Component {
@@ -34,12 +35,16 @@ class User extends Component {
   renderContent(){
     if(this.state.content == "videos") {
       return(
-        <VideoList videos={this.state.user.Videos}/>
+        <div className="user-content-container">
+          <VideoList videos={this.state.user.Videos}/>
+        </div>
       )
     }
     else {
       return(
-        <ReviewsList />
+        <div className="user-content-container">
+          <ReviewsList />
+        </div>
       )
     }
   }
