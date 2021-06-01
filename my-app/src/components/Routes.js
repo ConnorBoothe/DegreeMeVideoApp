@@ -163,17 +163,18 @@ class Routes extends Component {
             <Route exact path="/Settings" render={props => 
             (<Settings {...props} user={this.state.user}
             setUser={this.setUser}  />)} />
-            <Route
-                exact
-                path="/:id"
-                render= {props => (
-                    <Redirect to={`SearchResults/${this.state.searchValue}`} />
-                )}/>
+           
             <Route exact path="/SearchResults/:id" render={props => 
             (<SearchResults {...props} searchValue={this.state.searchValue}
             setSearchValue={this.setSearchValue}/>)} />
             <Route exact path="/LikedVideos" render={props => 
             (<LikedVideos {...props} user={this.state.user} />)} />
+             <Route
+                exact
+                path="/:id"
+                render= {props => (
+                    <Redirect to={`SearchResults/${this.state.searchValue}`} />
+                )}/>
 
         </Switch>
         <Footer />
