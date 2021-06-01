@@ -104,7 +104,7 @@ class CreateAccount extends Component {
     render(){
         
     return (
-        <div className="video-upload-container">
+        <div className="login-container">
             <h2 className="create-account-title text-light">Create Account</h2>
             <ul>
             <li>
