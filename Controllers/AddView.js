@@ -32,8 +32,12 @@ var videos = new VideosDB();
 //endpoint to add user to database
 router.post('/API/AddView', 
     function(req, res){
+      var userId = "none";
+        if(req.body.UserId != undefined) {
+          userId = req.body.UserId
+        }
             views.addView(
-                req.body.UserId,
+                userId,
                 req.body.CreatorId,
                 req.body.VideoId, 
             )
