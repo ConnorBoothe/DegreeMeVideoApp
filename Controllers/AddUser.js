@@ -28,9 +28,8 @@ router.post('/API/AddUser',
         return res.status(400).json({ errors: errors.array() });
         }
         else {
-            //add video to DB if validation succeeds
+            //add user to DB if validation succeeds
             //encrypt password
-            console.log(req.body)
             users.getUserByEmail(req.body.Email)
             .then((user)=>{
                 if(user == null){
