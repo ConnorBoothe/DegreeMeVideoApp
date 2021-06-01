@@ -111,7 +111,6 @@ module.exports = class Videos {
     getVideoResults(VideoIds, idHashMap){
       console.log("hashMap: " ,idHashMap)
       return new Promise((resolve, reject)=>{
-        // var hash = new Map(idHashMap)
         const hash = new Map([...idHashMap.entries()].sort((a, b) => b[1] - a[1]));
         VideosDB.find({_id: {$in: VideoIds}})
           .sort({"_id": -1})
@@ -121,14 +120,19 @@ module.exports = class Videos {
             //need to reduce for larger datasets
             hash.forEach((value, key)=>{
               for(var y in videos) {
-                if(videos[y]._id == key){
+                if(videos[y]._id == key && value > 1){
                   videos[y].ResultRank = value;
                   sortedVideos.push(videos[y])
                 }
               }
               })
            //now that we have videos sorted by tag relevance
-           //we can sort deeper based on views and likes
+           //we can sort deeper based on views
+              console.log("Sorted vids", sortedVideos)
+              //sorty by views
+              sortedVideos.sort(function(a, b) {
+                return parseFloat(b.Views) - parseFloat(a.Views);
+            });
             resolve(sortedVideos)
           })
       })
