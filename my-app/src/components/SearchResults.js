@@ -14,11 +14,14 @@ class SearchResults extends Component {
     super(props)
     this.state = {
         videos: [],
-        searchLabel: ""
+        searchLabel: "",
+        noResults: false
     }
     this.getVideosFromSearchValue = this.getVideosFromSearchValue.bind(this)
     this.renderResults = this.renderResults.bind(this)
     this.setSearchLabel = this.setSearchLabel.bind(this)
+    this.showNoResults = this.showNoResults.bind(this)
+
 
 }
 setSearchLabel(){
@@ -33,6 +36,7 @@ setSearchLabel(){
   componentDidMount(){
       this.getVideosFromSearchValue();
       this.setSearchLabel();
+      this.render();
   }
 //   componentDidUpdate(){
 //     this.getVideosFromSearchValue();
@@ -55,9 +59,29 @@ setSearchLabel(){
     fetch(api_route, requestMetadata)
     .then(response => response.json())
         .then(result => {
-            console.log(result)
+
             this.setState({videos: result})
+            if(result.length > 0){
+                this.setState({noResults: false})
+            }
+            else {
+                this.setState({noResults: true})
+
+            }
         })
+  }
+  showNoResults(){
+      console.log(this.state.noResults)
+    if(this.state.noResults) {
+       return (
+        <img className="no-results-img" src={NoResultsImage}/>
+       );
+   }
+   else {
+       return (
+            <div className="loader-search-results"></div>      
+       );
+   }
   }
   renderResults(){
       if(this.state.videos.length > 0) {
@@ -76,13 +100,13 @@ setSearchLabel(){
         )
       }
       else{
+
           return (
               <div>
-                <img className="no-results-img" src={NoResultsImage}/>
+                  {this.showNoResults()}
               </div>
           );
       }
-    
   }
   render(){
     return (

@@ -5,14 +5,18 @@ import "../css/Header.css";
 import UserMenu from "./UserMenu"
 import SearchBar from "./SearchBar"
 import { Link } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter} from 'react-router-dom';
 
 // import bootstrap from "bootstrap";
 class Header extends Component {
   constructor(props){
     super(props)
-    console.log(this.props.user)
+    this.redirectToResults = this.redirectToResults.bind(this)
   }
- 
+  redirectToResults(){
+    console.log(this.props)
+      this.props.history.push("/SearchResults")
+}
   render(){
     return (
         <div className="header">
@@ -23,7 +27,8 @@ class Header extends Component {
             {/* <li className="coming-soon-text">DegreeMe Video Collection Tool</li> */}
           </ul>
           <SearchBar setSearchValue={this.props.setSearchValue}
-          searchValue={this.props.searchValue}/>
+          searchValue={this.props.searchValue}
+          redirectToResults={this.redirectToResults}/>
           <UserMenu user={this.props.user} logout={this.props.logout} 
           setUser={this.props.setUser} notifications={this.props.notifications}
           getNotifications={this.props.getNotifications}
@@ -39,4 +44,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

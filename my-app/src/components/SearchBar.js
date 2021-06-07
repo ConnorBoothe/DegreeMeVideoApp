@@ -3,7 +3,7 @@ import "../css/Header.css";
 import "../css/SearchBar.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import AutocompleteItem from "../components/AutocompleteItem"
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, useHistory } from 'react-router-dom';
 import SearchResults from '../components/SearchResults'
 import { Link } from 'react-router-dom';
 
@@ -14,7 +14,8 @@ class SearchBar extends Component {
         this.state = {
             showAutocomplete: "none",
             autocomplete: [],
-            searchValue: ""    
+            searchText: "", 
+            redirect: false
           }
         this.wrapperRef = React.createRef();
         this.handleClickOutside = this.handleClickOutside.bind(this);
@@ -22,13 +23,16 @@ class SearchBar extends Component {
         this.hideAutocomplete = this.hideAutocomplete.bind(this)
         this.autocomplete = this.autocomplete.bind(this)
         this.search = this.search.bind(this)
+        this.handleSearchOnEnter = this.handleSearchOnEnter.bind(this)
+        this.redirectToResults = this.redirectToResults.bind(this)
+
     }
     showAutocomplete(){
         this.setState({showAutocomplete: "none"})
     }
     hideAutocomplete(){
+        alert("hide")
         this.setState({
-            showAutocomplete: "none",
             searchValue: ""
         })
     }
@@ -43,42 +47,8 @@ class SearchBar extends Component {
 
     }
     autocomplete(e){
-        console.log(e.target.value)
-        if(e.target.value == ""){
-            this.props.setSearchValue("");
-            this.setState({showAutocomplete: "none"});
-        }
-        else { 
-            this.props.setSearchValue(e.target.value)
-           
-            const api_route = 'http://localhost:8080/API/Autocomplete';
-            const postBody = {
-                text: e.target.value
-            };
-            const requestMetadata = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(postBody),
-            };
-            fetch(api_route, requestMetadata)
-            .then(res => res.json())
-            .then((res)=>{
-                console.log(res)
-                if(res.length > 0 ){
-                    //temporarily keeping autocomplete hidden
-                    //until i figure out what i want to do with it
-                    this.setState({showAutocomplete: "none",
-                    autocomplete: res});
-                }
-                else{
-                    this.setState({showAutocomplete: "none",
-                    autocomplete: res});
-                }
-            })
-        }
-        
+        this.setState({searchText: e.target.value})
+        this.props.setSearchValue(e.target.value)
     }
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
@@ -88,16 +58,36 @@ class SearchBar extends Component {
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
     search(){
+        alert("sub")
+         this.setState({searchText: ""})
         return (
-            <Redirect to="/SearchResults/jfnjgnjnfj"/>
+            <Redirect to="/SearchResults/"/>
         );
+    }
+    handleSearchOnEnter(e){
+        if(e.key == "Enter") {
+            this.props.redirectToResults();
+        }
+        
+    }
+    redirectToResults(){
+        if(this.state.redirect) {
+            alert("redirect")
+            return (
+                
+                <Redirect push to="/SearchResults"/>
+
+            )
+        }
     }
   render(){
     return (
         <div className="search-bar" ref={this.wrapperRef}>
             <div className="search-container">
-                <input autocomplete="off" value={this.props.searchValue} type="text" placeholder="Search Videos" onFocus={this.showAutocomplete} 
-                onChange={this.autocomplete}/>
+                
+                    <input autocomplete="off" value={this.state.searchText} type="text" placeholder="Search Videos" 
+                    onChange={this.autocomplete} onKeyPress={this.handleSearchOnEnter}/>
+                
                 <Link to="/SearchResults">
                     <span className="search-icon" onClick={this.search}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#d4d4d4" className="bi bi-search" viewBox="0 0 16 16">

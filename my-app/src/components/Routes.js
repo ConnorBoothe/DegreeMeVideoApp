@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter} from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from '../components/Header';
 import VideoUploader from '../components/VideoUploader';
@@ -131,6 +131,7 @@ class Routes extends Component {
     logout(){
         this.setState({user: {}});
     }
+   
     render() {
         return (
         <Router>
@@ -141,7 +142,8 @@ class Routes extends Component {
             notificationCount={this.state.notificationCount}
             searchValue={this.state.searchValue}
             setSearchValue={this.setSearchValue}
-            handleAutocompleteChange={this.handleAutocompleteChange}/>
+            handleAutocompleteChange={this.handleAutocompleteChange}
+          />
         <Switch>
           <Route exact path="/">
               <Redirect to="/Home" />
