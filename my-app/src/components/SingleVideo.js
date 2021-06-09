@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import CommentList from "../components/CommentList"
 import VideoActions from "../components/VideoActions";
 import ReactPlayer from "react-player";
-import CreateAccountModal from "../components/CreateAccountModal";
 
 import {
     BrowserRouter as Router,
@@ -102,7 +101,8 @@ class SingleVideo extends Component {
                     var likeCount = this.state.likeCount;
                     likeCount++;
                     this.setState({likeCount: likeCount});
-                    this.props.showUnreadCount();
+                    //do not increment notif count every time user likes a video
+                    // this.props.showUnreadCount();
                 }
                 else{
                     const api_route = 'http://localhost:8080/API/RemoveLike';

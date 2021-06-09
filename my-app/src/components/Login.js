@@ -34,7 +34,7 @@ class LoginForm extends Component {
           return(
 <div className="login-container">
             <h1 className="login-title">Login</h1>
-            <div className="login-container">
+            <div className="login-container-child">
             <ul>
                 <li>
                 <div className="login-input-container">

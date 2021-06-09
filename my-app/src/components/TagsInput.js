@@ -11,7 +11,7 @@ class TagsInput extends Component {
             <div className="tags-container">
                 <div className="tags-input-container">
                 <p className="input-label">Add tags</p>
-                    <input name="tags" className="tags-input" ref={this.props.tag} autocomplete="off"/>
+                    <input name="tags" className="tags-input" ref={this.props.tag} autoComplete="off"/>
                     <span className="btn-primary add-tags-btn" onClick={this.props.addTag}>Add</span>
                 </div>
 

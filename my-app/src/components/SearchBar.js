@@ -58,7 +58,6 @@ class SearchBar extends Component {
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
     search(){
-        alert("sub")
          this.setState({searchText: ""})
         return (
             <Redirect to="/SearchResults/"/>
@@ -67,12 +66,12 @@ class SearchBar extends Component {
     handleSearchOnEnter(e){
         if(e.key == "Enter") {
             this.props.redirectToResults();
+            this.setState({searchText: ""});
         }
         
     }
     redirectToResults(){
         if(this.state.redirect) {
-            alert("redirect")
             return (
                 
                 <Redirect push to="/SearchResults"/>
@@ -85,7 +84,7 @@ class SearchBar extends Component {
         <div className="search-bar" ref={this.wrapperRef}>
             <div className="search-container">
                 
-                    <input autocomplete="off" value={this.state.searchText} type="text" placeholder="Search Videos" 
+                    <input autoComplete="off" value={this.state.searchText} type="text" placeholder="Search Videos" 
                     onChange={this.autocomplete} onKeyPress={this.handleSearchOnEnter}/>
                 
                 <Link to="/SearchResults">

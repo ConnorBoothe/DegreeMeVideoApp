@@ -27,32 +27,34 @@ class Settings extends Component {
           <textarea onChange={this.handleBioChange} className="update-bio-input" placeholder="Write something about your academic experience"></textarea>
           <p className="text-light helper-text">This will be displayed on your profile</p>
           <button onClick={this.updateBio}className="btn btn-primary">Update Bio</button>
-          <p className="text-light" style={{display: this.state.showBioSuccess}}>Bio successfully updated</p>
+          <p className="text-light bio-msg" style={{display: this.state.showBioSuccess}}>Bio successfully updated</p>
         </div>
       );
     
   }
   updateBio(){
-    const api_route = 'http://localhost:8080/API/UpdateBio';
-        const postBody = {
-            userId: this.props.user._id,
-            bio: this.state.bio,
-        };
-        const requestMetadata = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postBody)
-        };
-        fetch(api_route, requestMetadata)
-        .then(res => res.json())
-        .then((user)=>{
-          alert("done")
-          this.props.setUser(user)
-          this.showBioSuccessMessage();
-          // Cookies.set("user", user)
-        })
+    if(this.state.bio != "") {
+      const api_route = 'http://localhost:8080/API/UpdateBio';
+      const postBody = {
+          userId: this.props.user._id,
+          bio: this.state.bio,
+      };
+      const requestMetadata = {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(postBody)
+      };
+      fetch(api_route, requestMetadata)
+      .then(res => res.json())
+      .then((user)=>{
+        this.props.setUser(user)
+        this.showBioSuccessMessage();
+        // Cookies.set("user", user)
+      })
+    }
+   
   }
   render(){
     return (
