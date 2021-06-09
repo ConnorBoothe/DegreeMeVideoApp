@@ -1,12 +1,4 @@
-.video-upload-container {
-    width:30%;
-    min-width:500px;
-    margin-left:auto;
-    margin-right:auto;
-    display:inline-block;
-    text-align:center!important;
-    margin-top:40px;
-}
+
 .description{
     width:100%;
     outline:0;
@@ -120,4 +112,28 @@
     border-radius:10px;
     margin-bottom:30px;
     position: relative;
+}
+/* desktop styles */
+@media only screen and (min-width: 725px) {
+    .video-upload-container {
+        width:30%;
+        min-width:500px;
+        margin-left:auto;
+        margin-right:auto;
+        display:inline-block;
+        text-align:center!important;
+        margin-top:40px;
+    }
+}
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .video-upload-container {
+        width:30%;
+        min-width:300px;
+        margin-left:auto;
+        margin-right:auto;
+        display:inline-block;
+        text-align:center!important;
+        margin-top:40px;
+    }
 }

@@ -5,6 +5,19 @@
     margin-left:10px;
     margin-right: 10px;
 }
-.videos-container {
-    margin-top: 20px;
+
+/* desktop styles */
+@media only screen and (min-width: 725px) {
+    .videos-container {
+        margin-top: 20px;
+    }
 }
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .videos-container {
+        margin-top: 20px;
+    }
+    .videos-container ul {
+        padding-left: 0px;
+    }
+  }

@@ -1,13 +1,32 @@
-.update-bio-input {
-    width:40%;
-    background-color: #131313;
-    border:0;
-    outline: none;
-    color: white;
-    padding:8px;
-    margin-bottom: 10px;
-}
+
 .helper-text {
     font-size: 13px;
     font-weight: bold;
 }
+.bio-msg {
+    margin-top: 10px;
+}
+/* desktop styles */
+@media only screen and (min-width: 725px) {
+    .update-bio-input {
+        width:40%;
+        background-color: #131313;
+        border:0;
+        outline: none;
+        color: white;
+        padding:8px;
+        margin-bottom: 10px;
+    }
+}
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .update-bio-input {
+        width:80%;
+        background-color: #131313;
+        border:0;
+        outline: none;
+        color: white;
+        padding:8px;
+        margin-bottom: 10px;
+    }
+  }

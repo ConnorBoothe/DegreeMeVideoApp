@@ -25,7 +25,7 @@
 }
 .header ul li{
     display: inline-block;
-    padding:10px 60px;
+    /* padding:10px 60px; */
     text-align:left;
 }
 .header ul li a {
