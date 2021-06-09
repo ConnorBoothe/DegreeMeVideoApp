@@ -26,13 +26,10 @@ router.post('/API/AddVideo',
 
 function(req, res){
     const errors = validationResult(req);
-    console.log("Adding video")
     if (!errors.isEmpty()) {
-        console.log(errors)
       return res.status(400).json({ errors: errors.array() });
     }
     else {
-        console.log(req.body)
         //add video to DB if validation succeeds
         
         videos.addVideo(
@@ -47,13 +44,10 @@ function(req, res){
             req.body.tags
         )
          .then(function(video){
-             console.log("Add tags")
              var newTags = [];
              for(var x = 0; x < req.body.tags.length; x++){
                 if(req.body.tags[x].includes(" ")){
-                    console.log("INCLUDES SPACE")
                     var splitArray = req.body.tags[x].split(" ");
-                    console.log(splitArray)
                     for(var y = 0; y < splitArray.length; y++){
                         newTags.push(splitArray[y]);
                     }
@@ -64,12 +58,10 @@ function(req, res){
             }
              tags.addTags(newTags, video._id)
              .then(()=>{
-                 console.log(video)
                 res.json(video)
              })
          })
          .catch((err)=>{
-             console.log(err)
              res.json(err)
          })
     }

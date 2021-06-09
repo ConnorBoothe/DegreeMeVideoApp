@@ -22,11 +22,9 @@ router.post('/API/UpdateBio',
             req.body.bio
         )
         .then(function(user){
-            console.log(user)
             res.json(user)
         })
         .catch((err)=>{
-            console.log(err)
             res.json(err)
         })
    

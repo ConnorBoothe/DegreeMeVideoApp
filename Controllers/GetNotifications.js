@@ -1,8 +1,6 @@
 require("dotenv").config();
 const express = require('express');
 const router = express.Router();
-const session = require("express-session");
-
 const bodyParser = require('body-parser');
 const {
     check,
@@ -14,16 +12,6 @@ router.use(bodyParser.urlencoded({
     resave: false,
     saveUninitialized: true
 }));
-router.use(
-  session({
-  //   store: MongoStore.create({
-  //     mongoUrl: process.env.MONGO_URL,
-  //   }),
-  secret: 'whatever',
-  secure: false,
-  httpOnly: false
-  })
-);
 const NotificationsDB = require('../Models/Notifications');
 var notifications = new NotificationsDB();
 

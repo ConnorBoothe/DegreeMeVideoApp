@@ -23,7 +23,6 @@ function countDuplicates(array_elements) {
         if (array_elements[i] != current) {
             if (cnt > 0) {
                 idMap.set(current, cnt)
-                // console.log(current + ' comes --> ' + cnt + ' times<br>');
             }
             current = array_elements[i];
             cnt = 1;
@@ -33,9 +32,7 @@ function countDuplicates(array_elements) {
     }
     if (cnt > 0) {
         idMap.set(current, cnt)
-        // console.log(current + ' comes --> ' + cnt + ' times');
     }
-    console.log(idMap)
     return idMap;
 }
 
@@ -70,7 +67,6 @@ router.get('/API/GetVideosBySearchValue/:value',
             })
         })
         .catch((err) => {
-            console.log(err)
             res.json(err)
         })
     });

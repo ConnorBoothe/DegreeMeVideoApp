@@ -24,12 +24,9 @@ router.post('/API/AddReview',
     check('Message').isString().escape(),
     check('Rating').isNumeric(),
     function(req, res){
-        console.log(req.body)
         const errors = validationResult(req);
-        console.log("Adding review")
         if (!errors.isEmpty()) {
-            console.log(errors)
-        return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ errors: errors.array() });
         }
         else {
             //add review to DB
@@ -47,7 +44,6 @@ router.post('/API/AddReview',
                 res.json(review)
             })
             .catch((err)=>{
-                console.log(err)
                 res.json(err)
             })
         }

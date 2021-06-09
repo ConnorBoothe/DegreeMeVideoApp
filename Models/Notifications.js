@@ -20,7 +20,6 @@ module.exports = class Notifications {
      //add comment to db
      addNotification(UserId, Author_UserId, Author_First_Name, Author_Last_Name,
          Author_Image, Message, VideoId){
-           console.log("adding notif")
         return new Promise((resolve, reject)=>{
               var notification = new NotificationsDB({
                 UserId: UserId,
@@ -35,12 +34,9 @@ module.exports = class Notifications {
               })
               notification.save()
               .then((notif)=>{
-                console.log("resolve notif")
-                console.log(notif)
                 resolve(notif)
               })
               .catch((err)=>{
-                console.log(err)
                 reject(err)
               })
       })
@@ -60,7 +56,6 @@ module.exports = class Notifications {
         }).updateMany({Viewed: true})
      }
      getUnreadCount(UserId){
-       console.log("id", UserId)
       return NotificationsDB.find({
         $and: [
           {

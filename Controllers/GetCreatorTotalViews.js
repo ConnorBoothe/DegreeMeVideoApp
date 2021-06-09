@@ -14,11 +14,9 @@ router.get('/API/GetAllCreatorViews/:id',
     function(req, res){
         views.getViewCountByCreatorId(req.params.id)
         .then((views)=>{
-            console.log("View count " + views)
             res.json(views)
         })
         .catch((err)=>{
-            console.log(err)
             res.json(err);
         })
 });

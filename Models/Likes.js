@@ -41,7 +41,6 @@ module.exports = class Comment {
                 resolve(like)
               })
               .catch((err)=>{
-                console.log(err)
                 resolve(false)
               })
             }
@@ -56,7 +55,6 @@ module.exports = class Comment {
         return LikesDB.find({VideoId: VideoId})
      }
      getLikesByUserId(UserId){
-       console.log(UserId)
         return LikesDB.find({UserId: UserId}, "VideoId")
      }
      removeLike(UserId, VideoId){

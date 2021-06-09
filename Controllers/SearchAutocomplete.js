@@ -13,14 +13,11 @@ var videos = new VideosDB();
 
 router.post('/API/Autocomplete', 
     function(req, res){
-        console.log("Autocomplete working")
         videos.getMatchingTitles(req.body.text)
         .then((videos)=>{
-            console.log(videos)
             res.json(videos);
         })
         .catch((err)=>{
-            console.log(err)
             res.json(err)
         })
 });

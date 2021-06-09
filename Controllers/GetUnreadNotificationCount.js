@@ -14,16 +14,6 @@ router.use(bodyParser.urlencoded({
     resave: false,
     saveUninitialized: true
 }));
-router.use(
-  session({
-  //   store: MongoStore.create({
-  //     mongoUrl: process.env.MONGO_URL,
-  //   }),
-  secret: 'whatever',
-  secure: false,
-  httpOnly: false
-  })
-);
 const NotificationsDB = require('../Models/Notifications');
 var notifications = new NotificationsDB();
 
@@ -32,7 +22,6 @@ router.get('/API/GetUnreadCount/:id',
     function(req, res){
         notifications.getUnreadCount(req.params.id)
         .then((count)=>{
-            console.log("count", count)
             res.json(count);
         })
         .catch((err)=>{

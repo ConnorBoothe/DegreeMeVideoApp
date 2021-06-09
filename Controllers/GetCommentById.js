@@ -18,7 +18,6 @@ router.get('/API/Comments/:id',
             res.json(comment);
         })
         .catch((err)=>{
-            console.log(err)
             res.json(err)
         })
 });

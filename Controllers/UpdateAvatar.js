@@ -22,11 +22,9 @@ router.post('/API/UpdateAvatar',
             req.body.avatar
         )
         .then(function(user){
-            console.log(user)
             res.json(user)
         })
         .catch((err)=>{
-            console.log(err)
             res.json(err)
         })
    

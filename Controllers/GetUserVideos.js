@@ -15,13 +15,11 @@ var videos = new VideosDB();
 //endpoint to add user to database
 router.get('/API/GetUserVideos/:id',
     function (req, res) {
-        console.log("Get user")
                 videos.getVideosByCreatorId(req.params.id)
                 .then((videos)=>{
                     res.json(videos)
                 })
             .catch((err) => {
-                console.log(err)
                 res.json(err)
             })
 

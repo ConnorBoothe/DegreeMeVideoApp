@@ -3,8 +3,6 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const {
     check,
     validationResult
@@ -15,17 +13,7 @@ router.use(bodyParser.urlencoded({
     resave: false,
     saveUninitialized: true
 }));
-//use session with data store
-router.use(
-    session({
-    //   store: MongoStore.create({
-    //     mongoUrl: process.env.MONGO_URL,
-    //   }),
-    secret: 'whatever',
-    secure: false,
-    httpOnly: false
-    })
-  );
+
 var UserDB = require('../Models/User');
 var users = new UserDB();
 //endpoint to add user to database
@@ -34,13 +22,10 @@ router.post('/API/Login',
     check('Password').isString().escape(),
     function(req, res){
         const errors = validationResult(req);
-        console.log("Log in")
         if (!errors.isEmpty()) {
-            console.log(errors)
             return res.status(400).json({ errors: errors.array() });
         }
         else {
-            console.log("log user in")
             users.login(req.body.Email)
             .then((user)=>{
                 if(user) {
@@ -50,11 +35,8 @@ router.post('/API/Login',
                         user.Password,
                         function (err, match) {
                             //password matches
-                            console.log(match)
                             if(match){
-                                console.log("user2", user)
                                 req.session.user = user;
-                                console.log("Session id", req.session.id)
                                 res.json(user)
                             }
                             else {
@@ -63,7 +45,6 @@ router.post('/API/Login',
                     })
                 }
                 else {
-                    console.log("User not found")
                     res.json(false)
                 }
                 

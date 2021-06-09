@@ -19,14 +19,12 @@ router.get('/API/Video/:id',
         .then((video)=>{
             views.getViewCountByVideoId(video._id)
             .then((views)=>{
-                console.log("Views", views)
                 video.Views = views;
                 res.json(video);
             })
             
         })
         .catch((err)=>{
-            console.log(err)
             res.json(err)
         })
 });

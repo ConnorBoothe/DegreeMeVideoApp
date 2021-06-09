@@ -3,7 +3,6 @@ const express = require('express');
 const https = require('https');
 const app = module.exports = express(); 
 const cors = require('cors');
-const session = require("express-session");
 
 var whitelist = ['https://firebasestorage.googleapis.com/']
 var corsOptions = {
@@ -18,16 +17,7 @@ var corsOptions = {
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
-app.use(
-  session({
-  //   store: MongoStore.create({
-  //     mongoUrl: process.env.MONGO_URL,
-  //   }),
-    secret: 'whatever',
-    secure: false,
-    httpOnly: false
-  })
-);
+
 //API Controllers
 app.use([
     require("./Controllers/AddVideo"),

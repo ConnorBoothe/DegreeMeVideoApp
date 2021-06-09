@@ -13,14 +13,11 @@ var reviews = new ReviewsDB();
 //endpoint to add user to database
 router.get('/API/GetUserReviews/:id',
     function (req, res) {
-        console.log("get reviews")
             reviews.getReviewByCreatorId(req.params.id)
             .then((reviews)=>{
-                console.log(reviews)
                 res.json(reviews)
             })
             .catch((err) => {
-                console.log(err)
                 res.json(err)
             })
     });

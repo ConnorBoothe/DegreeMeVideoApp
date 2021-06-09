@@ -34,7 +34,6 @@ module.exports = class Comment {
             resolve(comment)
           })
           .catch((err)=>{
-            console.log(err)
             reject(err)
           })
       })

@@ -43,12 +43,10 @@ module.exports = class Reviews {
               })
             }
             else{
-              console.log("exists")
               resolve(false)
             }
           })
           .catch((err)=>{
-            console.log(err)
             reject(err)
           })
         

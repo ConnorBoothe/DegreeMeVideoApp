@@ -17,7 +17,6 @@ router.get('/API/GetUserReviews/:id',
             res.json(reviews)
         })
         .catch((err)=>{
-            console.log(err)
             res.json(err);
         })
 });

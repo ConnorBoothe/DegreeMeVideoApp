@@ -46,11 +46,9 @@ module.exports = class User {
           })
           user.save()
           .then((user)=>{
-            console.log(user)
             resolve(user)
           })
           .catch((err)=>{
-            console.log(err)
             reject(err)
           })
       })
@@ -69,8 +67,6 @@ module.exports = class User {
     }
     //attempt to login user
     login(Email){
-        console.log("Logging you in...")
-        console.log("Email", Email)
         return UserDB.findOne({Email: Email});
     }
     //get user by id

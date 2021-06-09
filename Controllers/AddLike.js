@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require('express');
 const router = express.Router();
-const session = require("express-session");
 
 const bodyParser = require('body-parser');
 const MongoStore = require("connect-mongo");
@@ -15,16 +14,7 @@ router.use(bodyParser.urlencoded({
     resave: false,
     saveUninitialized: true
 }));
-router.use(
-  session({
-  //   store: MongoStore.create({
-  //     mongoUrl: process.env.MONGO_URL,
-  //   }),
-  secret: 'whatever',
-  secure: false,
-  httpOnly: false
-  })
-);
+
 const LikesDB = require('../Models/Likes');
 const NotificationsDB = require('../Models/Notifications');
 const { resolve } = require("path");
@@ -36,8 +26,6 @@ var notifications = new NotificationsDB();
 router.post('/API/AddLike', 
     check('VideoId').isString().escape(),
     function(req, res){
-        console.log("Adding like")
-        console.log(req.body)
             likes.addLike(
                 req.body.VideoId, 
                 req.body.UserId,
@@ -66,7 +54,6 @@ router.post('/API/AddLike',
                 
             })
             .catch((err)=>{
-                // console.log(err)
                 res.json(false)
             })
 });

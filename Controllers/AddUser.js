@@ -22,10 +22,8 @@ router.post('/API/AddUser',
     check('Password').isString().escape(),
     function(req, res){
         const errors = validationResult(req);
-        console.log("Adding user")
         if (!errors.isEmpty()) {
-            console.log(errors)
-        return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ errors: errors.array() });
         }
         else {
             //add user to DB if validation succeeds
@@ -42,18 +40,15 @@ router.post('/API/AddUser',
                             hash
                             )
                         .then(function(user){
-                            console.log(user)
                             res.json(user)
                         })
                     })
                     .catch((err)=>{
-                        console.log(err)
                         res.json(err)
                     })
                 }
                 else{
                     //email already in use
-                    console.log("email taken")
                     res.json("This email is already in use");
                 }
             })
