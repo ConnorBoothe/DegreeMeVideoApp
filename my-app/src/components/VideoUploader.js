@@ -234,7 +234,7 @@ return (
           <li>
               <div className="input-container">
                 <p className="input-label">Title</p>
-                <input autocomplete="off" name ="Title" onChange={this.handleTitleChange}
+                <input autoComplete="off" name ="Title" onChange={this.handleTitleChange}
                  onFocus={this.showTitleChar} onBlur={this.hideTitleChar} value={this.state.title}/>
                 <p className="char-count" style={{"display":this.state.showTitleCharCount}}>{this.state.titleCharCount}/{this.state.titleCharLimit}</p>
               </div>
