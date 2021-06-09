@@ -26,7 +26,7 @@ class NotificationList extends Component {
             return (
                 <ul>
                     {this.props.notifications.map((video, index) => (
-                        <li><Notification userImage={video.Author_Image} 
+                        <li key={index}><Notification userImage={video.Author_Image} 
                         name={video.Author_First_Name + " " +video.Author_Last_Name} 
                         date={video.Date} message={video.Message} VideoId={video.VideoId}
                         hideMenu={this.props.hideMenu} isRead={video.Viewed}/></li>

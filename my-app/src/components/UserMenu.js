@@ -41,6 +41,7 @@ class UserMenu extends Component {
         else {
             this.readNotifications();
             if(this.state.menuTitle === "Account"){
+                this.props.getNotifications()
                 this.setState({menuTitle: "Notifications"});
             }
             else {

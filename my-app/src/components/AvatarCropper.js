@@ -1,7 +1,8 @@
 import React, {Component} from "react";
 import Avatar from 'react-avatar-edit'
 import '../css/AvatarCropper.css';
-import firebase from "firebase";
+import firebase from "firebase/app";
+import 'firebase/storage';
 import {v4 as uuid} from "uuid";
 import Cookies from 'js-cookie';
 

@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import '../css/VideoUploader.css';
-import firebase from "firebase";
+import firebase from "firebase/app";
+import 'firebase/storage';  
+
+
 import ProgressBar from "./ProgressBar";
 import TagsInput from './TagsInput';
 import {v4 as uuid} from "uuid";
