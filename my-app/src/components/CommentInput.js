@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import '../css/CommentInput.css';
 class CommentInput extends Component {
     render(){
+        
         return (
             <div className="comment-input-container" >
                 <img className="user-image" src={this.props.user.Image} alt="User"/>
