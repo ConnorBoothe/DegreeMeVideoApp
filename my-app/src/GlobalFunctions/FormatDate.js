@@ -9,12 +9,12 @@ displayDate(date) {
         month = monthArray[x];
       }
     }
-    if (todayArray[1] == dateArray[1] & todayArray[2] == dateArray[2]) {
+    if (todayArray[1] === dateArray[1] & todayArray[2] === dateArray[2]) {
       return "Today";
-    } else if (month == "") {
+    } else if (month === "") {
       return "";
     } else {
-    if(dateArray[2].split("")[0] == "0"){
+    if(dateArray[2].split("")[0] === "0"){
       return month + " " +dateArray[2].split("")[1];
     }
     else{
@@ -24,10 +24,9 @@ displayDate(date) {
   }
   //takes date object as parameter
   formatTimeFromDate(date) {
-    // var date = this.convertUTCtoEastern(date)
-    var date = new Date(date)
-    date = date.toString().split(" ");
-    var timeArray = date[4].split(":");
+    var newDate = new Date(date)
+    newDate = newDate.toString().split(" ");
+    var timeArray = newDate[4].split(":");
     var minutes = timeArray[1];
     var hours = timeArray[0];
     var intHours = parseInt(hours);
@@ -40,10 +39,8 @@ displayDate(date) {
       amPm = "PM";
     } else if (intHours < 12) {
     if(intHours<10){
-        var splitHours = hours.split("");
         hours = intHours;
       }
-      hours = hours;
       amPm = "AM";
     } else {
       hours = hours % 12;
