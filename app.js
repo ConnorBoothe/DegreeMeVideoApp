@@ -1,19 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const https = require('https');
 const app = module.exports = express(); 
 const cors = require('cors');
 
-var whitelist = ['https://firebasestorage.googleapis.com/']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
