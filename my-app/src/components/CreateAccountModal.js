@@ -7,10 +7,6 @@ import CreateAccount from "../components/CreateAccount"
 import "tippy.js/dist/tippy.css"
 
 class CreateAccountModal extends Component {
-    constructor(props){
-        super(props);
-    }
-    
   render(){
     return (
     <div className="video-actions">

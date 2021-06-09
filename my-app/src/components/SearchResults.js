@@ -25,7 +25,7 @@ class SearchResults extends Component {
 
 }
 setSearchLabel(){
-    if(this.props.searchValue != ""){
+    if(this.props.searchValue !== ""){
         this.setState({searchLabel: this.props.searchValue})
     }
     else {
@@ -43,7 +43,7 @@ setSearchLabel(){
 // }
   getVideosFromSearchValue(){
         var search = "";
-      if(this.props.searchValue != "") {
+      if(this.props.searchValue !== "") {
         search = this.props.searchValue;
       }
       else {
@@ -71,10 +71,9 @@ setSearchLabel(){
         })
   }
   showNoResults(){
-      console.log(this.state.noResults)
     if(this.state.noResults) {
        return (
-        <img className="no-results-img" src={NoResultsImage}/>
+        <img className="no-results-img" src={NoResultsImage} alt="No results"/>
        );
    }
    else {
@@ -87,7 +86,7 @@ setSearchLabel(){
       if(this.state.videos.length > 0) {
         return (
             this.state.videos.map((video, index) => (
-                <li>
+                <li key={index}>
                    <div className="video-item-container">
                        <Link to={"/Video/"+video._id}>
                            <Video Id={video._id} Title={video.Title} Thumbnail ={video.Thumbnail}

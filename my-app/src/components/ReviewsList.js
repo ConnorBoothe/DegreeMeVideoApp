@@ -24,7 +24,6 @@ class ReviewsList extends Component {
         .then(response => response.json())
             .then(result => {
                 this.setState({reviews: result})
-                console.log("reviews",this.state.reviews)
             })
       }
     componentDidMount(){

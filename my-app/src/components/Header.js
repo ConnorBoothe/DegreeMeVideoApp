@@ -5,7 +5,7 @@ import "../css/Header.css";
 import UserMenu from "./UserMenu"
 import SearchBar from "./SearchBar"
 import { Link } from 'react-router-dom';
-import { Route, Switch, Redirect, withRouter} from 'react-router-dom';
+import { withRouter} from 'react-router-dom';
 
 // import bootstrap from "bootstrap";
 class Header extends Component {
@@ -14,7 +14,6 @@ class Header extends Component {
     this.redirectToResults = this.redirectToResults.bind(this)
   }
   redirectToResults(){
-    console.log(this.props)
       this.props.history.push("/SearchResults")
 }
   render(){
@@ -22,7 +21,7 @@ class Header extends Component {
         <div className="header">
           <ul>
             <li className="logo-link">
-            <Link to="/Home"><img className="site-logo desktop-logo" src={desktopLogo} /><img className="site-logo mobile-logo" src={mobileLogo} /></Link></li>
+            <Link to="/Home"><img className="site-logo desktop-logo" src={desktopLogo} alt="Logo" /><img className="site-logo mobile-logo" src={mobileLogo} alt="Logo" /></Link></li>
             <li className="search-li"></li>
             {/* <li className="coming-soon-text">DegreeMe Video Collection Tool</li> */}
           </ul>

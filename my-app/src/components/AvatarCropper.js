@@ -28,9 +28,8 @@ class AvatarCropper extends Component {
       }
       
       onCrop(preview) {
-          console.log(preview)
         this.setState({preview: preview, showPreview: "block"})
-        if(this.setState.preview != null){
+        if(this.setState.preview !== null){
             this.setState({showPreview: "block"})
         }
        
@@ -103,12 +102,10 @@ class AvatarCropper extends Component {
         const storageRef = firebase.storage().ref("avatars/"+id).put(this.base64ImageToBlob(this.state.preview), metadata)
 
         storageRef.on(`state_changed`,snapshot=>{
-          console.log(snapshot)
         }, error=>{
         },
         async () => {
           storageRef.snapshot.ref.getDownloadURL().then(async (url)=>{
-            console.log(url)
             this.postImageToDB(this.props.user._id, url)
             .then((user)=>{
               this.props.setUser(user)

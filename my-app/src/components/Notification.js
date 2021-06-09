@@ -33,7 +33,7 @@ class Notification extends Component {
                                 {this.isUnread()}
                             </li>
                             <li>
-                                <img className="notification-image" src={this.props.userImage}/>
+                                <img className="notification-image" src={this.props.userImage} alt="User"/>
                             </li>
                         </ul>
                     </li>

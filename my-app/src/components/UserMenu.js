@@ -14,7 +14,6 @@ class UserMenu extends Component {
             menuTitle: "Notifications",
             showUnreadCount: "block"
         }
-        console.log("props", this.props)
         this.toggleNotifications = this.toggleNotifications.bind(this);
         this.toggleAccount = this.toggleAccount.bind(this);
         this.hideMenu = this.hideMenu.bind(this);
@@ -33,7 +32,7 @@ class UserMenu extends Component {
 
     toggleNotifications(){
         this.props.hideUnreadCount()
-        if(this.state.showNotifications == "none"){
+        if(this.state.showNotifications === "none"){
             this.props.getNotifications()
             this.setState({showNotifications: "inline-block",
             menuTitle: "Notifications"
@@ -41,7 +40,7 @@ class UserMenu extends Component {
         }
         else {
             this.readNotifications();
-            if(this.state.menuTitle == "Account"){
+            if(this.state.menuTitle === "Account"){
                 this.setState({menuTitle: "Notifications"});
             }
             else {
@@ -63,14 +62,14 @@ class UserMenu extends Component {
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
     toggleAccount(){
-        if(this.state.showNotifications == "none"){
+        if(this.state.showNotifications === "none"){
             this.setState({showNotifications: "inline-block",
             menuTitle: "Account"
         });
         }
         else {
            
-            if(this.state.menuTitle == "Notifications"){
+            if(this.state.menuTitle === "Notifications"){
                 this.readNotifications();
                 this.setState({menuTitle: "Account"});
             }
@@ -96,7 +95,7 @@ class UserMenu extends Component {
                 <span>
                 <Tippy content="Account">
                     <li onClick={this.toggleAccount}>
-                        <img className="user-image" src={this.props.user.Image}/>
+                        <img className="user-image" src={this.props.user.Image} alt="User"/>
                     </li>
                 </Tippy>
                 <Tippy content="Notifications">
@@ -127,7 +126,6 @@ class UserMenu extends Component {
         const postBody = {
             user_id: this.props.user._id
         };
-        console.log(postBody)
         const requestMetadata = {
             method: 'POST',
             headers: {

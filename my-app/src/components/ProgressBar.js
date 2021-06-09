@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import '../css/ProgressBar.css';
 class ProgressBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const computedClassName = this.props.show ? 'uploading' : 'not-uploading';
         return (

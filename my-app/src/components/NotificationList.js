@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import '../css/NotificationList.css';
 import Notification from "../components/Notification"
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 class NotificationList extends Component {
@@ -13,29 +13,6 @@ class NotificationList extends Component {
             notifications :[]
         }
     }
-    componentDidMount(){
-        // if(Cookies.get("user") != null) {
-        //     var user = JSON.parse(Cookies.get("user"));
-        //     const api_route = 'http://localhost:8080/API/GetNotifications/'+user._id;
-        //     const requestMetadata = {
-        //         method: 'GET',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //     };
-        //     fetch(api_route, requestMetadata)
-        //     .then(res => res.json())
-        //     .then((result)=>{
-        //         console.log(result)
-        //         this.setState({notifications: result})
-        //     })
-        //     .catch((err)=>{
-        //         console.log(err)
-        //     });
-        // }
-       
-    }
-    
     logout(){
         this.props.logout();
         this.props.hideMenu();
@@ -45,7 +22,7 @@ class NotificationList extends Component {
         //  );
     }
     toggleUserMenu(){
-        if(this.props.type == "Notifications") {
+        if(this.props.type === "Notifications") {
             return (
                 <ul>
                     {this.props.notifications.map((video, index) => (

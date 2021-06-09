@@ -5,7 +5,6 @@ import "../css/ReviewModal.css";
 class ReviewModal extends Component {
   constructor(props){
     super(props)
-    console.log(props)
     this.state = {
       isOpen: false,
       message: "", 
@@ -34,7 +33,6 @@ class ReviewModal extends Component {
     this.setState({rating: e.target.value})
   }
   addReview(){
-    console.log(this.props)
     const api_route = 'http://localhost:8080/API/AddReview';
           const postBody = {
               Creator_Id: window.location.href.split("/")[4],
@@ -55,7 +53,6 @@ class ReviewModal extends Component {
           fetch(api_route, requestMetadata)
           .then(res => res.json())
           .then((res)=>{
-            console.log(res)
             if(!res){
               this.setState(
                 {reviewMsg: "You can only leave a creator one review per month",

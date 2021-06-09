@@ -20,7 +20,7 @@ class CreatorDashboard extends Component {
         this.getCreatorTotalViewCount()
     }
     getCreatorTotalViewCount(){
-        if(Cookies.get("user") != null) {
+        if(Cookies.get("user") !== null) {
             var user = JSON.parse(Cookies.get("user"));
             const api_route = 'http://localhost:8080/API/GetAllCreatorViews/'+user._id;
             const requestMetadata = {
@@ -32,7 +32,6 @@ class CreatorDashboard extends Component {
             fetch(api_route, requestMetadata)
             .then(response => response.json())
                 .then(result => {
-                    console.log(result)
                     this.setState({
                         allViews: result[0], 
                         viewsThisMonth: result[1],

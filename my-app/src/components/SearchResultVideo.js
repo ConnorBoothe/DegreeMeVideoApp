@@ -29,7 +29,7 @@ class Video extends Component {
                             <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
                         </svg>
                     </div>
-                    <img className="thumbnail-search-result" src={this.props.Thumbnail}/>
+                    <img className="thumbnail-search-result" src={this.props.Thumbnail} alt="Thumbnail"/>
 
                     <div className="video-details-search-result">
                         <div className="sub-details-search-result">
@@ -43,7 +43,7 @@ class Video extends Component {
                                 </p>
                                 <p className="text-light video-description-search-result">{this.props.description}</p>
                             <p className="creator-name-search-result">
-                                <img className="creator-img-search-result" src={this.props.image}/>
+                                <img className="creator-img-search-result" src={this.props.image} alt="Creator"/>
                                 {this.props.Creator}
                                 </p>
                         </div>

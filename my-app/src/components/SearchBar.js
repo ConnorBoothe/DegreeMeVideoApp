@@ -3,8 +3,7 @@ import "../css/Header.css";
 import "../css/SearchBar.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import AutocompleteItem from "../components/AutocompleteItem"
-import { BrowserRouter as Router, Redirect, useHistory } from 'react-router-dom';
-import SearchResults from '../components/SearchResults'
+import { BrowserRouter as Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 // import bootstrap from "bootstrap";
@@ -42,7 +41,6 @@ class SearchBar extends Component {
         }
     }
     handleAutocompleteChange(e){
-        console.log("hide")
         this.setState({autocompleteText: e.target.value});
 
     }
@@ -64,7 +62,7 @@ class SearchBar extends Component {
         );
     }
     handleSearchOnEnter(e){
-        if(e.key == "Enter") {
+        if(e.key === "Enter") {
             this.props.redirectToResults();
             this.setState({searchText: ""});
         }

@@ -7,9 +7,7 @@ import Tippy from "@tippy.js/react";
 import "tippy.js/dist/tippy.css"
 
 class VideoUploadModal extends Component {
-    constructor(props){
-        super(props);
-    }
+   
   render(){
     return (
     <div className="video-actions">
@@ -32,7 +30,7 @@ class VideoUploadModal extends Component {
             <h1 className="video-modal-title">
                 {this.props.Title}
             </h1>
-            <img className="thumbnail" src={this.props.Thumbnail}/>
+            <img className="thumbnail" src={this.props.Thumbnail} alt="Video Thumbnail"/>
             <p className="video-modal-label">Creator</p>
             <p className="video-modal-description">
                 {this.props.Creator}

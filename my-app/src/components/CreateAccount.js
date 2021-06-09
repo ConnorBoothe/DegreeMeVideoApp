@@ -32,10 +32,10 @@ class CreateAccount extends Component {
 
     createAccount(){
       var isEmail = this.validateEmail(this.state.email);
-      if(this.state.first_name == "" ||
-      this.state.last_name == "" ||
-      this.state.email == "" ||
-      this.state.password == "" ) {
+      if(this.state.first_name === "" ||
+      this.state.last_name === "" ||
+      this.state.email === "" ||
+      this.state.password === "" ) {
         this.showError();
       }
       else if (!isEmail){
@@ -50,7 +50,6 @@ class CreateAccount extends Component {
             Email: this.state.email,
             Password: this.state.password
         };
-        console.log(postBody)
         const requestMetadata = {
             method: 'POST',
             headers: {
@@ -61,8 +60,7 @@ class CreateAccount extends Component {
         fetch(api_route, requestMetadata)
         .then(res => res.json())
         .then((res)=>{
-            console.log(res)
-            if(res == "This email is already in use"){
+            if(res === "This email is already in use"){
               this.setState({
                 errorClass: "error",
                 error: res,

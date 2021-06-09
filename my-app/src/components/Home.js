@@ -8,11 +8,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // import bootstrap from "bootstrap";
 class Home extends Component {
-  constructor(props){
-    super(props)
-  }
   renderCreatorDashboard(){
-    if(this.props.user._id != undefined) {
+    if(this.props.user._id !== undefined) {
       return (
         <CreatorDashboard />
       );

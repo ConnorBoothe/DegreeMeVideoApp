@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import '../css/TagsInput.css';
 import '../css/VideoUploader.css';
 class TagsInput extends Component {
-    constructor(props) {
-        super(props);
-    }
-   
+    
     render() {
         return (
             <div className="tags-container">

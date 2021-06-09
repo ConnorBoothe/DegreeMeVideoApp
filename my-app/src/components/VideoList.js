@@ -25,7 +25,6 @@ class UserVideos extends Component {
         .then(response => response.json())
             .then(result => {
                 this.setState({videos: result})
-                console.log("Vids",this.state.videos)
             })
       }
     componentDidMount(){
@@ -39,7 +38,7 @@ class UserVideos extends Component {
                     
                 {this.state.videos.map((video, index) => (
                    
-                    <li>
+                    <li key={index}>
                         <Link to={"/Video/"+video._id}>
                             <Video Id={video._id} Title={video.Title} Thumbnail ={video.Thumbnail}
                             Creator={video.Creator} Views={video.Views} image={video.Creator_Image}

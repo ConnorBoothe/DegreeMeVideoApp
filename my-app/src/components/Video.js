@@ -29,8 +29,8 @@ class Video extends Component {
                             <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
                         </svg>
                     </div>
-                    <img className="thumbnail" src={this.props.Thumbnail}/>
-                    <img className="creator-img" src={this.props.image}/>
+                    <img className="thumbnail" src={this.props.Thumbnail} alt="Video Thumbnail"/>
+                    <img className="creator-img" src={this.props.image} alt="Creator"/>
 
                     <div className="video-details">
 

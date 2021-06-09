@@ -6,7 +6,6 @@ import VideoActions from "../components/VideoActions";
 import ReactPlayer from "react-player";
 
 import {
-    BrowserRouter as Router,
     Link
   } from "react-router-dom";
 
@@ -57,9 +56,8 @@ class SingleVideo extends Component {
             fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((res)=>{
-                console.log(res)
              
-                    if(res == 1){
+                    if(res === 1){
                         this.setState({ views:res,
                             viewText: "view"})
                     }
@@ -71,9 +69,8 @@ class SingleVideo extends Component {
         }, 30000)
     }
     addLike(){
-        if(this.props.user._id == undefined) {
+        if(this.props.user._id === undefined) {
             //show modal
-            console.log("Open modal")
             this.setState({isOpen: true})
         }
         else {
@@ -96,8 +93,7 @@ class SingleVideo extends Component {
             fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((res)=>{
-                console.log("Res: " ,res)
-                if(res != false) {
+                if(res !== false) {
                     var likeCount = this.state.likeCount;
                     likeCount++;
                     this.setState({likeCount: likeCount});
@@ -110,7 +106,6 @@ class SingleVideo extends Component {
                         VideoId: this.state.video._id,
                         UserId: this.props.user._id
                     };
-                    // console.log("cookie user", JSON.parse(Cookies.get("user"))._id)
                     const requestMetadata = {
                         method: 'POST',
                         headers: {
@@ -121,7 +116,7 @@ class SingleVideo extends Component {
                     fetch(api_route, requestMetadata)
                     .then(res => res.json())
                     .then((res)=>{
-                        if(res.deletedCount == 1) {
+                        if(res.deletedCount === 1) {
                             var likeCount = this.state.likeCount;
                             likeCount--;
                             this.setState({likeCount: likeCount});                    }
@@ -133,7 +128,6 @@ class SingleVideo extends Component {
     }
     componentDidUpdate(prevProps) {
         //if props are updated, get the new video
-        console.log("Video update", this.props.match.params.id )
         if(prevProps.match.params.id !== this.props.match.params.id){
           this.getVideo();
         }
@@ -150,8 +144,7 @@ class SingleVideo extends Component {
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
-                console.log(result)
-                if(result.Views == 1){
+                if(result.Views === 1){
                     this.setState({video: result, views:result.Views,
                         viewText: "view"})
                 }
@@ -190,7 +183,7 @@ class SingleVideo extends Component {
                         <div className="sub-details">
                             <div className="single-creator-name">
                                 <Link to={"/User/"+this.state.video.Creator_Id}>
-                                    <img className="user-image" src={this.state.video.Creator_Image}/>
+                                    <img className="user-image" src={this.state.video.Creator_Image} alt="Creator"/>
                                     <span className="creator-text">{this.state.video.Creator}</span>
                                 </Link>
                             </div>

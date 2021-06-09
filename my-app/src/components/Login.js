@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import '../css/VideoUploader.css';
 import '../css/Login.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Link } from 'react-router-dom';
 import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 class LoginForm extends Component {
@@ -71,8 +70,8 @@ class LoginForm extends Component {
   }
     login(){
         var isEmail = this.validateEmail(this.state.email)
-        if(this.state.email == "" ||
-        this.state.password == ""){
+        if(this.state.email === "" ||
+        this.state.password === ""){
             this.setState({error: "Please enter email and password"})
             this.showError();
         }
@@ -86,7 +85,6 @@ class LoginForm extends Component {
                 Email: this.state.email,
                 Password: this.state.password
             };
-            console.log(postBody)
             const requestMetadata = {
                 method: 'POST',
                 headers: {
@@ -97,7 +95,6 @@ class LoginForm extends Component {
             fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((user)=>{
-                console.log(user)
                 if(!user){
                     this.setState({error: "Incorrect email or password"})
                     this.showError();

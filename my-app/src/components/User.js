@@ -23,7 +23,7 @@ class User extends Component {
   }
   handleContentChange(){
 
-    if(this.state.content == "videos"){
+    if(this.state.content === "videos"){
       this.setState({content: "reviews", 
       videosBorder:"none", reviewsBorder: "2px solid #007bff"})
     }
@@ -33,7 +33,7 @@ class User extends Component {
     }
   }
   renderContent(){
-    if(this.state.content == "videos") {
+    if(this.state.content === "videos") {
       return(
         <div className="user-content-container">
           <VideoList videos={this.state.user.Videos}/>
@@ -60,14 +60,13 @@ class User extends Component {
     .then(response => response.json())
         .then(result => {
             this.setState({user: result})
-            console.log(this.state.user)
         })
   }
   render(){
     return (
         <div>
             <div className="profile-header">
-                <img className="user-profile-image" src={this.state.user.Image}/>
+                <img className="user-profile-image" src={this.state.user.Image} alt="User"/>
                 <p className="user-profile-name">{this.state.user.First_Name + " " + this.state.user.Last_Name}</p>
                 <p className="profile-bio">{this.state.user.Bio}</p>
                 <ReviewModal user={this.props.user}/>

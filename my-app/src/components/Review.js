@@ -9,9 +9,6 @@ var formatDate = new FormatDate();
 // import ReactPlayer from "react-player";
 
 class Review extends Component {
-    constructor(props) {
-        super(props); 
-    }
     render(){
         var stars = [];
         for (var x = 0; x < this.props.Rating; x++) {
@@ -20,7 +17,7 @@ class Review extends Component {
         return (
             <div className="review-item" >
                     <p className ="review-name">
-                        <img className="review-avatar" src={htmlDecoder.htmlDecode(this.props.Image)}/>
+                        <img className="review-avatar" src={htmlDecoder.htmlDecode(this.props.Image)} alt="Review avatar"/>
                         {this.props.Name}
                         </p>
                         <ul className="starsList">

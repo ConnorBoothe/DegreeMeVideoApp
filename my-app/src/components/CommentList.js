@@ -26,12 +26,12 @@ class CommentList extends Component {
         showButtons: "block"})
     }
     addComment() {
-        if(this.props.user._id == undefined) {
+        if(this.props.user._id === undefined) {
             //show modal
             this.props.showModal();
         }
         else {
-            if(this.state.comment != ""){
+            if(this.state.comment !== ""){
                 const api_route = 'http://localhost:8080/API/AddComment';
                 const postBody = {
                     Video_Id: this.props.VideoId,
@@ -51,7 +51,7 @@ class CommentList extends Component {
                 fetch(api_route, requestMetadata)
                 .then(res => res.json())
                 .then((comment)=>{
-                  var newCommentsArray = new Array();
+                  var newCommentsArray = [];
                   newCommentsArray = this.state.comments;
                   newCommentsArray.unshift(comment)
                   this.setState({comments: newCommentsArray,
@@ -59,8 +59,6 @@ class CommentList extends Component {
                     showButtons:"none"})
                 })
                 .catch((err)=>{
-                    console.log(err)
-                    alert("Error")
                 })
             }
         }
@@ -90,11 +88,9 @@ class CommentList extends Component {
         fetch(api_route, requestMetadata)
         .then(res => res.json())
         .then((result)=>{
-            console.log(result)
             this.setState({comments: result})
         })
         .catch((err)=>{
-            console.log(err)
         });
     }
     componentDidMount(){
@@ -120,12 +116,15 @@ class CommentList extends Component {
                 Comment={this.state.comment}
                 user={this.props.user}/>
                 {this.state.comments.map((comment, index) => (
-                    <Comment 
-                    Image={this.htmlDecode(comment.Author_Img)}
-                    Creator={comment.Author_First_Name + " " + comment.Author_Last_Name} 
-                    Message={this.htmlDecode(comment.Message)}
-                    Date={comment.Date}
-                    />
+                    <li key={index}>
+                        <Comment 
+                            Image={this.htmlDecode(comment.Author_Img)}
+                            Creator={comment.Author_First_Name + " " + comment.Author_Last_Name} 
+                            Message={this.htmlDecode(comment.Message)}
+                            Date={comment.Date}
+                        />
+                    </li>
+                    
                 ))}
             </div>          
         );

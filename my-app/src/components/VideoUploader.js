@@ -84,7 +84,6 @@ class VideoUploader extends Component {
     var allowedExtensions = 
                     /(\.mp4)$/i;
       if (!allowedExtensions.exec(this.Link.current.value)) {
-        console.log("Not mp4")
             return false;
       } 
       return true;
@@ -92,7 +91,7 @@ class VideoUploader extends Component {
   }
   addTag(){
     //if tag isn't empty, add it
-    if(this.tag.current.value != ""){
+    if(this.tag.current.value !== ""){
       var newArray = this.state.tags.concat(this.tag.current.value)
       this.setState({ tags: newArray })
       this.tag.current.value = "";
@@ -137,7 +136,7 @@ class VideoUploader extends Component {
     this.setState({tags: newArray});
   }
     addVideoToDatabase(videoUrl){
-      if(this.props.user._id != undefined) {
+      if(this.props.user._id !== undefined) {
         const api_route = 'http://localhost:8080/API/AddVideo';
         this.createThumbnail(this.Link.current.files[0])
         .then((url)=>{
@@ -153,7 +152,6 @@ class VideoUploader extends Component {
             tags: this.state.tags,
             Thumbnail: url
         };
-        console.log(postBody)
         const requestMetadata = {
             method: 'POST',
             headers: {
@@ -164,25 +162,22 @@ class VideoUploader extends Component {
         fetch(api_route, requestMetadata)
         .then(res => res.json())
         .then((video)=>{
-          console.log(video)
           this.setState({videoId: video._id})
           this.showModal();
         })
         .catch((err)=>{
-          console.log(err)
           this.setState({type: "An error occurred. Please try again"})
         })
         })
          
         .catch((err)=>{
-          console.log(err)
           this.setState({type: "An error occurred. Please try again"})
 
         })
       }
     }
     renderUploader(){
-      if(this.props.user._id != undefined) {
+      if(this.props.user._id !== undefined) {
         const readImage =(file)=>{
           // this.handleChange();
   const id = uuid();
@@ -201,16 +196,14 @@ class VideoUploader extends Component {
         this.uploadingMedia = false;
       });
     });
-  console.log(file)
 }
 const addVideo =(e)=>{
   var validMp4 = this.validateMp4();
   if(
-      this.state.title == "" ||
-      this.state.description == "" ||
-      this.Link.current.value == ""
+      this.state.title === "" ||
+      this.state.description === "" ||
+      this.Link.current.value === ""
     ){
-        console.log("empty field")
         this.setState({error: "Please fill out all fields"})
     }
     else if(!validMp4){
@@ -281,7 +274,7 @@ return (
       }
     }
     componentDidMount(){
-      if(Cookies.get("user")!= undefined) {
+      if(Cookies.get("user")!== undefined) {
         var user = JSON.parse(Cookies.get("user"));
         this.setState({
           creator: user.First_Name + " " +user.Last_Name,

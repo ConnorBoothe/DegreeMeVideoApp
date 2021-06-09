@@ -1,7 +1,4 @@
 import React, {Component} from "react";
-import VideoRow from "../components/VideoRow";
-import Header from "../components/Header";
-
 import "../css/Header.css";
 import "../css/Home.css";
 import Video from "../components/Video";
@@ -24,7 +21,6 @@ componentDidMount(){
 }
 getLikedVideos(){
     var user = JSON.parse(Cookies.get("user"));
-    console.log(user)
     const api_route = 'http://localhost:8080/GetLikedVideos/'+user._id;
     const requestMetadata = {
         method: 'GET',
@@ -45,7 +41,7 @@ getLikedVideos(){
             <div className="videos-container">
             <ul>
             {this.state.videos.map((video, index) => (
-                <li>
+                <li key={index}>
                 <Link to={"/Video/"+video._id}>
                     <Video Id={video._id} Title={video.Title} Thumbnail ={video.Thumbnail}
                     Creator={video.Creator} Views={video.Views} image={video.Creator_Image}

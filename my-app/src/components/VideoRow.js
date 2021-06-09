@@ -26,7 +26,6 @@ class VideoRow extends Component {
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
-                console.log(result)
                 this.setState({videos: result})
             })
     }
@@ -36,8 +35,7 @@ class VideoRow extends Component {
                 <h1 className="text-light category">{this.props.category}</h1>
                 <ul>
                 {this.state.videos.map((video, index) => (
-                    
-                    <li>
+                    <li key={index}>
                         <Link to={"/Video/"+video._id}>
                             <Video Id={video._id} Title={video.Title} Thumbnail ={video.Thumbnail}
                             Creator={video.Creator} image={video.Creator_Image} Views={video.Views}

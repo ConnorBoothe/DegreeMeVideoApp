@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect, withRouter} from 'react-router-dom';
+import { Route, Switch, Redirect} from 'react-router-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Header from '../components/Header';
 import VideoUploader from '../components/VideoUploader';
@@ -44,7 +44,7 @@ class Routes extends Component {
         this.setState({user: user})
     }
     getNotificationCount(){
-        if(Cookies.get("user")!= undefined) {
+        if(Cookies.get("user")!== undefined) {
         var user = JSON.parse(Cookies.get("user"));
         const api_route = 'http://localhost:8080/API/GetUnreadCount/'+user._id;
         const requestMetadata = {
@@ -69,12 +69,11 @@ class Routes extends Component {
             }
         })
         .catch((err)=>{
-            console.log(err)
         });
     }
     }
     getNotifications(){
-        if(Cookies.get("user")!= undefined) {
+        if(Cookies.get("user")!== undefined) {
         var user = JSON.parse(Cookies.get("user"));
             const api_route = 'http://localhost:8080/API/GetNotifications/'+user._id;
             const requestMetadata = {
@@ -86,11 +85,9 @@ class Routes extends Component {
             fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((result)=>{
-                console.log(result)
                 this.setState({notifications: result})
             })
             .catch((err)=>{
-                console.log(err)
             });
         }
     }
@@ -111,7 +108,7 @@ class Routes extends Component {
         this.setState({showNotificationBadge: "none", notificationCount: 0})
     }
     componentDidMount(){
-        if(Cookies.get("user")!= undefined) {
+        if(Cookies.get("user")!== undefined) {
             this.setUser(JSON.parse(Cookies.get("user")))
             this.getNotificationCount();
             // this.getNotifications();
@@ -124,7 +121,6 @@ class Routes extends Component {
         this.setState({searchValue: value});
     }
     handleAutocompleteChange(e){
-        console.log("hide")
         this.setState({searchValue: e.target.value});
 
     }

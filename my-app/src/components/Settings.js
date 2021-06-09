@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import "../css/Settings.css";
 import AvatarCropper from "../components/AvatarCropper";
 import 'bootstrap/dist/css/bootstrap.css';
-import Cookies from 'js-cookie';
 
 class Settings extends Component {
   constructor(props){
@@ -33,7 +32,7 @@ class Settings extends Component {
     
   }
   updateBio(){
-    if(this.state.bio != "") {
+    if(this.state.bio !== "") {
       const api_route = 'http://localhost:8080/API/UpdateBio';
       const postBody = {
           userId: this.props.user._id,
@@ -51,7 +50,6 @@ class Settings extends Component {
       .then((user)=>{
         this.props.setUser(user)
         this.showBioSuccessMessage();
-        // Cookies.set("user", user)
       })
     }
    
