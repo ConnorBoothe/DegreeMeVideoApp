@@ -36,7 +36,6 @@ router.post('/API/Login',
                         function (err, match) {
                             //password matches
                             if(match){
-                                req.session.user = user;
                                 res.json(user)
                             }
                             else {
