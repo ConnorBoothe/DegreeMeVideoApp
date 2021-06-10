@@ -1,7 +1,5 @@
-require("dotenv").config();
 const express = require('express');
 const router = express.Router();
-
 const bodyParser = require('body-parser');
 const {
     check,
@@ -13,18 +11,15 @@ router.use(bodyParser.urlencoded({
     resave: false,
     saveUninitialized: true
 }));
-const NotificationsDB = require('../Models/Notifications');
-var notifications = new NotificationsDB();
-
+var KeyWordsDB = require('../Models/UserKeyWords');
+var keywords = new KeyWordsDB();
 //endpoint to add user to database
-router.get('/API/GetUnreadCount/:id',
+router.get('/API/keywords/:id', 
     function(req, res){
-        notifications.getUnreadCount(req.params.id)
-        .then((count)=>{
-            res.json(count);
+        keywords.getUserKeyWords(req.params.id)
+        .then((keywords)=>{
+            console.log(keywords)
+            res.json(keywords)
         })
-        .catch((err)=>{
-            res.json(err)
-        })  
 });
 module.exports = router;

@@ -16,7 +16,7 @@ var UserSchema = new Schema({
     Bio:{type:String},
     Stripe_Id: {type:String},
     Videos:{type: Array}
-}, {collection: 'User'});
+  }, {collection: 'User'});
 var UserDB = mongoose.model('User',UserSchema);
 
 module.exports = class User {
@@ -109,4 +109,5 @@ module.exports = class User {
           })
       })
     }
+    
 }

@@ -34,7 +34,11 @@ app.use([
     require("./Controllers/GetUnreadNotificationCount"),
     require("./Controllers/GetCreatorTotalViews"),
     require("./Controllers/GetVideosByTag"),
-    require("./Controllers/GetVideosBySearchValue")
+    require("./Controllers/GetVideosBySearchValue"),
+    require("./Controllers/AddKeyWordsToProfile"),
+    require("./Controllers/GetKeyWords"),
+    require("./Controllers/RemoveKeyWords"),
+
 ]); 
 
 //Wildcard route
