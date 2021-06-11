@@ -9,11 +9,16 @@ class VideoRow extends Component {
         super(props);
         this.getVideos = this.getVideos.bind(this)
         this.state = {
-            videos:[]
+            videos:[],
+            isMounted: false
         }
     }
     componentDidMount(){
+        this.setState({isMounted: true});
         this.getVideos();
+    }
+    componentWillUnmount(){
+        this.setState({isMounted: false})
     }
     getVideos(){
         const api_route = 'http://localhost:8080/API/GetVideosBySearchValue/'+this.props.category;
@@ -26,7 +31,9 @@ class VideoRow extends Component {
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
-                this.setState({videos: result})
+                if(this.state.isMounted) {
+                    this.setState({videos: result})
+                }
             })
     }
     render(){
