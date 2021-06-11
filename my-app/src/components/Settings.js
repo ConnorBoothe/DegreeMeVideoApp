@@ -37,7 +37,6 @@ class Settings extends Component {
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
-              console.log(result) 
               var keywords = [];
               for(var i = 0; i < result.length; i++ ){
                 keywords.push(result[i].Word)
@@ -91,7 +90,7 @@ class Settings extends Component {
     .then((result)=>{
       const newArray = this.state.keywords
       newArray.splice(index,1)
-      this.setState({tags: newArray});
+      this.setState({keywords: newArray});
     })
     
   }

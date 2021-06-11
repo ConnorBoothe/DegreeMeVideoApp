@@ -33,9 +33,6 @@ module.exports = class KeyWords {
         return KeywordsDB.find({UserId: userId})
     }
     removeKeyword(userId, word){
-        console.log("Remove hoe")
-        console.log(userId)
-        console.log("Word:",word)
         return new Promise((resolve, reject)=>{
             KeywordsDB.deleteOne({
                 $and: [{
@@ -44,7 +41,6 @@ module.exports = class KeyWords {
                 }]
             })
             .then((result)=>{
-                console.log(result)
                 user.getUser(userId)
                 .then((user)=>{
                     resolve(user)

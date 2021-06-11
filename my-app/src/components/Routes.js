@@ -33,7 +33,7 @@ class Routes extends Component {
         this.showUnreadCount = this.showUnreadCount.bind(this)
         this.setSearchValue = this.setSearchValue.bind(this)
         this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this)
-
+        this.getKeywords = this.getKeywords.bind(this)
     }
     setUser(user){
         this.setState({user: user});
@@ -43,6 +43,31 @@ class Routes extends Component {
         user.Image = avatar;
         this.setState({user: user})
     }
+    getKeywords(){
+        var user = {};
+        if(this.props.user._id === undefined) {
+          user = JSON.parse(Cookies.get("user"));
+        }
+        else {
+          user = this.props.user
+        }
+        const api_route = 'http://localhost:8080/API/keywords/'+ user._id;
+        const requestMetadata = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                    };
+            fetch(api_route, requestMetadata)
+            .then(response => response.json())
+                .then(result => {
+                  var keywords = [];
+                  for(var i = 0; i < result.length; i++ ){
+                    keywords.push(result[i].Word)
+                  } 
+                  this.setState({keywords: keywords})              
+                })
+      }
     getNotificationCount(){
         if(Cookies.get("user")!== undefined) {
         var user = JSON.parse(Cookies.get("user"));
@@ -160,7 +185,7 @@ class Routes extends Component {
             (<User {...props} user={this.state.user}  />)} />
             <Route exact path="/Settings" render={props => 
             (<Settings {...props} user={this.state.user}
-            setUser={this.setUser}  />)} />
+            setUser={this.setUser} />)} />
            
             <Route exact path="/SearchResults/:id" render={props => 
             (<SearchResults {...props} searchValue={this.state.searchValue}

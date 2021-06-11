@@ -18,7 +18,6 @@ router.get('/API/keywords/:id',
     function(req, res){
         keywords.getUserKeyWords(req.params.id)
         .then((keywords)=>{
-            console.log(keywords)
             res.json(keywords)
         })
 });
