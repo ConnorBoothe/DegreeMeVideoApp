@@ -27,9 +27,7 @@
     padding-left: 5px;
     margin-bottom: 12px;
 }
-.input-label{
-    color: white;
-    text-align:left;
-    margin-bottom: 5px;
-    padding-left:0;
+
+.keywords-list li {
+    display: inline-block;
 }
