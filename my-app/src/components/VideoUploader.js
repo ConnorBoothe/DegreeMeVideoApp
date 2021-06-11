@@ -207,11 +207,15 @@ const addVideo =(e)=>{
       this.state.description === "" ||
       this.Link.current.value === ""
     ){
+      alert(this.state.tags.length)
         this.setState({error: "Please fill out all fields"})
+    }
+    //require 5 tags
+    else if (this.state.tags.length < 5){
+      this.setState({error: "You must add at least 5 tags to the video"})
     }
     else if(!validMp4){
       this.setState({error: "File upload must be .mp4 format"})
-
     }
     else{
      readImage(this.Link.current.files[0])
