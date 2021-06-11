@@ -1,4 +1,4 @@
-import React, {Component, createRef} from "react";
+import React, {Component} from "react";
 import "../css/Settings.css";
 import AvatarCropper from "../components/AvatarCropper";
 import KeyWordsInput from "../components/KeyWordsInput";
