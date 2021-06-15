@@ -123,11 +123,18 @@ class VideoUploader extends Component {
       const video = new Video(this.Link.current.files[0]);
       video.getThumbnails().then((thumbnails)=>{
         var reader = new FileReader();
-        reader.readAsDataURL(thumbnails[0].blob);
-        this.postThumbnailToFirebase(thumbnails[0].blob)
-        .then((url)=>{
-          resolve(url)
-        })
+        if(thumbnails[0].blob === null){
+          resolve(false)
+        }
+        else {
+          console.log(thumbnails[0].blob);
+          reader.readAsDataURL(thumbnails[0].blob);
+          this.postThumbnailToFirebase(thumbnails[0].blob)
+          .then((url)=>{
+            resolve(url)
+          })
+        }
+       
       })
     })
     
@@ -143,6 +150,12 @@ class VideoUploader extends Component {
         const api_route = 'http://localhost:8080/API/AddVideo';
         this.createThumbnail(this.Link.current.files[0])
         .then((url)=>{
+          if(url === false) {
+            this.setState({error: "An error occurred"})
+
+          }
+          else {
+            
           this.setState({uploadType: "Posting to database"});
           const postBody = {
             Creator: this.state.creator,
@@ -171,13 +184,10 @@ class VideoUploader extends Component {
         .catch((err)=>{
           this.setState({type: "An error occurred. Please try again"})
         })
-        })
-         
-        .catch((err)=>{
-          this.setState({type: "An error occurred. Please try again"})
-
+      }
         })
       }
+      
     }
     renderUploader(){
       if(this.props.user._id !== undefined) {
