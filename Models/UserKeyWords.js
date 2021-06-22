@@ -29,6 +29,25 @@ module.exports = class KeyWords {
             })
         })
     }
+    addManyKeywords(userId, words){
+        return new Promise((resolve, reject)=>{
+            var keywordsArray = [];
+            for(var i = 0; i < words.length; i++) {
+                keywordsArray.push({UserId: userId, Word: words[i] })
+            }
+            KeywordsDB.insertMany(keywordsArray)
+            .then(()=>{
+                //respond with new user object
+                user.getUser(userId)
+                .then((user)=>{
+                    resolve(user)
+                })
+                .catch((err)=>{
+                    reject(err);
+                })
+            })
+        });
+    }
     getUserKeyWords(userId){
         return KeywordsDB.find({UserId: userId})
     }
