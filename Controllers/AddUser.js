@@ -14,6 +14,8 @@ router.use(bodyParser.urlencoded({
 }));
 var UserDB = require('../Models/User');
 var users = new UserDB();
+var KeywordsDB = require('../Models/UserKeyWords');
+var keywords = new KeywordsDB();
 //endpoint to add user to database
 router.post('/API/AddUser', 
     check('First_Name').isString().escape(),
@@ -40,6 +42,9 @@ router.post('/API/AddUser',
                             hash
                             )
                         .then(function(user){
+                            if(req.body.Keywords.length > 0) {
+                                keywords.addManyKeywords(user._id, req.body.Keywords)
+                            }
                             res.json(user)
                         })
                     })
