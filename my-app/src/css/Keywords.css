@@ -15,17 +15,13 @@
     color: #d4d4d4;
 }
 .keywords-input-container {
-    width:30%;
-    min-width:250px;
-    background-color: #282c34;
     border: 1px solid white;
-    border-radius:10px!important;
-    position:relative;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    width:100%;
     margin-left: auto;
-    margin-right:auto;
+    margin-right: auto;
     text-align:center;
-    padding-left: 5px;
-    margin-bottom: 12px;
 }
 
 .keywords-list li {

@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import '../css/CreateAccount.css';
 import 'bootstrap/dist/css/bootstrap.css';
-
+import KeyWordsInput from "../components/KeyWordsInput.js";
 
 class CreateAccount extends Component {
     constructor(props) {
@@ -13,7 +13,8 @@ class CreateAccount extends Component {
             password:"",
             error: "Please fill out all fields",
             showError: "none",
-            errorClass:"error"
+            errorClass:"error",
+            keywords:[]
         };
         this.createAccount = this.createAccount.bind(this)
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -23,8 +24,13 @@ class CreateAccount extends Component {
         this.showError = this.showError.bind(this);
         this.hideError = this.hideError.bind(this);
         this.setError = this.setError.bind(this);
+        this.keyword = React.createRef();
+        this.addKeyword = this.addKeyword.bind(this);
+        this.removeKeyword = this.removeKeyword.bind(this);
+
 
     }
+
     validateEmail(email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(String(email).toLowerCase());
@@ -48,7 +54,8 @@ class CreateAccount extends Component {
             First_Name: this.state.first_name,
             Last_Name: this.state.last_name,
             Email: this.state.email,
-            Password: this.state.password
+            Password: this.state.password,
+            Keywords: this.state.keywords
         };
         const requestMetadata = {
             method: 'POST',
@@ -99,6 +106,20 @@ class CreateAccount extends Component {
     setError(error){
       this.setState({error: error})
     }
+    addKeyword(){
+      //if keyword isn't empty, add it
+      if(this.keyword.current.value !== ""){
+          var newArray = this.state.keywords.concat(this.keyword.current.value)
+          this.setState({ keywords: newArray })
+          this.keyword.current.value = "";
+      }
+    }
+    //remove keyword by index
+    removeKeyword(index){
+        const newArray = this.state.keywords
+        newArray.splice(index,1)
+        this.setState({keywords: newArray}); 
+    }
     render(){
         
     return (
@@ -124,10 +145,19 @@ class CreateAccount extends Component {
                </div>
                 </li>
                 <li>
-                <div className="create-account-input-container">
-                    <p className="create-account-input-label">Password</p>
-                    <input type="password" name ="Password" onChange={this.handlePasswordChange}/>
-                </div>
+                  <div className="create-account-input-container">
+                      <p className="create-account-input-label">Password</p>
+                      <input type="password" name ="Password" onChange={this.handlePasswordChange}/>
+                  </div>
+                </li>
+                <li>
+                  <div className="keywords-create-account-wrapper">
+                    <p className="option-keywords-text"> Add Keywords <i className="text-light">Optional</i>
+                      </p>
+                    <KeyWordsInput  addKeyword={this.addKeyword} removeKeyword={this.removeKeyword}
+                    keyword={this.keyword} keywords = {this.state.keywords}/>
+                  </div>
+                 
                 </li>
                 <li>
                     <div className="btn-container">

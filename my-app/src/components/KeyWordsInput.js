@@ -2,15 +2,22 @@ import React, { Component } from "react";
 import '../css/Keywords.css';
 import '../css/VideoUploader.css';
 class KeyWordsInput extends Component {
-    
+    renderYourKeywordsText(){
+        if(this.props.keywords.length > 0){
+            return(
+                <p className="text-light your-keywords">Your keywords</p>
+            );
+        }
+    }
     render() {
+        console.log(this.props.keywords)
         return (
             <div className="tags-container">
                 <div className="keywords-input-container">
                     <input name="tags" className="keywords-input" ref={this.props.keyword} autoComplete="off"/>
                     <span className="btn-primary add-tags-btn" onClick={this.props.addKeyword}>Add</span>
                 </div>
-                <p className="text-light your-keywords">Your keywords</p>
+                    {this.renderYourKeywordsText()}
                 <div className="append-tags">
                     <ul className="keywords-list">
                         {this.props.keywords.map((keyword, index) => (
@@ -25,7 +32,7 @@ class KeyWordsInput extends Component {
                             
                         ))}
                     </ul>
-                     <p className="keywords-helper-text">Your keywords control the videos that populate your dashboard</p>
+                     <p className="keywords-helper-text">Keywords control the videos that populate your dashboard</p>
                 </div>
             </div>
         );

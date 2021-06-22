@@ -7,6 +7,19 @@
     margin-right: auto;
     text-align:center;
 }
+.keywords-create-account-wrapper {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    width:70%;
+    position:relative;
+}
+.option-keywords-text {
+    padding-bottom:10px;
+    padding-top:10px;
+    font-weight: bold;
+    font-size: 14px;
+}
 .close-modal {
     z-index:3;
 }

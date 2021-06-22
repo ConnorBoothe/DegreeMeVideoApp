@@ -22,18 +22,23 @@ class Routes extends Component {
             notifications: [],
             showNotificationBadge: "none",
             notificationCount: 0,
-            searchValue: ""
+            searchValue: "",
+            keywords: []
         }
         this.setUser = this.setUser.bind(this);
         this.logout = this.logout.bind(this);
         this.updateAvatar = this.updateAvatar.bind(this);
-        this.getNotifications = this.getNotifications.bind(this)
-        this.getNotificationCount = this.getNotificationCount.bind(this)
-        this.hideUnreadCount = this.hideUnreadCount.bind(this)
-        this.showUnreadCount = this.showUnreadCount.bind(this)
-        this.setSearchValue = this.setSearchValue.bind(this)
-        this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this)
-        this.getKeywords = this.getKeywords.bind(this)
+        this.getNotifications = this.getNotifications.bind(this);
+        this.getNotificationCount = this.getNotificationCount.bind(this);
+        this.hideUnreadCount = this.hideUnreadCount.bind(this);
+        this.showUnreadCount = this.showUnreadCount.bind(this);
+        this.setSearchValue = this.setSearchValue.bind(this);
+        this.handleAutocompleteChange = this.handleAutocompleteChange.bind(this);
+        this.getKeywords = this.getKeywords.bind(this);
+        this.addKeyword = this.addKeyword.bind(this);
+        this.removeKeyword = this.removeKeyword.bind(this);
+        this.keyword = React.createRef();
+
     }
     setUser(user){
         this.setState({user: user});
@@ -44,12 +49,13 @@ class Routes extends Component {
         this.setState({user: user})
     }
     getKeywords(){
+        console.log("Running routez")
         var user = {};
-        if(this.props.user._id === undefined) {
+        if(this.state.user._id === undefined) {
           user = JSON.parse(Cookies.get("user"));
         }
         else {
-          user = this.props.user
+          user = this.state.user
         }
         const api_route = 'http://localhost:8080/API/keywords/'+ user._id;
         const requestMetadata = {
@@ -61,6 +67,7 @@ class Routes extends Component {
             fetch(api_route, requestMetadata)
             .then(response => response.json())
                 .then(result => {
+                    console.log("Result",result)
                   var keywords = [];
                   for(var i = 0; i < result.length; i++ ){
                     keywords.push(result[i].Word)
@@ -152,7 +159,53 @@ class Routes extends Component {
     logout(){
         this.setState({user: {}});
     }
-   
+    addKeyword(){
+        //if keyword isn't empty, add it
+        if(this.keyword.current.value !== ""){
+          const api_route = 'http://localhost:8080/API/AddKeywords';
+          const postBody = {
+              userId: this.state.user._id,
+              word: this.keyword.current.value
+          };
+          const requestMetadata = {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(postBody),
+          };
+          fetch(api_route, requestMetadata)
+          .then(res => res.json())
+          .then((result)=>{
+            var newArray = this.state.keywords.concat(this.keyword.current.value)
+            this.setState({ keywords: newArray })
+            this.keyword.current.value = "";
+          })
+        }
+      }
+       //remove keyword by index
+       removeKeyword(index){
+        const api_route = 'http://localhost:8080/API/RemoveKeyword';
+        const postBody = {
+            userId: this.state.user._id,
+            word: this.state.keywords[index]
+        };
+        const requestMetadata = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(postBody),
+        };
+        fetch(api_route, requestMetadata)
+        .then(res => res.json())
+        .then((result)=>{
+          const newArray = this.state.keywords
+          newArray.splice(index,1)
+          this.setState({keywords: newArray});
+        })
+        
+      }
     render() {
         return (
         <Router>
@@ -177,7 +230,10 @@ class Routes extends Component {
             (<Login {...props} user={this.state.user} setUser={this.setUser} getUnreadCount={this.getNotificationCount}
             />)} />
             <Route exact path="/CreateAccount" component={CreateAccount} />
-            {/* <Route exact path="/Video/:id" component={SingleVideo} /> */}
+            <Route exact path="/CreateAccount" render={props => 
+            (<CreateAccount {...props}
+            getKeyWords = {this.getKeyWords} addKeyWord={this.addKeyword} removeKeyword={this.removeKeyword}
+            keyword={this.keyword} keywords = {this.state.keywords}/>)} />
             <Route exact path="/Video/:id" render={props => 
             (<SingleVideo {...props} user={this.state.user} 
             showUnreadCount={this.showUnreadCount}/>)} />
@@ -185,7 +241,9 @@ class Routes extends Component {
             (<User {...props} user={this.state.user}  />)} />
             <Route exact path="/Settings" render={props => 
             (<Settings {...props} user={this.state.user}
-            setUser={this.setUser} />)} />
+            setUser={this.setUser} getKeywords = {this.getKeywords} 
+            addKeyword={this.addKeyword} removeKeyword={this.removeKeyword}
+            keyword={this.keyword} keywords = {this.state.keywords}/>)} />
            
             <Route exact path="/SearchResults/:id" render={props => 
             (<SearchResults {...props} searchValue={this.state.searchValue}

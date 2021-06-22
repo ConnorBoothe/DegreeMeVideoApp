@@ -6,6 +6,13 @@
 .bio-msg {
     margin-top: 10px;
 }
+.keywords-settings-wrapper {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    width:30%;
+    position:relative;
+}
 /* desktop styles */
 @media only screen and (min-width: 725px) {
     .update-bio-input {
