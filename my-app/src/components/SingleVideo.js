@@ -56,15 +56,14 @@ class SingleVideo extends Component {
             fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((res)=>{
-             
-                    if(res === 1){
-                        this.setState({ views:res,
-                            viewText: "view"})
-                    }
-                    else {
-                        this.setState({ views:res,
-                            viewText: "views"})
-                    }
+                if(res === 1){
+                    this.setState({ views:res,
+                        viewText: "view"})
+                }
+                else if(res !== false) {
+                    this.setState({ views:res,
+                        viewText: "views"})
+                }
             })
         }, 30000)
     }

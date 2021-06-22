@@ -23,9 +23,16 @@ router.post('/API/AddView',
     function(req, res){
       var userId = "none";
         if(req.body.UserId != undefined) {
-          userId = req.body.UserId
-        }
-            views.addView(
+          userId = req.body.UserId;
+          videos.getVideoById(req.body.VideoId)
+          .then((video)=>{
+            //check if viewer is creator
+            if(req.body.UserId == video.Creator_Id) {
+              res.json(false)
+            }
+            else {
+              //if viewer is not creator, add view
+              views.addView(
                 userId,
                 req.body.CreatorId,
                 req.body.VideoId, 
@@ -40,5 +47,10 @@ router.post('/API/AddView',
             .catch((err)=>{
                 res.json(err)
             })
+            }
+          })
+          
+        }
+            
 });
 module.exports = router;
