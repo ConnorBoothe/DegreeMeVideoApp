@@ -97,11 +97,9 @@ class AvatarCropper extends Component {
         };
         if(Cookies.get("user")){
           //name user avatar after email
-          var user = JSON.parse(Cookies.get("user"))
-          id = user.Email;
-        }
-        const storageRef = firebase.storage().ref("avatars/"+id).put(this.base64ImageToBlob(this.state.preview), metadata)
-
+        var user = JSON.parse(Cookies.get("user"))
+        const storageRef = firebase.storage().ref("avatars/"+user.Email).put(
+          this.base64ImageToBlob(this.state.preview), metadata)
         storageRef.on(`state_changed`,snapshot=>{
         }, error=>{
         },
@@ -118,6 +116,8 @@ class AvatarCropper extends Component {
             })
           });
         });
+        }
+        
     }
         render () {
         return (
