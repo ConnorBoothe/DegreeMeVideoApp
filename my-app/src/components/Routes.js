@@ -13,6 +13,7 @@ import Footer from "../components/Footer"
 import LikedVideos from '../components/LikedVideos';
 import SearchResults from '../components/SearchResults'
 import Cookies from 'js-cookie';
+import Subscriptions from "./Subscriptions";
 
 class Routes extends Component {
     constructor(props) {
@@ -244,6 +245,8 @@ class Routes extends Component {
             setUser={this.setUser} getKeywords = {this.getKeywords} 
             addKeyword={this.addKeyword} removeKeyword={this.removeKeyword}
             keyword={this.keyword} keywords = {this.state.keywords}/>)} />
+             <Route exact path="/Subscriptions" render={props => 
+            (<Subscriptions {...props} />)} />
            
             <Route exact path="/SearchResults/:id" render={props => 
             (<SearchResults {...props} searchValue={this.state.searchValue}

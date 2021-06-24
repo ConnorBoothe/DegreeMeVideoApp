@@ -144,6 +144,11 @@ class UserMenu extends Component {
     return (
         <div className="user-menu" ref={this.wrapperRef}>
             <ul>
+                <li>
+                    <Link to="/Subscriptions">
+                        <button className="btn btn-primary subcribe-btn">Subscribe</button>
+                    </Link>
+                </li>
                 <Tippy content="Upload">
                     <li onClick={this.hideMenu}>
                     <Link to="/Upload">

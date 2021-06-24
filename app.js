@@ -38,6 +38,8 @@ app.use([
     require("./Controllers/AddKeyWordsToProfile"),
     require("./Controllers/GetKeyWords"),
     require("./Controllers/RemoveKeyWords"),
+    require("./Controllers/Subscribe"),
+
 
 ]); 
 
