@@ -13,7 +13,10 @@ import Footer from "../components/Footer"
 import LikedVideos from '../components/LikedVideos';
 import SearchResults from '../components/SearchResults'
 import Cookies from 'js-cookie';
-import Subscriptions from "./Subscriptions";
+import CreateSellerAccount from "./CreateSellerAccount";
+import UpgradeAccount from "./UpgradeAccount";
+import PaymentSettings from "./PaymentSettings";
+
 
 class Routes extends Component {
     constructor(props) {
@@ -42,6 +45,7 @@ class Routes extends Component {
 
     }
     setUser(user){
+        Cookies.set("user", user)
         this.setState({user: user});
     }
     updateAvatar(avatar){
@@ -230,7 +234,7 @@ class Routes extends Component {
             <Route exact path="/Login" render={props => 
             (<Login {...props} user={this.state.user} setUser={this.setUser} getUnreadCount={this.getNotificationCount}
             />)} />
-            <Route exact path="/CreateAccount" component={CreateAccount} />
+            {/* <Route exact path="/CreateAccount" component={CreateAccount} /> */}
             <Route exact path="/CreateAccount" render={props => 
             (<CreateAccount {...props}
             getKeyWords = {this.getKeyWords} addKeyWord={this.addKeyword} removeKeyword={this.removeKeyword}
@@ -245,9 +249,14 @@ class Routes extends Component {
             setUser={this.setUser} getKeywords = {this.getKeywords} 
             addKeyword={this.addKeyword} removeKeyword={this.removeKeyword}
             keyword={this.keyword} keywords = {this.state.keywords}/>)} />
-             <Route exact path="/Subscriptions" render={props => 
-            (<Subscriptions {...props} />)} />
-           
+             <Route exact path="/CreateSellerAccount" render={props => 
+            (<CreateSellerAccount {...props} setUser={this.setUser} />)} />
+            <Route exact path="/Upgrade" render={props => 
+            (<UpgradeAccount {...props} user={this.state.user}
+                setUser={this.setUser} />)} />
+         <Route exact path="/PaymentSettings/:customer_id" render={props => 
+            (<PaymentSettings {...props} user={this.state.user}
+                setUser={this.setUser} />)} />
             <Route exact path="/SearchResults/:id" render={props => 
             (<SearchResults {...props} searchValue={this.state.searchValue}
             setSearchValue={this.setSearchValue}/>)} />

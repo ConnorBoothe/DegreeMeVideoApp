@@ -70,7 +70,6 @@ class User extends Component {
                 <p className="user-profile-name">{this.state.user.First_Name + " " + this.state.user.Last_Name}</p>
                 <p className="profile-bio">{this.state.user.Bio}</p>
                 <ReviewModal user={this.props.user}/>
-
             </div>
             <ul className="actions-list" >
               <li onClick={this.handleContentChange} style={{borderBottom: this.state.videosBorder}}>            

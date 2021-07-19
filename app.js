@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = module.exports = express(); 
 const cors = require('cors');
-
+const UserDB = require("./Models/Views")
+const users = new UserDB();
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
@@ -38,8 +39,20 @@ app.use([
     require("./Controllers/AddKeyWordsToProfile"),
     require("./Controllers/GetKeyWords"),
     require("./Controllers/RemoveKeyWords"),
-    require("./Controllers/Subscribe"),
-
+    require("./Controllers/CreateStripeConnectedAccount"),
+    require("./Controllers/CreateStripeCustomer"),
+    require("./Controllers/AttachPaymentMethodAndSubscribe"),
+    require("./Controllers/GetPaymentMethods"),
+    require("./Controllers/GetSubscriptions"),
+    require("./Controllers/GetStripeCustomer"),
+    require("./Controllers/GetPastTransactions"),
+    require("./Controllers/GetUpcomingPayments"),
+    require("./Controllers/UpdateDefaultPaymentMethod"),
+    require("./Controllers/RemovePaymentMethod"),
+    require("./Controllers/AddPaymentMethod"),
+    require("./Controllers/CancelSubscription"),
+    require("./Controllers/AddSubscription"),
+    require("./Controllers/TransferFunds")
 
 ]); 
 

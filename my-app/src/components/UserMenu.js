@@ -140,14 +140,26 @@ class UserMenu extends Component {
             //hide red notif badge
         })
     }
+    showUpgradeButton(){
+        if( this.props.user.Subscription_Level === "Free Tier" ){
+            return (
+                <Link to="/Upgrade">
+                        <button className="btn btn-primary subcribe-btn">Upgrade</button>
+                </Link>
+            )
+        }
+        else if(this.props.user.Subscription_Level === "Pro Tier") {
+            return (
+                <p className="text-light tier-text">Pro Tier</p>
+            )
+        }
+    }
   render(){
     return (
         <div className="user-menu" ref={this.wrapperRef}>
             <ul>
                 <li>
-                    <Link to="/Subscriptions">
-                        <button className="btn btn-primary subcribe-btn">Subscribe</button>
-                    </Link>
+                   {this.showUpgradeButton()}
                 </li>
                 <Tippy content="Upload">
                     <li onClick={this.hideMenu}>

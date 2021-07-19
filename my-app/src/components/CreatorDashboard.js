@@ -41,29 +41,40 @@ class CreatorDashboard extends Component {
         }
          
     }
+    renderCreatorDashboard(){
+        if(this.state.allViews > 0) {
+            return (
+                <div className="creator-dashboard selected">
+                                <p className="text-light creator-stats-label">Creator Stats</p>
+                                <ul>
+                                    <li>
+                                        <h2 className="text-light dashboard-text">{this.state.allViews}</h2>
+                                        <p className="text-light dashboard-label">All-time views</p>
+                                    </li>
+                                    <li>
+                                    <h2 className="text-light dashboard-text">{this.state.viewsThisMonth}</h2>
+                                        <p className="text-light dashboard-label">Views this month</p>
+                
+                                    </li>
+                                    <li>
+                                        <h2 className="text-light dashboard-text">{(this.state.percentageOfTotalViews *100).toFixed(2)}%</h2>
+                                        <p className="text-light dashboard-label"> of total views</p>
+                                    </li>
+                                
+                                </ul>
+                                {/* <p className="text-light">Creator Dashboard</p> */}
+                                
+                            </div>
+                        )
+        }
+        else {
+            return(<div></div>)
+        }
+        
+    }
     render(){
         return (
-            <div className="creator-dashboard">
-                <p className="text-light creator-stats-label">Creator Stats</p>
-                <ul>
-                    <li>
-                        <h2 className="text-light dashboard-text">{this.state.allViews}</h2>
-                        <p className="text-light dashboard-label">All-time views</p>
-                    </li>
-                    <li>
-                    <h2 className="text-light dashboard-text">{this.state.viewsThisMonth}</h2>
-                        <p className="text-light dashboard-label">Views this month</p>
-
-                    </li>
-                    <li>
-                        <h2 className="text-light dashboard-text">{(this.state.percentageOfTotalViews *100).toFixed(2)}%</h2>
-                        <p className="text-light dashboard-label"> of total views</p>
-                    </li>
-                
-                </ul>
-                {/* <p className="text-light">Creator Dashboard</p> */}
-                
-            </div>
+            this.renderCreatorDashboard()
             );
     }
     }

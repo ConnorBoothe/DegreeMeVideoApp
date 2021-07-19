@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+
 const {
     check,
     validationResult
@@ -35,19 +37,58 @@ router.post('/API/AddUser',
                 if(user == null){
                     bcrypt.hash(req.body.Password, 8)
                     .then((hash)=>{
+                        //create stripe customer acct
+                        stripe.customers.create({
+                            email:req.body.Email,
+                            name:req.body.First_Name + " " + req.body.Last_Name,
+                            payment_method: req.body.PaymentMethodId,
+                            invoice_settings: {
+                                default_payment_method: req.body.PaymentMethodId
+                            },
+                            metadata:{
+                                // school:docs[0].school,
+                                // subscription:docs[0].subscription,
+                            }
+                        })
+                        .then((customer)=>{
+                            new Promise((resolve, reject)=>{
+                                if(req.body.Subscription === "Pro Tier"){
+                                    console.log("Create sub")
+                                     stripe.subscriptions.create({
+                                        customer: customer.id,
+                                        items: [
+                                          {price: 'price_1J8uQ2EKHHXXF01HWqZv0vOv'},
+                                        ],
+                                      })
+                                      .then((sub)=>{
+                                        resolve(sub)
+                                      })
+                                }
+                                else{
+                                    console.log("Dont create sub")
+                                    resolve(false)
+                                }
+                            })
+                            
+                            
                         users.addUser(
                             req.body.First_Name, 
                             req.body.Last_Name,
                             req.body.Email,
-                            hash
+                            hash,
+                            customer.id,
+                            req.body.Subscription
                             )
                         .then(function(user){
                             if(req.body.Keywords.length > 0) {
                                 keywords.addManyKeywords(user._id, req.body.Keywords)
                             }
                             res.json(user)
+                            
+                            
                         })
                     })
+                })
                     .catch((err)=>{
                         res.json(err)
                     })

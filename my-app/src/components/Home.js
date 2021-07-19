@@ -61,7 +61,6 @@ class Home extends Component {
         <div>
         {this.renderCreatorDashboard()}       
      <div className="videos-container">
-              <h2 className="text-light suggested-label">Suggested Videos</h2>
               {this.state.keywords.map((keyword, index) => (
                 <li key={index}>
                   <VideoRow category={keyword} />

@@ -3,7 +3,6 @@ import '../css/VideoUploader.css';
 import firebase from "firebase/app";
 import 'firebase/storage';  
 
-
 import ProgressBar from "./ProgressBar";
 import TagsInput from './TagsInput';
 import {v4 as uuid} from "uuid";
@@ -11,6 +10,8 @@ import {Video} from 'video-metadata-thumbnails';
 import VideoUploadModal from "./VideoUploadModal";
 import Cookies from 'js-cookie';
 import CreateAccount from "../components/CreateAccount"
+import CreateSellerAccount from "../components/CreateSellerAccount"
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 // import FileUploader from "react-firebase-file-uploader";
@@ -67,8 +68,6 @@ class VideoUploader extends Component {
         this.hideDescChar = this.hideDescChar.bind(this)
         this.renderUploader = this.renderUploader.bind(this)
         this.copyToClipboard = this.copyToClipboard.bind(this)
-        // this.Creator = React.createRef();
-        // this.Email = React.createRef();
         this.Description = React.createRef();
         this.Link = React.createRef();
         this.tag = React.createRef();
@@ -78,11 +77,6 @@ class VideoUploader extends Component {
     handleChange() {
       this.setState({show: true});
     }
-  //   validateEmail(email) {
-  //     alert(email)
-  //     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //     return re.test(String(email).toLowerCase());
-  // }
   validateMp4(){
     var allowedExtensions = 
                     /(\.mp4)$/i;
@@ -127,7 +121,6 @@ class VideoUploader extends Component {
           resolve(false)
         }
         else {
-          console.log(thumbnails[0].blob);
           reader.readAsDataURL(thumbnails[0].blob);
           this.postThumbnailToFirebase(thumbnails[0].blob)
           .then((url)=>{
@@ -189,10 +182,10 @@ class VideoUploader extends Component {
       }
       
     }
-    renderUploader(){
-      if(this.props.user._id !== undefined) {
-        const readImage =(file)=>{
-          // this.handleChange();
+  renderUploader(){
+  if(this.props.user.Stripe_Bank_Acct_Id !== undefined && 
+    this.props.user._id !== undefined) {
+    const readImage =(file)=>{
   const id = uuid();
   const storageRef = firebase.storage().ref("videos/"+id).put(file)
   this.setState({uploadProgress: this.uploadProgress, show:true})
@@ -217,7 +210,6 @@ const addVideo =(e)=>{
       this.state.description === "" ||
       this.Link.current.value === ""
     ){
-      alert(this.state.tags.length)
         this.setState({error: "Please fill out all fields"})
     }
     //require 5 tags
@@ -280,8 +272,15 @@ return (
   </div>
 
 );
-      }
-      else{
+}
+else if(this.props.user.Stripe_Bank_Acct_Id === undefined && 
+  this.props.user._id !== undefined) {
+    console.log(this.props.user)
+    return (
+      <CreateSellerAccount setUser={this.props.setUser} />
+    );
+  }
+else{
         return (
           <div>
             <h2 className="text-light create-account-label">You must create an account to upload a video</h2>
@@ -300,6 +299,7 @@ return (
           creator_image: user.Image,
         })
         this.props.setUser(JSON.parse(Cookies.get("user")))
+
     }
     }
     postThumbnailToFirebase(image){

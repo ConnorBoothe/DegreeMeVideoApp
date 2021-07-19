@@ -14,15 +14,17 @@ var UserSchema = new Schema({
     Verification_Code: {type:Number, required:true},
     Account_Verified: {type:Boolean, required:true},
     Bio:{type:String},
-    Stripe_Id: {type:String},
-    Videos:{type: Array}
+    Stripe_Customer_Id: {type:String},
+    Videos:{type: Array},
+    Stripe_Acct_Id: {type: String},
+    Stripe_Bank_Acct_Id: {type: String},
   }, {collection: 'User'});
 var UserDB = mongoose.model('User',UserSchema);
 
 module.exports = class User {
      //add user to db
      addUser(First_Name, Last_Name, Email, Password,
-        Subscription_Level){
+        CustomerId, SubTier){
         return new Promise((resolve, reject)=>{
         const defaultImages = [
             "https://firebasestorage.googleapis.com/v0/b/degreeme-bd5c7.appspot.com/o/default-profile-images%2Fcircle_degreeMe_logo_4.png?alt=media&token=94de9ef2-573a-4b1f-a5c3-edf56c1855cc",
@@ -40,9 +42,10 @@ module.exports = class User {
             Email: Email,
             Password: Password,
             Image: randomImg,
-            Subscription_Level: "Free Tier",
+            Subscription_Level: SubTier,
             Verification_Code: verificationCode,
-            Account_Verified: false
+            Account_Verified: false,
+            Stripe_Customer_Id: CustomerId
           })
           user.save()
           .then((user)=>{
@@ -59,11 +62,32 @@ module.exports = class User {
         return UserDB.findOne({_id: UserId})
         .updateOne({Account_Verified: true});
     }
+    //get users with stripe bank account
+     getUsersWithStripeBankAccount(){
+      return UserDB.find({
+        Stripe_Bank_Acct_Id: 
+        {
+          $exists: true
+        }
+      },"_id Stripe_Bank_Acct_Id Stripe_Acct_Id")
+    }
     //update user subscription level
     updateSubscriptionLevel(UserId, SubscriptionLevel){
         //find user by id
-        return UserDB.findOne({_id: UserId})
-        .updateOne({Subscription_Level: SubscriptionLevel});
+        return new Promise((resolve, reject)=>{
+          UserDB.findOne({_id: UserId})
+          .then((user)=>{
+              user.Subscription_Level = SubscriptionLevel;
+              user.save()
+              .then(()=>{
+                resolve(user)
+              })
+          })
+          .catch((err)=>{
+            resolve("error")
+          })
+        })
+        
     }
     //attempt to login user
     login(Email){
@@ -109,5 +133,29 @@ module.exports = class User {
           })
       })
     }
+    addStripeBankAccount(id, account_id, bank_id){
+      return new Promise((resolve, reject)=>{
+        UserDB.findOne(
+          {
+            _id:id
+          }).updateOne({
+            Stripe_Acct_Id : account_id,
+            Stripe_Bank_Acct_Id : bank_id
+          })
+          .then(()=>{
+            UserDB.findOne(
+              {
+                _id:id
+              })
+              .then((user)=>{
+                resolve(user)
+              })
+            })
+          .catch((err)=>{
+            resolve(err)
+          })
+      })
+    }
+    
     
 }

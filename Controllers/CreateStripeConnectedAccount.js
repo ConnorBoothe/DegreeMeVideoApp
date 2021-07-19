@@ -7,6 +7,8 @@ const {
     validationResult
   } = require('express-validator');
 const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+const UserDB = require("../Models/User");
+const users = new UserDB();
 router.post('/API/CreateStripeAccount',
     // check('dob').trim(),
     check('phone').trim().escape(),
@@ -17,8 +19,8 @@ router.post('/API/CreateStripeAccount',
         }
         console.log(req.body)
         //logic goes here
-        var dob = (req.body.dob).split('/');
-        console.log(dob)
+        var dob = (req.body.dob).split('-');
+        console.log("DOB",dob)
         var phone = (req.body.phone).replace(/-/g, "");
         //phone=phone.replaceAll("-","")
         stripe.account.create({
@@ -27,7 +29,7 @@ router.post('/API/CreateStripeAccount',
                 business_type: 'individual',
                 business_profile: {
                     mcc: '8299',
-                    product_description: 'DegreeMe Contractor'
+                    product_description: 'DegreeMe Content Creator'
                 },
                 tos_acceptance: {
                     date: Math.floor(Date.now() / 1000),
@@ -37,9 +39,9 @@ router.post('/API/CreateStripeAccount',
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
                     dob: {
-                        day: dob[1],
-                        month: dob[0],
-                        year: dob[2],
+                        day: dob[2],
+                        month: dob[1],
+                        year: dob[0],
                     },
                     address: {
                         line1: req.body.street_number,
@@ -50,32 +52,22 @@ router.post('/API/CreateStripeAccount',
                     },
                     email: req.body.email,
                     phone: phone,
-                    // ssn_last_4: req.body.ssn,
-                    id_number: "000-00-0000"
+                    ssn_last_4: req.body.ssn,
                 },
+                //payouts set to manual
                 settings: {
                     payouts: {
                         schedule: {
-                            //delay_days: 0,
                             interval: "monthly",
                             monthly_anchor:31
                         }
                     }
                 }
-            },
-            function (err, account) {
-                if (err != null) {
-                    console.log(err)
-                    // console.log(err);
-                    res.json(encodeURIComponent(err));
-                    // some error
-                    // res.redirect('/oops');<-This page needs to be made
-                } else {
-                    
-                    console.log(account.id);
+            })
+            .then((account)=>{
                     //save account id to database
                     //create Bank Account
-                    console.log('creating bank account');
+                    console.log("Adding bank acct")
                     stripe.accounts.createExternalAccount(
                         account.id, {
                             external_account: { //for attatching bank accounts/credit cards
@@ -88,20 +80,24 @@ router.post('/API/CreateStripeAccount',
                         },
                         function (err, bankAccount) {
                             if (err != null) {
-                                console.log(err);
-                                // res.redirect('/MyFinances?errmsg=' + encodeURIComponent(err));
-                                //some error
+                               res.json(err)
                             } else {
-                                console.log(bankAccount);
+                                console.log("Bank account: ", bankAccount)
+                                console.log("add id to user");
                                 //add the stripeId to user's account
-                           
-                                //update the session
-                                res.json('MyFinances?msg=Seller%20Account%20Created!%20Create%20a%20Tutor%20Listing%20to%20Start%20Earning');
+                                users.addStripeBankAccount(req.body.user_id, 
+                                    account.id, bankAccount.id)
+                                .then((user)=>{
+                                    res.json(user);
+                                })
                             }
                         }
                     );
-                }
-            }
-        );
-    });
+                
+            })
+            .catch((err)=>{
+                res.json(err)
+            })
+        })
+           
 module.exports = router;

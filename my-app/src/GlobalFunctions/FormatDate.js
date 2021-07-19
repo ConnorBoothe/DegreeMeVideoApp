@@ -76,5 +76,6 @@ displayDate(date) {
         return dayDifference + " days ago";
     }
   }
+  
 }
 export default FormatDate;
