@@ -48,3 +48,15 @@
 .create-account-input-container input {
     padding-left:10px;
 }
+.card-input-container {
+    height: 50px;
+    background-color: #202020;
+    display:inline-block;
+    width:80%;
+    margin-top: 20px;
+    vertical-align: middle;
+    padding-top:15px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

@@ -1,0 +1,189 @@
+.card-group span {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.card-group {
+    margin-left: auto;
+    margin-right: auto;
+    text-align:left;
+    /* background-color: #202020; */
+    width:20%;
+    /* border-bottom: 0.1px solid #a9a9a9; */
+    padding: 5px;
+    display: inline-block;
+    min-width: 250px;
+}
+.pro-tier-access {
+    margin-bottom: 0;
+}
+table tr {
+    background-color: #131313;
+    color: white;
+}
+.card-popover {
+    background-color: #131313;
+    padding: 6px;
+    border-radius: 5px;
+}
+.card-popover ul li {
+    list-style-type: none;
+    font-size: 12px;
+    font-weight: bold;
+}
+.card-popover ul li span{
+    font-size: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.card-popover ul {
+    margin-bottom: 0;
+}
+.cards-container {
+    /* background-color: #25282c; */
+    border-bottom: 0.1px solid #a9a9a9;
+    text-align:left;
+}
+.subscription-loader-text {
+    text-align: center;
+    font-weight: bold;
+}
+.card-loader-text {
+    text-align: center;
+    font-weight: bold;
+}
+ul {
+    padding-left: 0;
+}
+.payment-details {
+    text-align:left;
+}
+.main-list li {
+    display:table-cell;
+    
+}
+.main-list li ul li {
+    display:block;
+    
+}
+.sub-li {
+    text-align: left;
+}
+.payments-li {
+    width:900px;
+    padding-right:40px;
+}
+.add-card {
+    font-size: 12px;
+    font-weight: bold;
+    width:80px;
+    padding: 1px!important;
+    margin-right:40px;
+
+}
+.add-card-li {
+    text-align: right;
+    margin-bottom:20px
+}
+.upcoming-payment-container {
+    margin-top:30px;
+}
+.payment-details-li {
+    width: 400px;
+    padding-left:20px;
+}
+.payment-details {
+    min-width: 250px;
+}
+.payment-details h4 {
+    text-align: left;
+}
+.three-dots {
+    margin-left: 25px;
+    cursor: pointer;
+    width:20px!important;
+    border-radius:10px;
+}
+.three-dots:hover {
+    background-color: #a9a9a9;
+    
+}
+.payment-settings {
+    width:60%;
+    margin-left:auto;
+    margin-right: auto;
+    text-align:center;
+    margin-top: 50px;
+}
+.brand-img {
+    width: 40px;
+}
+.payment-settings {
+    min-height: 100vh;
+}
+.subs {
+    margin-top: 10px;
+    padding:0;
+}
+.brand, .expiration{
+    text-align: left!important;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 0!important;
+}
+ul li {
+    list-style-type: none;
+}
+.left-div {
+    float: left;
+    min-height: 100vh;
+}
+table tr td{
+    padding: 5px 20px!important;
+    min-width: 50px;
+    
+}
+.status-badge {
+    margin-left:10px;
+}
+.header-row {
+    font-weight: bold;
+    font-size: 14px;
+}
+.table-container {
+    background-color: #131313;
+    border-radius: 20px;
+    padding-bottom: 10px;
+}
+.table-container table td{
+    background-color: #131313;
+    border-radius: 20px;
+    padding-left:5px;
+    padding-top: 5px;
+}
+.subscription-loader-text {
+    color: #d4d4d4;
+    font-weight: bold;
+}
+.sub-loader {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    margin-right:auto;
+    margin-left:auto;
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #007bff; /* Blue */
+    border-radius: 50%;
+    margin-top: 20px!important;
+    animation: spin 2s linear infinite;
+  }
+.add-pro-sub {
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 20px;
+}
+.add-pro-sub-btn-container {
+    margin-left:auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 10px;
+}

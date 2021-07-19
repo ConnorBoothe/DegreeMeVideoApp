@@ -1,0 +1,29 @@
+.subscription-item {
+    width: 190px;
+    background-color: #202020;
+    height: 150px!important;
+    margin-right:10px!important;
+    margin-left: 10p!important;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.sub-container{
+    display: inline-block!important;
+
+}
+.sub-title { 
+    font-size: 22px;
+    margin-bottom: 0;
+}
+
+.sub-desc {
+    text-align: left;
+    height:30px;
+    padding: 0px 10px;
+}
+.sub-radio {
+    display: none;
+}
+.price {
+    font-size: 18px;
+}

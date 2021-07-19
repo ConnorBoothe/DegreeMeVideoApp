@@ -1,0 +1,100 @@
+.create-seller-account {
+    margin-top: 30px;
+}
+.create-seller-input, .state-select {
+    width: 280px;
+    background-color: #282c34;
+    outline:none;
+    color: white;
+    border:none!important;
+}
+.create-seller-title {
+    margin-top:30px;
+    margin-bottom: 30px;
+}
+.create-seller-input-container {
+    width: 300px;
+    border: 1px solid #d4d4d4;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    height: 60px!important;
+}
+.create-seller-label {
+    text-align: left;
+    font-size: 14px;
+    padding-left: 10px;
+    margin-bottom: 0;
+}
+.PhoneInputInput {
+    outline: none!important;
+    background-color: #282c34;
+    color: white;
+    border: 0!important;
+    border-radius: 20px;
+}
+.flag-dropdown, .flag-dropdown:hover {
+    background-color: #282c34!important;
+    border:0!important;
+    margin-left: 5px!important;
+
+}
+.loader-create-payment-account {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top: 20px;
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #007bff; /* Blue */
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+  }
+  .create-payment-message {
+      width:400px;
+      margin-left:auto;
+      margin-right: auto;
+      text-align:center;
+      margin-top: 20px;
+  }
+  .create-payment-account-error {
+      width:400px;
+      border-radius: 10px;
+      font-weight: bold;
+  }
+  .create-payment-message p {
+      font-size: 18px!important;
+  }
+.form-control {
+    border: none!important;
+    color: white!important;
+    outline: none!important;
+    width:200px!important;
+    margin-left: 5px!important;
+    box-shadow: inset 0 -1px 0 #ddd!important;
+    border: 0px solid white!important;
+    border-radius: 0!important;
+}
+.react-tel-input {
+    border-bottom: 0px!important;
+}
+.selected-flag:hover {
+    background-color: #282c34;
+}
+.create-seller-list li {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+.stripe-link {
+    color: #d4d4d4;
+    margin-bottom: 80px!important;
+}
+.create-seller-message  {
+    font-size: 18px!important;
+    width:500px;
+    margin-bottom: 10px;
+}

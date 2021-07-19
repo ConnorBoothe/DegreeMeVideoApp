@@ -1,0 +1,22 @@
+.add-card-btn {
+    font-weight: bold;
+    width:100%;
+    border-radius: 20px;
+    margin-top: 25px;
+    font-size: 14px;
+}
+.card-input-container-1 {
+    height: 40px;
+    background-color: #131313;
+    display:inline-block;
+    width:100%;
+    margin-top: 20px;
+    vertical-align: middle;
+    padding-top:10px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.processText{
+    text-align: center;
+}
