@@ -275,6 +275,7 @@ class UpgradeAccount extends Component {
     if (user.Subscription_Level === "Free Tier") {
       return (
         <div className="upgrade-acct">
+          <p className="limit-reached badge badge-warning">{this.props.limit_message}</p>
           <h1 className="text-light upgrade-title">Go Pro</h1>
           <p className="text-light upgrade-text">Get unlimited access to DegreeMe content
             for $8/month</p>

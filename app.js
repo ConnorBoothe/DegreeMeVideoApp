@@ -52,8 +52,8 @@ app.use([
     require("./Controllers/AddPaymentMethod"),
     require("./Controllers/CancelSubscription"),
     require("./Controllers/AddSubscription"),
-    require("./Controllers/TransferFunds")
-
+    require("./Controllers/TransferFunds"),
+    require("./Controllers/UpdateFreeTierSeconds"),
 ]); 
 
 //Wildcard route

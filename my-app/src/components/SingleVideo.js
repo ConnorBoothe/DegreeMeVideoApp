@@ -3,6 +3,8 @@ import "../css/SingleVideo.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import CommentList from "../components/CommentList"
 import VideoActions from "../components/VideoActions";
+import UpgradeAccount from "../components/UpgradeAccount";
+
 import ReactPlayer from "react-player";
 
 import {
@@ -18,13 +20,17 @@ class SingleVideo extends Component {
             duration:0,
             viewText: "views",
             showLikedMsg: "none",
-            isOpen:false
+            isOpen:false,
+            secondsStartTime:0,
+            secondsEndTime:0
         }
         this.getVideo = this.getVideo.bind(this)
         this.addLike = this.addLike.bind(this)
         this.addView = this.addView.bind(this);
         this.showModal = this.showModal.bind(this)
         this.hideModal = this.hideModal.bind(this)
+        this.startTime = this.startTime.bind(this)
+        this.endTime = this.endTime.bind(this);
     }
     showModal = () => {
         this.setState({isOpen: true});
@@ -157,47 +163,99 @@ class SingleVideo extends Component {
                 }
             })
     }
+    startTime() {
+        this.setState({secondsStartTime: new Date()})
+    };
+      
+      endTime() {
+        this.setState({secondsEndTime: new Date()});
+        var timeDiff = this.state.secondsEndTime - this.state.secondsStartTime; //in ms
+        // strip the ms
+        timeDiff /= 1000;
+      
+        // get seconds 
+        var seconds = Math.round(timeDiff);
+        this.updateSecondsViewed(seconds)
+      }
+      //function runs twice when video ends
+    updateSecondsViewed(secondsToAdd){
+        if(this.props.user.Subscription_Level === "Free Tier") {
+        const api_route = 'http://localhost:8080/API/UpdateFreeTierSeconds';
+                const postBody = {
+                    UserId: this.props.user._id,
+                    secondsToAdd: secondsToAdd,
+                };
+                const requestMetadata = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postBody),
+                };
+                fetch(api_route, requestMetadata)
+                .then(res => res.json())
+                .then((res)=>{
+                    this.props.setUser(res);
+                })
+            }
+    }
     render(){
-        return (
-            <div className="single-video">
-                {/* <CreateAccountModal isOpen={this.state.isOpen} hideModal={this.hideModal}/> */}
-                    <div className="single-video-frame">
-                    <ReactPlayer 
-                    url={this.state.video.Link}
-                    onDuration={this.duration}
-                    controls
-                    width="100%"
-                    height="auto"
-                    playing
-                    />
-                    </div>
-                    <div>
-                    <p className="single-video-title">{this.state.video.Title} </p>
-                    <div className="video-actions-list">
-                        <p className="single-view-count">{this.state.views + " " + this.state.viewText} </p>
-                        <VideoActions Likes={this.state.likeCount} 
-                        addLike={this.addLike} showLikedMsg={this.state.showLikedMsg}
+        console.log(this.props.user)
+        if(this.props.user.Subscription_Level !== "Free Tier" ||
+        this.props.user.Free_Tier_Seconds < 600 || this.props.user.Free_Tier_Seconds === undefined ) {
+            return (
+                <div className="single-video">
+                    {/* <CreateAccountModal isOpen={this.state.isOpen} hideModal={this.hideModal}/> */}
+                        <div className="single-video-frame">
+                        <ReactPlayer 
+                            url={this.state.video.Link}
+                            onDuration={this.duration}
+                            controls
+                            width="100%"
+                            height="auto"
+                            playing
+                            onPlay={()=> this.startTime()}
+                            onPause={()=>this.endTime()}
                         />
-                    </div>
-                        <div className="sub-details">
-                            <div className="single-creator-name">
-                                <Link to={"/User/"+this.state.video.Creator_Id}>
-                                    <img className="user-image" src={this.state.video.Creator_Image} alt="Creator"/>
-                                    <span className="creator-text">{this.state.video.Creator}</span>
-                                </Link>
-                            </div>
                         </div>
-                        <p className="creator-label">Creator</p>
-                        <p className="description-label">Description</p>
-                        <p className="text-light video-description">{this.state.video.Description}</p>
-                    </div>
-                    <CommentList VideoId={this.state.video._id} 
-                    isOpen={this.state.isOpen} hideModal={this.hideModal}
-                    showModal={this.showModal}
-                    user={this.props.user}/>
-            </div>
-                        
-        );
+                        <div>
+                        <p className="single-video-title">{this.state.video.Title} </p>
+                        <div className="video-actions-list">
+                            <p className="single-view-count">{this.state.views + " " + this.state.viewText} </p>
+                            <VideoActions Likes={this.state.likeCount} 
+                            addLike={this.addLike} showLikedMsg={this.state.showLikedMsg}
+                            />
+                        </div>
+                            <div className="sub-details">
+                                <div className="single-creator-name">
+                                    <Link to={"/User/"+this.state.video.Creator_Id}>
+                                        <img className="user-image" src={this.state.video.Creator_Image} alt="Creator"/>
+                                        <span className="creator-text">{this.state.video.Creator}</span>
+                                    </Link>
+                                </div>
+                            </div>
+                            <p className="creator-label">Creator</p>
+                            <p className="description-label">Description</p>
+                            <p className="text-light video-description">{this.state.video.Description}</p>
+                        </div>
+                        <CommentList VideoId={this.state.video._id} 
+                        isOpen={this.state.isOpen} hideModal={this.hideModal}
+                        showModal={this.showModal}
+                        user={this.props.user}/>
+                </div>
+                            
+            );
+        }
+        else {
+            return(
+                <div>
+                    <UpgradeAccount user={this.props.user}
+                    setUser={this.props.setUser} limit_message="Sorry, you reached the 10 minute
+                    free tier limit." />
+                </div>
+            );
+        }
+        
   }
 }
 

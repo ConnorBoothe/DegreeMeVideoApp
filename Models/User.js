@@ -1,3 +1,4 @@
+const { resolveCaa } = require("dns");
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
@@ -18,6 +19,7 @@ var UserSchema = new Schema({
     Videos:{type: Array},
     Stripe_Acct_Id: {type: String},
     Stripe_Bank_Acct_Id: {type: String},
+    Free_Tier_Seconds: {type: Number}
   }, {collection: 'User'});
 var UserDB = mongoose.model('User',UserSchema);
 
@@ -61,6 +63,34 @@ module.exports = class User {
         //find user by id
         return UserDB.findOne({_id: UserId})
         .updateOne({Account_Verified: true});
+    }
+    //update free_tier_seconds count
+    updateFreeTierSeconds(userId, secondsToAdd){
+      console.log("update free")
+      return new Promise((resolve, reject)=>{
+        UserDB.findOne({_id: userId}, "Free_Tier_Seconds")
+        .then((seconds)=>{
+          if(seconds.Free_Tier_Seconds !== undefined) {
+            seconds.Free_Tier_Seconds += secondsToAdd;
+            // console.log(seconds.Free_Tier_Seconds)
+          }
+          else {
+            seconds.Free_Tier_Seconds = secondsToAdd;
+          }
+          seconds.save()
+          .then(()=>{
+            //send the new user object to frontend
+            UserDB.findOne({_id: userId})
+            .then((user)=>{
+              resolve(user)
+            })
+          })
+        })
+        .catch((error)=>{
+            reject(error)
+        })
+      })
+     
     }
     //get users with stripe bank account
      getUsersWithStripeBankAccount(){

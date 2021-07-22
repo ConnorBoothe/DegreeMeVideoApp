@@ -6,6 +6,10 @@
 .bio-msg {
     margin-top: 10px;
 }
+.limit-reached {
+    font-size: 16px!important;
+    margin-top:30px;
+}
 .keywords-settings-wrapper {
     text-align:center;
     margin-left:auto;
