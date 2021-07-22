@@ -47,7 +47,8 @@ module.exports = class User {
             Subscription_Level: SubTier,
             Verification_Code: verificationCode,
             Account_Verified: false,
-            Stripe_Customer_Id: CustomerId
+            Stripe_Customer_Id: CustomerId,
+            Free_Tier_Seconds:0
           })
           user.save()
           .then((user)=>{
@@ -64,9 +65,16 @@ module.exports = class User {
         return UserDB.findOne({_id: UserId})
         .updateOne({Account_Verified: true});
     }
+    //reset Free_Tier_Seconds to 0
+    resetFreeTierSeconds(userId){
+      return UserDB.findOne({_id: userId})
+      .updateOne({Free_Tier_Seconds: 0});
+    }
+    getFreeTierUsers(){
+      return UserDB.find({Subscription_Level: "Free Tier"},"_id");
+    }
     //update free_tier_seconds count
     updateFreeTierSeconds(userId, secondsToAdd){
-      console.log("update free")
       return new Promise((resolve, reject)=>{
         UserDB.findOne({_id: userId}, "Free_Tier_Seconds")
         .then((seconds)=>{
