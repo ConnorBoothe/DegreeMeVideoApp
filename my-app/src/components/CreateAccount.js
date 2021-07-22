@@ -5,7 +5,9 @@ import KeyWordsInput from "../components/KeyWordsInput.js";
 import Subscriptions from "../components/Subscriptions"
 import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-
+import ReactGA from 'react-ga';
+const TRACKING_ID = "247336033";
+ReactGA.initialize(TRACKING_ID);
 class CreateAccount extends Component {
   constructor(props) {
     super(props);
@@ -228,6 +230,10 @@ class CreateAccount extends Component {
               error: "Account Successfully Created",
               showError: "block"
             })
+            ReactGA.event({
+              category: 'User',
+              action: 'Created an Account'
+            });
           }
         })
     }
