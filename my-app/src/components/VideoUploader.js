@@ -50,11 +50,13 @@ class VideoUploader extends Component {
             titleCharLimit: 100,
             descCharLimit: 2000,
             titleCharCount: 0,
-            descCharCount: 0
+            descCharCount: 0,
+            filename: ""
         };
         this.handleChange = this.handleChange.bind(this)
         this.addTag = this.addTag.bind(this)
         this.removeTag = this.removeTag.bind(this)
+        this.setFileName = this.setFileName.bind(this)
         this.createThumbnail = this.createThumbnail.bind(this)
         this.postThumbnailToFirebase = this.postThumbnailToFirebase.bind(this)
         this.showModal = this.showModal.bind(this)
@@ -85,6 +87,10 @@ class VideoUploader extends Component {
       } 
       return true;
             
+  }
+  setFileName(e){
+    var filename = e.target.value.split("\\")[2]
+    this.setState({filename: filename })
   }
   addTag(){
     //if tag isn't empty, add it
@@ -252,7 +258,19 @@ return (
           </li>
           
           <li className="upload-link">
-              <input className="file-input" type="file" ref={this.Link}/>   
+            <label for="file-input">
+              <div className="btn btn-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z"/>
+              </svg>
+             <span className="select-file-txt">
+                Select MP4 File
+             </span>
+             
+              </div>
+            </label>
+            <span className="text-light filename">{this.state.filename}</span>
+              <input id="file-input" className="file-input" type="file" onChange={this.setFileName} ref={this.Link}/>   
           </li>
           <li>
             <TagsInput addTag = {this.addTag} tag = {this.tag}
