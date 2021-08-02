@@ -30,7 +30,7 @@
     width:100%;
     outline:none!important;
     border:none;
-    background-color: #282c34;
+    background-color: #181818;
     padding-left:5px;
     color:white;
 
@@ -41,7 +41,7 @@
     font-weight: bold;
 }
 .description {
-    background-color: #282c34;
+    background-color: #181818;
     color:white;
     border: none!important;
     padding-left:10px;
@@ -57,11 +57,21 @@
     font-size:25px;
     margin-bottom: 30px;
 }
+.filename {
+    margin-left: 10px;
+}
+.select-file-txt {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 5px;
+}
 .add-video{
     width:100%;
     border-radius:20px;
     margin-top:15px;
     font-weight: bold;
+    font-size: 18px;
+    padding: 5px 5px;
 }
 .create-account-title {
     display:none;
@@ -89,8 +99,7 @@
     font-size:18px;
 }
 .file-input{
-    color:white;
-    border:none!important;
+    display:none;
 }
 .video-modal-label {
     font-size:13px;

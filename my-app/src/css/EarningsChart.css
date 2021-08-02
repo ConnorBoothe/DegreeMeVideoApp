@@ -1,0 +1,12 @@
+.line-chart {
+    width: 550px!important;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color:white!important;
+    padding-bottom: 20px;
+}
+.react-line-chart {
+    color: white!important;
+    /* background-color: white; */
+}
