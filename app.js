@@ -54,7 +54,9 @@ app.use([
     require("./Controllers/AddSubscription"),
     require("./Controllers/TransferFunds"),
     require("./Controllers/UpdateFreeTierSeconds"),
-    require("./Controllers/ResetFreeTierSeconds")
+    require("./Controllers/ResetFreeTierSeconds"),
+    require("./Controllers/GetCreatorPayouts")
+
 ]); 
 
 //Wildcard route

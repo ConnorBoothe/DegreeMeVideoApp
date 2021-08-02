@@ -110,7 +110,7 @@ module.exports = class Videos {
             //need to reduce runtime for larger datasets
             hash.forEach((value, key)=>{
               for(var y in videos) {
-                if(videos[y]._id == key && value > 1){
+                if(videos[y]._id == key && value > 0){
                   videos[y].ResultRank = value;
                   sortedVideos.push(videos[y])
                 }
@@ -118,7 +118,6 @@ module.exports = class Videos {
               })
            //now that we have videos sorted by tag relevance
            //we can sort deeper based on views
-              //sorty by views
               sortedVideos.sort(function(a, b) {
                 return parseFloat(b.Views) - parseFloat(a.Views);
             });

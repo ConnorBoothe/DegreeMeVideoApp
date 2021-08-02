@@ -44,6 +44,7 @@ router.get('/API/GetVideosBySearchValue/:value',
         var tagsArray = req.params.value.split(" ");
         tags.getVideoIdsByTagArray(tagsArray)
         .then((videoIds)=>{
+            console.log(videoIds)
             //Possibly split tags on the backend
             //then check if split tags matches anything in the split sentence
             //down side => Seach input: ITSC 1212 Return: Would return 
@@ -61,6 +62,7 @@ router.get('/API/GetVideosBySearchValue/:value',
                 videoIdArray.push(videoIds[x].VideoId)
             }
            var idHashMap = countDuplicates(videoIdArray);
+           console.log(idHashMap)
             videos.getVideoResults(videoIdArray, idHashMap)
             .then((videos)=>{
                 res.json(videos)

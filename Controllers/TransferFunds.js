@@ -20,6 +20,7 @@ async function transferToStripeAccounts(){
         console.log(parseInt(totalPayouts * userViewCountPercentages[i].percentageOfViews * 100))
           //if user has views, transfer money to their account
         if(userViewCountPercentages[i].percentageOfViews > 0) {
+          console.log(userViewCountPercentages[i].accountId)
             await stripe.transfers.create({
                 amount: parseInt(totalPayouts * userViewCountPercentages[i].percentageOfViews * 100),
                 currency: 'usd',
@@ -35,6 +36,8 @@ async function transferToStripeAccounts(){
 //a large number of subscribers on the last couple days
 //of the month.
 //Run job on 1st day of month at 12:00 AM 
+// transferToStripeAccounts();
+
 var job = new CronJob('0 0 1 * * ', function() {
   transferToStripeAccounts();
 }, null, true, 'America/New_York');

@@ -102,8 +102,6 @@ class CreateAccount extends Component {
     this.state.email === "" ||
     this.state.password === ""
     ) {
-      this.setState({paymentSubmitted: false})
-
       return false;
     }
     else{

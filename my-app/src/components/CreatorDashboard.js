@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-
+import EarningsChart from "../components/EarningsChart"
+import PercentageOfViewsPieChart from "../components/PercentageOfViewsPieChart"
 
 import "../css/CreatorDashboard.css";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -45,7 +46,8 @@ class CreatorDashboard extends Component {
         if(this.state.allViews > 0) {
             return (
                 <div className="creator-dashboard selected">
-                                <p className="text-light creator-stats-label">Creator Stats</p>
+
+                                <h3 className="text-light creator-stats-label">Creator Stats</h3>
                                 <ul>
                                     <li>
                                         <h2 className="text-light dashboard-text">{this.state.allViews}</h2>
@@ -60,10 +62,12 @@ class CreatorDashboard extends Component {
                                         <h2 className="text-light dashboard-text">{(this.state.percentageOfTotalViews *100).toFixed(2)}%</h2>
                                         <p className="text-light dashboard-label"> of total views</p>
                                     </li>
-                                
                                 </ul>
+                                <PercentageOfViewsPieChart percentage={this.state.percentageOfTotalViews *100}/>
+
+                                <EarningsChart/>
                                 {/* <p className="text-light">Creator Dashboard</p> */}
-                                
+                             
                             </div>
                         )
         }
@@ -74,7 +78,10 @@ class CreatorDashboard extends Component {
     }
     render(){
         return (
-            this.renderCreatorDashboard()
+            <div>
+            {this.renderCreatorDashboard()}
+                
+            </div>
             );
     }
     }

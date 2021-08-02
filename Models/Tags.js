@@ -33,6 +33,7 @@ module.exports = class Tags {
         for(var x = 0; x < TagsArray.length; x++) {
             regexQueries.push({"Name": { "$regex": TagsArray[x], "$options": "i" },})
         }
+        console.log(regexQueries)
         return TagsDB.find({ 
             $or: regexQueries
         }).sort({"_id": 1});
