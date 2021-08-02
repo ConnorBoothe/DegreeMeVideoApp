@@ -16,6 +16,8 @@ import Cookies from 'js-cookie';
 import CreateSellerAccount from "./CreateSellerAccount";
 import UpgradeAccount from "./UpgradeAccount";
 import PaymentSettings from "./PaymentSettings";
+import LandingPage from "./LandingPage";
+
 
 
 class Routes extends Component {
@@ -211,6 +213,11 @@ class Routes extends Component {
         })
         
       }
+    isUserLoggedIn(){
+        if(this.state.user !== undefined){
+            
+        }
+    }
     render() {
         return (
         <Router>
@@ -225,10 +232,12 @@ class Routes extends Component {
           />
         <Switch>
           <Route exact path="/">
-              <Redirect to="/Home" />
+              <Redirect to="/LandingPage" />
             </Route>
             <Route exact path="/Home" render={props => 
             (<Home {...props} user={this.state.user} />)} />
+           <Route exact path="/LandingPage" render={props => 
+            (<LandingPage {...props} />)} />
             <Route exact path="/Upload" render={props => 
             (<VideoUploader {...props} user={this.state.user} setUser={this.setUser} />)} />
             <Route exact path="/Login" render={props => 
@@ -262,6 +271,7 @@ class Routes extends Component {
             setSearchValue={this.setSearchValue}/>)} />
             <Route exact path="/LikedVideos" render={props => 
             (<LikedVideos {...props} user={this.state.user} />)} />
+            
              <Route
                 exact
                 path="/:id"
