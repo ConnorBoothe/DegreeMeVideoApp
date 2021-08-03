@@ -39,12 +39,17 @@ a:hover {
   @font-face { 
     font-family: GT-Walsheim-Bold; 
     } 
-
+.landing-sign-up {
+  font-weight:bold;
+  margin-top: 20px;
+  font-size:22px;
+  border-radius: 10px;
+}
 .landing {
   display: flex;
   flex-direction: column;
-  padding-top: 150px;
-  background-color: #1f2024;
+  padding-top: 100px;
+  background-color: #181818;
   color: white;
   font-family: 'GT-Walsheim-Bold', Helvetica, Arial, sans-serif;
 }

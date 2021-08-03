@@ -17,7 +17,7 @@ class LandingPage extends Component {
                     How-to videos created for UNCC Comp Sci. Students <br />
                 </div>
                 <Link to="/CreateAccount">
-                   <button className="btn btn-primary">Sign Up</button>
+                   <button className="btn btn-primary landing-sign-up">Sign Up</button>
                 </Link>
                 <div class="landing--people" id="landing--animation--1">
                     <img
