@@ -16,12 +16,26 @@ class Header extends Component {
   redirectToResults(){
       this.props.history.push("/SearchResults")
 }
+renderLogo(){
+  if(this.props.user._id !== undefined){
+    console.log("user is ")
+    return(
+      <Link to="/Home"><img className="site-logo desktop-logo" src={desktopLogo} alt="Logo" /><img className="site-logo mobile-logo" src={mobileLogo} alt="Logo" /></Link>
+    )
+  }
+  else {
+    return (
+      <Link to="/"><img className="site-logo desktop-logo" src={desktopLogo} alt="Logo" /><img className="site-logo mobile-logo" src={mobileLogo} alt="Logo" /></Link>
+    );
+  }
+}
   render(){
     return (
         <div className="header">
           <ul>
             <li className="logo-link">
-            <Link to="/Home"><img className="site-logo desktop-logo" src={desktopLogo} alt="Logo" /><img className="site-logo mobile-logo" src={mobileLogo} alt="Logo" /></Link></li>
+              {this.renderLogo()}
+            </li>
             <li className="search-li"></li>
             {/* <li className="coming-soon-text">DegreeMe Video Collection Tool</li> */}
           </ul>
