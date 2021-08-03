@@ -55,7 +55,8 @@ app.use([
     require("./Controllers/TransferFunds"),
     require("./Controllers/UpdateFreeTierSeconds"),
     require("./Controllers/ResetFreeTierSeconds"),
-    require("./Controllers/GetCreatorPayouts")
+    require("./Controllers/GetCreatorPayouts"),
+    require("./Controllers/GetAllEarnings"),
 
 ]); 
 

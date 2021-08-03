@@ -1,11 +1,12 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 // import "./styles.css";
 import Cookies from 'js-cookie';
 import "../css/EarningsChart.css"
 import { Line } from "react-chartjs-2";
-import { withRouter } from "react-router";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 class EarningsChart extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
             dataList: []
@@ -14,47 +15,44 @@ class EarningsChart extends Component {
         this.getPrevSixMonths = this.getPrevSixMonths.bind(this)
         this.setData = this.setData.bind(this)
     }
-    async setData(){
+    async setData() {
         this.getCreatorPayouts()
-        .then(()=>{
-            return {
-                labels: this.getPrevSixMonths(),
-                labelColor: "red",
-                datasets: [
-                  {
-                    label: "Monthly Earnings",
-                    data: this.state.dataList,
-                    fill: true,
-                    borderColor: "rgba(75,192,192,1)",
-                  }
-                ]
-              };
-        })
-        
-          
+            .then(() => {
+                return {
+                    labels: this.getPrevSixMonths(),
+                    labelColor: "red",
+                    datasets: [
+                        {
+                            data: this.state.dataList,
+                            fill: true,
+                            borderColor: "rgba(75,192,192,1)",
+                        }
+                    ]
+                };
+            })
     }
     //create chart labels for previous 6 months
-     getPrevSixMonths(){
+    getPrevSixMonths() {
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
             "Aug", "Sept", "Oct", "Nov", "Dec"];
         var thisMonth = new Date().getMonth()
         var labels = [];
-            for(var i = thisMonth - 5; i <= thisMonth; i++){
-                if(i < 0){
-                    labels.push(months[11 + i])
-                }
-                else{
-                    console.log(months[i])
-                    labels.push(months[i])
-                }
-             }
+        for (var i = thisMonth - 5; i <= thisMonth; i++) {
+            if (i < 0) {
+                labels.push(months[11 + i])
+            }
+            else {
+                console.log(months[i])
+                labels.push(months[i])
+            }
+        }
         return labels;
     }
-    
-     async getCreatorPayouts(){
+
+    async getCreatorPayouts() {
         var user = JSON.parse(Cookies.get("user"));
-    
-        const api_route = 'http://localhost:8080/API/GetCreatorPayouts/'+user.Stripe_Acct_Id;
+
+        const api_route = 'http://localhost:8080/API/GetCreatorPayouts/' + user.Stripe_Acct_Id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -62,27 +60,55 @@ class EarningsChart extends Component {
             }
         };
         await fetch(api_route, requestMetadata)
-        .then(response => response.json())
+            .then(response => response.json())
             .then(result => {
                 console.log(result)
-               this.setState({dataList: result})
+                this.setState({ dataList: result })
             })
     }
-
-    
-    componentDidMount(){
+    componentDidMount() {
         this.setData()
     }
-    render(){
-        const options={
+    render() {
+        const options = {
+            animation: {
+                duration: 0
+            },
+            layout: {
+                padding: {
+                    right: 40
+                }
+            },
+            tooltips: {
+                callbacks: {
+                    label: function (tooltipItem) {
+                        return tooltipItem.yLabel;
+                    }
+                }
+            },
             plugins: {
-                labels: {
-                    display: false,
-                    // This more specific font property overrides the global property
+                legend: {
+                    display: false
+                },
+
+                datalabels: {
+                    anchor: 'end',
+                    align: 'top',
+                    clamp: false,
+                    clip: false,
+                    color: 'white',
                     font: {
-                        size: 0,
+                        size: 16,
+                        weight: "bold"
                     },
-                }, 
+                    padding: {
+                        right: 20,
+
+                    },
+                    formatter: function (value, context) {
+                        return "$" + value.toFixed(2)
+                    },
+                }
             },
             scales: {
                 x: {
@@ -95,113 +121,42 @@ class EarningsChart extends Component {
                     // display:false
                 },
                 y: {
-                    
+
                     grid: {
                         borderColor: "#202020",
                         color: "#202020",
                     }
                 }
             },
-           
-          };
+
+        };
         return (
             <div className="line-chart">
-              <Line 
-              options={options}
-              data= {{
-                  labels: this.getPrevSixMonths(),
-                  backgroundColor: 'rgb(255, 99, 132)',
-                  color:"white",
-                  datasets: [
-                    {
-                      label: "Monthly Earnings",
-                      data: this.state.dataList,
-                      fill: true,
-                      borderColor: "#077bff",
+                <h5 className="chart-title">Monthly Earnings</h5>
+
+                <Line
+                    plugins={[ChartDataLabels]}
+                    options={options}
+                    data={{
+                        labels: this.getPrevSixMonths(),
+                        //   backgroundColor: 'rgb(255, 99, 132)',
+                        opacity: 0.6,
+                        datasets: [
+                            {
+
+                                data: this.state.dataList,
+                                fill: false,
+                                width: 20,
+                                borderColor: "#40c164",
+                            }
+                        ]
                     }
-                  ]
-                }
-              }
-              height={150}
-              className="react-line-chart"
-              />
+                    }
+                    height={90}
+                    className="react-line-chart"
+                />
             </div>
-          );
+        );
     }
 }
 export default EarningsChart;
-// async function setData(){
-//     var dataList = [];
-//     await getCreatorPayouts()
-//     .then(response => response.json())
-//     .then(result => {
-//         dataList = result;
-//         console.log(result)
-//     })
-//     console.log(dataList)
-//     console.log("Data list: ", dataList)
-//     const data = {
-//         labels: getPrevSixMonths(),
-//         labelColor: "red",
-//         datasets: [
-//           {
-//             label: "Monthly Earnings",
-//             data: dataList,
-//             fill: true,
-//             borderColor: "rgba(75,192,192,1)",
-//           }
-//         ]
-//       };
-//      return data;
-      
-// }
-
-
-// //create chart labels for previous 6 months
-// function getPrevSixMonths(){
-//     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-//         "Aug", "Sept", "Oct", "Nov", "Dec"];
-//     var thisMonth = new Date().getMonth()
-//     var labels = [];
-//         for(var i = thisMonth - 5; i < thisMonth; i++){
-//             if(i < 0){
-//                 labels.push(months[11 + i])
-//             }
-//             else{
-//                 labels.push(months[i])
-//             }
-//          }
-//     return labels;
-// }
-
-//  getCreatorPayouts()
-//  async function getCreatorPayouts(){
-//     var user = JSON.parse(Cookies.get("user"));
-
-//     const api_route = 'http://localhost:8080/API/GetCreatorPayouts/'+user.Stripe_Acct_Id;
-//     const requestMetadata = {
-//         method: 'GET',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         }
-//     };
-//     return await fetch(api_route, requestMetadata)
-//     // .then(response => response.json())
-//     //     .then(result => {
-//     //        return result;
-//     //     })
-// }
-// export default function App() {
-// const [dataList, setDataList] = useState([]);
-// setData()
-// .then((result)=>{
-//       setDataList(result)
- 
-// })
-
-// return (
-//     <div className="App">
-//       <Line data={dataList}/>
-//     </div>
-//   );
-// }

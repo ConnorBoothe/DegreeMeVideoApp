@@ -29,13 +29,15 @@ router.get('/API/GetCreatorPayouts/:accountId',
 
                 for (var i in result.data) {
                     var month = new Date(result.data[i].created * 1000).getMonth();
+                    var amount = Math.round(result.data[i].amount)/ 100;
                     
                     switch (month) {
+                        
                         case date.getMonth():
                             tableValues[0] += result.data[i].amount/100;
                             break;
                         case date.getMonth() + 1:
-                            tableValues[1] += result.data[i].amount/100;
+                            tableValues[1] += (result.data[i].amount/100);
                             break;
                         case date.getMonth() + 2:
                             tableValues[2] += result.data[i].amount/100;
@@ -44,7 +46,7 @@ router.get('/API/GetCreatorPayouts/:accountId',
                             tableValues[3] += result.data[i].amount/100;
                             break;
                         case date.getMonth() + 4:
-                            tableValues[4] += result.data[i].amount/100;
+                            tableValues[4] += amount;
                             break
                         case date.getMonth() + 5:
                             tableValues[5] += result.data[i].amount/100;
@@ -54,6 +56,7 @@ router.get('/API/GetCreatorPayouts/:accountId',
                             break;
                     }
                 }
+                console.log(tableValues)
                 res.json(tableValues)
             })
     });
