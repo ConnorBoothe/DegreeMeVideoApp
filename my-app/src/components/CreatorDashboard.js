@@ -13,12 +13,34 @@ class CreatorDashboard extends Component {
         this.state = {
             allViews: 0,
             viewsThisMonth:0,
-            percentageOfTotalViews: 0
+            percentageOfTotalViews: 0,
+            totalEarnings:0
         }
         this.getCreatorTotalViewCount = this.getCreatorTotalViewCount.bind(this)
+        this.getTotalEarnings = this.getTotalEarnings.bind(this)
     }
     componentDidMount(){
         this.getCreatorTotalViewCount()
+        this.getTotalEarnings()
+    }
+    getTotalEarnings(){
+        if(Cookies.get("user") !== null) {
+            var user = JSON.parse(Cookies.get("user"));
+            const api_route = 'http://localhost:8080/API/GetAllEarnings/'+user.Stripe_Acct_Id;
+            const requestMetadata = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            fetch(api_route, requestMetadata)
+            .then(response => response.json())
+                .then(result => {
+                    this.setState({
+                        totalEarnings: result/100
+                    })
+                })
+        }
     }
     getCreatorTotalViewCount(){
         if(Cookies.get("user") !== null) {
@@ -59,8 +81,8 @@ class CreatorDashboard extends Component {
                 
                                     </li>
                                     <li>
-                                        <h2 className="text-light dashboard-text">{(this.state.percentageOfTotalViews *100).toFixed(2)}%</h2>
-                                        <p className="text-light dashboard-label"> of total views</p>
+                                        <h2 className="text-light dashboard-text">${this.state.totalEarnings.toFixed(2)}</h2>
+                                        <p className="text-light dashboard-label"> Total earnings</p>
                                     </li>
                                 </ul>
                                 <PercentageOfViewsPieChart percentage={this.state.percentageOfTotalViews *100}/>
