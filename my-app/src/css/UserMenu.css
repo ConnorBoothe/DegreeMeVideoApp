@@ -26,7 +26,8 @@
         min-height: 200px;
         max-height:600px;
         overflow-y: auto;
-        background-color:#1b1e23;
+        background-color:#202020;
+        box-shadow: 1px 2px 1px 1px black;
         margin-right:auto;
         margin-left:auto;
         display:inline-block;

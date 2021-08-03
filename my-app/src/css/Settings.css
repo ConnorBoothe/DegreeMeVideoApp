@@ -21,7 +21,7 @@
 @media only screen and (min-width: 725px) {
     .update-bio-input {
         width:40%;
-        background-color: #131313;
+        background-color: #282c34;
         border:0;
         outline: none;
         color: white;
@@ -33,7 +33,7 @@
 @media only screen and (max-width: 725px) {
     .update-bio-input {
         width:80%;
-        background-color: #131313;
+        background-color: #282c34;
         border:0;
         outline: none;
         color: white;

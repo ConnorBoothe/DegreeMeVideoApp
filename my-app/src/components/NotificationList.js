@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import '../css/NotificationList.css';
 import Notification from "../components/Notification"
-import { Link } from 'react-router-dom';
+import { Link, Redirect} from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 class NotificationList extends Component {
@@ -16,10 +16,10 @@ class NotificationList extends Component {
     logout(){
         this.props.logout();
         this.props.hideMenu();
-         Cookies.remove("user")
-        //  return(
-        //      <Redirect to="/Home"></Redirect>
-        //  );
+        Cookies.remove("user")
+         return(
+             <Redirect to="/"></Redirect>
+         );
     }
     toggleUserMenu(){
         if(this.props.type === "Notifications") {

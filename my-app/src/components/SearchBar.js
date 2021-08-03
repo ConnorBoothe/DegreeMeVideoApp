@@ -46,6 +46,7 @@ class SearchBar extends Component {
     }
     autocomplete(e){
         this.setState({searchText: e.target.value})
+        //this is causing charts to re-render
         this.props.setSearchValue(e.target.value)
     }
     componentDidMount() {

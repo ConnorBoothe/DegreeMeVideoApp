@@ -9,7 +9,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
  
   -webkit-text-fill-color: white;
-  -webkit-box-shadow: 0 0 0px 1000px #282c34 inset;
+  -webkit-box-shadow: 0 0 0px 1000px #181818 inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -56,7 +56,7 @@ select:-webkit-autofill:focus {
     width:100%;
     outline:none!important;
     border:none;
-    background-color: #282c34;
+    background-color: #181818;
     padding-left:5px;
     color:white;
 
@@ -95,8 +95,11 @@ select:-webkit-autofill:focus {
         margin-right:auto;
         text-align: center;
     }
-    .login-text {
-        font-size: 14px;
+    .login-home-btn {
+        padding: 3px 5px!important;
+        font-size: 15px;
+        font-weight: bold;
+
     }
   }
 /* mobile styles */

@@ -1,10 +1,11 @@
 .line-chart {
-    width: 550px!important;
+    width: 90%!important;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
     color:white!important;
     padding-bottom: 20px;
+    padding:10px!important;
 }
 .react-line-chart {
     color: white!important;

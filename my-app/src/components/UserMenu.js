@@ -117,8 +117,8 @@ class UserMenu extends Component {
         else {
             
             return (
-            <li>
-                <Link to="/Login"><p className="login-text">Log In</p></Link>
+            <li className="login-li">
+                <Link to="/Login" className="btn btn-primary login-home-btn">Log In</Link>
             </li>);
         }
       }

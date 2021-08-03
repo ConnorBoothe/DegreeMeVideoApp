@@ -8,7 +8,7 @@ import UpgradeAccount from "../components/UpgradeAccount";
 import ReactPlayer from "react-player";
 
 import {
-    Link
+    Link, Redirect
   } from "react-router-dom";
 
 class SingleVideo extends Component {
@@ -201,7 +201,11 @@ class SingleVideo extends Component {
     }
     render(){
         console.log(this.props.user)
-        if(this.props.user.Subscription_Level !== "Free Tier" ||
+        if(this.props.user._id === undefined) {
+            return(
+                <Redirect to="/CreateAccount" />            )
+        }
+        else if(this.props.user.Subscription_Level !== "Free Tier" ||
         this.props.user.Free_Tier_Seconds < 600 || this.props.user.Free_Tier_Seconds === undefined ) {
             return (
                 <div className="single-video">
