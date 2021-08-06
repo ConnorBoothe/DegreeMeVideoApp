@@ -53,7 +53,6 @@ router.post('/API/AddUser',
                         .then((customer)=>{
                             new Promise((resolve, reject)=>{
                                 if(req.body.Subscription === "Pro Tier"){
-                                    console.log("Create sub")
                                      stripe.subscriptions.create({
                                         customer: customer.id,
                                         items: [

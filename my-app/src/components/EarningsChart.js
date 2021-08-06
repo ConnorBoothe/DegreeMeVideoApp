@@ -42,7 +42,6 @@ class EarningsChart extends Component {
                 labels.push(months[11 + i])
             }
             else {
-                console.log(months[i])
                 labels.push(months[i])
             }
         }
@@ -62,7 +61,6 @@ class EarningsChart extends Component {
         await fetch(api_route, requestMetadata)
             .then(response => response.json())
             .then(result => {
-                console.log(result)
                 this.setState({ dataList: result })
             })
     }

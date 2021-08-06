@@ -18,7 +18,6 @@ class Header extends Component {
 }
 renderLogo(){
   if(this.props.user._id !== undefined){
-    console.log("user is ")
     return(
       <Link to="/Home"><img className="site-logo desktop-logo" src={desktopLogo} alt="Logo" /><img className="site-logo mobile-logo" src={mobileLogo} alt="Logo" /></Link>
     )
@@ -50,7 +49,6 @@ renderLogo(){
           notificationCount = {this.props.notificationCount}
           handleAutocompleteChange={this.props.handleAutocompleteChange}/>
         </div>
-        // <p>Coming soon to iOs</p>
     );
 
 

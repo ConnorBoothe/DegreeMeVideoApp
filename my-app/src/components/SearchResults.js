@@ -49,7 +49,6 @@ setSearchLabel(){
       else {
           search = window.location.href.split("/")[4];
       }
-      console.log(search)
     const api_route = 'http://localhost:8080/API/GetVideosBySearchValue/'+search;
     const requestMetadata = {
         method: 'GET',
