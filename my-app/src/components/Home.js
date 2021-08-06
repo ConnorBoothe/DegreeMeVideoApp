@@ -12,7 +12,7 @@ class Home extends Component {
   constructor(props){
     super(props)
     this.state = {
-      keywords : ["ITSC 1212", "ITSC 1213", "Calc 1","Calc 2" ]
+      keywords : []
     }
     this.getKeywords = this.getKeywords.bind(this)
   }
@@ -37,10 +37,19 @@ class Home extends Component {
         .then(response => response.json())
             .then(result => {
               var keywords = [];
+              if(result.length > 0){
               for(var i = 0; i < result.length; i++ ){
                 keywords.push(result[i].Word)
               } 
-              this.setState({keywords: keywords})              
+              this.setState({
+                keywords: keywords
+              }) 
+            }  
+            else{
+              this.setState({
+                keywords: ["ITSC 1212", "ITSC 1213", "Calc 1","Calc 2"]
+              }) 
+            }           
             })
     }
     
@@ -63,7 +72,7 @@ class Home extends Component {
      <div className="videos-container">
               {this.state.keywords.map((keyword, index) => (
                 <li key={index}>
-                  <VideoRow category={keyword} />
+                  <VideoRow category={keyword}/>
                 </li>
             ))}
             </div>
