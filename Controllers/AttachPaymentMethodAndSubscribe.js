@@ -6,16 +6,11 @@ var UserDB = require('../Models/User');
 var users = new UserDB();
 
 router.post('/API/AttachPaymentMethod', function(req, res){
-    console.log("attaching..")
-    console.log(req.body)
     stripe.paymentMethods.attach(
         req.body.PaymentMethodId,
         {customer: req.body.CustomerId}
       )
       .then((result)=>{
-        console.log(result)
-        console.log(req.body.CustomerId,
-          req.body.PaymentMethodId)
         //make payment method default
         stripe.customers.update(
             req.body.CustomerId,
@@ -37,7 +32,6 @@ router.post('/API/AttachPaymentMethod', function(req, res){
                   
                 })
               })
-              console.log("updated")
           })
       })
       .catch((err)=>{

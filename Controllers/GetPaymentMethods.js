@@ -6,8 +6,6 @@ var UserDB = require('../Models/User');
 var users = new UserDB();
 
 router.get('/API/GetPaymentMethods/:customer_id', function(req, res){
-    console.log("get payment settings")
-    console.log(req.params.customer_id)
     stripe.paymentMethods.list({
         customer: req.params.customer_id,
         type: 'card',

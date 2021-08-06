@@ -10,7 +10,6 @@ class KeyWordsInput extends Component {
         }
     }
     render() {
-        console.log(this.props.keywords)
         return (
             <div className="tags-container">
                 <div className="keywords-input-container">

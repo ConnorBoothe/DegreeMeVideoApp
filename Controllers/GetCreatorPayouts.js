@@ -25,7 +25,6 @@ router.get('/API/GetCreatorPayouts/:accountId',
                 //each index represents a monthly total
                 //begin with current month - 6 months at index 0
                 var tableValues = [0, 0, 0, 0, 0, 0];
-                console.log("Get month: ",date.getMonth())
 
                 for (var i in result.data) {
                     var month = new Date(result.data[i].created * 1000).getMonth();
@@ -52,11 +51,9 @@ router.get('/API/GetCreatorPayouts/:accountId',
                             tableValues[5] += result.data[i].amount/100;
                             break;
                         default:
-                            console.log("default ran")
                             break;
                     }
                 }
-                console.log(tableValues)
                 res.json(tableValues)
             })
     });

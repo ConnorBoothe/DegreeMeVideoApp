@@ -50,7 +50,6 @@ class UpgradeAccount extends Component {
     fetch(api_route, requestMetadata)
       .then(res => res.json())
       .then((res) => {
-        console.log(res)
         if (res != "error") {
           this.props.setUser(res)
           this.setState({

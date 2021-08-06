@@ -17,7 +17,6 @@ const users = new UserDB();
 
 //endpoint to add seconds to Free_Tier_Seconds
 router.post('/API/UpdateFreeTierSeconds',function(req, res){
-    console.log("update seconds")
     users.updateFreeTierSeconds(req.body.UserId, req.body.secondsToAdd)
     .then((seconds)=>{
         res.json(seconds)

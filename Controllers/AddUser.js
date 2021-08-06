@@ -64,7 +64,6 @@ router.post('/API/AddUser',
                                       })
                                 }
                                 else{
-                                    console.log("Dont create sub")
                                     resolve(false)
                                 }
                             })

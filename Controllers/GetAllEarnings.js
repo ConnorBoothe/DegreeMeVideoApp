@@ -15,7 +15,6 @@ router.get('/API/GetAllEarnings/:accountId',
                 for (var i in result.data) {
                    total += result.data[i].amount;   
                 }
-                console.log(total)
                 res.json(total)
             })
     });

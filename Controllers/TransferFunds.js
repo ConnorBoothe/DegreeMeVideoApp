@@ -17,10 +17,8 @@ async function transferToStripeAccounts(){
       var totalRevenueMinusFees = (subscriptions.data.length * 8) - ((subscriptions.data.length * 8 * .029) +(subscriptions.data.length * .3));
       var totalPayouts = totalRevenueMinusFees * .2; 
       for(var i in userViewCountPercentages) {
-        console.log(parseInt(totalPayouts * userViewCountPercentages[i].percentageOfViews * 100))
           //if user has views, transfer money to their account
         if(userViewCountPercentages[i].percentageOfViews > 0) {
-          console.log(userViewCountPercentages[i].accountId)
             await stripe.transfers.create({
                 amount: parseInt(totalPayouts * userViewCountPercentages[i].percentageOfViews * 100),
                 currency: 'usd',

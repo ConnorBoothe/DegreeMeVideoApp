@@ -17,10 +17,8 @@ router.post('/API/CreateStripePaymentMethod',
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        console.log(req.body)
         //logic goes here
         var dob = (req.body.dob).split('/');
-        console.log(dob)
         var phone = (req.body.phone).replace(/-/g, "");
         //phone=phone.replaceAll("-","")
         stripe.createPaymentMethod ({

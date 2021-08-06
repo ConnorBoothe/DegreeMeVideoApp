@@ -65,11 +65,10 @@ class CreateSellerAccount extends Component {
     handleStateChange(e){
         this.setState({city: e.target.value})
     }
-    handlePhoneChange(e){
-        console.log("change")
-        console.log(this.state.phone)
-        // this.setState({phone: e.target.value})
-    }
+    // handlePhoneChange(e){
+    //     console.log("change")
+    //     // this.setState({phone: e.target.value})
+    // }
     showError(){
         if(this.state.error !== false) {
             return (
@@ -101,7 +100,6 @@ class CreateSellerAccount extends Component {
         }
     }
     handleSSNChange(e){
-        console.log(parseInt(e.target.value))
         if(isNaN(e.target.value)){
             e.target.value = this.state.ssn;
         }
@@ -133,7 +131,6 @@ class CreateSellerAccount extends Component {
         if(Cookies.get("user") !== undefined) {
             this.setState({formSubmitted: true, error: false})
         var user = JSON.parse(Cookies.get("user"));
-        console.log(user)
         const api_route = 'http://localhost:8080/API/CreateStripeAccount';
           const postBody = {
             user_id: user._id,
@@ -163,17 +160,14 @@ class CreateSellerAccount extends Component {
         .then((result)=>{
             if(result._id !== undefined) {
                 //call setUser here with new user object
-                console.log(result)
                 this.setState({success: true, formSubmitted: false})
                 this.props.setUser(result)
                 Cookies.set("user", result)
-                console.log(Cookies.get("user"))
 
             }
             else {
                 this.setState({error: result.raw.message, formSubmitted: false})
             }
-            console.log(result)
         })
         .catch((err)=>{
         })

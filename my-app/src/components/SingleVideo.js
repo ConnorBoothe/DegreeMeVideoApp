@@ -200,7 +200,6 @@ class SingleVideo extends Component {
             }
     }
     render(){
-        console.log(this.props.user)
         if(this.props.user._id === undefined) {
             return(
                 <Redirect to="/CreateAccount" />            )

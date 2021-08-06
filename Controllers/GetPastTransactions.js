@@ -6,8 +6,6 @@ var UserDB = require('../Models/User');
 var users = new UserDB();
 
 router.get('/API/GetPastTransactions/:customer_id', function(req, res){
-    console.log("get trans settings")
-    console.log(req.params.customer_id)
      stripe.paymentIntents.list({
         customer: req.params.customer_id
       })

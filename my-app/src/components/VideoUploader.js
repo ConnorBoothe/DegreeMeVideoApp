@@ -293,7 +293,6 @@ return (
 }
 else if(this.props.user.Stripe_Bank_Acct_Id === undefined && 
   this.props.user._id !== undefined) {
-    console.log(this.props.user)
     return (
       <CreateSellerAccount setUser={this.props.setUser} />
     );

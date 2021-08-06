@@ -4,8 +4,6 @@ const router = express.Router();
 
 
 router.get('/API/GetStripeCustomer/:customer_id', function(req, res){
-    console.log("get payment settings")
-    console.log(req.params.customer_id)
         stripe.customers.retrieve(
             req.params.customer_id
         )

@@ -30,7 +30,6 @@ class Subscription_Item extends Component{
             .then(res => res.json())
             .then((result)=>{
                 this.props.setUser(result);
-                console.log("deleted payment", result)
                 this.props.getStripeSubscriptions();
                 this.props.hideRemoveSubLoader();
             })

@@ -30,7 +30,6 @@ router.post('/API/CreateStripeCustomer',
                 }
             })
             .then((customer)=>{
-                console.log(customer)
             })
         }
         

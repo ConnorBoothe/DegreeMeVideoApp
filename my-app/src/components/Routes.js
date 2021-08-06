@@ -56,7 +56,6 @@ class Routes extends Component {
         this.setState({user: user})
     }
     getKeywords(){
-        console.log("Running routez")
         var user = {};
         if(this.state.user._id === undefined) {
           user = JSON.parse(Cookies.get("user"));
@@ -74,7 +73,6 @@ class Routes extends Component {
             fetch(api_route, requestMetadata)
             .then(response => response.json())
                 .then(result => {
-                    console.log("Result",result)
                   var keywords = [];
                   for(var i = 0; i < result.length; i++ ){
                     keywords.push(result[i].Word)

@@ -6,14 +6,11 @@ var UserDB = require('../Models/User');
 var users = new UserDB();
 
 router.get('/API/GetSubscriptions/:customer_id', function(req, res){
-    console.log("get sub settings")
-    console.log(req.params.customer_id)
    stripe.subscriptions.list({
         limit: 3,
         customer: req.params.customer_id
       })
       .then((result)=>{
-          console.log(result)
         res.json(result)
       })
       .catch((err)=>{

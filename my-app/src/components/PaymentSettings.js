@@ -70,7 +70,6 @@ class PaymentSettings extends Component {
             })
     }
 getStripePaymentMethods(){
-    console.log(this.props.user)
     const api_route = 'http://localhost:8080/API/GetPaymentMethods/'+window.location.href.split("/")[4];
     const requestMetadata = {
         method: 'GET',
@@ -81,7 +80,6 @@ getStripePaymentMethods(){
     fetch(api_route, requestMetadata)
     .then(response => response.json())
         .then(result => {
-            console.log("REs:",result)
             this.setState({paymentMethods: result.data})
             if(result.data.length === 0) {
                 this.setState({containsNoPaymentMethod: true})
@@ -99,7 +97,6 @@ getStripeCustomer(){
     fetch(api_route, requestMetadata)
     .then(response => response.json())
         .then(result => {
-            console.log("cust: ",result)
             this.setState({customer: result})
         })
 }
@@ -130,7 +127,6 @@ getPastTransactions(){
     fetch(api_route, requestMetadata)
     .then(response => response.json())
         .then(result => {
-            console.log("trans: ",result)
             this.setState({payments: result.data})
         })
 }
@@ -194,8 +190,6 @@ setContainsNoPaymentMethod(){
 }
 
 showCustomerInfo(){
-    console.log("customer info", this.state.customer
-    )
     return (
         <div>
             <p className="text-light">{this.state.customer.name}</p>
@@ -238,7 +232,6 @@ updateDefaultPaymentMethod(paymentMethodId){
         fetch(api_route, requestMetadata)
         .then(res => res.json())
         .then((result)=>{
-            console.log("updated payment default", result)
             this.getStripeCustomer();
             this.showCards();
         })

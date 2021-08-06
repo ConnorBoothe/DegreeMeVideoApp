@@ -40,7 +40,6 @@ class AddPaymentMethod extends Component {
         fetch(api_route, requestMetadata)
           .then(res => res.json())
           .then((res) => {
-           console.log(res)
            if(res != "error") {
                this.props.getStripePaymentMethods();
                this.props.getStripeCustomer();
@@ -79,7 +78,6 @@ class AddPaymentMethod extends Component {
         if (error) {
           console.log('[error]', error);
         } else {
-          console.log('[PaymentMethod]', paymentMethod);
           this.setState({paymentMethod: paymentMethod,
             disableCardButton: false});
             this.submitPaymentMethod(this.props.user)
@@ -97,7 +95,6 @@ class AddPaymentMethod extends Component {
         const cardElement = elements.getElement(CardElement);
         cardElement.on('change', (event) => {
           if (event.complete) {
-            console.log("Complter")
             this.setState({ cardComplete: true })
           } else {
             this.setState({ cardComplete: false })

@@ -17,10 +17,8 @@ router.post('/API/CreateStripeAccount',
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        console.log(req.body)
         //logic goes here
         var dob = (req.body.dob).split('-');
-        console.log("DOB",dob)
         var phone = (req.body.phone).replace(/-/g, "");
         //phone=phone.replaceAll("-","")
         stripe.account.create({
@@ -67,7 +65,6 @@ router.post('/API/CreateStripeAccount',
             .then((account)=>{
                     //save account id to database
                     //create Bank Account
-                    console.log("Adding bank acct")
                     stripe.accounts.createExternalAccount(
                         account.id, {
                             external_account: { //for attatching bank accounts/credit cards
@@ -82,8 +79,6 @@ router.post('/API/CreateStripeAccount',
                             if (err != null) {
                                res.json(err)
                             } else {
-                                console.log("Bank account: ", bankAccount)
-                                console.log("add id to user");
                                 //add the stripeId to user's account
                                 users.addStripeBankAccount(req.body.user_id, 
                                     account.id, bankAccount.id)

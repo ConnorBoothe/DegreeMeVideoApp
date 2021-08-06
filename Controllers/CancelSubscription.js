@@ -6,7 +6,6 @@ const users = new UserDB();
 router.post('/API/CancelSubscription', function(req, res){
     stripe.subscriptions.del(req.body.subscription)
       .then((result)=>{
-          console.log("Deleted sub: " , result)
         users.updateSubscriptionLevel(req.body.UserId, "Free Tier")
         .then((user)=>{
             res.json(user)
