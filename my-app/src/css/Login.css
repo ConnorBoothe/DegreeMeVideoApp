@@ -19,7 +19,7 @@ select:-webkit-autofill:focus {
     margin-top:10px;
     border-radius: 10px;
     font-weight: bold;
-    padding:2px;
+    padding:5px;
 }
 .login-input-container {
     border: 1px solid white;
@@ -110,6 +110,12 @@ select:-webkit-autofill:focus {
         margin-left: auto!important;
         margin-right:auto!important;
         text-align: left;
+    }
+    .login-home-btn {
+        padding: 3px 5px!important;
+        font-size: 15px;
+        font-weight: bold;
+
     }
     .login-text {
         font-size: 13px;
