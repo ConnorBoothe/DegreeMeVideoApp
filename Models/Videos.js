@@ -101,16 +101,23 @@ module.exports = class Videos {
     //add Rank to each doc and then sort query by rank
     
     getVideoResults(VideoIds, idHashMap){
+      console.log("get video res", VideoIds)
       return new Promise((resolve, reject)=>{
         const hash = new Map([...idHashMap.entries()].sort((a, b) => b[1] - a[1]));
         VideosDB.find({_id: {$in: VideoIds}})
           .sort({"_id": -1})
           .then((videos)=>{
+            console.log("videos", videos)
             var sortedVideos = [];
             //need to reduce runtime for larger datasets
+  
             hash.forEach((value, key)=>{
+              console.log("value",key)
+              console.log(videos.length)
               for(var y in videos) {
+
                 if(videos[y]._id == key && value > 0){
+                  console.log("Got him")
                   videos[y].ResultRank = value;
                   sortedVideos.push(videos[y])
                 }
@@ -121,6 +128,7 @@ module.exports = class Videos {
               sortedVideos.sort(function(a, b) {
                 return parseFloat(b.Views) - parseFloat(a.Views);
             });
+            console.log("sorted", sortedVideos)
             resolve(sortedVideos)
           })
       })

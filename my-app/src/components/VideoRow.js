@@ -31,12 +31,13 @@ class VideoRow extends Component {
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
+                console.log("RES: " ,result)
                 if(this.state.isMounted) {
                     this.setState({videos: result})
                 }
             })
     }
-    render(){
+    renderVideoRow(){
         return (
             <div className="video-row">
                 <h1 className="text-light category">{this.props.category}</h1>
@@ -53,7 +54,12 @@ class VideoRow extends Component {
                 </ul>
             </div>
         );
-  }
+
+    }
+    render(){
+      return this.renderVideoRow()
+    }
+
 }
 
 export default VideoRow;
