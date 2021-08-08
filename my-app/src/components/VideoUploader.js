@@ -128,7 +128,9 @@ class VideoUploader extends Component {
         }
         else {
           reader.readAsDataURL(thumbnails[0].blob);
-          this.postThumbnailToFirebase(thumbnails[0].blob)
+          //get thumbnail from middle of video to ensure
+          //picture isnt blank black screen
+          this.postThumbnailToFirebase(thumbnails[parseInt(thumbnails.length/2)].blob)
           .then((url)=>{
             resolve(url)
           })
