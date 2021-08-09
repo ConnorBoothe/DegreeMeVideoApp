@@ -86,7 +86,7 @@ class ReviewModal extends Component {
             <textarea onChange={this.handleMessageChange}placeholder="Write your review" className="review-message"></textarea>
             <p className="rating-label">Rating</p>
               <div id="ratingContainer">
-                <div class="rating">
+                <div className="rating">
                   <input type="radio" className="starVal" name="star" id="star1" value="5" onChange={this.handleRatingChange} /><label for="star1"></label>
                   <input type="radio" className="starVal" name="star" id="star2" value="4" onChange={this.handleRatingChange}/><label for="star2"></label>
                   <input type="radio" className="starVal" name="star" id="star3" value="3" onChange={this.handleRatingChange}/><label for="star3"></label>
@@ -94,7 +94,7 @@ class ReviewModal extends Component {
                   <input type="radio" className="starVal" name="star" id="star5" value="1" onChange={this.handleRatingChange}/><label for="star5"></label>
                 </div>
               </div>
-              <button class="btn btn-primary rating-btn" onClick={this.addReview}>Submit Review</button>
+              <button className="btn btn-primary rating-btn" onClick={this.addReview}>Submit Review</button>
               <p className={this.state.reviewMsgColor + " reviewMsg"} style={{display: this.state.showReviewMsg}} >{this.state.reviewMsg}</p>
         </Modal.Body>
         <Modal.Footer>
