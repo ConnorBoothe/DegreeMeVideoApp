@@ -36,14 +36,7 @@ select:-webkit-autofill:focus {
     font-size: 13px;
     font-weight: bold;
 }
-.create-account-link p, .create-account-link:hover{
-    text-align: center!important;
-    color: #d4d4d4;
-    width: 100%;
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 14px;
-}
+
 .login-container ul li p {
     color:white;
     margin-top:5px;
@@ -83,8 +76,13 @@ select:-webkit-autofill:focus {
     margin-top:20px;
 
 }
-.create-account-link p{
+.forgot-pw {
+    color: #d4d4d4;
+    text-align: center!important;
+}
+.create-account-link{
     margin-top: 20px!important;
+    font-weight: bold;
 }
 /* desktop styles */
 @media only screen and (min-width: 725px) {

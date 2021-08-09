@@ -145,6 +145,15 @@ module.exports = class User {
           Email:email
         });
     }
+    //update password
+    updatePassword(userId, password){
+      return UserDB.findOne(
+        {
+          _id:userId
+        }).updateOne({
+          Password: password
+        })  
+    }
     updateAvatar(id, avatar){
       return new Promise((resolve, reject)=>{
         UserDB.findOne(

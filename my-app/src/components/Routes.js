@@ -17,7 +17,8 @@ import CreateSellerAccount from "./CreateSellerAccount";
 import UpgradeAccount from "./UpgradeAccount";
 import PaymentSettings from "./PaymentSettings";
 import LandingPage from "./LandingPage";
-
+import ForgotPassword from "./ForgotPassword";
+import UpdatePassword from "./UpdatePassword";
 
 
 class Routes extends Component {
@@ -236,10 +237,15 @@ class Routes extends Component {
             (<Home {...props} user={this.state.user} />)} />
            <Route exact path="/LandingPage" render={props => 
             (<LandingPage {...props} />)} />
+             <Route exact path="/ResetPassword" render={props => 
+            (<ForgotPassword {...props} />)} />
             <Route exact path="/Upload" render={props => 
             (<VideoUploader {...props} user={this.state.user} setUser={this.setUser} />)} />
             <Route exact path="/Login" render={props => 
             (<Login {...props} user={this.state.user} setUser={this.setUser} getUnreadCount={this.getNotificationCount}
+            />)} />
+            <Route exact path="/UpdatePassword/:id" render={props => 
+            (<UpdatePassword {...props} 
             />)} />
             {/* <Route exact path="/CreateAccount" component={CreateAccount} /> */}
             <Route exact path="/CreateAccount" render={props => 

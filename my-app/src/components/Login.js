@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import '../css/VideoUploader.css';
 import '../css/Login.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect, Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 class LoginForm extends Component {
     constructor(props) {
@@ -52,13 +52,14 @@ class LoginForm extends Component {
                     <button className="btn btn-primary login-btn" onClick={this.login}>Login</button>
                 </li>
                 <li>
-                    <Router>
-                        <a href="/CreateAccount" className="create-account-link">
-                        <p>
-                            Create an account in seconds
-                        </p>
-                        </a>
-                    </Router>
+                    <Link to="/ResetPassword">
+                        <p className="forgot-pw">Forgot Password?</p>
+                    </Link>
+                </li>
+                <li>
+                        <Link to="/CreateAccount" className="create-account-link btn btn-success">
+                            Create New Account
+                        </Link>
                    </li>
                 <li>
                   <p className="error" style={{display: this.state.showError}}>{this.state.error}</p>

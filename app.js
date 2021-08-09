@@ -57,6 +57,10 @@ app.use([
     require("./Controllers/ResetFreeTierSeconds"),
     require("./Controllers/GetCreatorPayouts"),
     require("./Controllers/GetAllEarnings"),
+    require("./Controllers/GenerateResetPasswordLink"),
+    require("./Controllers/GetPasswordUpdateRequest"),
+    require("./Controllers/UpdatePassword")
+
 
 ]); 
 
