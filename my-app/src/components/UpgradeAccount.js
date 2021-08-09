@@ -4,7 +4,7 @@ import "../css/Upgrade.css"
 import Video_Sub from "../images/Video_Sub.svg"
 import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 class UpgradeAccount extends Component {
@@ -50,7 +50,7 @@ class UpgradeAccount extends Component {
     fetch(api_route, requestMetadata)
       .then(res => res.json())
       .then((res) => {
-        if (res != "error") {
+        if (res !== "error") {
           this.props.setUser(res)
           this.setState({
             loading: false, progressText: "Successfully subscribed",
@@ -279,7 +279,7 @@ class UpgradeAccount extends Component {
           <p className="text-light upgrade-text">Get unlimited access to DegreeMe content
             for $8/month</p>
           <div>
-            <img className="upgrade-img" src={Video_Sub} />
+            <img className="upgrade-img" src={Video_Sub} alt="Upgrade"/>
           </div>
           {this.renderCardInput()}
           {this.showLoader()}

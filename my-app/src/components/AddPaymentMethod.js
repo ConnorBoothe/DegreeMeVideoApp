@@ -1,10 +1,8 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import "../css/AddCard.css"
-import Video_Sub from "../images/Video_Sub.svg"
 import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 class AddPaymentMethod extends Component {
     constructor(props){
@@ -40,7 +38,7 @@ class AddPaymentMethod extends Component {
         fetch(api_route, requestMetadata)
           .then(res => res.json())
           .then((res) => {
-           if(res != "error") {
+           if(res !== "error") {
                this.props.getStripePaymentMethods();
                this.props.getStripeCustomer();
                this.props.setContainsNoPaymentMethod();

@@ -141,8 +141,8 @@ class CreateAccount extends Component {
           <li>
             <div className="btn-container">
               <button className="btn btn-primary" onClick={() => this.handleSubmit(elements, stripe)}
-                disabled={!stripe || !this.state.cardComplete || !this.checkAllFieldsComplete()
-                  && this.state.subscription !== "Free Tier" || this.state.paymentSubmitted
+                disabled={(!stripe || !this.state.cardComplete || !this.checkAllFieldsComplete())
+                  && (this.state.subscription !== "Free Tier" || this.state.paymentSubmitted)
                 }>Create Account</button>
             </div>
           </li>

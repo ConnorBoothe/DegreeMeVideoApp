@@ -3,7 +3,6 @@ import "../css/Settings.css";
 import AvatarCropper from "../components/AvatarCropper";
 import KeyWordsInput from "../components/KeyWordsInput";
 import 'bootstrap/dist/css/bootstrap.css';
-import Cookies from 'js-cookie';
 class Settings extends Component {
   constructor(props){
     super(props)

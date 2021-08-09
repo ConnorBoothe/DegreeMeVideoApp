@@ -3,8 +3,6 @@ import '../css/VideoUploader.css';
 import '../css/Login.css';
 import '../css/ResetPassword.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import { BrowserRouter as Router, Redirect, Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
 class ForgotPassword extends Component {
     constructor(props) {
         super(props);

@@ -36,7 +36,6 @@ class Subscription_Item extends Component{
     }
     render() {
         return (
-        <li className="text-light sub-li">
             <div>
                 <p className="pro-tier-access">Pro Access</p>
                 <p className="brand">${this.props.sub.plan.amount / 100} per {this.props.sub.plan.interval}
@@ -56,9 +55,6 @@ class Subscription_Item extends Component{
                 </span>
                 </p>
             </div>
-                <div>
-                </div>
-        </li>
         )
     }
 }

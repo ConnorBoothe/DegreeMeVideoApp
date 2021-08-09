@@ -24,20 +24,27 @@ class LandingPage extends Component {
                     <img
                       id="landing--person1--animation"
                       src={person1}
+                      alt="Person 1"
                     ></img>
                     <img
                       id="landing--person2--animation"
                       src={person2}
+                      alt="Person 2"
                     ></img>
                     <img
                       id="landing--person3--animation"
-                      src={person3}                    ></img>
+                      src={person3}        
+                      alt="Person 3"            
+                      ></img>
                     <img
                       id="landing--person4--animation"
-                      src={person4}                    ></img>
+                      src={person4}      
+                      alt="Person 4"   
+                      ></img>
                     <img
                       id="landing--person5--animation"
                       src={person5}
+                      alt="Person 5"
                     ></img>
                 </div>
                 <svg className="landing--wave" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs></defs><path id="wave1" d=""/></svg>
@@ -70,7 +77,7 @@ class LandingPage extends Component {
             that have taken the courses you need help with.
           </div>
    
-           <img className="students-studying" src={studentsStudying}/>
+           <img className="students-studying" src={studentsStudying} alt="Student Studying"/>
           
     
           

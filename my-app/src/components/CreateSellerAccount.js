@@ -4,8 +4,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import "../css/CreateSellerAccount.css"
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-import { Link } from 'react-router-dom';
-import User from "./User";
 import Cookies from "js-cookie"
 
 
@@ -237,7 +235,7 @@ class CreateSellerAccount extends Component {
                 We do not save any of the below data on our servers. 
             </div>
             <p className="text-light">Your data will be stored with our payments processor, Stripe.</p>
-            <a href="https://stripe.com/legal" className="stripe-link" target="_blank">Stripe's terms and conditions</a>
+            <a href="https://stripe.com/legal" className="stripe-link" target="_blank" rel="noreferrer">Stripe's terms and conditions</a>
             <input type="hidden" autocomplete="false"/>
             <ul className="create-seller-list">
                 

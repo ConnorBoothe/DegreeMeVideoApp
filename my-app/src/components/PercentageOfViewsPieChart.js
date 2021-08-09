@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 // import "./styles.css";
-import 'chart.piecelabel.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import "../css/PieChart.css"
-import { Doughnut, Pie } from "react-chartjs-2";
+import { Pie } from "react-chartjs-2";
 class PercentageOfViewsPieChart extends Component {
-  constructor(props) {
-    super(props)
-  }
   getChartData() {
     return (
       {

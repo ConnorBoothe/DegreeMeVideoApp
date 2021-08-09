@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import { Popover } from 'react-tiny-popover';
 import 'bootstrap/dist/css/bootstrap.css';
 import "../css/PaymentSettings.css"
 import { Link } from 'react-router-dom';
@@ -8,7 +7,7 @@ import Visa_SVG from "../images/visa.svg"
 import FormatDate from "../GlobalFunctions/FormatDate";
 import PaymentCard from "../components/PaymentCard";
 import AddPaymentMethod from "./AddPaymentMethod";
-import Subscription_Item from "../components/Subscription_Item"
+import SubscriptionItem from "../components/Subscription_Item"
 const formatDate = new FormatDate()
 class PaymentSettings extends Component {
     constructor(props){
@@ -166,9 +165,11 @@ showSubscriptions(){
     
         <ul>
         {this.state.subscriptions.map((sub, index) => (
-            <Subscription_Item sub={sub} getStripeSubscriptions={this.getStripeSubscriptions}
-            showRemoveSubLoader = {this.showRemoveSubLoader} user={this.props.user} setUser={this.props.setUser}
-            hideRemoveSubLoader={this.hideRemoveSubLoader}/>
+            <li key={index} className="text-light sub-li">
+                <SubscriptionItem sub={sub} getStripeSubscriptions={this.getStripeSubscriptions}
+                showRemoveSubLoader = {this.showRemoveSubLoader} user={this.props.user} setUser={this.props.setUser}
+                hideRemoveSubLoader={this.hideRemoveSubLoader}/>
+            </li>
         ))}
     </ul>
     {this.showSubscriptionLoader()}
@@ -201,7 +202,7 @@ showCustomerInfo(){
 showCardLogo(brand){
     if(brand === "visa"){
         return(
-            <img className="brand-img" src={Visa_SVG} />
+            <img className="brand-img" src={Visa_SVG} alt="Visa Card"/>
         )
     }
     else{
@@ -289,7 +290,7 @@ setCardLoading(status){
     this.setState({cardLoading: status})
 }
 showCardError(hasDefault){
-    this.state.hasDefault = hasDefault
+    // this.setState({hasDefault:hasDefault });
     if(this.state.containsNoPaymentMethod) {
         return(
             <p className="text-danger">
@@ -332,8 +333,8 @@ showCards(){
 
     <ul>
     {this.state.paymentMethods.map((paymentMethod, index) => (
-        this.formatCards(paymentMethod, this.state.customer, index)
-    ))}
+            this.formatCards(paymentMethod, this.state.customer, index)
+))}
     <li>
         <AddPaymentMethod showCardInput={this.state.showCardInput}
         user={this.props.user} getStripePaymentMethods={this.getStripePaymentMethods}
@@ -358,7 +359,7 @@ renderPayments(){
                 <td></td>
             </tr>
             {this.state.payments.map((payment, index) => (
-            <tr className="text-light">
+            <tr className="text-light" key={index}>
                 <td>${payment.amount / 100}.00
                 <span className="badge badge-success status-badge">{payment.status}</span>
                 </td>

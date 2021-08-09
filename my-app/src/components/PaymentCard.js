@@ -16,7 +16,7 @@ class PaymentCard extends Component {
     showCardLogo(brand){
         if(brand === "visa"){
             return(
-                <img className="brand-img" src={Visa_SVG} />
+                <img className="brand-img" src={Visa_SVG} alt="Visa Card"/>
             )
         }
         else{
@@ -32,9 +32,7 @@ class PaymentCard extends Component {
         
     }
     renderCard() {
-        var hasDefault = false;
         if(this.props.customer.invoice_settings.default_payment_method === this.props.paymentMethod.id){
-            hasDefault = true;
             return(
                 <li className="text-light">
                 <div className="card-group">
