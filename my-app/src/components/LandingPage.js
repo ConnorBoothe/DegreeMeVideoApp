@@ -20,7 +20,7 @@ class LandingPage extends Component {
                 <Link to="/CreateAccount">
                    <button className="btn btn-primary landing-sign-up">Sign Up</button>
                 </Link>
-                <div class="landing--people" id="landing--animation--1">
+                <div className="landing--people" id="landing--animation--1">
                     <img
                       id="landing--person1--animation"
                       src={person1}
@@ -58,13 +58,13 @@ class LandingPage extends Component {
                       Each creator is paid based on the percentage of views 
                       they generate.
                     </div>
-                    <Link to="/CreateAccount" class="landing--text--yellow text--link">
+                    <Link to="/CreateAccount" className="landing--text--yellow text--link">
                       Start earning today 
                     </Link>                </div>
             </div>
-            <div class="feature4">
-          <div class="landing--text--big">Our Vision</div>
-          <div class="landing--text--small">
+            <div className="feature4">
+          <div className="landing--text--big">Our Vision</div>
+          <div className="landing--text--small">
             We aim to simplify college
             by connecting you with knowledgeable creators
             that have taken the courses you need help with.

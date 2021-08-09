@@ -108,7 +108,7 @@ class AvatarCropper extends Component {
             this.postImageToDB(this.props.user._id, url)
             .then((user)=>{
               this.props.setUser(user)
-              Cookies.set("user", user)
+              Cookies.set("user", user, {secure: true, sameSite: "strict"})
               this.setState({uploadingText: "Avatar updated"})
               setTimeout(()=>{
                 this.setState({showUploadingText: "none"})

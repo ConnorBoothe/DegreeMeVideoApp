@@ -103,7 +103,7 @@ class LoginForm extends Component {
                 else {
                     this.props.setUser(user);
                     this.props.getUnreadCount();
-                    Cookies.set('user', JSON.stringify(user)) 
+                    Cookies.set('user', JSON.stringify(user), {secure: true, sameSite: "strict"}) 
                     this.setState({redirect: true})
                     this.props.getUnreadCount()
                 }

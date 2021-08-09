@@ -48,7 +48,7 @@ class Routes extends Component {
 
     }
     setUser(user){
-        Cookies.set("user", user)
+        Cookies.set("user", user, {secure: true, sameSite: "strict"})
         this.setState({user: user});
     }
     updateAvatar(avatar){
