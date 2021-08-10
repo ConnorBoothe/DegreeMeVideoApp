@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import desktopLogo from "../images/degreeMeLogo.svg";
 import mobileLogo from "../images/degreeMeHashTag.svg";
 import "../css/Header.css";
+
 import UserMenu from "./UserMenu"
 import SearchBar from "./SearchBar"
 import { Link } from 'react-router-dom';

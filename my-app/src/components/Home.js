@@ -6,7 +6,9 @@ import Cookies from 'js-cookie';
 import "../css/Header.css";
 import "../css/Home.css";
 import 'bootstrap/dist/css/bootstrap.css';
-
+import {
+  Redirect
+} from "react-router-dom";
 // import bootstrap from "bootstrap";
 class Home extends Component {
   constructor(props){
@@ -64,18 +66,29 @@ class Home extends Component {
   componentDidMount(){
     this.getKeywords();
   }
-
-  render(){
-    return (
-        <div>
-        {this.renderCreatorDashboard()}       
-     <div className="videos-container">
+  renderVideoRows(){
+    if(this.props.user._id !== undefined){
+      return (
+        <div className="videos-container">
               {this.state.keywords.map((keyword, index) => (
                 <li key={index}>
                   <VideoRow category={keyword}/>
                 </li>
             ))}
             </div>
+      )
+    }
+    else {
+      return(
+        <Redirect to="/LandingPage" />
+      )
+    }
+  }
+  render(){
+    return (
+        <div>
+        {this.renderCreatorDashboard()}       
+        {this.renderVideoRows()}
         </div>
     );
   }
