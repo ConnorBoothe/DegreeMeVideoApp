@@ -5,6 +5,7 @@ import "../css/CreateSellerAccount.css"
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import Cookies from "js-cookie"
+import { Link } from 'react-router-dom';
 
 
 // import bootstrap from "bootstrap";
@@ -25,7 +26,8 @@ class CreateSellerAccount extends Component {
            formComplete: false,
            formSubmitted: false,
            error: false,
-           success: false
+           success: false,
+           agreedToTerms: false
         }
         this.createStripeAccount = this.createStripeAccount.bind(this);
         this.createStateDropdown = this.createStateDropdown.bind(this);
@@ -37,9 +39,13 @@ class CreateSellerAccount extends Component {
         this.handleSSNChange = this.handleSSNChange.bind(this)
         this.handleRoutingChange = this.handleRoutingChange.bind(this)
         this.handleAccountChange = this.handleAccountChange.bind(this)
-        this.handlePhoneChange = this.handlePhoneChange.bind(this)
+        // this.handlePhoneChange = this.handlePhoneChange.bind(this)
         this.showLoader = this.showLoader.bind(this);
+        this.setAgreedToTerms = this.setAgreedToTerms.bind(this)
     }
+    setAgreedToTerms(e){
+        this.setState({agreedToTerms: e.target.checked})
+      }
     validateInputFields(){
         if(this.state.routing_number.length !== 9) {
             return "Routing number length must be 9";
@@ -230,7 +236,7 @@ class CreateSellerAccount extends Component {
   render(){
     return (
         <div className="create-seller-account">
-            <h4 className="text-light create-seller-title">Create seller account so you can be paid for your content</h4>
+            <h4 className="text-light create-seller-title">Create a seller account so you can be paid for your content</h4>
             <div className="badge badge-warning create-seller-message">
                 We do not save any of the below data on our servers. 
             </div>
@@ -274,7 +280,7 @@ class CreateSellerAccount extends Component {
                     onChange={phone => this.setState({ phone })}
                     inputStyle={{
                         border: "none",
-                        backgroundColor: "#282c34"
+                        backgroundColor: "#181818"
                       }}
                     />
   
@@ -297,14 +303,25 @@ class CreateSellerAccount extends Component {
                 <input className="create-seller-input" type="text" onChange={this.handleAccountChange}/>
             </div>
             </li>
+
             </ul>
+            <div>
+            <Link to="/">
+                Terms and Conditions
+              </Link>
+            </div>
+            <div className="terms-container">
+           
+                <input onChange={this.setAgreedToTerms} type="checkbox" className="terms-checkbox"/>
+                <span className="agree-text text-light">I agree to DegreeMe's terms and conditions</span>
+            </div>
             <br></br>
             <button type="submit" className="btn btn-primary" onClick={this.createStripeAccount}
             disabled={!(this.state.dob !== "" && this.state.street_number !== ""
             && this.state.postal_code !== "" && this.state.city !== "" 
             && this.state.state !== "" && this.state.ssn !== ""
             && this.state.routing_number !== "" && this.state.account_number !== ""
-            && this.state.phone !== "") || this.state.formSubmitted}
+            && this.state.phone !== "" && this.state.agreedToTerms) || this.state.formSubmitted}
             >Create Payment Account</button>
             {this.showLoader()}
             {this.showError()}

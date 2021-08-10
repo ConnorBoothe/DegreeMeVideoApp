@@ -6,6 +6,8 @@ import Subscriptions from "../components/Subscriptions"
 import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import ReactGA from 'react-ga';
+import { Link } from 'react-router-dom';
+
 const TRACKING_ID = "247336033";
 ReactGA.initialize(TRACKING_ID);
 class CreateAccount extends Component {
@@ -25,7 +27,8 @@ class CreateAccount extends Component {
       stripePromise: loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh'),
       paymentMethod: "none",
       cardComplete: false,
-      paymentSubmitted: false
+      paymentSubmitted: false,
+      agreedToTerms: false
     };
     this.createAccount = this.createAccount.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -45,6 +48,8 @@ class CreateAccount extends Component {
     this.setSubscription = this.setSubscription.bind(this)
     this.validateStripeCard = this.validateStripeCard.bind(this)
     this.checkAllFieldsComplete = this.checkAllFieldsComplete.bind(this)
+    this.setAgreedToTerms = this.setAgreedToTerms.bind(this)
+
   }
   validateStripeCard = (elements) => {
     const cardElement = elements.getElement(CardElement);
@@ -57,7 +62,9 @@ class CreateAccount extends Component {
 
     });
   }
-
+  setAgreedToTerms(e){
+    this.setState({agreedToTerms: e.target.checked})
+  }
   validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
@@ -138,10 +145,20 @@ class CreateAccount extends Component {
             </div>
 
           </li>
+          <li className="terms-link">
+              <Link to="/">
+                Terms and Conditions
+              </Link>
+          </li>
+          <li className="text-light terms-li">
+          <input onChange={this.setAgreedToTerms} type="checkbox" className="terms-checkbox"/>
+             
+            <span className="agree-text">I agree to DegreeMe's terms and conditions</span>
+          </li>
           <li>
             <div className="btn-container">
               <button className="btn btn-primary" onClick={() => this.handleSubmit(elements, stripe)}
-                disabled={(!stripe || !this.state.cardComplete || !this.checkAllFieldsComplete())
+                disabled={(!stripe || !this.state.cardComplete || !this.checkAllFieldsComplete() || !this.state.agreedToTerms)
                   && (this.state.subscription !== "Free Tier" || this.state.paymentSubmitted)
                 }>Create Account</button>
             </div>
@@ -164,10 +181,20 @@ class CreateAccount extends Component {
             </div>
 
           </li>
+          <li className="terms-link">
+              <Link to="/">
+                Terms and Conditions
+              </Link>
+          </li>
+          <li className="text-light terms-li">
+          <input onChange={this.setAgreedToTerms} type="checkbox" className="terms-checkbox"/>
+             
+            <span className="agree-text">I agree to DegreeMe's terms and conditions</span>
+          </li>
           <li>
             <div className="btn-container">
               <button className="btn btn-primary" onClick={() => this.createAccount()}
-                disabled={!this.checkAllFieldsComplete()}>Create Account</button>
+                disabled={!this.checkAllFieldsComplete() || !this.state.agreedToTerms}>Create Account</button>
             </div>
           </li>
           <li>
