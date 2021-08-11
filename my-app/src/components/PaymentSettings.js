@@ -283,12 +283,12 @@ class PaymentSettings extends Component {
     }
     formatCards(customer) {
         if (customer.invoice_settings) {
-            {return this.state.paymentMethods.map((paymentMethod, index) => (               
+            return this.state.paymentMethods.map((paymentMethod, index) => (               
                 <PaymentCard customer={customer} paymentMethod={paymentMethod}
                     updateDefaultPaymentMethod={this.updateDefaultPaymentMethod}
                     removePaymentMethod={this.removePaymentMethod}
                     setCardLoading={this.setCardLoading} key={index} />
-            ))}
+            ))
         }
     }
     setCardLoading(status) {
