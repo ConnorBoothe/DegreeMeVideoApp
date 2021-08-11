@@ -67,7 +67,8 @@ class Home extends Component {
     this.getKeywords();
   }
   renderVideoRows(){
-    if(this.props.user._id !== undefined){
+    var user = JSON.parse(Cookies.get("user"));
+    if(user !== undefined){
       return (
         <div className="videos-container">
               {this.state.keywords.map((keyword, index) => (
