@@ -56,7 +56,9 @@ class CommentList extends Component {
                   newCommentsArray.unshift(comment)
                   this.setState({comments: newCommentsArray,
                     borderBottom:"2px solid #d4d4d4",
-                    showButtons:"none"})
+                    showButtons:"none",
+                    comment: ""
+                })
                 })
                 .catch((err)=>{
                 })
