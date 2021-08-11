@@ -33,8 +33,9 @@ class PaymentCard extends Component {
     }
     renderCard() {
         if(this.props.customer.invoice_settings.default_payment_method === this.props.paymentMethod.id){
+            console.log(this.props)
             return(
-                <li className="text-light">
+                <li className="text-light" key={this.props.currIndex}>
                 <div className="card-group">
                {this.showCardLogo(this.props.paymentMethod.card.brand)}
                     <span>****</span>
