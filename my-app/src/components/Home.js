@@ -67,7 +67,7 @@ class Home extends Component {
     this.getKeywords();
   }
   renderVideoRows(){
-    var user = JSON.parse(Cookies.get("user"));
+    var user = Cookies.get("user");
     if(user !== undefined){
       return (
         <div className="videos-container">
