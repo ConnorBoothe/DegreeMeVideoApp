@@ -57,7 +57,7 @@ class SearchBar extends Component {
         document.removeEventListener('mousedown', this.handleClickOutside);
     }
     search(){
-         this.setState({searchText: ""})
+        //  this.setState({searchText: ""})
         return (
             <Redirect to="/SearchResults/"/>
         );
@@ -65,7 +65,7 @@ class SearchBar extends Component {
     handleSearchOnEnter(e){
         if(e.key === "Enter") {
             this.props.redirectToResults();
-            this.setState({searchText: ""});
+            // this.setState({searchText: ""});
         }
         
     }
