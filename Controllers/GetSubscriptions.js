@@ -5,14 +5,18 @@ const bodyParser = require('body-parser');
 var UserDB = require('../Models/User');
 var users = new UserDB();
 
-router.get('/API/GetSubscriptions/:customer_id', function(req, res){
+router.get('/API/GetSubscriptions/:userId', 
+function(req, res){
+  users.getCustomerId(req.params.userId)
+  .then((user)=>{
    stripe.subscriptions.list({
         limit: 3,
-        customer: req.params.customer_id
+        customer: user.Stripe_Customer_Id
       })
       .then((result)=>{
         res.json(result)
       })
+    })
       .catch((err)=>{
           console.log(err)
           res.json("err")

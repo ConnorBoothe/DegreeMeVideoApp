@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 
-
-router.post('/API/RemovePaymentMethod', function(req, res){
+router.post('/API/RemovePaymentMethod', 
+    function(req, res){
         //make payment method default
         stripe.paymentMethods.detach(
             req.body.PaymentMethodId

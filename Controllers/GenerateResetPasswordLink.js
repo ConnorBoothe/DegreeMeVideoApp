@@ -19,7 +19,6 @@ var passwordReset = new PasswordResetDB();
 //endpoint to add user to database
 router.post('/API/GenerateResetPasswordLink',
     function(req, res){
-        console.log(req.body.Email)
         users.getUserByEmail(req.body.Email)
         .then((user)=>{
             if(user != null) {
@@ -28,7 +27,6 @@ router.post('/API/GenerateResetPasswordLink',
                     user.Email
                 )
                 .then((result)=>{
-                    console.log(result)
                     //send email with link
                     //UpdatePassword/result._id?user=user._id
                     res.json("Check your email for the password reset link.")

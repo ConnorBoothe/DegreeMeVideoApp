@@ -21,7 +21,6 @@ class Home extends Component {
   getKeywords(){
     if(Cookies.get("user") !== undefined) {
       var user = {};
-
       if(this.props.user._id === undefined) {
         user = JSON.parse(Cookies.get("user"));
     }

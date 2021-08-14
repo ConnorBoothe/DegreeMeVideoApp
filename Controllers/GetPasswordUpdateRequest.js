@@ -20,7 +20,6 @@ router.post('/API/GetPasswordUpdateRequest',
         console.log(req.body.request_id)
         passwordReset.getPasswordResetRequest(req.body.request_id)
         .then((result)=>{
-            console.log(result)
            if(result._id !== undefined){
                res.json([true, result.UserId])
            }

@@ -5,14 +5,18 @@ const bodyParser = require('body-parser');
 var UserDB = require('../Models/User');
 var users = new UserDB();
 
-router.get('/API/GetPaymentMethods/:customer_id', function(req, res){
+router.get('/API/GetPaymentMethods/:userId',
+ function(req, res){
+   users.getCustomerId(req.params.userId)
+   .then((user)=>{
     stripe.paymentMethods.list({
-        customer: req.params.customer_id,
+        customer: user.Stripe_Customer_Id,
         type: 'card',
       })
       .then((result)=>{
         res.json(result)
       })
+    })
       .catch((err)=>{
           console.log(err)
           res.json("err")

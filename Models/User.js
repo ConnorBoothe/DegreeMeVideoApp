@@ -100,6 +100,14 @@ module.exports = class User {
       })
      
     }
+    //get stripe account id by user id
+    getStripeAccountId(userId){
+      return UserDB.findOne({_id: userId}, "Stripe_Acct_Id")
+    }
+    //get customer id by user id
+    getCustomerId(userId){
+      return UserDB.findOne({_id: userId}, "Stripe_Customer_Id")
+    }
     //get users with stripe bank account
      getUsersWithStripeBankAccount(){
       return UserDB.find({

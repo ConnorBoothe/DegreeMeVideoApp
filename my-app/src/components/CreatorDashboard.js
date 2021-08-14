@@ -26,7 +26,7 @@ class CreatorDashboard extends Component {
     getTotalEarnings(){
         if(Cookies.get("user") !== null) {
             var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'http://localhost:8080/API/GetAllEarnings/'+user.Stripe_Acct_Id;
+            const api_route = 'http://localhost:8080/API/GetAllEarnings/'+user._id;
             const requestMetadata = {
                 method: 'GET',
                 headers: {
@@ -44,6 +44,7 @@ class CreatorDashboard extends Component {
     }
     getCreatorTotalViewCount(){
         if(Cookies.get("user") !== null) {
+            console.log(Cookies.get("user"))
             var user = JSON.parse(Cookies.get("user"));
             const api_route = 'http://localhost:8080/API/GetAllCreatorViews/'+user._id;
             const requestMetadata = {

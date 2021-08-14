@@ -36,10 +36,7 @@ class ReviewModal extends Component {
     const api_route = 'http://localhost:8080/API/AddReview';
           const postBody = {
               Creator_Id: window.location.href.split("/")[4],
-              Author_Id: this.props.user._id,
-              Author_Img: this.props.user.Image,
-              Author_First_Name: this.props.user.First_Name,
-              Author_Last_Name: this.props.user.Last_Name,
+              User_Id: this.props.user._id,
               Message:this.state.message,
               Rating: this.state.rating
           };
@@ -72,12 +69,11 @@ class ReviewModal extends Component {
   }
   render(){
     return(
-      <>
+      <div>
       <button className="btn btn-primary leave-review" onClick={this.showModal}>Leave Review</button>
-      <Modal show={this.state.isOpen} onHide={this.hideModal}>
+      <Modal show={this.state.isOpen} onHide={this.hideModal} >
         <Modal.Header>
         {/* <button className="btn-danger" onClick={hideModal}>X</button> */}
-
           <Modal.Title>Leave a Review
           </Modal.Title>
         </Modal.Header>
@@ -87,11 +83,11 @@ class ReviewModal extends Component {
             <p className="rating-label">Rating</p>
               <div id="ratingContainer">
                 <div className="rating">
-                  <input type="radio" className="starVal" name="star" id="star1" value="5" onChange={this.handleRatingChange} /><label for="star1"></label>
-                  <input type="radio" className="starVal" name="star" id="star2" value="4" onChange={this.handleRatingChange}/><label for="star2"></label>
-                  <input type="radio" className="starVal" name="star" id="star3" value="3" onChange={this.handleRatingChange}/><label for="star3"></label>
-                  <input type="radio" className="starVal" name="star" id="star4" value="2" onChange={this.handleRatingChange}/><label for="star4"></label>
-                  <input type="radio" className="starVal" name="star" id="star5" value="1" onChange={this.handleRatingChange}/><label for="star5"></label>
+                  <input type="radio" className="starVal" name="star" id="star1" value="5" onChange={this.handleRatingChange} /><label htmlFor="star1"></label>
+                  <input type="radio" className="starVal" name="star" id="star2" value="4" onChange={this.handleRatingChange}/><label htmlFor="star2"></label>
+                  <input type="radio" className="starVal" name="star" id="star3" value="3" onChange={this.handleRatingChange}/><label htmlFor="star3"></label>
+                  <input type="radio" className="starVal" name="star" id="star4" value="2" onChange={this.handleRatingChange}/><label htmlFor="star4"></label>
+                  <input type="radio" className="starVal" name="star" id="star5" value="1" onChange={this.handleRatingChange}/><label htmlFor="star5"></label>
                 </div>
               </div>
               <button className="btn btn-primary rating-btn" onClick={this.addReview}>Submit Review</button>
@@ -100,7 +96,7 @@ class ReviewModal extends Component {
         <Modal.Footer>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
   }
 }

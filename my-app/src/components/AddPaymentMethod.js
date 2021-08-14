@@ -25,7 +25,7 @@ class AddPaymentMethod extends Component {
         return new Promise((resolve, reject)=>{
         const api_route = 'http://localhost:8080/API/AddPaymentMethod';
         const postBody = {
-          CustomerId: user.Stripe_Customer_Id,
+          UserId: user._id,
           PaymentMethodId: this.state.paymentMethod.id
         };
         const requestMetadata = {

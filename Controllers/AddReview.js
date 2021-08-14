@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const {
     check,
     validationResult
-  } = require('express-validator');
+} = require('express-validator');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
     extended: true,
@@ -13,39 +13,42 @@ router.use(bodyParser.urlencoded({
 }));
 var ReviewsDB = require('../Models/Reviews');
 var reviews = new ReviewsDB();
-//endpoint to add review to database
 
-router.post('/API/AddReview', 
+var UserDB = require('../Models/User');
+var users = new UserDB();
+//endpoint to add review to database
+router.post('/API/AddReview',
     check('Creator_Id').isString().escape(),
-    check('Author_Id').isString().escape(),
-    check('Author_First_Name').isString().escape(),
-    check('Author_Last_Name').isString().escape(),
-    check('Author_Img').isString().escape(),
+    check('User_Id').isString().escape(),
     check('Message').isString().escape(),
     check('Rating').isNumeric(),
-    function(req, res){
+    function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
         else {
-            //add review to DB
-            reviews.addReview(
-                req.body.Creator_Id, 
-                req.body.Author_Id,
-                req.body.Author_First_Name,
-                req.body.Author_Last_Name,
-                req.body.Author_Img,
-                req.body.Message,
-                req.body.Rating,
-                new Date()
-            )
-            .then(function(review){
-                res.json(review)
-            })
-            .catch((err)=>{
-                res.json(err)
-            })
+            users.getUser(req.body.User_Id)
+                .then((user) => {
+                    //add review to DB
+                    reviews.addReview(
+                        req.body.Creator_Id,
+                        user._id,
+                        user.First_Name,
+                        user.Last_Name,
+                        user.Image,
+                        req.body.Message,
+                        req.body.Rating,
+                        new Date()
+                    )
+                        .then(function (review) {
+                            res.json(review)
+                        })
+                })
+                .catch((err) => {
+                    console.log(err)
+                    res.json(err)
+                })
         }
-});
+    });
 module.exports = router;

@@ -116,7 +116,6 @@ class UpgradeAccount extends Component {
     var user = JSON.parse(Cookies.get("user"));
     const api_route = 'http://localhost:8080/API/AddSubscription';
         const postBody = {
-            CustomerId: user.Stripe_Customer_Id,
             UserId: user._id
         };
         const requestMetadata = {
@@ -213,7 +212,7 @@ class UpgradeAccount extends Component {
   getStripeCustomer() {
     return new Promise((resolve, reject) => {
       var user = JSON.parse(Cookies.get("user"));
-      const api_route = 'http://localhost:8080/API/GetStripeCustomer/' + user.Stripe_Customer_Id;
+      const api_route = 'http://localhost:8080/API/GetStripeCustomer/' + user._id;
       const requestMetadata = {
         method: 'GET',
         headers: {

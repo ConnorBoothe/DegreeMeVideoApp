@@ -1,13 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
-
-router.get('/API/GetAllEarnings/:accountId',
+var UserDB = require('../Models/User');
+var users = new UserDB();
+router.get('/API/GetAllEarnings/:userId',
     function (req, res) {
-        stripe.transfers.list({
-            limit: 100,
-            destination: req.params.accountId,
-        })
+        users.getStripeAccountId(req.params.userId)
+        .then((user)=>{
+            stripe.transfers.list({
+                limit: 100,
+                destination: user.Stripe_Acct_Id,
+            })
             .then((result) => {
                 //each index represents a monthly total
                 //begin with current month - 6 months at index 0
@@ -17,5 +20,10 @@ router.get('/API/GetAllEarnings/:accountId',
                 }
                 res.json(total)
             })
-    });
+        })
+        .catch((err)=>{
+            res.json(err)
+        })
+    
+    })
 module.exports = router;

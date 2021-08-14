@@ -83,10 +83,7 @@ class SingleVideo extends Component {
             const postBody = {
                 Creator_Id:this.state.video.Creator_Id,
                 VideoId: this.state.video._id,
-                UserId: this.props.user._id,
-                First_Name: this.props.user.First_Name,
-                Last_Name: this.props.user.Last_Name,
-                Image: this.props.user.Image
+                UserId: this.props.user._id
             };
             const requestMetadata = {
                 method: 'POST',

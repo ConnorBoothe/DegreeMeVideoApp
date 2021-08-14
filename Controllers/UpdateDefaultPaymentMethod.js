@@ -5,19 +5,24 @@ const bodyParser = require('body-parser');
 var UserDB = require('../Models/User');
 var users = new UserDB();
 
-router.post('/API/UpdateDefaultPaymentMethod', function(req, res){
+router.post('/API/UpdateDefaultPaymentMethod',
+    function (req, res) {
         //make payment method default
-        stripe.customers.update(
-            req.body.CustomerId,
-            {invoice_settings:{
-                default_payment_method: req.body.PaymentMethodId
-            }
-            }
-          ).then((result)=>{ 
-              res.json(result) 
-      })
-      .catch(()=>{
-          console.log("ERR")
-      })
-});
+        users.getCustomerId(req.body.UserId)
+            .then((user) => {
+                stripe.customers.update(
+                    user.Stripe_Customer_Id,
+                    {
+                        invoice_settings: {
+                            default_payment_method: req.body.PaymentMethodId
+                        }
+                    }
+                ).then((result) => {
+                    res.json(result)
+                })
+            })
+            .catch(() => {
+                console.log("ERR")
+            })
+    });
 module.exports = router;

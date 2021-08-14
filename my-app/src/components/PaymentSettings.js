@@ -76,6 +76,7 @@ class PaymentSettings extends Component {
             })
     }
     getStripePaymentMethods() {
+        //fixed
         const api_route = 'http://localhost:8080/API/GetPaymentMethods/' + window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
@@ -88,11 +89,13 @@ class PaymentSettings extends Component {
             .then(result => {
                 this.setState({ paymentMethods: result.data })
                 if (result.data.length === 0) {
+                    alert("contains none")
                     this.setState({ containsNoPaymentMethod: true })
                 }
             })
     }
     getStripeCustomer() {
+        //fixed
         const api_route = 'http://localhost:8080/API/GetStripeCustomer/' + window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
@@ -104,9 +107,10 @@ class PaymentSettings extends Component {
             .then(response => response.json())
             .then(result => {
                 this.setState({ customer: result })
-            })
+        })
     }
     getUpcomingPayments() {
+        //fixed
         const api_route = 'http://localhost:8080/API/GetUpcomingPayments/' + window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
@@ -143,8 +147,7 @@ class PaymentSettings extends Component {
         });
         const api_route = 'http://localhost:8080/API/AddSubscription';
         const postBody = {
-            CustomerId: window.location.href.split("/")[4],
-            UserId: this.props.user._id
+            UserId: window.location.href.split("/")[4]
         };
         const requestMetadata = {
             method: 'POST',
@@ -229,7 +232,7 @@ class PaymentSettings extends Component {
     updateDefaultPaymentMethod(paymentMethodId) {
         const api_route = 'http://localhost:8080/API/UpdateDefaultPaymentMethod';
         const postBody = {
-            CustomerId: window.location.href.split("/")[4],
+            UserId: window.location.href.split("/")[4],
             PaymentMethodId: paymentMethodId
         };
         const requestMetadata = {
@@ -250,7 +253,6 @@ class PaymentSettings extends Component {
         this.setCardLoading(true);
         const api_route = 'http://localhost:8080/API/RemovePaymentMethod';
         const postBody = {
-            CustomerId: window.location.href.split("/")[4],
             PaymentMethodId: paymentMethodId
         };
         const requestMetadata = {

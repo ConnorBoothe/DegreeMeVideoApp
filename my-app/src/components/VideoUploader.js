@@ -151,7 +151,6 @@ class VideoUploader extends Component {
         .then((url)=>{
           if(url === false) {
             this.setState({error: "An error occurred"})
-
           }
           else {
             

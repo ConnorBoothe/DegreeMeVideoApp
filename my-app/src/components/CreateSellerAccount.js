@@ -138,9 +138,6 @@ class CreateSellerAccount extends Component {
         const api_route = 'http://localhost:8080/API/CreateStripeAccount';
           const postBody = {
             user_id: user._id,
-            first_name: user.First_Name,
-            last_name: user.Last_Name,
-            email: user.Email,
             dob: this.state.dob,
             street_number: this.state.street_number,
             postal_code: this.state.postal_code,

@@ -96,14 +96,14 @@ class AvatarCropper extends Component {
         if(Cookies.get("user")){
           //name user avatar after email
         var user = JSON.parse(Cookies.get("user"))
-        const storageRef = firebase.storage().ref("avatars/"+user.Email).put(
+        const storageRef = firebase.storage().ref("avatars/"+user._id).put(
           this.base64ImageToBlob(this.state.preview), metadata)
         storageRef.on(`state_changed`,snapshot=>{
         }, error=>{
         },
         async () => {
           storageRef.snapshot.ref.getDownloadURL().then(async (url)=>{
-            this.postImageToDB(this.props.user._id, url)
+            this.postImageToDB(user._id, url)
             .then((user)=>{
               this.props.setUser(user)
               Cookies.set("user", user, {secure: true, sameSite: "strict"})
