@@ -78,7 +78,8 @@ class CommentList extends Component {
           }
     }
     getComments(){
-        const api_route = 'http://localhost:8080/API/Comments/'+window.location.href.split("/")[4];
+        // alert(window.location.href.split("/")[4])
+        const api_route = 'http://localhost:8080/API/Comments/'+this.props.VideoId;
         const requestMetadata = {
             method: 'GET',
             headers: {

@@ -46,10 +46,16 @@ router.post('/API/Login',
                         function (err, match) {
                             //password matches
                             if(match){
+                                console.log( new User(user._id, user.First_Name, 
+                                    user.Last_Name, user.Image,
+                                    user.Subscription_Level, 
+                                    hasBankAccount(user.Stripe_Bank_Acct_Id)
+                                ))
                                 res.json(
                                     new User(user._id, user.First_Name, 
                                         user.Last_Name, user.Image,
                                         user.Subscription_Level, 
+                                        user.Free_Tier_Seconds,
                                         hasBankAccount(user.Stripe_Bank_Acct_Id)
                                     )
                                 )

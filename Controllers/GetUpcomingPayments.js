@@ -16,8 +16,8 @@ router.get('/API/GetUpcomingPayments/:userId', function (req, res) {
         })
     })
     .catch((err) => {
-      console.log(err)
-      res.json("err")
+      console.log("No invoices")
+      res.json([])
     })
 });
 module.exports = router;

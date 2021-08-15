@@ -6,21 +6,25 @@ var UserDB = require('../Models/User');
 var users = new UserDB();
 
 router.post('/API/AttachPaymentMethod', function(req, res){
+  users.getUser(req.body.UserId)
+  .then((user)=>{
+    console.log(user.Stripe_Customer_Id)
+
     stripe.paymentMethods.attach(
         req.body.PaymentMethodId,
-        {customer: req.body.CustomerId}
+        {customer: user.Stripe_Customer_Id}
       )
       .then((result)=>{
         //make payment method default
         stripe.customers.update(
-            req.body.CustomerId,
+            user.Stripe_Customer_Id,
             {invoice_settings:{
                 default_payment_method: req.body.PaymentMethodId
             }
             }
           ).then(()=>{
             stripe.subscriptions.create({
-                customer: req.body.CustomerId,
+                customer: user.Stripe_Customer_Id,
                 items: [
                   {price: 'price_1J8uQ2EKHHXXF01HWqZv0vOv'},
                 ],
@@ -34,6 +38,7 @@ router.post('/API/AttachPaymentMethod', function(req, res){
               })
           })
       })
+    })
       .catch((err)=>{
         console.log(err)
           console.log("ERR")

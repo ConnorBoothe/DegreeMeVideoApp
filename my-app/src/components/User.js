@@ -49,7 +49,8 @@ class User extends Component {
     }
   }
   getUser(){
-    const api_route = 'http://localhost:8080/API/GetUser/'+window.location.href.split("/")[4];
+    let id = this.props.match.params.id
+    const api_route = 'http://localhost:8080/API/GetUser/'+id;
     const requestMetadata = {
         method: 'GET',
         headers: {

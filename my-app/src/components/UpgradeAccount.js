@@ -37,7 +37,6 @@ class UpgradeAccount extends Component {
     const api_route = 'http://localhost:8080/API/AttachPaymentMethod';
     const postBody = {
       UserId: user._id,
-      CustomerId: user.Stripe_Customer_Id,
       PaymentMethodId: this.state.paymentMethod.id
     };
     const requestMetadata = {
@@ -281,7 +280,7 @@ class UpgradeAccount extends Component {
             <img className="upgrade-img" src={Video_Sub} alt="Upgrade"/>
           </div>
           {this.renderCardInput()}
-          {this.showLoader()}
+          {/* {this.showLoader()} */}
           {this.showProcessText()}
         </div>
       );

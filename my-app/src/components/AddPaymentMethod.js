@@ -11,7 +11,7 @@ class AddPaymentMethod extends Component {
             cardComplete: false,
             loading: false,
             loadStarted: false,
-            progressText:"Adding card",
+            progressText:"Adding card...",
             disableCardButton: false   
         }
         this.submitPaymentMethod = this.submitPaymentMethod.bind(this);
@@ -55,7 +55,7 @@ class AddPaymentMethod extends Component {
     handleSubmit = async (elements, stripe) => {
 
         this.setState({loading: true, loadStarted: true,
-            progressText: "Adding payment method",
+            progressText: "Adding payment method...",
         disableCardButton: true })
 
         if (!stripe || !elements) {
@@ -125,11 +125,11 @@ class AddPaymentMethod extends Component {
                 },
               }} 
             />
-            <button className="btn btn-primary add-card-btn" 
+            
+          </div>
+          <button className="btn btn-primary add-card-btn" 
             disabled={!stripe || !this.state.cardComplete || this.state.disableCardButton}
             onClick={()=> this.handleSubmit(elements, stripe)}>Add Card</button>
-          </div>
-          
         </div>
       );
   }
@@ -138,8 +138,9 @@ class AddPaymentMethod extends Component {
       showLoader(){
           if(this.state.loading){
               return (
-                  <div>
-                       <div className="loader"></div> 
+                  <div className="load-container">
+                       {/* <div className="loader"></div>  */}
+                       <p className="text-light processText">{this.state.progressText}</p>
                   </div>
               )
           }
@@ -150,13 +151,13 @@ class AddPaymentMethod extends Component {
           }
       }
       showProcessText(){
-        if(this.state.loadStarted){
-            return (
-                <div>
-                    <p className="text-light processText">{this.state.progressText}</p>                          
-                </div>
-            )
-        }
+        // if(this.state.loadStarted){
+            // return (
+            //     <div>
+            //         <p className="text-light processText">{this.state.progressText}</p>                          
+            //     </div>
+            // )
+        // }
     }
     renderCard(){
         if(this.props.showCardInput) {
@@ -173,7 +174,7 @@ class AddPaymentMethod extends Component {
                 </Elements>
                 </div>
                 {this.showLoader()}
-                {this.showProcessText()}
+                {/* {this.showProcessText()} */}
            </div>
                 );
         }

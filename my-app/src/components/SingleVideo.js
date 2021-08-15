@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import CommentList from "../components/CommentList"
 import VideoActions from "../components/VideoActions";
 import UpgradeAccount from "../components/UpgradeAccount";
-
+import Cookies from 'js-cookie';
 import ReactPlayer from "react-player";
 
 import {
@@ -197,7 +197,8 @@ class SingleVideo extends Component {
             }
     }
     render(){
-        if(this.props.user._id === undefined) {
+        var user = JSON.parse(Cookies.get("user"));
+        if(user._id === undefined) {
             return(
                 <Redirect to="/CreateAccount" />            )
         }

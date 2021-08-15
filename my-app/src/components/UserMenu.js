@@ -90,7 +90,6 @@ class UserMenu extends Component {
         }
     }
     isLoggedIn(){
-       
         if(this.props.user._id){
             return(
                 <span>
@@ -115,7 +114,8 @@ class UserMenu extends Component {
             );
         }
         else {
-            
+            console.log("user props non no")
+            console.log(this.props)
             return (
             <li className="login-li">
                 <Link to="/Login" className="btn btn-primary login-home-btn">Log In</Link>

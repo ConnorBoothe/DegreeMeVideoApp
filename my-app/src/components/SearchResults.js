@@ -42,12 +42,12 @@ setSearchLabel(){
 //     this.getVideosFromSearchValue();
 // }
   getVideosFromSearchValue(){
-        var search = "";
+    var search = "";
       if(this.props.searchValue !== "") {
         search = this.props.searchValue;
       }
       else {
-          search = window.location.href.split("/")[4];
+        search = this.props.match.params.id;
       }
     const api_route = 'http://localhost:8080/API/GetVideosBySearchValue/'+search;
     const requestMetadata = {

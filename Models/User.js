@@ -1,5 +1,5 @@
-const { resolveCaa } = require("dns");
 const mongoose = require("mongoose");
+var UserClass = require("../Classes/User")
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
 });
@@ -22,7 +22,14 @@ var UserSchema = new Schema({
     Free_Tier_Seconds: {type: Number}
   }, {collection: 'User'});
 var UserDB = mongoose.model('User',UserSchema);
-
+function hasBankAccount(Stripe_Bank_Acct_Id){
+  if(Stripe_Bank_Acct_Id !== undefined) {
+      return true;
+  }
+  else {
+      return false;
+  }
+}
 module.exports = class User {
      //add user to db
      addUser(First_Name, Last_Name, Email, Password,
@@ -52,7 +59,11 @@ module.exports = class User {
           })
           user.save()
           .then((user)=>{
-            resolve(user)
+            resolve(
+              new UserClass(user._id, user.First_Name,
+                user.Last_Name, user.Image, user.Susbscription_Level,
+                user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
+            )
           })
           .catch((err)=>{
             reject(err)
@@ -172,7 +183,11 @@ module.exports = class User {
           .then((user)=>{
             user.Image = avatar;
             user.save()
-            resolve(user)
+            resolve(
+              new UserClass(user._id, user.First_Name,
+              user.Last_Name, user.Image, user.Susbscription_Level,
+              user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
+              )
           })
       })
     }
@@ -185,7 +200,11 @@ module.exports = class User {
           .then((user)=>{
             user.Bio = bio;
             user.save()
-            resolve(user)
+            resolve(
+              new UserClass(user._id, user.First_Name,
+              user.Last_Name, user.Image, user.Susbscription_Level,
+              user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
+              )
           })
       })
     }
@@ -204,7 +223,11 @@ module.exports = class User {
                 _id:id
               })
               .then((user)=>{
-                resolve(user)
+                resolve(
+                  new UserClass(user._id, user.First_Name,
+                    user.Last_Name, user.Image, user.Susbscription_Level,
+                    user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
+                )
               })
             })
           .catch((err)=>{

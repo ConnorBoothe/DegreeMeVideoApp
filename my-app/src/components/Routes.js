@@ -266,7 +266,7 @@ class Routes extends Component {
             <Route exact path="/Upgrade" render={props => 
             (<UpgradeAccount {...props} user={this.state.user}
                 setUser={this.setUser} />)} />
-         <Route exact path="/PaymentSettings/:customer_id" render={props => 
+         <Route exact path="/PaymentSettings/:id" render={props => 
             (<PaymentSettings {...props} user={this.state.user}
                 setUser={this.setUser} />)} />
             <Route exact path="/SearchResults/:id" render={props => 

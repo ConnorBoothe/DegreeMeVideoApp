@@ -62,7 +62,8 @@ class PaymentSettings extends Component {
         this.mounted = false
     }
     getStripeSubscriptions() {
-        const api_route = 'http://localhost:8080/API/GetSubscriptions/' + window.location.href.split("/")[4];
+        let id = this.props.match.params.id
+        const api_route = 'http://localhost:8080/API/GetSubscriptions/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -77,7 +78,8 @@ class PaymentSettings extends Component {
     }
     getStripePaymentMethods() {
         //fixed
-        const api_route = 'http://localhost:8080/API/GetPaymentMethods/' + window.location.href.split("/")[4];
+        let id = this.props.match.params.id
+        const api_route = 'http://localhost:8080/API/GetPaymentMethods/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -95,8 +97,8 @@ class PaymentSettings extends Component {
             })
     }
     getStripeCustomer() {
-        //fixed
-        const api_route = 'http://localhost:8080/API/GetStripeCustomer/' + window.location.href.split("/")[4];
+        let id = this.props.match.params.id
+        const api_route = 'http://localhost:8080/API/GetStripeCustomer/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -107,11 +109,11 @@ class PaymentSettings extends Component {
             .then(response => response.json())
             .then(result => {
                 this.setState({ customer: result })
-        })
+            })
     }
     getUpcomingPayments() {
-        //fixed
-        const api_route = 'http://localhost:8080/API/GetUpcomingPayments/' + window.location.href.split("/")[4];
+        let id = this.props.match.params.id
+        const api_route = 'http://localhost:8080/API/GetUpcomingPayments/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -127,7 +129,8 @@ class PaymentSettings extends Component {
             })
     }
     getPastTransactions() {
-        const api_route = 'http://localhost:8080/API/GetPastTransactions/' + window.location.href.split("/")[4];
+        let id = this.props.match.params.id
+        const api_route = 'http://localhost:8080/API/GetPastTransactions/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -147,7 +150,8 @@ class PaymentSettings extends Component {
         });
         const api_route = 'http://localhost:8080/API/AddSubscription';
         const postBody = {
-            UserId: window.location.href.split("/")[4]
+            UserId: this.props.match.params.id
+
         };
         const requestMetadata = {
             method: 'POST',
@@ -192,7 +196,7 @@ class PaymentSettings extends Component {
             return (
                 <div className="add-pro-sub-btn-container">
                     <button className="btn btn-primary add-pro-sub"
-                        onClick={() => this.addSubscription()} disabled={this.state.containsNoPaymentMethod || !this.state.hasDefault || this.state.disableSubButton}>Add Pro Subscription</button>
+                        onClick={() => this.addSubscription()} disabled={this.state.containsNoPaymentMethod || !this.checkIfDefaultExists() || this.state.disableSubButton}>Add Pro Subscription</button>
                     {this.showSubscriptionLoader()}
                 </div>
             )
@@ -232,7 +236,7 @@ class PaymentSettings extends Component {
     updateDefaultPaymentMethod(paymentMethodId) {
         const api_route = 'http://localhost:8080/API/UpdateDefaultPaymentMethod';
         const postBody = {
-            UserId: window.location.href.split("/")[4],
+            UserId: this.props.match.params.id,
             PaymentMethodId: paymentMethodId
         };
         const requestMetadata = {
@@ -285,7 +289,7 @@ class PaymentSettings extends Component {
     }
     formatCards(customer) {
         if (customer.invoice_settings) {
-            return this.state.paymentMethods.map((paymentMethod, index) => (               
+            return this.state.paymentMethods.map((paymentMethod, index) => (
                 <PaymentCard customer={customer} paymentMethod={paymentMethod}
                     updateDefaultPaymentMethod={this.updateDefaultPaymentMethod}
                     removePaymentMethod={this.removePaymentMethod}
@@ -297,7 +301,7 @@ class PaymentSettings extends Component {
         this.setState({ cardLoading: status })
     }
     showCardError(hasDefault) {
-        // this.setState({hasDefault:hasDefault });
+        //  this.setState({hasDefault:hasDefault });
         if (this.state.containsNoPaymentMethod) {
             return (
                 <p className="text-danger">
@@ -337,9 +341,7 @@ class PaymentSettings extends Component {
                 <h4 className="text-light">Cards on file</h4>
                 {this.showCardError(defaultExists)}
 
-
                 <ul>
-                  
                     {this.formatCards(this.state.customer)}
                     <li>
                         <AddPaymentMethod showCardInput={this.state.showCardInput}
@@ -368,8 +370,8 @@ class PaymentSettings extends Component {
                         </thead>
                         <tbody>
                             {this.state.payments.map((payment, index) => (
-                                
-                                <tr className="text-light"  key={index}>
+
+                                <tr className="text-light" key={index}>
                                     <td>${payment.amount / 100}.00
                                         <span className="badge badge-success status-badge">{payment.status}</span>
                                     </td>
@@ -377,9 +379,9 @@ class PaymentSettings extends Component {
                                     <td>{formatDate.displayDate(new Date(payment.created * 1000))}</td>
                                     <td></td>
                                 </tr>
-                                
+
                             ))}
-                                
+
                         </tbody>
                         <tfoot>
                         </tfoot>

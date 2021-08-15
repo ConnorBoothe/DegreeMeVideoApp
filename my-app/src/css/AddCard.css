@@ -4,6 +4,7 @@
     border-radius: 20px;
     margin-top: 25px;
     font-size: 14px;
+    position: relative;
 }
 .card-input-container-1 {
     height: 40px;
@@ -19,4 +20,7 @@
 }
 .processText{
     text-align: center;
+}
+.load-container {
+    position: relative;
 }
