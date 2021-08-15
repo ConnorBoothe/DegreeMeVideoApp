@@ -13,9 +13,19 @@ router.use(bodyParser.urlencoded({
     resave: false,
     saveUninitialized: true
 }));
-
-var UserDB = require('../Models/User');
-var users = new UserDB();
+//user db
+const UserDB = require('../Models/User');
+const users = new UserDB();
+//user class
+var User = require('../Classes/User');
+function hasBankAccount(Stripe_Bank_Acct_Id){
+    if(Stripe_Bank_Acct_Id !== undefined) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 //endpoint to add user to database
 router.post('/API/Login', 
     check('Email').isString().isEmail().escape(),
@@ -36,7 +46,13 @@ router.post('/API/Login',
                         function (err, match) {
                             //password matches
                             if(match){
-                                res.json(user)
+                                res.json(
+                                    new User(user._id, user.First_Name, 
+                                        user.Last_Name, user.Image,
+                                        user.Subscription_Level, 
+                                        hasBankAccount(user.Stripe_Bank_Acct_Id)
+                                    )
+                                )
                             }
                             else {
                                 res.json(false)

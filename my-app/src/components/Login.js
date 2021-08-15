@@ -96,6 +96,7 @@ class LoginForm extends Component {
             fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((user)=>{
+                console.log(user)
                 if(!user){
                     this.setState({error: "Incorrect email or password"})
                     this.showError();
@@ -103,7 +104,6 @@ class LoginForm extends Component {
                 else {
                     this.props.setUser(user);
                     this.props.getUnreadCount();
-                    Cookies.set('user', JSON.stringify(user), {secure: true, sameSite: "strict"}) 
                     this.setState({redirect: true})
                     this.props.getUnreadCount()
                 }

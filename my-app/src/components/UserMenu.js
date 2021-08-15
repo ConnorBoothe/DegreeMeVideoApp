@@ -91,7 +91,7 @@ class UserMenu extends Component {
     }
     isLoggedIn(){
        
-        if(this.props.user.First_Name){
+        if(this.props.user._id){
             return(
                 <span>
                 <Tippy content="Account">

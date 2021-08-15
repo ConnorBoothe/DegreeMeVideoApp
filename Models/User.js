@@ -137,7 +137,8 @@ module.exports = class User {
     }
     //attempt to login user
     login(Email){
-        return UserDB.findOne({Email: Email});
+        return UserDB.findOne({Email: Email},"First_Name Last_Name Image "+
+        "Email Password Subscription_Level Stripe_Bank_Acct_Id");
     }
     //get user by id
     getUser(id){

@@ -163,8 +163,6 @@ class CreateSellerAccount extends Component {
                 //call setUser here with new user object
                 this.setState({success: true, formSubmitted: false})
                 this.props.setUser(result)
-                Cookies.set("user", result, {secure: true, sameSite: "strict"})
-
             }
             else {
                 this.setState({error: result.raw.message, formSubmitted: false})

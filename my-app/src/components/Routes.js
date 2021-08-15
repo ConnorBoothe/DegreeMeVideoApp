@@ -45,7 +45,6 @@ class Routes extends Component {
         this.addKeyword = this.addKeyword.bind(this);
         this.removeKeyword = this.removeKeyword.bind(this);
         this.keyword = React.createRef();
-
     }
     setUser(user){
         Cookies.set("user", user, {secure: true, sameSite: "strict"})

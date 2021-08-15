@@ -12,7 +12,6 @@ import CreateAccount from "../components/CreateAccount"
 import CreateSellerAccount from "../components/CreateSellerAccount"
 import 'bootstrap/dist/css/bootstrap.css';
 
-// import FileUploader from "react-firebase-file-uploader";
 const config = {
     apiKey: "AIzaSyCdNXC20rfZy4WU_Yo0r1_jqurajcevaI0",
     authDomain: "degreeme-bd5c7.firebaseapp.com",
@@ -188,7 +187,9 @@ class VideoUploader extends Component {
       
     }
   renderUploader(){
-  if(this.props.user.Stripe_Bank_Acct_Id !== undefined && 
+    //need to fix
+    console.log()
+  if(this.props.user.hasBankAccount == true && 
     this.props.user._id !== undefined) {
     const readImage =(file)=>{
   const id = uuid();
@@ -290,7 +291,7 @@ return (
 
 );
 }
-else if(this.props.user.Stripe_Bank_Acct_Id === undefined && 
+else if(this.props.user.hasBankAccount === false && 
   this.props.user._id !== undefined) {
     return (
       <CreateSellerAccount setUser={this.props.setUser} />
@@ -314,8 +315,6 @@ else{
           creator_email: user.Email,
           creator_image: user.Image,
         })
-        this.props.setUser(JSON.parse(Cookies.get("user")))
-
     }
     }
     postThumbnailToFirebase(image){
