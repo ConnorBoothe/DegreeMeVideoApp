@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const {
     check,
     validationResult
-  } = require('express-validator');
+} = require('express-validator');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
     extended: true,
@@ -14,9 +14,10 @@ router.use(bodyParser.urlencoded({
 var KeyWordsDB = require('../Models/UserKeyWords');
 var keywords = new KeyWordsDB();
 //endpoint to add user to database
-router.post('/API/RemoveKeyword', 
+router.post('/API/RemoveKeyword',
     check('word').isString().escape(),
-    function(req, res){
+    check('userId').isString().escape(),
+    function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
@@ -25,10 +26,9 @@ router.post('/API/RemoveKeyword',
             //add user to DB if validation succeeds
             //encrypt password
             keywords.removeKeyword(req.body.userId, req.body.word)
-            .then((user)=>{
-                res.json(user)
-            })
-            
+                .then((user) => {
+                    res.json(user)
+                })
         }
-});
+    });
 module.exports = router;

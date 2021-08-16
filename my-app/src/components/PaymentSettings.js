@@ -151,7 +151,6 @@ class PaymentSettings extends Component {
         const api_route = 'http://localhost:8080/API/AddSubscription';
         const postBody = {
             UserId: this.props.match.params.id
-
         };
         const requestMetadata = {
             method: 'POST',

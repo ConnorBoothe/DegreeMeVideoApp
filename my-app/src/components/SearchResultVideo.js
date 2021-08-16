@@ -3,8 +3,9 @@ import "../css/VideoRow.css";
 import "../css/Video.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import FormatDate from "../GlobalFunctions/FormatDate";
+import HtmlDecode from '../GlobalFunctions/HTMLDecode'
 var formatDate = new FormatDate();
-// import ReactPlayer from "react-player";
+var decode = new HtmlDecode();
 
 class Video extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class Video extends Component {
                             <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
                         </svg>
                     </div>
-                    <img className="thumbnail-search-result" src={this.props.Thumbnail} alt="Thumbnail"/>
+                    <img className="thumbnail-search-result" src={decode.htmlDecode(this.props.Thumbnail)} alt="Thumbnail"/>
 
                     <div className="video-details-search-result">
                         <div className="sub-details-search-result">

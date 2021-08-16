@@ -63,7 +63,7 @@ class UpdatePassword extends Component {
             const postBody = {
                 userId: this.state.userId,
                 password: this.state.password,
-                req_id: window.location.href.split("/")[4]
+                req_id: this.props.match.params.id
             };
             const requestMetadata = {
                 method: 'POST',

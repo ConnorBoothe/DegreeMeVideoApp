@@ -2,22 +2,38 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
+    extended: true,
+    resave: false,
+    saveUninitialized: true
+}));
 const {
     check,
     validationResult
 } = require('express-validator');
-const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 const UserDB = require("../Models/User");
 const users = new UserDB();
 router.post('/API/CreateStripeAccount',
-    // check('dob').trim(),
-    check('phone').trim().escape(),
+    check('user_id').isString().trim(),
+    check('dob').isDate(),
+    check('postal_code').isString(),
+    check('city').trim(),
+    check('state').trim().escape(),
+    check('country').trim(),
+    check('phone').isString(),
+    check('ssn').isString().trim(),
+    check('routing_number').isString().trim().escape(),
+    check('account').isString().trim().escape(),
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             res.redirect('/home');
         }
-        //logic goes here
+        else {
+
+        
         var dob = (req.body.dob).split('-');
         var phone = (req.body.phone).replace(/-/g, "");
         //phone=phone.replaceAll("-","")
@@ -98,7 +114,8 @@ router.post('/API/CreateStripeAccount',
             })
             .catch((err) => {
                 res.json(err)
-    })
+            })
+        }
     })
 
 module.exports = router;

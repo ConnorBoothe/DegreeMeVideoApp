@@ -2,16 +2,25 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
+    extended: true,
+    resave: false,
+    saveUninitialized: true
+}));
 const {
     check,
     validationResult
   } = require('express-validator');
-const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 const UserDB = require("../Models/User");
 const users = new UserDB();
+//error
+//route will not work
+//recycle this route, not in use
 router.post('/API/CreateStripeCustomer',
-    // check('dob').trim(),
-    // check('phone').trim().escape(),
+    check('dob').trim(),
+    check('phone').trim().escape(),
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {

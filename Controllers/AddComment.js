@@ -16,9 +16,12 @@ var comments = new CommentsDB();
 
 var UserDB = require('../Models/User');
 var users = new UserDB();
+
 //add comment to db
+//done
 router.post('/API/AddComment', 
     check('Video_Id').isString().escape(),
+    check('User_Id').isString().escape(),
     check('Message').isString().escape(),
     function(req, res){
         const errors = validationResult(req);

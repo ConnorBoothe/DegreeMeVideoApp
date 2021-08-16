@@ -30,13 +30,14 @@ class VideoUploader extends Component {
         this.state = { 
             uploadProgress: 0,
             show:false,
+            uploading:false,
             error:"",
             tags:[],
             thumbnail:"",
-            creator: "",
-            creator_id: "",
-            creator_email: "",
-            creator_image: "",
+            // creator: "",
+            // creator_id: "",
+            // creator_email: "",
+            // creator_image: "",
             title:"",
             description: "",
             uploadType:"Uploading video",
@@ -116,10 +117,14 @@ class VideoUploader extends Component {
   //create thumbnail from video file
   createThumbnail() {
     return new Promise((resolve, reject)=>{
+      console.log("creating thumbnail")
       this.setState({uploadType: "Creating thumbnail"});
       const video = new Video(this.Link.current.files[0]);
+      console.log(video)
       video.getThumbnails().then((thumbnails)=>{
+        console.log(thumbnails)
         var reader = new FileReader();
+        console.log(thumbnails[0])
         if(thumbnails[0].blob === null){
           resolve(false)
         }
@@ -144,7 +149,9 @@ class VideoUploader extends Component {
     this.setState({tags: newArray});
   }
     addVideoToDatabase(videoUrl){
-      if(this.props.user._id !== undefined) {
+      console.log("adding video")
+      var user = JSON.parse(Cookies.get("user"));
+      if(user._id !== undefined) {
         const api_route = 'http://localhost:8080/API/AddVideo';
         this.createThumbnail(this.Link.current.files[0])
         .then((url)=>{
@@ -155,10 +162,7 @@ class VideoUploader extends Component {
             
           this.setState({uploadType: "Posting to database"});
           const postBody = {
-            Creator: this.state.creator,
-            Creator_Id: this.state.creator_id,
-            Email: this.state.creator_email,
-            Creator_Image: this.state.creator_image,
+            Creator_Id: user._id,
             Title: this.state.title,
             Description: this.state.description,
             Link: videoUrl,
@@ -175,7 +179,15 @@ class VideoUploader extends Component {
         fetch(api_route, requestMetadata)
         .then(res => res.json())
         .then((video)=>{
-          this.setState({videoId: video._id})
+          this.setState({
+            videoId: video._id,
+            title:"",
+            description: "",
+            tags:[],
+            filename: "",
+            uploading:false,
+            show:false
+          })
           this.showModal();
         })
         .catch((err)=>{
@@ -188,8 +200,8 @@ class VideoUploader extends Component {
     }
   renderUploader(){
     //need to fix
-    console.log()
-  if(this.props.user.hasBankAccount == true && 
+    console.log(this.props.user)
+  if(this.props.user.hasBankAccount &&
     this.props.user._id !== undefined) {
     const readImage =(file)=>{
   const id = uuid();
@@ -226,7 +238,8 @@ const addVideo =(e)=>{
       this.setState({error: "File upload must be .mp4 format"})
     }
     else{
-     readImage(this.Link.current.files[0])
+      this.setState({uploading: true})
+      readImage(this.Link.current.files[0])
     }
     
 }
@@ -277,7 +290,8 @@ return (
             tags = {this.state.tags} removeTag = { this.removeTag}/>
           </li>
           <li>
-              <button className="btn-primary add-video" onClick={addVideo}>Upload Video</button>
+              <button className="btn-primary add-video" onClick={addVideo}
+              disabled={this.state.uploading}>Upload Video</button>
           </li>
           <li>
               <ProgressBar progress={this.uploadProgress} show={this.state.show} 
@@ -305,17 +319,6 @@ else{
           </div>
         )
       }
-    }
-    componentDidMount(){
-      if(Cookies.get("user")!== undefined) {
-        var user = JSON.parse(Cookies.get("user"));
-        this.setState({
-          creator: user.First_Name + " " +user.Last_Name,
-          creator_id: user._id,
-          creator_email: user.Email,
-          creator_image: user.Image,
-        })
-    }
     }
     postThumbnailToFirebase(image){
       return new Promise((resolve, reject)=>{

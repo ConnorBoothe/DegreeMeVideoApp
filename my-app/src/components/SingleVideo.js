@@ -6,10 +6,12 @@ import VideoActions from "../components/VideoActions";
 import UpgradeAccount from "../components/UpgradeAccount";
 import Cookies from 'js-cookie';
 import ReactPlayer from "react-player";
-
+import HtmlDecode from "../GlobalFunctions/HTMLDecode"
 import {
     Link, Redirect
   } from "react-router-dom";
+var decode = new HtmlDecode();
+
 
 class SingleVideo extends Component {
     constructor(props) {
@@ -47,8 +49,12 @@ class SingleVideo extends Component {
         //do not add view if the viewer is also Creator
         setTimeout(()=>{
             const api_route = 'http://localhost:8080/API/AddView';
+            var userId = "none"
+            if(this.props.user._id !== undefined){
+                userId = this.props.user._id;
+            }
             const postBody = {
-                UserId: this.props.user._id,
+                UserId: userId,
                 CreatorId: this.state.video.Creator_Id,
                 VideoId: this.state.video._id,
             };
@@ -209,7 +215,7 @@ class SingleVideo extends Component {
                     {/* <CreateAccountModal isOpen={this.state.isOpen} hideModal={this.hideModal}/> */}
                         <div className="single-video-frame">
                         <ReactPlayer 
-                            url={this.state.video.Link}
+                            url={decode.htmlDecode(this.state.video.Link)}
                             onDuration={this.duration}
                             controls
                             width="100%"

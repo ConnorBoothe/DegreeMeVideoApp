@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
-const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 const {
     check,
@@ -19,14 +19,18 @@ var users = new UserDB();
 var KeywordsDB = require('../Models/UserKeyWords');
 var keywords = new KeywordsDB();
 //endpoint to add user to database
+//done
 router.post('/API/AddUser', 
     check('First_Name').isString().escape(),
     check('Last_Name').isString().escape(),
     check('Email').isString().isEmail().escape(),
     check('Password').isString().escape(),
+    check('Keywords').isArray(),
+    check('Subscription').isString().escape(),
     function(req, res){
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
+            console.log(errors)
             return res.status(400).json({ errors: errors.array() });
         }
         else {

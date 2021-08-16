@@ -17,6 +17,7 @@ var reviews = new ReviewsDB();
 var UserDB = require('../Models/User');
 var users = new UserDB();
 //endpoint to add review to database
+//done
 router.post('/API/AddReview',
     check('Creator_Id').isString().escape(),
     check('User_Id').isString().escape(),

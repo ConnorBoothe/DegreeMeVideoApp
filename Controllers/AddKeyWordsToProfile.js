@@ -14,7 +14,9 @@ router.use(bodyParser.urlencoded({
 var KeyWordsDB = require('../Models/UserKeyWords');
 var keywords = new KeyWordsDB();
 //endpoint to add user to database
+//done
 router.post('/API/AddKeywords', 
+    check('userId').isString().escape(),
     check('word').isString().escape(),
     function(req, res){
         const errors = validationResult(req);

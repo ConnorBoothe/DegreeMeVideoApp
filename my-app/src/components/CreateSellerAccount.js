@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "../css/UserMenu.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import "../css/CreateSellerAccount.css"
@@ -7,27 +7,26 @@ import 'react-phone-input-2/lib/style.css'
 import Cookies from "js-cookie"
 import { Link } from 'react-router-dom';
 
-
 // import bootstrap from "bootstrap";
 class CreateSellerAccount extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {
-           dob:"",
-           street_number: "",
-           postal_code: "",
-           city: "",
-           country:"US",
-           state:"North Carolina",
-           phone:"",
-           ssn:"",
-           routing_number: "",
-           account_number:"",
-           formComplete: false,
-           formSubmitted: false,
-           error: false,
-           success: false,
-           agreedToTerms: false
+            dob: "",
+            street_number: "",
+            postal_code: "",
+            city: "",
+            country: "US",
+            state: "North Carolina",
+            phone: "",
+            ssn: "",
+            routing_number: "",
+            account_number: "",
+            formComplete: false,
+            formSubmitted: false,
+            error: false,
+            success: false,
+            agreedToTerms: false
         }
         this.createStripeAccount = this.createStripeAccount.bind(this);
         this.createStateDropdown = this.createStateDropdown.bind(this);
@@ -43,58 +42,58 @@ class CreateSellerAccount extends Component {
         this.showLoader = this.showLoader.bind(this);
         this.setAgreedToTerms = this.setAgreedToTerms.bind(this)
     }
-    setAgreedToTerms(e){
-        this.setState({agreedToTerms: e.target.checked})
-      }
-    validateInputFields(){
-        if(this.state.routing_number.length !== 9) {
+    setAgreedToTerms(e) {
+        this.setState({ agreedToTerms: e.target.checked })
+    }
+    validateInputFields() {
+        if (this.state.routing_number.length !== 9) {
             return "Routing number length must be 9";
         }
-        else if(this.state.account_number.length !== 12) {
+        else if (this.state.account_number.length !== 12) {
             return "Account number length must be 12";
         }
     }
-    handleDOBChange(e){
-        this.setState({dob: e.target.value})
+    handleDOBChange(e) {
+        this.setState({ dob: e.target.value })
     }
-    handleStreetNumberChange(e){
-        this.setState({street_number: e.target.value})
+    handleStreetNumberChange(e) {
+        this.setState({ street_number: e.target.value })
     }
-    handlePostalChange(e){
-        this.setState({postal_code: e.target.value})
+    handlePostalChange(e) {
+        this.setState({ postal_code: e.target.value })
     }
-    handleCityChange(e){
-        this.setState({city: e.target.value})
+    handleCityChange(e) {
+        this.setState({ city: e.target.value })
     }
-    handleStateChange(e){
-        this.setState({city: e.target.value})
+    handleStateChange(e) {
+        this.setState({ city: e.target.value })
     }
     // handlePhoneChange(e){
     //     console.log("change")
     //     // this.setState({phone: e.target.value})
     // }
-    showError(){
-        if(this.state.error !== false) {
+    showError() {
+        if (this.state.error !== false) {
             return (
                 <div className="create-payment-message">
-                <p className=" badge-danger create-payment-account-error ">{this.state.error}</p>
+                    <p className=" badge-danger create-payment-account-error ">{this.state.error}</p>
                 </div>
             );
-            
+
         }
     }
-    showSuccess(){
-        if(this.state.success) {
+    showSuccess() {
+        if (this.state.success) {
             return (
                 <div className="create-payment-message">
-                <p className=" badge-success create-payment-account-error ">Payment Account Added</p>
+                    <p className=" badge-success create-payment-account-error ">Payment Account Added</p>
                 </div>
             );
-            
+
         }
     }
-    showLoader(){
-        if(this.state.formSubmitted) {
+    showLoader() {
+        if (this.state.formSubmitted) {
             return (
                 <div className="create-payment-message">
                     <div className="loader-create-payment-account"></div>
@@ -103,76 +102,76 @@ class CreateSellerAccount extends Component {
             );
         }
     }
-    handleSSNChange(e){
-        if(isNaN(e.target.value)){
+    handleSSNChange(e) {
+        if (isNaN(e.target.value)) {
             e.target.value = this.state.ssn;
         }
-        else if(e.target.value.length < 5) {
-            this.setState({ssn: e.target.value})
+        else if (e.target.value.length < 5) {
+            this.setState({ ssn: e.target.value })
         }
-       
+
         else {
             e.target.value = this.state.ssn;
         }
     }
-    handleRoutingChange(e){
-        if(isNaN(e.target.value) || e.target.value.length > 9) {
+    handleRoutingChange(e) {
+        if (isNaN(e.target.value) || e.target.value.length > 9) {
             e.target.value = this.state.routing_number;
         }
         else {
-            this.setState({routing_number: e.target.value})
+            this.setState({ routing_number: e.target.value })
         }
     }
-    handleAccountChange(e){
-        if(isNaN(e.target.value) || e.target.value.length > 12) {
+    handleAccountChange(e) {
+        if (isNaN(e.target.value) || e.target.value.length > 12) {
             e.target.value = this.state.account_number;
         }
         else {
-            this.setState({account_number: e.target.value})
+            this.setState({ account_number: e.target.value })
         }
     }
-    createStripeAccount(){
-        if(Cookies.get("user") !== undefined) {
-            this.setState({formSubmitted: true, error: false})
-        var user = JSON.parse(Cookies.get("user"));
-        const api_route = 'http://localhost:8080/API/CreateStripeAccount';
-          const postBody = {
-            user_id: user._id,
-            dob: this.state.dob,
-            street_number: this.state.street_number,
-            postal_code: this.state.postal_code,
-            city: this.state.city,
-            state: this.state.state,
-            country: this.state.country,
-            phone: this.state.phone,
-            ssn: this.state.ssn,
-            routing_number: this.state.routing_number,
-            account: this.state.account_number,
-        };
-        const requestMetadata = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(postBody)
-        };
-        fetch(api_route, requestMetadata)
-        .then(res => res.json())
-        .then((result)=>{
-            if(result._id !== undefined) {
-                //call setUser here with new user object
-                this.setState({success: true, formSubmitted: false})
-                this.props.setUser(result)
-            }
-            else {
-                this.setState({error: result.raw.message, formSubmitted: false})
-            }
-        })
-        .catch((err)=>{
-        })
+    createStripeAccount() {
+        if (Cookies.get("user") !== undefined) {
+            this.setState({ formSubmitted: true, error: false })
+            var user = JSON.parse(Cookies.get("user"));
+            const api_route = 'http://localhost:8080/API/CreateStripeAccount';
+            const postBody = {
+                user_id: user._id,
+                dob: this.state.dob,
+                street_number: this.state.street_number,
+                postal_code: this.state.postal_code,
+                city: this.state.city,
+                state: this.state.state,
+                country: this.state.country,
+                phone: this.state.phone,
+                ssn: this.state.ssn,
+                routing_number: this.state.routing_number,
+                account: this.state.account_number
+            };
+            const requestMetadata = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postBody)
+            };
+            fetch(api_route, requestMetadata)
+                .then(res => res.json())
+                .then((result) => {
+                    if (result._id !== undefined) {
+                        //call setUser here with new user object
+                        this.setState({ success: true, formSubmitted: false })
+                        this.props.setUser(result)
+                    }
+                    else {
+                        this.setState({ error: result.raw.message, formSubmitted: false })
+                    }
+                })
+                .catch((err) => {
+                })
+        }
     }
-    }
-    createStateDropdown(){
+    createStateDropdown() {
         return (
             <div className="state-select-container">
                 <select className="state-select" name="state-select" onChange={this.handleStateChange}>
@@ -228,103 +227,103 @@ class CreateSellerAccount extends Component {
             </div>
         )
     }
-  render(){
-    return (
-        <div className="create-seller-account">
-            <h4 className="text-light create-seller-title">Create a seller account so you can be paid for your content</h4>
-            <div className="badge badge-warning create-seller-message">
-                We do not save any of the below data on our servers. 
+    render() {
+        return (
+            <div className="create-seller-account">
+                <h4 className="text-light create-seller-title">Create a seller account so you can be paid for your content</h4>
+                <div className="badge badge-warning create-seller-message">
+                    We do not save any of the below data on our servers.
             </div>
-            <p className="text-light">Your data will be stored with our payments processor, Stripe.</p>
-            <a href="https://stripe.com/legal" className="stripe-link" target="_blank" rel="noreferrer">Stripe's terms and conditions</a>
-            <input type="hidden" autocomplete="false"/>
-            <ul className="create-seller-list">
-                
-       
-           <li className="create-seller-li-1">
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label">Street Number</p>
-                <input className="create-seller-input" type="text" onChange={this.handleStreetNumberChange}
-                autocomplete="off"/>
-            </div>
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label" >Postal Code</p>
-                <input autocomplete="off" type="text" onChange={this.handlePostalChange}
-                className="create-seller-input" />
-            </div>
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label" >City</p>
-                <input autocomplete="off" type="text" onChange={this.handleCityChange}
-                className="create-seller-input"  />
-            </div>
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label">State</p>
-                {this.createStateDropdown()}
-            </div>
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label" >Country</p>
-                <input autocomplete="off" className="create-seller-input" type="text" disabled value="US" />
-            </div>
-            </li>
-            <li className="create-seller-li-2">
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label" >Phone Number</p>
-                <PhoneInput
-                    country={'us'}
-                    value={this.state.phone}
-                    onChange={phone => this.setState({ phone })}
-                    inputStyle={{
-                        border: "none",
-                        backgroundColor: "#181818"
-                      }}
-                    />
-  
-                {/* <input  className="create-seller-input" type="tel" onChange={this.handlePhoneChange} /> */}
-            </div>
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label" >Date of Birth</p>
-                <input autocomplete="off" className="create-seller-input" type="date" onChange={this.handleDOBChange} />
-            </div>
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label" >Last 4 Digits of Social Security Number</p>
-                <input autocomplete="off" className="create-seller-input" type="text" onChange={this.handleSSNChange}/>
-            </div>
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label" >Routing Number</p>
-                <input autocomplete="off" className="create-seller-input" type="text" onChange={this.handleRoutingChange}/>
-            </div>
-            <div className="create-seller-input-container">
-                <p className="text-light create-seller-label"  >Account Number</p>
-                <input className="create-seller-input" type="text" onChange={this.handleAccountChange}/>
-            </div>
-            </li>
+                <p className="text-light">Your data will be stored with our payments processor, Stripe.</p>
+                <a href="https://stripe.com/legal" className="stripe-link" target="_blank" rel="noreferrer">Stripe's terms and conditions</a>
+                <input type="hidden" autocomplete="false" />
+                <ul className="create-seller-list">
 
-            </ul>
-            <div>
-            <Link to="/">
-                Terms and Conditions
+
+                    <li className="create-seller-li-1">
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label">Street Number</p>
+                            <input className="create-seller-input" type="text" onChange={this.handleStreetNumberChange}
+                                autocomplete="off" />
+                        </div>
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label" >Postal Code</p>
+                            <input autocomplete="off" type="text" onChange={this.handlePostalChange}
+                                className="create-seller-input" />
+                        </div>
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label" >City</p>
+                            <input autocomplete="off" type="text" onChange={this.handleCityChange}
+                                className="create-seller-input" />
+                        </div>
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label">State</p>
+                            {this.createStateDropdown()}
+                        </div>
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label" >Country</p>
+                            <input autocomplete="off" className="create-seller-input" type="text" disabled value="US" />
+                        </div>
+                    </li>
+                    <li className="create-seller-li-2">
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label" >Phone Number</p>
+                            <PhoneInput
+                                country={'us'}
+                                value={this.state.phone}
+                                onChange={phone => this.setState({ phone })}
+                                inputStyle={{
+                                    border: "none",
+                                    backgroundColor: "#181818"
+                                }}
+                            />
+
+                            {/* <input  className="create-seller-input" type="tel" onChange={this.handlePhoneChange} /> */}
+                        </div>
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label" >Date of Birth</p>
+                            <input autocomplete="off" className="create-seller-input" type="date" onChange={this.handleDOBChange} />
+                        </div>
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label" >Last 4 Digits of Social Security Number</p>
+                            <input autocomplete="off" className="create-seller-input" type="text" onChange={this.handleSSNChange} />
+                        </div>
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label" >Routing Number</p>
+                            <input autocomplete="off" className="create-seller-input" type="text" onChange={this.handleRoutingChange} />
+                        </div>
+                        <div className="create-seller-input-container">
+                            <p className="text-light create-seller-label"  >Account Number</p>
+                            <input className="create-seller-input" type="text" onChange={this.handleAccountChange} />
+                        </div>
+                    </li>
+
+                </ul>
+                <div>
+                    <Link to="/">
+                        Terms and Conditions
               </Link>
-            </div>
-            <div className="terms-container">
-           
-                <input onChange={this.setAgreedToTerms} type="checkbox" className="terms-checkbox"/>
-                <span className="agree-text text-light">I agree to DegreeMe's terms and conditions</span>
-            </div>
-            <br></br>
-            <button type="submit" className="btn btn-primary" onClick={this.createStripeAccount}
-            disabled={!(this.state.dob !== "" && this.state.street_number !== ""
-            && this.state.postal_code !== "" && this.state.city !== "" 
-            && this.state.state !== "" && this.state.ssn !== ""
-            && this.state.routing_number !== "" && this.state.account_number !== ""
-            && this.state.phone !== "" && this.state.agreedToTerms) || this.state.formSubmitted}
-            >Create Payment Account</button>
-            {this.showLoader()}
-            {this.showError()}
-            {this.showSuccess()}
-            
+                </div>
+                <div className="terms-container">
 
-        </div>
-    );
-  }
+                    <input onChange={this.setAgreedToTerms} type="checkbox" className="terms-checkbox" />
+                    <span className="agree-text text-light">I agree to DegreeMe's terms and conditions</span>
+                </div>
+                <br></br>
+                <button type="submit" className="btn btn-primary" onClick={this.createStripeAccount}
+                    disabled={!(this.state.dob !== "" && this.state.street_number !== ""
+                        && this.state.postal_code !== "" && this.state.city !== ""
+                        && this.state.state !== "" && this.state.ssn !== ""
+                        && this.state.routing_number !== "" && this.state.account_number !== ""
+                        && this.state.phone !== "" && this.state.agreedToTerms) || this.state.formSubmitted}
+                >Create Payment Account</button>
+                {this.showLoader()}
+                {this.showError()}
+                {this.showSuccess()}
+
+
+            </div>
+        );
+    }
 }
 export default CreateSellerAccount;

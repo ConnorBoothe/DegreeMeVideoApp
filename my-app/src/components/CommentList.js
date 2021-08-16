@@ -4,7 +4,8 @@ import '../css/Comments.css';
 import CommentInput from "../components/CommentInput"
 import Comment from "../components/Comment"
 import CreateAccountModal from "../components/CreateAccountModal";
-
+import htmlDecode from "../GlobalFunctions/HTMLDecode";
+var decode = new htmlDecode();
 class CommentList extends Component {
     constructor(props) {
         super(props);
@@ -97,12 +98,6 @@ class CommentList extends Component {
     componentDidMount(){
         this.getComments();
     }
-    htmlDecode(input){
-        var e = document.createElement('textarea');
-        e.innerHTML = input;
-        // handle case of empty input
-        return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
-      }
     render(){
         return (
             <div className="comment-list">
@@ -119,9 +114,9 @@ class CommentList extends Component {
                 {this.state.comments.map((comment, index) => (
                     <li key={index}>
                         <Comment 
-                            Image={this.htmlDecode(comment.Author_Img)}
+                            Image={decode.htmlDecode(comment.Author_Img)}
                             Creator={comment.Author_First_Name + " " + comment.Author_Last_Name} 
-                            Message={this.htmlDecode(comment.Message)}
+                            Message={decode.htmlDecode(comment.Message)}
                             Date={comment.Date}
                         />
                     </li>
