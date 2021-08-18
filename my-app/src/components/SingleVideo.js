@@ -203,7 +203,15 @@ class SingleVideo extends Component {
             }
     }
     render(){
-        var user = JSON.parse(Cookies.get("user"));
+        // var user = JSON.parse(Cookies.get("user"));
+        var user;
+        if(this.props.user._id!== undefined) {
+            user = this.props.user
+        }
+        else{
+            user = JSON.parse(Cookies.get("user"))
+        }
+        console.log(user)
         if(user._id === undefined) {
             return(
                 <Redirect to="/CreateAccount" />            )

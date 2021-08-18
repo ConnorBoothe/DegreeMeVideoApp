@@ -3,7 +3,8 @@ import "../css/VideoRow.css";
 import Video from "../components/Video";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
-
+import htmlDecode from "../GlobalFunctions/HTMLDecode";
+var decode = new htmlDecode()
 class VideoRow extends Component {
     constructor(props) {
         super(props);
@@ -39,7 +40,7 @@ class VideoRow extends Component {
     renderVideoRow(){
         return (
             <div className="video-row">
-                <h1 className="text-light category">{this.props.category}</h1>
+                <h1 className="text-light category">{decode.htmlDecode(this.props.category)}</h1>
                 <ul>
                 {this.state.videos.map((video, index) => (
                     <li key={index}>

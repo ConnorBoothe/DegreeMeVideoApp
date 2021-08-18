@@ -44,6 +44,9 @@
     font-size: 16px;
     margin-bottom: 12px;
 }
+.search-results {
+    min-height: 100vh;
+}
 /* desktop styles */
 @media only screen and (min-width: 725px) {
     .video-title-search-result {

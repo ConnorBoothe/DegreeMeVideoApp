@@ -5,7 +5,8 @@ import ReviewModal from "../components/ReviewModal"
 import ReviewsList from "../components/ReviewsList"
 // import "../css/VideoRow.css"
 import 'bootstrap/dist/css/bootstrap.css';
-
+import htmlDecode from '../GlobalFunctions/HTMLDecode'
+var decode = new htmlDecode();
 class User extends Component {
   constructor(props){
     super(props)
@@ -68,8 +69,8 @@ class User extends Component {
         <div>
             <div className="profile-header">
                 <img className="user-profile-image" src={this.state.user.Image} alt="User"/>
-                <p className="user-profile-name">{this.state.user.First_Name + " " + this.state.user.Last_Name}</p>
-                <p className="profile-bio">{this.state.user.Bio}</p>
+                <p className="user-profile-name">{decode.htmlDecode(this.state.user.First_Name + " " + this.state.user.Last_Name)}</p>
+                <p className="profile-bio">{decode.htmlDecode(this.state.user.Bio)}</p>
                 <ReviewModal user={this.props.user}/>
             </div>
             <ul className="actions-list" >

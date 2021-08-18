@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const stripe = require('stripe')(process.env.STRIPE_KEY);
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 var UserDB = require('../Models/User');
 var users = new UserDB();
 router.get('/API/GetAllEarnings/:userId',

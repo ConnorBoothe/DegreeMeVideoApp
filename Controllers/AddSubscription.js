@@ -1,5 +1,5 @@
 //add subscription if credit card is already added to account
-const stripe = require('stripe')(process.env.STRIPE_KEY);
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');

@@ -28,7 +28,7 @@ class Review extends Component {
                        
 
     
-                    <p>{this.props.Message}</p>
+                    <p>{htmlDecoder.htmlDecode(this.props.Message)}</p>
                     <p className="date">{formatDate.displayTimeSince(this.props.Date)}</p>
             </div>        
         );
