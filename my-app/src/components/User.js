@@ -64,13 +64,18 @@ class User extends Component {
             this.setState({user: result})
         })
   }
+
   render(){
+    var bio = "";
+    if(this.state.user.Bio !== undefined) {
+      bio = this.state.user.Bio;
+    }
     return (
         <div>
             <div className="profile-header">
                 <img className="user-profile-image" src={this.state.user.Image} alt="User"/>
                 <p className="user-profile-name">{decode.htmlDecode(this.state.user.First_Name + " " + this.state.user.Last_Name)}</p>
-                <p className="profile-bio">{decode.htmlDecode(this.state.user.Bio)}</p>
+                <p className="profile-bio">{decode.htmlDecode(bio)}</p>
                 <ReviewModal user={this.props.user}/>
             </div>
             <ul className="actions-list" >
