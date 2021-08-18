@@ -18,6 +18,7 @@ class SingleVideo extends Component {
         super(props);
         this.state = {
             video: {},
+            user: this.props.user,
             likeCount:0,
             duration:0,
             viewText: "views",
@@ -33,6 +34,8 @@ class SingleVideo extends Component {
         this.hideModal = this.hideModal.bind(this)
         this.startTime = this.startTime.bind(this)
         this.endTime = this.endTime.bind(this);
+        this.setUserState = this.setUserState.bind(this)
+        this.renderVideo = this.renderVideo.bind(this)
     }
     showModal = () => {
         this.setState({isOpen: true});
@@ -42,8 +45,15 @@ class SingleVideo extends Component {
           this.setState({isOpen: false});
       };
     componentDidMount(){
-        this.getVideo()
-        this.setState({VideoId: this.state.video._id})
+        this.mounted = true
+        if (this.mounted) {
+            this.getVideo()
+            this.setUserState()
+            this.setState({VideoId: this.state.video._id})
+        }
+    }
+    componentWillUnmount() {
+        this.mounted = false
     }
     addView(){
         //do not add view if the viewer is also Creator
@@ -202,25 +212,41 @@ class SingleVideo extends Component {
                 })
             }
     }
-    render(){
-        // var user = JSON.parse(Cookies.get("user"));
-        var user;
+    setUserState(){
+        console.log("setting user state")
         if(this.props.user._id!== undefined) {
-            user = this.props.user
+            console.log("props: " ,this.props.user)
+            this.setState({user: this.props.user});
         }
         else{
+            console.log("cookie: " ,JSON.parse(Cookies.get("user")))
+
+            this.setState({user: JSON.parse(Cookies.get("user"))});
+        }
+    }
+    renderVideo(){
+        var user;
+        if(this.props.user._id !== undefined) {
+            console.log("if ran")
             user = JSON.parse(Cookies.get("user"))
         }
-        console.log(user)
+        else if(Cookies.get("user") !== undefined){
+            console.log("Else if ran")
+            user = JSON.parse(Cookies.get("user"))
+        }
+        else {
+            console.log("Else ran")
+            user = {};
+        }
+        console.log("render video", this.state.user)
         if(user._id === undefined) {
             return(
                 <Redirect to="/CreateAccount" />            )
         }
-        else if(this.props.user.Subscription_Level !== "Free Tier" ||
+        else if(user.Subscription_Level !== "Free Tier" ||
         this.props.user.Free_Tier_Seconds < 600 || this.props.user.Free_Tier_Seconds === undefined ) {
             return (
                 <div className="single-video">
-                    {/* <CreateAccountModal isOpen={this.state.isOpen} hideModal={this.hideModal}/> */}
                         <div className="single-video-frame">
                         <ReactPlayer 
                             url={decode.htmlDecode(this.state.video.Link)}
@@ -257,8 +283,7 @@ class SingleVideo extends Component {
                         isOpen={this.state.isOpen} hideModal={this.hideModal}
                         showModal={this.showModal}
                         user={this.props.user}/>
-                </div>
-                            
+                </div>           
             );
         }
         else {
@@ -270,7 +295,9 @@ class SingleVideo extends Component {
                 </div>
             );
         }
-        
+    }
+    render(){
+       return this.renderVideo()   
   }
 }
 

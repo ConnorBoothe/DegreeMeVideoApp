@@ -59,6 +59,7 @@ class PaymentSettings extends Component {
         }
     }
     componentWillUnmount() {
+        console.log("unmounted")
         this.mounted = false
     }
     getStripeSubscriptions() {
