@@ -70,6 +70,14 @@ setSearchLabel(){
             }
         })
   }
+  shortenVideoDescription(description){
+      if(description.length > 50) {
+          return description.substring(0,50) + "...";
+      }
+      else {
+          return description;
+      }
+  }
   showNoResults(){
     if(this.state.noResults) {
        return (
@@ -91,7 +99,7 @@ setSearchLabel(){
                        <Link to={"/Video/"+video._id}>
                            <Video Id={video._id} Title={video.Title} Thumbnail ={video.Thumbnail}
                            Creator={video.Creator} Views={video.Views} image={video.Creator_Image}
-                           date={video.Date} description={video.Description}/>
+                           date={video.Date} description={this.shortenVideoDescription(video.Description)}/>
                        </Link>
                    </div>
                </li>
@@ -109,7 +117,7 @@ setSearchLabel(){
   }
   render(){
     return (
-        <div>
+        <div className="search-results">
             <h2 className="text-light video-label">
                 {this.state.videos.length} results matching <span className="search-value-label">{htmlDecode.convertQueryString(this.state.searchLabel)}</span>
             </h2>
