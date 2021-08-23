@@ -61,7 +61,6 @@ app.use([
     require("./Controllers/GetPasswordUpdateRequest"),
     require("./Controllers/UpdatePassword")
 
-
 ]); 
 
 //Wildcard route

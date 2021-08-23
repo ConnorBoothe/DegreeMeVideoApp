@@ -23,6 +23,7 @@ module.exports = class Tags {
                 Date: new Date()
             })
         }
+        console.log(tagObjects)
         return TagsDB.insertMany(tagObjects)
     }
     getVideoIdsByTag(Name){

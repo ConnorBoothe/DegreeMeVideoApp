@@ -29,11 +29,11 @@ router.post('/API/CreateStripeAccount',
     function (req, res) {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            res.redirect('/home');
+            console.log(errors)
         }
         else {
 
-        
+        console.log("creati")
         var dob = (req.body.dob).split('-');
         var phone = (req.body.phone).replace(/-/g, "");
         //phone=phone.replaceAll("-","")
@@ -95,6 +95,7 @@ router.post('/API/CreateStripeAccount',
                         },
                             function (err, bankAccount) {
                                 if (err != null) {
+                                    console.log(err)
                                     res.json(err)
                                 } else {
                                     //add the stripeId to user's account
@@ -109,6 +110,7 @@ router.post('/API/CreateStripeAccount',
 
                     })
                     .catch((err) => {
+                        console.log(err)
                         res.json(err)
                     })
             })

@@ -73,6 +73,14 @@
     font-size: 18px;
     padding: 5px 5px;
 }
+#myCanvas {
+    width: 200px;
+    height: 100px;
+    background-color: black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+}
 .create-account-title {
     display:none;
 }
