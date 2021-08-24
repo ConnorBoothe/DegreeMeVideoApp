@@ -5,7 +5,9 @@
     margin-left:10px;
     margin-right: 10px;
 }
-
+.no-liked-videos {
+    margin-top: 50px;
+}
 /* desktop styles */
 @media only screen and (min-width: 725px) {
     .videos-container {

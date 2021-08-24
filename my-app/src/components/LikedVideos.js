@@ -35,6 +35,14 @@ getLikedVideos(){
         })
 }
   render(){
+    if(this.state.videos.length < 1) {
+        return(
+            <h2 className="text-light no-liked-videos">Your liked videos will appear here</h2>
+        )
+    }
+    else {
+
+    
     return (
         <div>
             <h1 className="text-light home-title">Liked Videos</h1>
@@ -53,6 +61,7 @@ getLikedVideos(){
             </div>
         </div>
     );
+}
   }
 }
 export default LikedVideos;
