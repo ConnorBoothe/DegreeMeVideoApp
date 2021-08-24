@@ -118,7 +118,8 @@ class EarningsChart extends Component {
                     // display:false
                 },
                 y: {
-
+                    
+                    min : 0,
                     grid: {
                         borderColor: "#202020",
                         color: "#202020",
