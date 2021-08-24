@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import VideoList from "../components/VideoList";
 import ReviewModal from "../components/ReviewModal"
 import ReviewsList from "../components/ReviewsList"
-// import "../css/VideoRow.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import htmlDecode from '../GlobalFunctions/HTMLDecode'
 var decode = new htmlDecode();
@@ -66,10 +65,14 @@ class User extends Component {
   }
 
   render(){
+    if(this.state.user._id !== undefined){
+
+  
     var bio = "";
     if(this.state.user.Bio !== undefined) {
       bio = this.state.user.Bio;
     }
+    
     return (
         <div>
             <div className="profile-header">
@@ -91,6 +94,12 @@ class User extends Component {
             </div>
         </div>
     );
+  }
+  else{
+    return(
+      <h2 className="text-light oops-user">Oops! User not found</h2>
+    )
+  }
   }
 }
 export default User;
