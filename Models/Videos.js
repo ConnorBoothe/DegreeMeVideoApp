@@ -59,6 +59,10 @@ module.exports = class Videos {
     //get video by id
     getVideoById(id){
       return new Promise((resolve, reject)=>{
+        if(!mongoose.Types.ObjectId.isValid(id)){
+          resolve(null)
+        }
+        else {
         VideosDB.findOne({_id: id})
         .then((video)=>{
           likes.getLikesByVideo(video._id)
@@ -66,12 +70,14 @@ module.exports = class Videos {
             video.Likes = likes;
             resolve(video)
           })
+          
         })
         .catch((err)=>{
           reject(err)
         })
+        }
       })
-      
+    
     }
     //get video by id
     getAllVideos(){

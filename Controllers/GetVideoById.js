@@ -17,15 +17,19 @@ router.get('/API/Video/:id',
     function(req, res){
         videos.getVideoById(req.params.id)
         .then((video)=>{
-            views.getViewCountByVideoId(video._id)
-            .then((views)=>{
-                video.Views = views;
-                res.json(video);
-            })
-            
+            if(video !== null) {
+                views.getViewCountByVideoId(video._id)
+                .then((views)=>{
+                    video.Views = views;
+                    res.json(video);
+                })
+            }
+            else {
+                res.json("err")
+            }
         })
         .catch((err)=>{
-            res.json(err)
+            res.json("err")
         })
 });
 module.exports = router;

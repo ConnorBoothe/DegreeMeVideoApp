@@ -25,7 +25,8 @@ class SingleVideo extends Component {
             showLikedMsg: "none",
             isOpen:false,
             secondsStartTime:0,
-            secondsEndTime:0
+            secondsEndTime:0,
+            videoLoaded: false
         }
         this.getVideo = this.getVideo.bind(this)
         this.addLike = this.addLike.bind(this)
@@ -162,9 +163,15 @@ class SingleVideo extends Component {
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
-                if(result.Views === 1){
+                if(result === "err") {
+                    this.setState({video: {}, views:0,
+                        viewText: "view",
+                    videoLoaded: true})  
+                }
+                else if(result.Views === 1){
                     this.setState({video: result, views:result.Views,
-                        viewText: "view"})
+                        viewText: "view",
+                        videoLoaded: true})
                 }
                 else {
                     this.setState({video: result, views:result.Views,
@@ -213,38 +220,28 @@ class SingleVideo extends Component {
             }
     }
     setUserState(){
-        console.log("setting user state")
         if(this.props.user._id!== undefined) {
-            console.log("props: " ,this.props.user)
             this.setState({user: this.props.user});
         }
         else{
-            console.log("cookie: " ,JSON.parse(Cookies.get("user")))
-
             this.setState({user: JSON.parse(Cookies.get("user"))});
         }
     }
     renderVideo(){
-        var user;
-        if(this.props.user._id !== undefined) {
-            console.log("if ran")
+        var user = this.props.user;
+        if(this.props.user._id === undefined) {
             user = JSON.parse(Cookies.get("user"))
         }
-        else if(Cookies.get("user") !== undefined){
-            console.log("Else if ran")
-            user = JSON.parse(Cookies.get("user"))
-        }
-        else {
-            console.log("Else ran")
-            user = {};
-        }
-        console.log("render video", this.state.user)
         if(user._id === undefined) {
             return(
                 <Redirect to="/CreateAccount" />            )
         }
-        else if(user.Subscription_Level !== "Free Tier" ||
-        this.props.user.Free_Tier_Seconds < 600 || this.props.user.Free_Tier_Seconds === undefined ) {
+        else if(this.state.video._id === undefined && this.state.videoLoaded){
+            return (<h2 className="text-light oops-video">Oops! Video not found</h2>)
+        }
+        else if((user.Subscription_Level !== "Free Tier" ||
+        this.props.user.Free_Tier_Seconds < 600 || this.props.user.Free_Tier_Seconds === undefined )
+        ) {
             return (
                 <div className="single-video">
                         <div className="single-video-frame">
