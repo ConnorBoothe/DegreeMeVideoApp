@@ -117,7 +117,12 @@ module.exports = class User {
     }
     //get customer id by user id
     getCustomerId(userId){
-      return UserDB.findOne({_id: userId}, "Stripe_Customer_Id")
+      if(mongoose.Types.ObjectId.isValid(userId)) {
+        return UserDB.findOne({_id: userId}, "Stripe_Customer_Id")
+      }
+      else {
+        return new Promise((resolve, reject)=>{ resolve(null)});
+      }
     }
     //get users with stripe bank account
      getUsersWithStripeBankAccount(){
