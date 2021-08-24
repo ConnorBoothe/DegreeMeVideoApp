@@ -23,6 +23,14 @@ class NotificationList extends Component {
     }
     toggleUserMenu(){
         if(this.props.type === "Notifications") {
+            if(this.props.notifications.length < 1) {
+                return(
+                    <p className="text-light no-notifications">Notifications will appear here</p>
+                )
+            }
+            else {
+
+            
             return (
                 <ul>
                     {this.props.notifications.map((video, index) => (
@@ -33,6 +41,7 @@ class NotificationList extends Component {
                     ))}
                 </ul>
             )
+        }
         }
         else {
             return (

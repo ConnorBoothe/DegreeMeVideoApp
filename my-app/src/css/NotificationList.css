@@ -8,6 +8,12 @@
 .user-settings-menu {
     text-align: center;
 }
+.no-notifications {
+    padding: 0px 15px;
+    font-weight: bold;
+    font-size: 14px!important;
+    text-align: center;
+}
 .user-settings-menu li{
     display: block!important;
     font-weight: bold;
