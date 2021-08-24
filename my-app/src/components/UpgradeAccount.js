@@ -106,6 +106,7 @@ class UpgradeAccount extends Component {
     return loadStripe('pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn');
   }
   addSubscription(){
+   
     this.setState({
       loading: true, 
       loadStarted: true,
@@ -127,6 +128,7 @@ class UpgradeAccount extends Component {
         fetch(api_route, requestMetadata)
         .then(res => res.json())
         .then((result)=>{
+          console.log("result: ",result)
           this.props.setUser(result)
           this.setState({
             loading: false, 

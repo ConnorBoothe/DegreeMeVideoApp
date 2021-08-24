@@ -58,7 +58,6 @@ class VideoUploader extends Component {
     this.hideModal = this.hideModal.bind(this)
     this.handleTitleChange = this.handleTitleChange.bind(this)
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
-    this.handleCreatorChange = this.handleCreatorChange.bind(this)
     this.showTitleChar = this.showTitleChar.bind(this)
     this.showDescChar = this.showDescChar.bind(this)
     this.hideTitleChar = this.hideTitleChar.bind(this)
@@ -92,10 +91,18 @@ class VideoUploader extends Component {
     this.setState({ filename: filename })
   }
   addTag() {
+    //check if tag contains spaces
+    if(this.tag.current.value.trim().includes(" ")){
+      this.setState({error: "Tags cannot contain spaces"})
+      this.tag.current.value = "";
+    }
     //if tag isn't empty, add it
-    if (this.tag.current.value !== "") {
-      var newArray = this.state.tags.concat(this.tag.current.value)
-      this.setState({ tags: newArray })
+    else if (this.tag.current.value !== "") {
+      var newArray = this.state.tags.concat(this.tag.current.value.trim())
+      this.setState({ 
+        tags: newArray, 
+        error: ""
+       })
       this.tag.current.value = "";
     }
   }
@@ -116,13 +123,7 @@ class VideoUploader extends Component {
     }
 
   }
-  handleCreatorChange(e) {
-    // this.setState({creator: e.target.value})
-  }
-  //generate thumbnail
-generateThumbnail(){
-  
-}
+ 
   //create thumbnail from video file
   createThumbnail() {
     return new Promise((resolve, reject) => {
@@ -259,7 +260,7 @@ generateThumbnail(){
 }
   renderUploader() {
     //need to fix
-    console.log(this.props.user)
+    console.log("USER: " ,this.props.user)
     if (this.props.user.hasBankAccount &&
       this.props.user._id !== undefined) {
 

@@ -163,8 +163,13 @@ class PaymentSettings extends Component {
         fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((result) => {
+                this.props.setUser(result)
                 this.getStripeSubscriptions();
-                this.setState({ subscriptionLoading: false })
+                this.setState({ 
+                    subscriptionLoading: false,
+                    disableSubButton: false
+                
+                })
             })
     }
     showRemoveSubLoader() {

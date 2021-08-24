@@ -61,7 +61,7 @@ module.exports = class User {
           .then((user)=>{
             resolve(
               new UserClass(user._id, user.First_Name,
-                user.Last_Name, user.Image, user.Susbscription_Level,
+                user.Last_Name, user.Image, user.Subscription_Level,
                 user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
             )
           })
@@ -132,14 +132,24 @@ module.exports = class User {
     updateSubscriptionLevel(UserId, SubscriptionLevel){
         //find user by id
         return new Promise((resolve, reject)=>{
-          UserDB.findOne({_id: UserId})
-          .then((user)=>{
-              user.Subscription_Level = SubscriptionLevel;
-              user.save()
-              .then(()=>{
-                resolve(user)
-              })
-          })
+          UserDB.findOne({_id: UserId}).updateOne({Subscription_Level: SubscriptionLevel})
+          .then((result)=>{
+            UserDB.findOne({_id: UserId})
+            .then((user)=>{
+              console.log(user)
+              console.log(user.Subscription_Level)
+              console.log("USER: " ,
+              new UserClass(user._id, user.First_Name,
+                user.Last_Name, user.Image, user.Subscription_Level,
+                user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
+              )
+              resolve(
+              new UserClass(user._id, user.First_Name,
+                user.Last_Name, user.Image, user.Subscription_Level,
+                user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
+              )
+            })
+                })
           .catch((err)=>{
             resolve("error")
           })
@@ -185,7 +195,7 @@ module.exports = class User {
             user.save()
             resolve(
               new UserClass(user._id, user.First_Name,
-              user.Last_Name, user.Image, user.Susbscription_Level,
+              user.Last_Name, user.Image, user.Subscription_Level,
               user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
               )
           })
@@ -202,7 +212,7 @@ module.exports = class User {
             user.save()
             resolve(
               new UserClass(user._id, user.First_Name,
-              user.Last_Name, user.Image, user.Susbscription_Level,
+              user.Last_Name, user.Image, user.Subscription_Level,
               user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
               )
           })
@@ -225,7 +235,7 @@ module.exports = class User {
               .then((user)=>{
                 resolve(
                   new UserClass(user._id, user.First_Name,
-                    user.Last_Name, user.Image, user.Susbscription_Level,
+                    user.Last_Name, user.Image, user.Subscription_Level,
                     user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id))
                 )
               })

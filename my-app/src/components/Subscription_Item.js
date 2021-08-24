@@ -29,6 +29,7 @@ class Subscription_Item extends Component{
             fetch(api_route, requestMetadata)
             .then(res => res.json())
             .then((result)=>{
+                console.log("RES: " ,result)
                 this.props.setUser(result);
                 this.props.getStripeSubscriptions();
                 this.props.hideRemoveSubLoader();
