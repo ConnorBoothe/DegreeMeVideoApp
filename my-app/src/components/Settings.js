@@ -3,6 +3,8 @@ import "../css/Settings.css";
 import AvatarCropper from "../components/AvatarCropper";
 import KeyWordsInput from "../components/KeyWordsInput";
 import 'bootstrap/dist/css/bootstrap.css';
+import { Link } from 'react-router-dom';
+
 class Settings extends Component {
   constructor(props){
     super(props)
@@ -15,6 +17,7 @@ class Settings extends Component {
     this.handleBioChange = this.handleBioChange.bind(this)
   }
   componentDidMount(){
+    console.log(this.props.user.Subscription_Level)
     this.props.getKeywords();
   }
   handleBioChange(e){
@@ -57,10 +60,18 @@ class Settings extends Component {
     }
    
   }
+  renderUpgradeBtn(){
+    if(this.props.user.Subscription_Level === "Free Tier") {
+      return(
+        <Link to="/Upgrade" className="btn btn-primary settings-upgrade-acct">Upgrade your account</Link>
+      )
+    }
+  }
   render(){
     return (
-        <div>
-            <h2 className="text-light video-label">Settings</h2>
+        <div className="settings-wrapper">
+            <h2 className="text-light settings-label">Settings</h2>
+            {this.renderUpgradeBtn()}
             <h2 className="text-light update-avatar-title">Add keywords to your profile</h2>
            <div className="keywords-settings-wrapper">
               <KeyWordsInput addKeyword = {this.props.addKeyword} 

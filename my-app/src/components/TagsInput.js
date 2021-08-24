@@ -14,8 +14,8 @@ class TagsInput extends Component {
 
                 <div className="append-tags">
                     {this.props.tags.map((tag, index) => (
-                        <div className="tag-container" >
-                            <p key={index} className="tag">
+                        <div key={index} className="tag-container" >
+                            <p className="tag">
                             <span className="text-light remove-tag" onClick={() => this.props.removeTag(index)}>x</span>
                                 {tag}
                             </p>
