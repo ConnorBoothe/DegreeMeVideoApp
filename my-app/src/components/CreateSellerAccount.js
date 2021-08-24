@@ -174,7 +174,8 @@ class CreateSellerAccount extends Component {
     createStateDropdown() {
         return (
             <div className="state-select-container">
-                <select className="state-select" name="state-select" onChange={this.handleStateChange}>
+                <select className="state-select" name="state-select" onChange={this.handleStateChange}
+                defaultValue="North Carolina">
                     <option value="Alabama">Alabama</option>
                     <option value="Alaska">Alaska</option>
                     <option value="Arizona">Arizona</option>
@@ -204,7 +205,7 @@ class CreateSellerAccount extends Component {
                     <option value="New Hampshire">New Hampshire</option>
                     <option value="New Jersey">New Jersey</option>
                     <option value="New Mexico">New Mexico</option>
-                    <option value="North Carolina" selected>North Carolina</option>
+                    <option value="North Carolina" >North Carolina</option>
                     <option value="North Dakota">North Dakota</option>
                     <option value="Ohio">Ohio</option>
                     <option value="Oklahoma">Oklahoma</option>
@@ -236,7 +237,7 @@ class CreateSellerAccount extends Component {
             </div>
                 <p className="text-light">Your data will be stored with our payments processor, Stripe.</p>
                 <a href="https://stripe.com/legal" className="stripe-link" target="_blank" rel="noreferrer">Stripe's terms and conditions</a>
-                <input type="hidden" autocomplete="false" />
+                <input type="hidden" autoComplete="false" />
                 <ul className="create-seller-list">
 
 
@@ -244,16 +245,16 @@ class CreateSellerAccount extends Component {
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label">Street Number</p>
                             <input className="create-seller-input" type="text" onChange={this.handleStreetNumberChange}
-                                autocomplete="off" />
+                                autoComplete="off" />
                         </div>
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label" >Postal Code</p>
-                            <input autocomplete="off" type="text" onChange={this.handlePostalChange}
+                            <input autoComplete="off" type="text" onChange={this.handlePostalChange}
                                 className="create-seller-input" />
                         </div>
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label" >City</p>
-                            <input autocomplete="off" type="text" onChange={this.handleCityChange}
+                            <input autoComplete="off" type="text" onChange={this.handleCityChange}
                                 className="create-seller-input" />
                         </div>
                         <div className="create-seller-input-container">
@@ -262,7 +263,7 @@ class CreateSellerAccount extends Component {
                         </div>
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label" >Country</p>
-                            <input autocomplete="off" className="create-seller-input" type="text" disabled value="US" />
+                            <input autoComplete="off" className="create-seller-input" type="text" disabled value="US" />
                         </div>
                     </li>
                     <li className="create-seller-li-2">
@@ -282,15 +283,15 @@ class CreateSellerAccount extends Component {
                         </div>
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label" >Date of Birth</p>
-                            <input autocomplete="off" className="create-seller-input" type="date" onChange={this.handleDOBChange} />
+                            <input autoComplete="off" className="create-seller-input" type="date" onChange={this.handleDOBChange} />
                         </div>
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label" >Last 4 Digits of Social Security Number</p>
-                            <input autocomplete="off" className="create-seller-input" type="text" onChange={this.handleSSNChange} />
+                            <input autoComplete="off" className="create-seller-input" type="text" onChange={this.handleSSNChange} />
                         </div>
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label" >Routing Number</p>
-                            <input autocomplete="off" className="create-seller-input" type="text" onChange={this.handleRoutingChange} />
+                            <input autoComplete="off" className="create-seller-input" type="text" onChange={this.handleRoutingChange} />
                         </div>
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label"  >Account Number</p>
