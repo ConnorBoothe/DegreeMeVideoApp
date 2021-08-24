@@ -41,7 +41,7 @@ class UserMenu extends Component {
         }
         else {
             this.readNotifications();
-            if (this.state.menuTitle === "Account") {
+            if (this.state.menuTitle.includes("Account")) {
                 this.props.getNotifications()
                 this.setState({ menuTitle: "Notifications" });
             }
@@ -69,19 +69,19 @@ class UserMenu extends Component {
         if (this.state.showNotifications === "none") {
             this.setState({
                 showNotifications: "inline-block",
-                menuTitle: "Account"
+                menuTitle: "Account: "+  this.props.user.Subscription_Level
             });
         }
         else {
 
             if (this.state.menuTitle === "Notifications") {
                 this.readNotifications();
-                this.setState({ menuTitle: "Account" });
+                this.setState({ menuTitle: "Account: "+ this.props.user.Subscription_Level});
             }
             else {
                 this.setState({
                     showNotifications: "none",
-                    menuTitle: "Account"
+                    menuTitle: "Account: "+ this.props.user.Subscription_Level
                 });
             }
         }
