@@ -58,10 +58,7 @@ ul {
 .payment-details {
     text-align:left;
 }
-.main-list li {
-    display:table-cell;
-    
-}
+
 .main-list li ul li {
     display:block;
     
@@ -69,10 +66,7 @@ ul {
 .sub-li {
     text-align: left;
 }
-.payments-li {
-    width:900px;
-    padding-right:40px;
-}
+
 .add-card {
     font-size: 12px;
     font-weight: bold;
@@ -87,6 +81,9 @@ ul {
 }
 .upcoming-payment-container {
     margin-top:30px;
+}
+.payments-container {
+    width: 100%;
 }
 .payment-details-li {
     width: 400px;
@@ -114,13 +111,13 @@ ul {
     margin-right: auto;
     text-align:center;
     margin-top: 50px;
+    min-height: 100vh;
+
 }
 .brand-img {
     width: 40px;
 }
-.payment-settings {
-    min-height: 100vh;
-}
+
 .subs {
     margin-top: 10px;
     padding:0;
@@ -138,11 +135,7 @@ ul li {
     float: left;
     min-height: 100vh;
 }
-table tr td{
-    padding: 5px 20px!important;
-    min-width: 50px;
-    
-}
+
 .status-badge {
     margin-left:10px;
 }
@@ -150,17 +143,8 @@ table tr td{
     font-weight: bold;
     font-size: 14px;
 }
-.table-container {
-    background-color: #131313;
-    border-radius: 20px;
-    padding-bottom: 10px;
-}
-.table-container table td{
-    background-color: #131313;
-    border-radius: 20px;
-    padding-left:5px;
-    padding-top: 5px;
-}
+
+
 .subscription-loader-text {
     color: #d4d4d4;
     font-weight: bold;
@@ -187,4 +171,77 @@ table tr td{
     margin-right: auto;
     text-align: center;
     margin-top: 10px;
+}
+/* mobile styles */
+@media only screen and (max-width: 725px) {
+    .payment-settings {
+        width:80%;
+        margin-left:auto;
+        margin-right: auto;
+        text-align:center;
+        margin-top: 50px;
+        min-height: 100vh;
+    
+    }
+    .table-container table td{
+        background-color: #131313;
+        border-radius: 0px;
+        padding-left:5px;
+        padding-top: 5px;
+    }
+    .table-container {
+        background-color: #131313;
+        border-radius: 0px;
+        padding-bottom: 10px;
+        width:100%!important;
+        max-width:500px;
+    }
+    .main-list li {
+        display:block;
+        margin-top: 20px;
+        margin-bottom: 5px;
+    }
+    .payments-li {
+        width:100%;
+    }
+    table tr td{
+        padding: 15px 10px!important;
+        min-width: 10px!important; 
+    }
+}
+/* desktop styles */
+@media only screen and (min-width: 725px) {
+    .payment-settings {
+        width:60%;
+        margin-left:auto;
+        margin-right: auto;
+        text-align:center;
+        margin-top: 50px;
+        min-height: 100vh;
+    
+    }
+    .table-container table td{
+        background-color: #131313;
+        border-radius: 20px;
+        padding-left:5px;
+        padding-top: 5px;
+    }
+    .table-container {
+        background-color: #131313;
+        border-radius: 20px;
+        padding-bottom: 10px;
+    }
+    .main-list li {
+        display:table-cell;
+        
+    }
+    .payments-li {
+        width:900px;
+        padding-right:40px;
+    }
+    table tr td{
+        padding: 5px 20px!important;
+        min-width: 50px;
+        
+    }
 }
