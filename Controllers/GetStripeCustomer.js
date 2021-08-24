@@ -10,16 +10,23 @@ router.get('/API/GetStripeCustomer/:userId', function (req, res) {
   users.getCustomerId(req.params.userId)
     .then((user) => {
       console.log(user)
-      stripe.customers.retrieve(
-        user.Stripe_Customer_Id
-      )
-        .then((result) => {
-          console.log(result)
-          res.json(result)
-        })
+      if (user !== null) {
+        stripe.customers.retrieve(
+          user.Stripe_Customer_Id
+        )
+          .then((result) => {
+            console.log(result)
+            res.json(result)
+          })
+      }
+      else {
+        res.json("err")
+
+      }
     })
     .catch((err) => {
-      console.log("Error occured")
+      console.log(err)
+      console.log("Error ocurred")
       res.json("err")
     })
 

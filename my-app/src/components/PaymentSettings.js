@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import "../css/PaymentSettings.css"
-import { Link } from 'react-router-dom';
+import {Redirect, Link } from 'react-router-dom';
 
 import Visa_SVG from "../images/visa.svg"
 import FormatDate from "../GlobalFunctions/FormatDate";
 import PaymentCard from "../components/PaymentCard";
 import AddPaymentMethod from "./AddPaymentMethod";
 import SubscriptionItem from "../components/Subscription_Item"
+import Cookies from 'js-cookie';
+
 const formatDate = new FormatDate()
 class PaymentSettings extends Component {
     mounted = false
@@ -34,6 +36,7 @@ class PaymentSettings extends Component {
         this.getPastTransactions = this.getPastTransactions.bind(this)
         this.renderPayments = this.renderPayments.bind(this)
         this.renderUpcomingPayments = this.renderUpcomingPayments.bind(this)
+        this.renderPaymentSettings = this.renderPaymentSettings.bind(this)
         this.getUpcomingPayments = this.getUpcomingPayments.bind(this)
         this.getStripeCustomer = this.getStripeCustomer.bind(this)
         this.toggleCardPopover = this.toggleCardPopover.bind(this);
@@ -59,7 +62,6 @@ class PaymentSettings extends Component {
         }
     }
     componentWillUnmount() {
-        console.log("unmounted")
         this.mounted = false
     }
     getStripeSubscriptions() {
@@ -74,7 +76,14 @@ class PaymentSettings extends Component {
         fetch(api_route, requestMetadata)
             .then(response => response.json())
             .then(result => {
-                this.setState({ subscriptions: result.data })
+                if(result === "err") {
+                    this.setState({ subscriptions: [] })
+  
+                }
+                else {
+                    this.setState({ subscriptions: result.data })
+
+                }
             })
     }
     getStripePaymentMethods() {
@@ -90,11 +99,20 @@ class PaymentSettings extends Component {
         fetch(api_route, requestMetadata)
             .then(response => response.json())
             .then(result => {
-                this.setState({ paymentMethods: result.data })
-                if (result.data.length === 0) {
-                    alert("contains none")
-                    this.setState({ containsNoPaymentMethod: true })
+                if(result === "err"){
+                    this.setState({ 
+                        containsNoPaymentMethod: true, 
+                        paymentMethods: []
+                    })
                 }
+                else {
+                    this.setState({ paymentMethods: result.data })
+                    if (result.data.length === 0) {
+                        alert("contains none")
+                        this.setState({ containsNoPaymentMethod: true })
+                    }
+                }
+                
             })
     }
     getStripeCustomer() {
@@ -109,7 +127,12 @@ class PaymentSettings extends Component {
         fetch(api_route, requestMetadata)
             .then(response => response.json())
             .then(result => {
-                this.setState({ customer: result })
+                if(result === "err"){
+                    this.setState({ customer: {} })
+                }
+                else {
+                    this.setState({ customer: result })
+                }
             })
     }
     getUpcomingPayments() {
@@ -126,6 +149,9 @@ class PaymentSettings extends Component {
             .then(result => {
                 if (result !== "err") {
                     this.setState({ upcomingPayments: result })
+                }
+                else {
+                    this.setState({ upcomingPayments: [] }) 
                 }
             })
     }
@@ -453,23 +479,50 @@ class PaymentSettings extends Component {
             )
         }
     }
+    renderPaymentSettings(){
+        var user = this.props.user;
+        if(this.props.user._id === undefined) {
+            user = JSON.parse(Cookies.get("user"))
+            
+        }
+        //if user is logged in
+         if(user._id !== undefined){
+             //check if user id matches params id
+             if(this.props.match.params.id === user._id) {
+                return (
+                    <div className="payment-settings">
+                        <ul className="main-list">
+                            <li className="payments-li">
+                                {this.renderPayments()}
+                                {this.renderUpcomingPayments()}
+                            </li>
+                            <li className="payment-details-li">
+                                <div className="payment-details">
+                                    {this.showCards()}
+                                    {this.showSubscriptions()}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                );
+             }
+             else {
+                 //redirect
+                 return (
+                    <Redirect to="/Home" />
+                );
+             }
+
+         }
+         else {
+             //redirect
+             return (
+                <Redirect to="/Home" />
+            );
+         }
+    }
     render() {
-        return (
-            <div className="payment-settings">
-                <ul className="main-list">
-                    <li className="payments-li">
-                        {this.renderPayments()}
-                        {this.renderUpcomingPayments()}
-                    </li>
-                    <li className="payment-details-li">
-                        <div className="payment-details">
-                            {this.showCards()}
-                            {this.showSubscriptions()}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        );
+        return this.renderPaymentSettings();
     }
 }
 export default PaymentSettings;

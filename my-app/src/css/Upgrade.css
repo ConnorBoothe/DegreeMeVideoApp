@@ -10,10 +10,7 @@
     border-radius: 20px;
     margin-top: 40px;
 }
-.tier-text {
-    font-weight: bold;
-    font-size: 12px;
-}
+
 
 
 .loader {
@@ -33,6 +30,11 @@
   }
     /* mobile styles */
 @media only screen and (max-width: 725px) {
+    .tier-text {
+        display: none;
+        font-weight: bold;
+        font-size: 12px;
+    }
     .upgrade-acct {
         margin-top:60px;
         min-height: 100vh;
@@ -56,6 +58,10 @@
 }
   /* desktop styles */
 @media only screen and (min-width: 725px) {
+    .tier-text {
+        font-weight: bold;
+        font-size: 12px;
+    }
     .upgrade-acct {
         margin-top:60px;
         min-height: 100vh;

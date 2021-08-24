@@ -9,6 +9,8 @@ router.get('/API/GetSubscriptions/:userId',
 function(req, res){
   users.getCustomerId(req.params.userId)
   .then((user)=>{
+    if(user !== null) {
+
    stripe.subscriptions.list({
         limit: 3,
         customer: user.Stripe_Customer_Id
@@ -16,6 +18,10 @@ function(req, res){
       .then((result)=>{
         res.json(result)
       })
+    }
+    else {
+      res.json("err")
+    }
     })
       .catch((err)=>{
           console.log(err)
