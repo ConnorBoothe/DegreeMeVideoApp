@@ -10,17 +10,29 @@
     font-size: 16px!important;
     margin-top:30px;
 }
-.keywords-settings-wrapper {
-    text-align:center;
-    margin-left:auto;
-    margin-right:auto;
-    width:30%;
-    position:relative;
+.settings-label {
+    font-size: 28px;
+    margin-top:40px;
 }
 /* desktop styles */
 @media only screen and (min-width: 725px) {
+    .keywords-settings-wrapper {
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+        width:50%;
+        position:relative;
+    }
+    .settings-wrapper {
+        padding: 0% 20%;
+    }
+    .settings-upgrade-acct {
+        width: 200px!important;
+        font-weight: bold!important;
+        margin-top: 20px;
+    }
     .update-bio-input {
-        width:40%;
+        width:50%;
         background-color: #282c34;
         border:0;
         outline: none;
@@ -31,8 +43,18 @@
 }
 /* mobile styles */
 @media only screen and (max-width: 725px) {
+    .keywords-settings-wrapper {
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+        width:60%;
+        position:relative;
+    }
+    .settings-wrapper {
+        padding: 0% 5%;
+    }
     .update-bio-input {
-        width:80%;
+        width:70%;
         background-color: #282c34;
         border:0;
         outline: none;

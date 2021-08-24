@@ -64,6 +64,7 @@
   /* mobile styles */
 @media only screen and (max-width: 725px) {
     .subcribe-btn {
+        display:none!important;
         padding:2px 8px!important;
         font-weight: bold!important;
         font-size: 12px!important;

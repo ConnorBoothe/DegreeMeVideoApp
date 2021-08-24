@@ -1,16 +1,9 @@
 .upgrade-title {
     font-size:25px;
 }
-.upgrade-acct {
-    margin-top:60px;
-}
-.upgrade-text {
-    font-size: 18px;
-}
-.upgrade-img {
-    width:400px;
-    margin: 20px 0px;
-}
+
+
+
 .upgrade-btn {
     font-weight: bold;
     width:100%;
@@ -21,16 +14,7 @@
     font-weight: bold;
     font-size: 12px;
 }
-.upgrade-acct {
-    min-height: 100vh;
-}
-.upgrade-card-input {
-    width:40%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align:center;
-    margin-bottom: 20px;
-}
+
 
 .loader {
     position: relative;
@@ -47,3 +31,47 @@
   .placeholder {
       margin-top: 20px;
   }
+    /* mobile styles */
+@media only screen and (max-width: 725px) {
+    .upgrade-acct {
+        margin-top:60px;
+        min-height: 100vh;
+        padding: 0px 30px;
+    }
+    .upgrade-img {
+        width:250px;
+        margin: 20px 0px;
+    }
+    .upgrade-text {
+        font-size: 18px;
+        padding:10px;
+    }
+    .upgrade-card-input {
+        width:70%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+        margin-bottom: 20px;
+    }
+}
+  /* desktop styles */
+@media only screen and (min-width: 725px) {
+    .upgrade-acct {
+        margin-top:60px;
+        min-height: 100vh;
+    }
+    .upgrade-img {
+        width:400px;
+        margin: 20px 0px;
+    }
+    .upgrade-text {
+        font-size: 18px;
+    }
+    .upgrade-card-input {
+        width:40%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align:center;
+        margin-bottom: 20px;
+    }
+}
