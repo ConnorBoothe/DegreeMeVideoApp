@@ -57,9 +57,18 @@ module.exports = class Views {
                        result.push(monthlyCount)
                        ViewsDB.find({},"_id").countDocuments()
                        .then((allCount)=>{
-                           result.push(allCount);
-                           resolve(result);
+                        result.push(allCount);
+                        ViewsDB.find({
+                            Date: {$gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1)}
+                           }, "_id").countDocuments()
+                           .then((allMonthlyViewsCount)=>{
+                               result.push(allMonthlyViewsCount)
+                                resolve(result);
+                           })
+                           
+                           
                        })
+                       
                    })
             })
         })

@@ -59,7 +59,7 @@ class CreatorDashboard extends Component {
                     this.setState({
                         allViews: result[0], 
                         viewsThisMonth: result[1],
-                        percentageOfTotalViews: result[0]/result[2]
+                        percentageOfTotalViews: result[1]/result[3]
                     })
                 })
         }
