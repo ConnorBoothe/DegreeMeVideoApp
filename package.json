@@ -1,0 +1,44 @@
+{
+  "name": "degreemevideoapp",
+  "version": "1.0.0",
+  "description": "DegreeMe Video app",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "chart.js": "^3.5.0",
+    "chartjs-plugin-datalabels": "^2.0.0",
+    "chart.piecelabel.js": "^0.15.0",
+    "connect-mongo": "^4.4.1",
+    "chartjs-plugin-labels": "^1.1.0",
+    "cron": "^1.8.2",
+    "cors": "^2.8.5",
+    "express-validator": "^6.12.1",
+    "express-session": "^1.17.2",
+    "handbrake-js": "^5.0.2",
+    "dotenv": "^8.6.0",
+    "ffmpeg": "^0.0.4",
+    "html-to-image": "^1.7.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.5",
+    "multer": "^1.4.3",
+    "mux": "^0.0.2",
+    "react-easy-crop": "^3.5.2",
+    "react-chartjs-2": "^3.0.4",
+    "react-phone-input-2": "^2.14.0",
+    "react-ga": "^3.3.0",
+    "react-phone-number-input": "^3.1.25",
+    "react-ffmpeg": "^0.0.35",
+    "stripe": "^8.168.0",
+    "tar": "^6.1.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://ConnorBoothe/DegreeMeVideoApp"
+  },
+  "author": "Connor Boothe",
+  "license": "ISC"
+}
