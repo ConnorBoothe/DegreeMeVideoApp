@@ -3,7 +3,7 @@ import '../css/CreateAccount.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import KeyWordsInput from "../components/KeyWordsInput.js";
 import Subscriptions from "../components/Subscriptions"
-import { loadStripe, CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
+import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import ReactGA from 'react-ga';
 import { Link } from 'react-router-dom';
