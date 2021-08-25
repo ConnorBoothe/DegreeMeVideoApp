@@ -1,4 +1,0 @@
-env_variables:
-  MONGO_URL: mongodb+srv://ConnorBoothe:Toolbox96%21@cluster0.okjxr.mongodb.net/Degreeme?retryWrites=true&w=majority
-  STRIPE_KEY : sk_live_UsWEE3E1nEmmn6MZWeSuYXdt00iRz8L1qn
-  STRIPE_TEST_KEY : sk_test_KLmOibLZEyhi7d6RA7CA42Bf00ZifUQEt7
