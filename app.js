@@ -71,9 +71,11 @@ app.use(function(req, res, next){
   res.header("Acces-Control-Allow_Origin", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
+
 //Wildcard route
 app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, "./my-app/build", "index.html"))
+  console.log("Not found")
+    res.sendFile(path.join(__dirname, "build", "index.html"))
 });
 console.log("Running")
 app.listen(8080);
