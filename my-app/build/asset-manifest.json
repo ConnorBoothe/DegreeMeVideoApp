@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.c8ecd9e1.chunk.css",
-    "main.js": "/static/js/main.d0df6c3f.chunk.js",
-    "main.js.map": "/static/js/main.d0df6c3f.chunk.js.map",
+    "main.js": "/static/js/main.bff6583a.chunk.js",
+    "main.js.map": "/static/js/main.bff6583a.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f0837909.js",
     "runtime-main.js.map": "/static/js/runtime-main.f0837909.js.map",
     "static/css/2.e0b28d21.chunk.css": "/static/css/2.e0b28d21.chunk.css",
@@ -17,7 +17,7 @@
     "static/media/NoResults.3936f882.svg": "/static/media/NoResults.3936f882.svg",
     "static/media/Video_Sub.11d3a8c4.svg": "/static/media/Video_Sub.11d3a8c4.svg",
     "static/media/degreeMeHashTag.acec1592.svg": "/static/media/degreeMeHashTag.acec1592.svg",
-    "static/media/degreeMeLogo.b8211a71.svg": "/static/media/degreeMeLogo.b8211a71.svg",
+    "static/media/degreeMeLogo.6ee69b6c.svg": "/static/media/degreeMeLogo.6ee69b6c.svg",
     "static/media/person1.41d70246.svg": "/static/media/person1.41d70246.svg",
     "static/media/person2.22387971.svg": "/static/media/person2.22387971.svg",
     "static/media/person3.6a72384c.svg": "/static/media/person3.6a72384c.svg",
@@ -31,6 +31,6 @@
     "static/css/2.e0b28d21.chunk.css",
     "static/js/2.af9d46a5.chunk.js",
     "static/css/main.c8ecd9e1.chunk.css",
-    "static/js/main.d0df6c3f.chunk.js"
+    "static/js/main.bff6583a.chunk.js"
   ]
 }

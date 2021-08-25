@@ -33,7 +33,7 @@ class ReviewModal extends Component {
     this.setState({rating: e.target.value})
   }
   addReview(){
-    const api_route = 'http://localhost:8080/API/AddReview';
+    const api_route = 'norse-botany-324000.ue.r.appspot.com/API/AddReview';
           const postBody = {
               Creator_Id: window.location.href.split("/")[4],
               User_Id: this.props.user._id,

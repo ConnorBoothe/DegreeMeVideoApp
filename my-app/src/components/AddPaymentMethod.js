@@ -23,7 +23,7 @@ class AddPaymentMethod extends Component {
     }
     submitPaymentMethod(user){
         return new Promise((resolve, reject)=>{
-        const api_route = 'http://localhost:8080/API/AddPaymentMethod';
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/AddPaymentMethod';
         const postBody = {
           UserId: user._id,
           PaymentMethodId: this.state.paymentMethod.id

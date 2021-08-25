@@ -81,7 +81,7 @@ class LoginForm extends Component {
             this.showError();
         }
         else {
-            const api_route = 'http://localhost:8080/API/Login';
+            const api_route = 'norse-botany-324000.ue.r.appspot.com/API/Login';
             const postBody = {
                 Email: this.state.email,
                 Password: this.state.password

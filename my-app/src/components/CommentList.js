@@ -33,7 +33,7 @@ class CommentList extends Component {
         }
         else {
             if(this.state.comment !== ""){
-                const api_route = 'http://localhost:8080/API/AddComment';
+                const api_route = 'norse-botany-324000.ue.r.appspot.com/API/AddComment';
                 const postBody = {
                     Video_Id: this.props.VideoId,
                     User_Id: this.props.user._id,
@@ -80,7 +80,7 @@ class CommentList extends Component {
     }
     getComments(){
         // alert(window.location.href.split("/")[4])
-        const api_route = 'http://localhost:8080/API/Comments/'+this.props.VideoId;
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/Comments/'+this.props.VideoId;
         const requestMetadata = {
             method: 'GET',
             headers: {

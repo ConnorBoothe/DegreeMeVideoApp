@@ -50,7 +50,7 @@ class User extends Component {
   }
   getUser(){
     let id = this.props.match.params.id
-    const api_route = 'http://localhost:8080/API/GetUser/'+id;
+    const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetUser/'+id;
     const requestMetadata = {
         method: 'GET',
         headers: {

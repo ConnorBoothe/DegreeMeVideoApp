@@ -31,7 +31,7 @@ class UpdatePassword extends Component {
     }
     getUpdateRequestById() {
         var req_id = window.location.href.split("/")[4];
-        const api_route = 'http://localhost:8080/API/GetPasswordUpdateRequest/';
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetPasswordUpdateRequest/';
         const postBody = {
             request_id: req_id,
         };
@@ -59,7 +59,7 @@ class UpdatePassword extends Component {
             })
         }
         else {
-            const api_route = 'http://localhost:8080/API/UpdatePassword/';
+            const api_route = 'norse-botany-324000.ue.r.appspot.com/API/UpdatePassword/';
             const postBody = {
                 userId: this.state.userId,
                 password: this.state.password,

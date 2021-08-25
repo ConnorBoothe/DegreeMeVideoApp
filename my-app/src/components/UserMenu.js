@@ -132,7 +132,7 @@ class UserMenu extends Component {
         if (this.props.user._id !== undefined) {
 
 
-            const api_route = 'http://localhost:8080/API/SeenNotifications';
+            const api_route = 'norse-botany-324000.ue.r.appspot.com/API/SeenNotifications';
             const postBody = {
                 user_id: this.props.user._id
             };

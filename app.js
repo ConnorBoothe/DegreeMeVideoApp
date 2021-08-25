@@ -75,6 +75,7 @@ app.use(function(req, res, next){
 //Wildcard route
 app.get('*', function(req, res) {
   console.log("Not found")
+    console.log(__dirname)
     res.sendFile(path.join(__dirname, "build", "index.html"))
 });
 console.log("Running")

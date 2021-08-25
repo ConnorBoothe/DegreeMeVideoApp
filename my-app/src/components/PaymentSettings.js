@@ -66,7 +66,7 @@ class PaymentSettings extends Component {
     }
     getStripeSubscriptions() {
         let id = this.props.match.params.id
-        const api_route = 'http://localhost:8080/API/GetSubscriptions/' + id;
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetSubscriptions/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -89,7 +89,7 @@ class PaymentSettings extends Component {
     getStripePaymentMethods() {
         //fixed
         let id = this.props.match.params.id
-        const api_route = 'http://localhost:8080/API/GetPaymentMethods/' + id;
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetPaymentMethods/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -117,7 +117,7 @@ class PaymentSettings extends Component {
     }
     getStripeCustomer() {
         let id = this.props.match.params.id
-        const api_route = 'http://localhost:8080/API/GetStripeCustomer/' + id;
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetStripeCustomer/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -137,7 +137,7 @@ class PaymentSettings extends Component {
     }
     getUpcomingPayments() {
         let id = this.props.match.params.id
-        const api_route = 'http://localhost:8080/API/GetUpcomingPayments/' + id;
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetUpcomingPayments/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -157,7 +157,7 @@ class PaymentSettings extends Component {
     }
     getPastTransactions() {
         let id = this.props.match.params.id
-        const api_route = 'http://localhost:8080/API/GetPastTransactions/' + id;
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetPastTransactions/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -175,7 +175,7 @@ class PaymentSettings extends Component {
             subscriptionLoading: true, subscriptionLoadingText: "Adding",
             disableSubButton: true
         });
-        const api_route = 'http://localhost:8080/API/AddSubscription';
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/AddSubscription';
         const postBody = {
             UserId: this.props.match.params.id
         };
@@ -265,7 +265,7 @@ class PaymentSettings extends Component {
 
     }
     updateDefaultPaymentMethod(paymentMethodId) {
-        const api_route = 'http://localhost:8080/API/UpdateDefaultPaymentMethod';
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/UpdateDefaultPaymentMethod';
         const postBody = {
             UserId: this.props.match.params.id,
             PaymentMethodId: paymentMethodId
@@ -286,7 +286,7 @@ class PaymentSettings extends Component {
     }
     removePaymentMethod(paymentMethodId) {
         this.setCardLoading(true);
-        const api_route = 'http://localhost:8080/API/RemovePaymentMethod';
+        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/RemovePaymentMethod';
         const postBody = {
             PaymentMethodId: paymentMethodId
         };
