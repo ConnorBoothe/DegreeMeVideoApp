@@ -6,7 +6,7 @@ const cors = require('cors');
 const UserDB = require("./Models/Views")
 const users = new UserDB();
 app.use(cors({
-  //origin: 'http://localhost:3000'
+  // origin: 'http://localhost:3000'
   origin: 'https://norse-botany-324000.ue.r.appspot.com'
 }));
 //use build directory for react app
