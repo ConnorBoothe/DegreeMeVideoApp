@@ -33,12 +33,12 @@ a:hover {
   opacity: 8%;
 }
 
-@font-face { 
+/* @font-face { 
   font-family: GT-Walsheim; 
   } 
   @font-face { 
     font-family: GT-Walsheim-Bold; 
-    } 
+    }  */
 .landing-sign-up {
   font-weight:bold;
   margin-top: 20px;
