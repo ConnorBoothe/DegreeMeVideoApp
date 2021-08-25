@@ -1,13 +1,16 @@
 require('dotenv').config();
 const express = require('express');
-const app = module.exports = express(); 
+const app = express(); 
+const path = require("path")
 const cors = require('cors');
 const UserDB = require("./Models/Views")
 const users = new UserDB();
 app.use(cors({
-  origin: 'http://localhost:3000'
+  //origin: 'http://localhost:3000'
+  origin: 'https://norse-botany-324000.ue.r.appspot.com'
 }));
-
+//use build directory for react app
+app.use(express.static(path.join(__dirname, "./my-app/build")))
 //API Controllers
 app.use([
     require("./Controllers/AddVideo"),
@@ -65,7 +68,7 @@ app.use([
 
 //Wildcard route
 app.get('*', function(req, res) {
-    res.send("Not valid")
+    res.sendFile(path.join(__dirname, "./my-app/build", "index.html"))
 });
 console.log("Running")
 app.listen(8080);
