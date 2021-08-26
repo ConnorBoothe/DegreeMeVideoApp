@@ -26,7 +26,7 @@ class CreatorDashboard extends Component {
     getTotalEarnings(){
         if(Cookies.get("user") !== null) {
             var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetAllEarnings/'+user._id;
+            const api_route = 'https://degreeme.io/API/GetAllEarnings/'+user._id;
             const requestMetadata = {
                 method: 'GET',
                 headers: {
@@ -48,7 +48,7 @@ class CreatorDashboard extends Component {
             console.log(Cookies.get("user"))
             alert(Cookies.get("user"))
             var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetAllCreatorViews/'+user._id;
+            const api_route = 'https://degreeme.io/API/GetAllCreatorViews/'+user._id;
             const requestMetadata = {
                 method: 'GET',
                 headers: {

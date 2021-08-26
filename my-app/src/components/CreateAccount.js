@@ -219,7 +219,7 @@ class CreateAccount extends Component {
       this.setState({ error: "Not a valid email" });
     }
     else {
-      const api_route = 'norse-botany-324000.ue.r.appspot.com/API/AddUser';
+      const api_route = 'https://degreeme.io/API/AddUser';
       const postBody = {
         First_Name: this.state.first_name,
         Last_Name: this.state.last_name,

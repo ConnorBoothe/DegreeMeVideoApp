@@ -64,7 +64,7 @@ class AvatarCropper extends Component {
       }
       postImageToDB(userId, avatar){
           return new Promise((resolve, reject)=>{
-            const api_route = 'norse-botany-324000.ue.r.appspot.com/API/UpdateAvatar';
+            const api_route = 'https://degreeme.io/API/UpdateAvatar';
             const postBody = {
                 userId: userId,
                 avatar: avatar,

@@ -158,7 +158,7 @@ class VideoUploader extends Component {
   addVideoToDatabase(videoUrl) {
     var user = JSON.parse(Cookies.get("user"));
     if (user._id !== undefined) {
-      const api_route = 'norse-botany-324000.ue.r.appspot.com/API/AddVideo';
+      const api_route = 'https://degreeme.io/API/AddVideo';
       this.createThumbnail(this.Link.current.files[0])
         .then((url) => {
           if (url === false) {

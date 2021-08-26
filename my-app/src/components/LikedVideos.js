@@ -21,7 +21,7 @@ componentDidMount(){
 }
 getLikedVideos(){
     var user = JSON.parse(Cookies.get("user"));
-    const api_route = 'norse-botany-324000.ue.r.appspot.com/GetLikedVideos/'+user._id;
+    const api_route = 'https://degreeme.io/GetLikedVideos/'+user._id;
     const requestMetadata = {
         method: 'GET',
         headers: {

@@ -27,7 +27,7 @@ class Home extends Component {
     else {
       user = this.props.user
     }
-    const api_route = 'norse-botany-324000.ue.r.appspot.com/API/keywords/'+ user._id;
+    const api_route = 'https://degreeme.io/API/keywords/'+ user._id;
     const requestMetadata = {
             method: 'GET',
             headers: {

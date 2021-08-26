@@ -50,7 +50,7 @@ class EarningsChart extends Component {
 
     async getCreatorPayouts() {
         var user = JSON.parse(Cookies.get("user"));
-        const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetCreatorPayouts/' + user._id;
+        const api_route = 'https://degreeme.io/API/GetCreatorPayouts/' + user._id;
         const requestMetadata = {
             method: 'GET',
             headers: {

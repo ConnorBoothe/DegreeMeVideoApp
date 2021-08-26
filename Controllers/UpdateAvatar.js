@@ -15,7 +15,7 @@ var UserDB = require('../Models/User');
 var users = new UserDB();
 //endpoint to add user to database
 router.post('/API/UpdateAvatar',
-    check('user_id').isString().escape(),
+    check('userId').isString().escape(),
     check('avatar').isString().escape(),
     function (req, res) {
         const errors = validationResult(req);

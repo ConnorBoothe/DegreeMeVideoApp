@@ -34,7 +34,7 @@ class UpgradeAccount extends Component {
   }
   submitPaymentMethod(user) {
     this.setState({ progressText: "Adding subscription" })
-    const api_route = 'norse-botany-324000.ue.r.appspot.com/API/AttachPaymentMethod';
+    const api_route = 'https://degreeme.io/API/AttachPaymentMethod';
     const postBody = {
       UserId: user._id,
       PaymentMethodId: this.state.paymentMethod.id
@@ -114,7 +114,7 @@ class UpgradeAccount extends Component {
       paymentSubmitted: true
     })
     var user = JSON.parse(Cookies.get("user"));
-    const api_route = 'norse-botany-324000.ue.r.appspot.com/API/AddSubscription';
+    const api_route = 'https://degreeme.io/API/AddSubscription';
         const postBody = {
             UserId: user._id
         };
@@ -213,7 +213,7 @@ class UpgradeAccount extends Component {
   getStripeCustomer() {
     return new Promise((resolve, reject) => {
       var user = JSON.parse(Cookies.get("user"));
-      const api_route = 'norse-botany-324000.ue.r.appspot.com/API/GetStripeCustomer/' + user._id;
+      const api_route = 'https://degreeme.io/API/GetStripeCustomer/' + user._id;
       const requestMetadata = {
         method: 'GET',
         headers: {

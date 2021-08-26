@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import Tippy from "@tippy.js/react";
 
 import NotificationList from "../components/NotificationList"
+import HTMLDecode from "../GlobalFunctions/HTMLDecode";
+var htmlDecode = new HTMLDecode();
 // import bootstrap from "bootstrap";
 class UserMenu extends Component {
     constructor(props) {
@@ -101,7 +103,7 @@ class UserMenu extends Component {
                 <span>
                     <Tippy content="Account">
                         <li onClick={this.toggleAccount}>
-                            <img className="user-image" src={this.props.user.Image} alt="User" />
+                            <img className="user-image" src={htmlDecode.htmlDecode(this.props.user.Image)} alt="User" />
                         </li>
                     </Tippy>
                     <Tippy content="Notifications">
@@ -132,7 +134,7 @@ class UserMenu extends Component {
         if (this.props.user._id !== undefined) {
 
 
-            const api_route = 'norse-botany-324000.ue.r.appspot.com/API/SeenNotifications';
+            const api_route = 'https://degreeme.io/API/SeenNotifications';
             const postBody = {
                 user_id: this.props.user._id
             };

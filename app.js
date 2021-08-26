@@ -7,7 +7,7 @@ const UserDB = require("./Models/Views")
 const users = new UserDB();
 app.use(cors({
   // origin: 'http://localhost:3000'
-  origin: 'https://norse-botany-324000.ue.r.appspot.com'
+  origin: 'https://https://degreeme.io'
 }));
 //use build directory for react app
 app.use(express.static(path.join(__dirname, "./my-app/build")))
@@ -67,16 +67,21 @@ app.use([
 ]); 
 app.use(function(req, res, next){
   res.header("Acces-Control-Allow_Origin",
-  "norse-botany-324000.ue.r.appspot.com")
+  "https://degreeme.io")
   res.header("Acces-Control-Allow_Origin", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
 
-//Wildcard route
+//render the react app
 app.get('*', function(req, res) {
   console.log("Not found")
     console.log(__dirname)
-    res.sendFile(path.join(__dirname, "build", "index.html"))
+    res.sendFile(path.join(__dirname, './my-app/build/index.html'), function(err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    })
+    // res.sendFile(path.join(__dirname, "build", "index.html"))
 });
 console.log("Running")
 app.listen(8080);
