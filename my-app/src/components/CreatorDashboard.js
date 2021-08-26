@@ -44,9 +44,7 @@ class CreatorDashboard extends Component {
     }
     getCreatorTotalViewCount(){
         if(Cookies.get("user") !== undefined) {
-            alert(this.props.user)
             console.log(Cookies.get("user"))
-            alert(Cookies.get("user"))
             var user = JSON.parse(Cookies.get("user"));
             const api_route = 'https://degreeme.io/API/GetAllCreatorViews/'+user._id;
             const requestMetadata = {

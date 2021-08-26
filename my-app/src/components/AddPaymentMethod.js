@@ -86,7 +86,6 @@ class AddPaymentMethod extends Component {
       };
       checkIfStripeCardComplete(event) {
         if (event.complete) {
-          alert("done")
         }
       }
     validateStripeCard = (elements) => {

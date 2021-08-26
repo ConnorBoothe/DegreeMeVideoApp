@@ -108,7 +108,6 @@ class PaymentSettings extends Component {
                 else {
                     this.setState({ paymentMethods: result.data })
                     if (result.data.length === 0) {
-                        alert("contains none")
                         this.setState({ containsNoPaymentMethod: true })
                     }
                 }
