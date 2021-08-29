@@ -101,7 +101,9 @@ module.exports = class User {
             //send the new user object to frontend
             UserDB.findOne({_id: userId})
             .then((user)=>{
-              resolve(user)
+              resolve(new UserClass(user._id, user.First_Name,
+                user.Last_Name, user.Image, user.Subscription_Level,
+                user.Free_Tier_Seconds, hasBankAccount(user.Stripe_Bank_Acct_Id)))
             })
           })
         })
