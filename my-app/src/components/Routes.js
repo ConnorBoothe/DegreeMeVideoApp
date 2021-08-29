@@ -19,6 +19,7 @@ import PaymentSettings from "./PaymentSettings";
 import LandingPage from "./LandingPage";
 import ForgotPassword from "./ForgotPassword";
 import UpdatePassword from "./UpdatePassword";
+import ContactUs from "./ContactUs";
 
 
 class Routes extends Component {
@@ -236,6 +237,8 @@ class Routes extends Component {
             (<Home {...props} user={this.state.user} />)} />
            <Route exact path="/LandingPage" render={props => 
             (<LandingPage {...props} />)} />
+            <Route exact path="/ContactUs" render={props => 
+            (<ContactUs {...props} />)} />
              <Route exact path="/ResetPassword" render={props => 
             (<ForgotPassword {...props} />)} />
             <Route exact path="/Upload" render={props => 

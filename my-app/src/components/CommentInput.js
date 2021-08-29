@@ -1,12 +1,13 @@
 import React, {Component} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import '../css/CommentInput.css';
+import htmlDecode from "../GlobalFunctions/HTMLDecode";
+var decode = new htmlDecode()
 class CommentInput extends Component {
     render(){
-        
         return (
             <div className="comment-input-container" >
-                <img className="user-image" src={this.props.user.Image} alt="User"/>
+                <img className="user-image" src={decode.htmlDecode(this.props.user.Image)} alt="User"/>
                 <input autoComplete="off" type="text" name="comment-input" className="comment-input" placeholder="Add comment" style={{"borderBottom": this.props.borderBottom}}
                     onFocus={this.props.showButtons}  onChange={this.props.HandleCommentChange}
                     value={this.props.Comment} />

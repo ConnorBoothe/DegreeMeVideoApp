@@ -76,7 +76,7 @@ class User extends Component {
     return (
         <div>
             <div className="profile-header">
-                <img className="user-profile-image" src={this.state.user.Image} alt="User"/>
+                <img className="user-profile-image" src={decode.htmlDecode(this.state.user.Image)} alt="User"/>
                 <p className="user-profile-name">{decode.htmlDecode(this.state.user.First_Name + " " + this.state.user.Last_Name)}</p>
                 <p className="profile-bio">{decode.htmlDecode(bio)}</p>
                 <ReviewModal user={this.props.user}/>

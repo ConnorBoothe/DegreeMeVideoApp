@@ -19,6 +19,8 @@
     width:265px;
     border-radius:20px;
     text-align:left;
+    margin-left:10px!important;
+    margin-right: 10px;
     color: white;
     display: inline-block;
     position: relative;

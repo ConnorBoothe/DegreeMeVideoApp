@@ -1,0 +1,16 @@
+.contact-us {
+    font-size: 22px!important;
+    margin: 0 10%;
+}
+.contact-wrapper {
+    min-height: 100vh;
+    margin-top: 50px;
+}
+.contact-wrapper a {
+    font-size: 18px!important;
+    color: #d3d3d3!important;
+    font-weight: bold;
+}
+.links {
+    margin-top:20px;
+}

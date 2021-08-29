@@ -229,7 +229,8 @@ class SingleVideo extends Component {
     }
     renderVideo(){
         var user = this.props.user;
-        if(this.props.user._id === undefined) {
+        if(this.props.user._id === undefined &&
+            Cookies.get("user") !== undefined) {
             user = JSON.parse(Cookies.get("user"))
         }
         if(user._id === undefined) {
