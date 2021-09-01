@@ -71,7 +71,15 @@ app.use(function(req, res, next){
   res.header("Acces-Control-Allow_Origin", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
-
+//redirect to https
+// app.use((req, res, next) => {
+//   if (req.secure) {
+//       next();
+//   } else {
+//       console.log("redirect")
+//       res.redirect('https://' + req.headers.host + req.url);
+//   }
+// });
 //render the react app
 app.get('*', function(req, res) {
   console.log("Not found")
@@ -81,7 +89,6 @@ app.get('*', function(req, res) {
         res.status(500).send(err)
       }
     })
-    // res.sendFile(path.join(__dirname, "build", "index.html"))
 });
 console.log("Running")
 app.listen(8080);
