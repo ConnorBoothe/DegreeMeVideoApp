@@ -29,8 +29,9 @@ router.post('/API/AddSubscription',
                     stripe.subscriptions.create({
                         customer: user.Stripe_Customer_Id,
                         items: [
-                            { price: 'price_1J8uQ2EKHHXXF01HWqZv0vOv' },
+                            { price: 'price_1JUiDZEKHHXXF01H7GN0BXLH' },
                         ],
+                        coupon: 'YmOr6RLs',
                     })
                         .then((sub) => {
                             users.updateSubscriptionLevel(user._id, "Pro Tier")

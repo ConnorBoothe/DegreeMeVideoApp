@@ -9,7 +9,7 @@ const views = new ViewsDB();
 async function transferToStripeAccounts(){
     //get all stripe subscriptions
     const subscriptions = await stripe.subscriptions.list({
-        price: 'price_1J8uQ2EKHHXXF01HWqZv0vOv',
+        price: 'price_1JUiDZEKHHXXF01H7GN0BXLH',
         limit: 100
       })
     //get user view count percentages
