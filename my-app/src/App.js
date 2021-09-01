@@ -1,4 +1,5 @@
 import './App.css';
+import HttpsRedirect from 'react-https-redirect';
 // import { AppContext } from "./libs/contextLib";
 import React from "react";
 import Routes from './components/Routes'
@@ -10,7 +11,9 @@ function App() {
     <div className="App">
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}> */}
-      <Routes/>
+      <HttpsRedirect>
+        <Routes/>
+      </HttpsRedirect>
           
       {/* </AppContext.Provider> */}
     </div>

@@ -39,10 +39,10 @@ class Subscriptions extends Component {
         <div>
             <p className="option-keywords-text text-light">Subscription Level</p>
             <SubscriptionItem type="Free Tier" id="free_tier" description="10 minutes of streaming access per month"  
-            selectSubscription = {this.selectSubscription.bind("Free Tier")} price="Free" selected={this.state.freeTierSelected}
+            selectSubscription = {this.selectSubscription.bind("Free Tier")} price={"Free"} selected={this.state.freeTierSelected}
             />
-            <SubscriptionItem type="Pro Tier" id="pro_tier" description="Unlimited streaming access" 
-             selectSubscription = {this.selectSubscription.bind("Pro Tier")} price="$8/month" selected={this.state.proTierSelected} 
+            <SubscriptionItem type="Pro Tier" id="pro_tier" description="Unlimited streaming access" details="Then $8/month"
+             selectSubscription = {this.selectSubscription.bind("Pro Tier")} price="Free first month" selected={this.state.proTierSelected} 
              />
         </div> 
     );

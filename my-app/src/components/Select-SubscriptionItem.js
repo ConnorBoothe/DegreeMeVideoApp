@@ -17,6 +17,8 @@ class SubscriptionItem extends Component {
             <p className="option-keywords-text text-light sub-title">{this.props.type}</p>
               <p className="text-light sub-desc">{this.props.description}</p>
               <p className="option-keywords-text text-light price">{this.props.price}</p>
+              <p className="text-light details">{this.props.details}</p>
+
           </label>
           <input className="sub-radio" type="radio" id={this.props.id} name="tier" value={this.props.id} onChange={this.props.selectSubscription} />
         </div>
