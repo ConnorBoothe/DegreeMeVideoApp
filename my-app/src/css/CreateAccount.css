@@ -8,7 +8,7 @@
     text-align:center;
 }
 .terms-link {
-    text-align: left;
+    text-align: center;
     margin-left:5%;
     margin-top: 10px;
 }
@@ -16,9 +16,11 @@
     font-weight: bold;
     
     margin-top: 10px!important;
+    margin-left: 10px;
 }
 .terms-li {
-    margin-top: 10px;
+    margin-top: 20px;
+    text-align:left;
 }
 .terms-checkbox {
     float: left;
@@ -26,6 +28,7 @@
     margin-top: -6px!important;
     font-size:14px!important;
     width:15px!important;
+    height: 15px!important;
 }
 .keywords-create-account-wrapper {
     text-align:center;

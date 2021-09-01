@@ -44,7 +44,7 @@ class Video extends Component {
                                 </p>
                                 <p className="text-light video-description-search-result">{this.props.description}</p>
                             <p className="creator-name-search-result">
-                                <img className="creator-img-search-result" src={this.props.image} alt="Creator"/>
+                                <img className="creator-img-search-result" src={decode.htmlDecode(this.props.image)} alt="Creator"/>
                                 {this.props.Creator}
                                 </p>
                         </div>

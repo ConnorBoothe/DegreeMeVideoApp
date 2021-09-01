@@ -31,7 +31,7 @@ class Video extends Component {
                     </svg>
                 </div>
                 <img className="thumbnail" src={decode.htmlDecode(this.props.Thumbnail)} alt="Video Thumbnail" />
-                <img className="creator-img" src={this.props.image} alt="Creator" />
+                <img className="creator-img" src={decode.htmlDecode(this.props.image)} alt="Creator" />
 
                 <div className="video-details">
 

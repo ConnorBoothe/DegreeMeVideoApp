@@ -1,11 +1,12 @@
 .subscription-item {
     width: 190px;
     background-color: #202020;
-    height: 150px!important;
+    height: 170px!important;
     margin-right:10px!important;
     margin-left: 10p!important;
     border-radius: 10px;
     cursor: pointer;
+    position: relative;
 }
 .sub-container{
     display: inline-block!important;
@@ -25,5 +26,15 @@
     display: none;
 }
 .price {
-    font-size: 18px;
+    font-size: 16px;
+    margin-bottom:0;
+    padding-bottom: 0;
+}
+.details {
+    padding-top:0;
+    color: #d4d4d4;
+    font-size: 14px;
+    position: absolute;
+    text-align:center;
+    width:100%;
 }
