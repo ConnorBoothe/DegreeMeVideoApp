@@ -7,7 +7,8 @@ const UserDB = require("./Models/Views")
 const users = new UserDB();
 app.use(cors({
   // origin: 'http://localhost:3000'
-  origin: 'https://https://degreeme.io'
+  origin: ['https://degreeme.io',
+  'https://www.degreeme.io']
 }));
 //use build directory for react app
 app.use(express.static(path.join(__dirname, "./my-app/build")))
