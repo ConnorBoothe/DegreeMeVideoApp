@@ -6,9 +6,8 @@ const cors = require('cors');
 const UserDB = require("./Models/Views")
 const users = new UserDB();
 app.use(cors({
-  // origin: 'http://localhost:3000'
-  origin: ['https://degreeme.io',
-  'https://www.degreeme.io']
+  origin: ['http://localhost:3000',
+  'http://localhost:3000']
 }));
 //use build directory for react app
 app.use(express.static(path.join(__dirname, "./my-app/build")))
@@ -68,7 +67,7 @@ app.use([
 ]); 
 app.use(function(req, res, next){
   res.header("Acces-Control-Allow_Origin",
-  "https://degreeme.io")
+  "http://localhost:3000")
   res.header("Acces-Control-Allow_Origin", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })

@@ -64,7 +64,7 @@ class AvatarCropper extends Component {
       }
       postImageToDB(userId, avatar){
           return new Promise((resolve, reject)=>{
-            const api_route = 'https://degreeme.io/API/UpdateAvatar';
+            const api_route = 'http://localhost:8080/API/UpdateAvatar';
             const postBody = {
                 userId: userId,
                 avatar: avatar,

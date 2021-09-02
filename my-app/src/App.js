@@ -11,9 +11,9 @@ function App() {
     <div className="App">
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}> */}
-      <HttpsRedirect>
+      {/* <HttpsRedirect> */}
         <Routes/>
-      </HttpsRedirect>
+      {/* </HttpsRedirect> */}
           
       {/* </AppContext.Provider> */}
     </div>

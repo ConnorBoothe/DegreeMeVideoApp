@@ -39,7 +39,7 @@ class Settings extends Component {
   }
   updateBio(){
     if(this.state.bio !== "") {
-      const api_route = 'https://degreeme.io/API/UpdateBio';
+      const api_route = 'http://localhost:8080/API/UpdateBio';
       const postBody = {
           userId: this.props.user._id,
           bio: this.state.bio,

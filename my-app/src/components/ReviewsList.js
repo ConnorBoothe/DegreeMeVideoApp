@@ -13,7 +13,7 @@ class ReviewsList extends Component {
         
     }
     getUserReviews(){
-        const api_route = 'https://degreeme.io/API/GetUserReviews/'+window.location.href.split("/")[4];
+        const api_route = 'http://localhost:8080/API/GetUserReviews/'+window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
             headers: {

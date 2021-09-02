@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const stripe = require('stripe')(process.env.STRIPE_KEY);
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 const UserDB = require("../Models/User");
 const users = new UserDB();
 //get date 6 months ago

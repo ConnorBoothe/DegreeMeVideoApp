@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const CronJob = require('cron').CronJob;
 
-const stripe = require('stripe')(process.env.STRIPE_KEY);
+const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
 const ViewsDB = require("../Models/Views");
 const views = new ViewsDB();
 async function transferToStripeAccounts(){

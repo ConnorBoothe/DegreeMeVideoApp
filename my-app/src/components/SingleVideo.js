@@ -59,7 +59,7 @@ class SingleVideo extends Component {
     addView(){
         //do not add view if the viewer is also Creator
         setTimeout(()=>{
-            const api_route = 'https://degreeme.io/API/AddView';
+            const api_route = 'http://localhost:8080/API/AddView';
             var userId = "none"
             if(this.props.user._id !== undefined){
                 userId = this.props.user._id;
@@ -96,7 +96,7 @@ class SingleVideo extends Component {
             this.setState({isOpen: true})
         }
         else {
-            const api_route = 'https://degreeme.io/API/AddLike';
+            const api_route = 'http://localhost:8080/API/AddLike';
             const postBody = {
                 Creator_Id:this.state.video.Creator_Id,
                 VideoId: this.state.video._id,
@@ -120,7 +120,7 @@ class SingleVideo extends Component {
                     // this.props.showUnreadCount();
                 }
                 else{
-                    const api_route = 'https://degreeme.io/API/RemoveLike';
+                    const api_route = 'http://localhost:8080/API/RemoveLike';
                     const postBody = {
                         VideoId: this.state.video._id,
                         UserId: this.props.user._id
@@ -153,7 +153,7 @@ class SingleVideo extends Component {
       }
     getVideo(){
         let id = this.props.match.params.id
-        const api_route = 'https://degreeme.io/API/Video/'+ id;
+        const api_route = 'http://localhost:8080/API/Video/'+ id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -200,7 +200,7 @@ class SingleVideo extends Component {
       //function runs twice when video ends
     updateSecondsViewed(secondsToAdd){
         if(this.props.user.Subscription_Level === "Free Tier") {
-        const api_route = 'https://degreeme.io/API/UpdateFreeTierSeconds';
+        const api_route = 'http://localhost:8080/API/UpdateFreeTierSeconds';
                 const postBody = {
                     UserId: this.props.user._id,
                     secondsToAdd: secondsToAdd,
