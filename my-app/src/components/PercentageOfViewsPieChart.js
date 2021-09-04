@@ -58,7 +58,7 @@ class PercentageOfViewsPieChart extends Component {
 
                 },
                 datalabels: {
-                  anchor: "end",
+                  anchor: "center",
                   align: "middle",
                   clamp: true,
                   offset: 1,

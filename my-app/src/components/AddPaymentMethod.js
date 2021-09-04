@@ -100,7 +100,7 @@ class AddPaymentMethod extends Component {
         });
       }
     loadStripe(){
-        return loadStripe('pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn');
+        return loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
       }
     //controls card input display
   createCard(elements, stripe) {
