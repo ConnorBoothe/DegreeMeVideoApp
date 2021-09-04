@@ -3,6 +3,7 @@ import "../css/Review.css";
 import Review from "../components/Review";
 import 'bootstrap/dist/css/bootstrap.css';
 
+
 class ReviewsList extends Component {
     constructor(props) {
         super(props);
@@ -13,7 +14,7 @@ class ReviewsList extends Component {
         
     }
     getUserReviews(){
-        const api_route = 'http://localhost:8080/API/GetUserReviews/'+window.location.href.split("/")[4];
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetUserReviews/'+window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
             headers: {

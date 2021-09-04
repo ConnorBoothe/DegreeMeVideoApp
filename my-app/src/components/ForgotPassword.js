@@ -3,6 +3,8 @@ import '../css/VideoUploader.css';
 import '../css/Login.css';
 import '../css/ResetPassword.css';
 import 'bootstrap/dist/css/bootstrap.css';
+
+
 class ForgotPassword extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +19,7 @@ class ForgotPassword extends Component {
        this.setState({email: e.target.value})
    }
    generateResetPWLink(){
-    const api_route = 'http://localhost:8080/API/GenerateResetPasswordLink';
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GenerateResetPasswordLink';
    const postBody = {
      Email: this.state.email,
    };

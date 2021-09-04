@@ -3,6 +3,7 @@ import '../css/VideoUploader.css';
 import '../css/Login.css';
 import '../css/ResetPassword.css';
 import 'bootstrap/dist/css/bootstrap.css';
+
 class UpdatePassword extends Component {
     constructor(props) {
         super(props);
@@ -31,7 +32,7 @@ class UpdatePassword extends Component {
     }
     getUpdateRequestById() {
         var req_id = window.location.href.split("/")[4];
-        const api_route = 'http://localhost:8080/API/GetPasswordUpdateRequest/';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetPasswordUpdateRequest/';
         const postBody = {
             request_id: req_id,
         };
@@ -59,7 +60,7 @@ class UpdatePassword extends Component {
             })
         }
         else {
-            const api_route = 'http://localhost:8080/API/UpdatePassword/';
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/UpdatePassword/';
             const postBody = {
                 userId: this.state.userId,
                 password: this.state.password,

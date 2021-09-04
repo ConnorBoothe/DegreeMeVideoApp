@@ -5,6 +5,7 @@ import firebase from "firebase/app";
 import 'firebase/storage';
 import Cookies from 'js-cookie';
 
+
 class AvatarCropper extends Component {
 
     constructor(props) {
@@ -64,7 +65,7 @@ class AvatarCropper extends Component {
       }
       postImageToDB(userId, avatar){
           return new Promise((resolve, reject)=>{
-            const api_route = 'http://localhost:8080/API/UpdateAvatar';
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/UpdateAvatar';
             const postBody = {
                 userId: userId,
                 avatar: avatar,

@@ -5,6 +5,7 @@ import "../css/EarningsChart.css"
 import { Line } from "react-chartjs-2";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
+
 class EarningsChart extends Component {
     constructor(props) {
         super(props)
@@ -50,7 +51,7 @@ class EarningsChart extends Component {
 
     async getCreatorPayouts() {
         var user = JSON.parse(Cookies.get("user"));
-        const api_route = 'http://localhost:8080/API/GetCreatorPayouts/' + user._id;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetCreatorPayouts/' + user._id;
         const requestMetadata = {
             method: 'GET',
             headers: {

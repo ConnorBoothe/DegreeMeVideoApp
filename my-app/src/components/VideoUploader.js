@@ -11,6 +11,8 @@ import Cookies from 'js-cookie';
 import CreateAccount from "../components/CreateAccount"
 import CreateSellerAccount from "../components/CreateSellerAccount"
 import 'bootstrap/dist/css/bootstrap.css';
+
+
 const config = {
   apiKey: "AIzaSyCdNXC20rfZy4WU_Yo0r1_jqurajcevaI0",
   authDomain: "degreeme-bd5c7.firebaseapp.com",
@@ -158,7 +160,7 @@ class VideoUploader extends Component {
   addVideoToDatabase(videoUrl) {
     var user = JSON.parse(Cookies.get("user"));
     if (user._id !== undefined) {
-      const api_route = 'http://localhost:8080/API/AddVideo';
+      const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddVideo';
       this.createThumbnail(this.Link.current.files[0])
         .then((url) => {
           if (url === false) {

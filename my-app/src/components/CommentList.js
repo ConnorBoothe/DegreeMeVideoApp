@@ -5,6 +5,7 @@ import CommentInput from "../components/CommentInput"
 import Comment from "../components/Comment"
 import CreateAccountModal from "../components/CreateAccountModal";
 import htmlDecode from "../GlobalFunctions/HTMLDecode";
+
 var decode = new htmlDecode();
 class CommentList extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class CommentList extends Component {
         }
         else {
             if(this.state.comment !== ""){
-                const api_route = 'http://localhost:8080/API/AddComment';
+                const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddComment';
                 const postBody = {
                     Video_Id: this.props.VideoId,
                     User_Id: this.props.user._id,
@@ -80,7 +81,7 @@ class CommentList extends Component {
     }
     getComments(){
         // alert(window.location.href.split("/")[4])
-        const api_route = 'http://localhost:8080/API/Comments/'+this.props.VideoId;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/Comments/'+this.props.VideoId;
         const requestMetadata = {
             method: 'GET',
             headers: {

@@ -7,6 +7,7 @@ import 'react-phone-input-2/lib/style.css'
 import Cookies from "js-cookie"
 import { Link } from 'react-router-dom';
 
+
 // import bootstrap from "bootstrap";
 class CreateSellerAccount extends Component {
     constructor(props) {
@@ -134,7 +135,7 @@ class CreateSellerAccount extends Component {
         if (Cookies.get("user") !== undefined) {
             this.setState({ formSubmitted: true, error: false })
             var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'http://localhost:8080/API/CreateStripeAccount';
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/CreateStripeAccount';
             const postBody = {
                 user_id: user._id,
                 dob: this.state.dob,

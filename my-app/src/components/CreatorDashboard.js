@@ -6,6 +6,7 @@ import "../css/CreatorDashboard.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import Cookies from 'js-cookie';
 
+
 // import bootstrap from "bootstrap";
 class CreatorDashboard extends Component {
     constructor(props){
@@ -26,7 +27,7 @@ class CreatorDashboard extends Component {
     getTotalEarnings(){
         if(Cookies.get("user") !== null) {
             var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'http://localhost:8080/API/GetAllEarnings/'+user._id;
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetAllEarnings/'+user._id;
             const requestMetadata = {
                 method: 'GET',
                 headers: {
@@ -46,7 +47,7 @@ class CreatorDashboard extends Component {
         if(Cookies.get("user") !== undefined) {
             console.log(Cookies.get("user"))
             var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'http://localhost:8080/API/GetAllCreatorViews/'+user._id;
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetAllCreatorViews/'+user._id;
             const requestMetadata = {
                 method: 'GET',
                 headers: {

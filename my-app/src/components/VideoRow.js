@@ -3,6 +3,7 @@ import "../css/VideoRow.css";
 import Video from "../components/Video";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
+
 import htmlDecode from "../GlobalFunctions/HTMLDecode";
 var decode = new htmlDecode()
 class VideoRow extends Component {
@@ -22,7 +23,7 @@ class VideoRow extends Component {
         this.setState({isMounted: false})
     }
     getVideos(){
-        const api_route = 'http://localhost:8080/API/GetVideosBySearchValue/'+this.props.category;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetVideosBySearchValue/'+this.props.category;
         const requestMetadata = {
             method: 'GET',
             headers: {

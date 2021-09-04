@@ -222,7 +222,7 @@ class CreateAccount extends Component {
       this.setState({ error: "Not a valid email" });
     }
     else {
-      const api_route = 'http://localhost:8080/API/AddUser';
+      const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddUser';
       const postBody = {
         First_Name: this.state.first_name,
         Last_Name: this.state.last_name,

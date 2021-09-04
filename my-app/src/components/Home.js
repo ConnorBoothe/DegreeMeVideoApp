@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {
   Redirect
 } from "react-router-dom";
+
+
 // import bootstrap from "bootstrap";
 class Home extends Component {
   constructor(props){
@@ -27,7 +29,7 @@ class Home extends Component {
     else {
       user = this.props.user
     }
-    const api_route = 'http://localhost:8080/API/keywords/'+ user._id;
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/keywords/'+ user._id;
     const requestMetadata = {
             method: 'GET',
             headers: {

@@ -3,7 +3,8 @@ import HttpsRedirect from 'react-https-redirect';
 // import { AppContext } from "./libs/contextLib";
 import React from "react";
 import Routes from './components/Routes'
-
+// import dotenv from "./dotenv"
+require('dotenv').config();
 function App() {
 
   return (

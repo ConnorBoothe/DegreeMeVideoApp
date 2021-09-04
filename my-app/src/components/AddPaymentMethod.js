@@ -4,6 +4,7 @@ import "../css/AddCard.css"
 import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
+
 class AddPaymentMethod extends Component {
     constructor(props){
         super(props)
@@ -23,7 +24,7 @@ class AddPaymentMethod extends Component {
     }
     submitPaymentMethod(user){
         return new Promise((resolve, reject)=>{
-        const api_route = 'http://localhost:8080/API/AddPaymentMethod';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddPaymentMethod';
         const postBody = {
           UserId: user._id,
           PaymentMethodId: this.state.paymentMethod.id

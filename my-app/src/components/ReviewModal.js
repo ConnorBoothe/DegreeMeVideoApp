@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/ReviewModal.css";
+
+
 class ReviewModal extends Component {
   constructor(props){
     super(props)
@@ -33,7 +35,7 @@ class ReviewModal extends Component {
     this.setState({rating: e.target.value})
   }
   addReview(){
-    const api_route = 'http://localhost:8080/API/AddReview';
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddReview';
           const postBody = {
               Creator_Id: window.location.href.split("/")[4],
               User_Id: this.props.user._id,

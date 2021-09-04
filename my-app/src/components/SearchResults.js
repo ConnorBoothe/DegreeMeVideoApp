@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import  "../css/SearchResults.css";
 import Video from "../components/SearchResultVideo";
 import { Link } from 'react-router-dom';
+
 import NoResultsImage from "../images/NoResults.svg";
 import HTMLDecode from "../GlobalFunctions/HTMLDecode";
 var htmlDecode = new HTMLDecode();
@@ -49,7 +50,7 @@ setSearchLabel(){
       else {
         search = this.props.match.params.id;
       }
-    const api_route = 'http://localhost:8080/API/GetVideosBySearchValue/'+search;
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetVideosBySearchValue/'+search;
     const requestMetadata = {
         method: 'GET',
         headers: {

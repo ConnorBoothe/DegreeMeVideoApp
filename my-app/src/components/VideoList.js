@@ -4,6 +4,7 @@ import Video from "../components/Video";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Link } from 'react-router-dom';
 
+
 class UserVideos extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +15,7 @@ class UserVideos extends Component {
         
     }
     getUserVideos(){
-        const api_route = 'http://localhost:8080/API/GetUserVideos/'+window.location.href.split("/")[4];
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetUserVideos/'+window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
             headers: {

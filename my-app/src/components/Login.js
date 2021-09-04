@@ -4,6 +4,8 @@ import '../css/Login.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Redirect, Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
+// 
+// require('dotenv').config();
 class LoginForm extends Component {
     constructor(props) {
         super(props);
@@ -81,7 +83,7 @@ class LoginForm extends Component {
             this.showError();
         }
         else {
-            const api_route = 'http://localhost:8080/API/Login';
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/Login';
             const postBody = {
                 Email: this.state.email,
                 Password: this.state.password

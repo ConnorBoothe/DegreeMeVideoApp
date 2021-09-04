@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import VideoList from "../components/VideoList";
 import ReviewModal from "../components/ReviewModal"
 import ReviewsList from "../components/ReviewsList"
+
 import 'bootstrap/dist/css/bootstrap.css';
 import htmlDecode from '../GlobalFunctions/HTMLDecode'
 var decode = new htmlDecode();
@@ -50,7 +51,7 @@ class User extends Component {
   }
   getUser(){
     let id = this.props.match.params.id
-    const api_route = 'http://localhost:8080/API/GetUser/'+id;
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetUser/'+id;
     const requestMetadata = {
         method: 'GET',
         headers: {

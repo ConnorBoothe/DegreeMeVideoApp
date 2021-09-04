@@ -7,7 +7,7 @@ import '../css/VideoRow.css';
 import '../css/LikedVideos.css';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
-// import bootstrap from "bootstrap";
+
 class LikedVideos extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +21,7 @@ componentDidMount(){
 }
 getLikedVideos(){
     var user = JSON.parse(Cookies.get("user"));
-    const api_route = 'http://localhost:8080/GetLikedVideos/'+user._id;
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/GetLikedVideos/'+user._id;
     const requestMetadata = {
         method: 'GET',
         headers: {

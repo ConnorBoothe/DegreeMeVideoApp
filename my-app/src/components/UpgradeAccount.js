@@ -7,6 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+
 class UpgradeAccount extends Component {
   constructor(props) {
     super(props)
@@ -34,7 +35,7 @@ class UpgradeAccount extends Component {
   }
   submitPaymentMethod(user) {
     this.setState({ progressText: "Adding subscription" })
-    const api_route = 'http://localhost:8080/API/AttachPaymentMethod';
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AttachPaymentMethod';
     const postBody = {
       UserId: user._id,
       PaymentMethodId: this.state.paymentMethod.id
@@ -114,7 +115,7 @@ class UpgradeAccount extends Component {
       paymentSubmitted: true
     })
     var user = JSON.parse(Cookies.get("user"));
-    const api_route = 'http://localhost:8080/API/AddSubscription';
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddSubscription';
         const postBody = {
             UserId: user._id
         };
@@ -213,7 +214,7 @@ class UpgradeAccount extends Component {
   getStripeCustomer() {
     return new Promise((resolve, reject) => {
       var user = JSON.parse(Cookies.get("user"));
-      const api_route = 'http://localhost:8080/API/GetStripeCustomer/' + user._id;
+      const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetStripeCustomer/' + user._id;
       const requestMetadata = {
         method: 'GET',
         headers: {
