@@ -134,7 +134,7 @@ class UserMenu extends Component {
         if (this.props.user._id !== undefined) {
 
 
-            const api_route = 'https://degreeme.io/API/SeenNotifications';
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/SeenNotifications';
             const postBody = {
                 user_id: this.props.user._id
             };

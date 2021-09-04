@@ -31,7 +31,7 @@ class UpdatePassword extends Component {
     }
     getUpdateRequestById() {
         var req_id = window.location.href.split("/")[4];
-        const api_route = 'https://degreeme.io/API/GetPasswordUpdateRequest/';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetPasswordUpdateRequest/';
         const postBody = {
             request_id: req_id,
         };
@@ -59,7 +59,7 @@ class UpdatePassword extends Component {
             })
         }
         else {
-            const api_route = 'https://degreeme.io/API/UpdatePassword/';
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/UpdatePassword/';
             const postBody = {
                 userId: this.state.userId,
                 password: this.state.password,

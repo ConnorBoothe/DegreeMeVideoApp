@@ -64,7 +64,7 @@ class Routes extends Component {
         else {
           user = this.state.user
         }
-        const api_route = 'https://degreeme.io/API/keywords/'+ user._id;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/keywords/'+ user._id;
         const requestMetadata = {
                 method: 'GET',
                 headers: {
@@ -84,7 +84,7 @@ class Routes extends Component {
     getNotificationCount(){
         if(Cookies.get("user")!== undefined) {
         var user = JSON.parse(Cookies.get("user"));
-        const api_route = 'https://degreeme.io/API/GetUnreadCount/'+user._id;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetUnreadCount/'+user._id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -113,7 +113,7 @@ class Routes extends Component {
     getNotifications(){
         if(Cookies.get("user")!== undefined) {
         var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'https://degreeme.io/API/GetNotifications/'+user._id;
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetNotifications/'+user._id;
             const requestMetadata = {
                 method: 'GET',
                 headers: {
@@ -168,7 +168,7 @@ class Routes extends Component {
     addKeyword(){
         //if keyword isn't empty, add it
         if(this.keyword.current.value !== ""){
-          const api_route = 'https://degreeme.io/API/AddKeywords';
+          const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddKeywords';
           const postBody = {
               userId: this.state.user._id,
               word: this.keyword.current.value
@@ -191,7 +191,7 @@ class Routes extends Component {
       }
        //remove keyword by index
        removeKeyword(index){
-        const api_route = 'https://degreeme.io/API/RemoveKeyword';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/RemoveKeyword';
         const postBody = {
             userId: this.state.user._id,
             word: this.state.keywords[index]

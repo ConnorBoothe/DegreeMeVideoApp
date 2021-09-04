@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.b7a33124.chunk.css",
-    "main.js": "/static/js/main.87209f05.chunk.js",
-    "main.js.map": "/static/js/main.87209f05.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.9646efb1.js",
-    "runtime-main.js.map": "/static/js/runtime-main.9646efb1.js.map",
+    "main.css": "/static/css/main.20207a99.chunk.css",
+    "main.js": "/static/js/main.6e9fff75.chunk.js",
+    "main.js.map": "/static/js/main.6e9fff75.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.5fcf3a38.js",
+    "runtime-main.js.map": "/static/js/runtime-main.5fcf3a38.js.map",
     "static/css/2.e0b28d21.chunk.css": "/static/css/2.e0b28d21.chunk.css",
-    "static/js/2.1da29a5d.chunk.js": "/static/js/2.1da29a5d.chunk.js",
-    "static/js/2.1da29a5d.chunk.js.map": "/static/js/2.1da29a5d.chunk.js.map",
-    "static/js/3.c6f3d29c.chunk.js": "/static/js/3.c6f3d29c.chunk.js",
-    "static/js/3.c6f3d29c.chunk.js.map": "/static/js/3.c6f3d29c.chunk.js.map",
+    "static/js/2.a17bf674.chunk.js": "/static/js/2.a17bf674.chunk.js",
+    "static/js/2.a17bf674.chunk.js.map": "/static/js/2.a17bf674.chunk.js.map",
+    "static/js/3.c45e3028.chunk.js": "/static/js/3.c45e3028.chunk.js",
+    "static/js/3.c45e3028.chunk.js.map": "/static/js/3.c45e3028.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.e0b28d21.chunk.css.map": "/static/css/2.e0b28d21.chunk.css.map",
-    "static/css/main.b7a33124.chunk.css.map": "/static/css/main.b7a33124.chunk.css.map",
-    "static/js/2.1da29a5d.chunk.js.LICENSE.txt": "/static/js/2.1da29a5d.chunk.js.LICENSE.txt",
+    "static/css/main.20207a99.chunk.css.map": "/static/css/main.20207a99.chunk.css.map",
+    "static/js/2.a17bf674.chunk.js.LICENSE.txt": "/static/js/2.a17bf674.chunk.js.LICENSE.txt",
     "static/media/NoResults.3936f882.svg": "/static/media/NoResults.3936f882.svg",
     "static/media/Video_Sub.11d3a8c4.svg": "/static/media/Video_Sub.11d3a8c4.svg",
     "static/media/degreeMeHashTag.acec1592.svg": "/static/media/degreeMeHashTag.acec1592.svg",
@@ -27,10 +27,10 @@
     "static/media/visa.1fae40ca.svg": "/static/media/visa.1fae40ca.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.9646efb1.js",
+    "static/js/runtime-main.5fcf3a38.js",
     "static/css/2.e0b28d21.chunk.css",
-    "static/js/2.1da29a5d.chunk.js",
-    "static/css/main.b7a33124.chunk.css",
-    "static/js/main.87209f05.chunk.js"
+    "static/js/2.a17bf674.chunk.js",
+    "static/css/main.20207a99.chunk.css",
+    "static/js/main.6e9fff75.chunk.js"
   ]
 }

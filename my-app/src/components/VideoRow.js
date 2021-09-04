@@ -22,7 +22,7 @@ class VideoRow extends Component {
         this.setState({isMounted: false})
     }
     getVideos(){
-        const api_route = 'https://degreeme.io/API/GetVideosBySearchValue/'+this.props.category;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetVideosBySearchValue/'+this.props.category;
         const requestMetadata = {
             method: 'GET',
             headers: {

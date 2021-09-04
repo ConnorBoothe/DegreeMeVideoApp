@@ -14,7 +14,7 @@ class Subscription_Item extends Component{
     }
     cancelSubscription(subscription_id){
         this.props.showRemoveSubLoader();
-        const api_route = 'https://degreeme.io/API/CancelSubscription';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/CancelSubscription';
             const postBody = {
                 UserId: this.props.user._id,
                 subscription: subscription_id

@@ -14,7 +14,7 @@ class UserVideos extends Component {
         
     }
     getUserVideos(){
-        const api_route = 'https://degreeme.io/API/GetUserVideos/'+window.location.href.split("/")[4];
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetUserVideos/'+window.location.href.split("/")[4];
         const requestMetadata = {
             method: 'GET',
             headers: {

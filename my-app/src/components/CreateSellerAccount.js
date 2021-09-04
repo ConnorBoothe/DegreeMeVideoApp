@@ -134,7 +134,7 @@ class CreateSellerAccount extends Component {
         if (Cookies.get("user") !== undefined) {
             this.setState({ formSubmitted: true, error: false })
             var user = JSON.parse(Cookies.get("user"));
-            const api_route = 'https://degreeme.io/API/CreateStripeAccount';
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/CreateStripeAccount';
             const postBody = {
                 user_id: user._id,
                 dob: this.state.dob,

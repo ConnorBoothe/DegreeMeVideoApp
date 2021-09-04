@@ -66,7 +66,7 @@ class PaymentSettings extends Component {
     }
     getStripeSubscriptions() {
         let id = this.props.match.params.id
-        const api_route = 'https://degreeme.io/API/GetSubscriptions/' + id;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetSubscriptions/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -89,7 +89,7 @@ class PaymentSettings extends Component {
     getStripePaymentMethods() {
         //fixed
         let id = this.props.match.params.id
-        const api_route = 'https://degreeme.io/API/GetPaymentMethods/' + id;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetPaymentMethods/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -116,7 +116,7 @@ class PaymentSettings extends Component {
     }
     getStripeCustomer() {
         let id = this.props.match.params.id
-        const api_route = 'https://degreeme.io/API/GetStripeCustomer/' + id;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetStripeCustomer/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -136,7 +136,7 @@ class PaymentSettings extends Component {
     }
     getUpcomingPayments() {
         let id = this.props.match.params.id
-        const api_route = 'https://degreeme.io/API/GetUpcomingPayments/' + id;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetUpcomingPayments/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -156,7 +156,7 @@ class PaymentSettings extends Component {
     }
     getPastTransactions() {
         let id = this.props.match.params.id
-        const api_route = 'https://degreeme.io/API/GetPastTransactions/' + id;
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetPastTransactions/' + id;
         const requestMetadata = {
             method: 'GET',
             headers: {
@@ -174,7 +174,7 @@ class PaymentSettings extends Component {
             subscriptionLoading: true, subscriptionLoadingText: "Adding",
             disableSubButton: true
         });
-        const api_route = 'https://degreeme.io/API/AddSubscription';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddSubscription';
         const postBody = {
             UserId: this.props.match.params.id
         };
@@ -264,7 +264,7 @@ class PaymentSettings extends Component {
 
     }
     updateDefaultPaymentMethod(paymentMethodId) {
-        const api_route = 'https://degreeme.io/API/UpdateDefaultPaymentMethod';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/UpdateDefaultPaymentMethod';
         const postBody = {
             UserId: this.props.match.params.id,
             PaymentMethodId: paymentMethodId
@@ -285,7 +285,7 @@ class PaymentSettings extends Component {
     }
     removePaymentMethod(paymentMethodId) {
         this.setCardLoading(true);
-        const api_route = 'https://degreeme.io/API/RemovePaymentMethod';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/RemovePaymentMethod';
         const postBody = {
             PaymentMethodId: paymentMethodId
         };

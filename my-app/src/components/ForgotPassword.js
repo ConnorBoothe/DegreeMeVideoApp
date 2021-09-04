@@ -17,7 +17,7 @@ class ForgotPassword extends Component {
        this.setState({email: e.target.value})
    }
    generateResetPWLink(){
-    const api_route = 'https://degreeme.io/API/GenerateResetPasswordLink';
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GenerateResetPasswordLink';
    const postBody = {
      Email: this.state.email,
    };

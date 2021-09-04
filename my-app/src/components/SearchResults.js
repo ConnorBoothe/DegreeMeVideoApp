@@ -49,7 +49,7 @@ setSearchLabel(){
       else {
         search = this.props.match.params.id;
       }
-    const api_route = 'https://degreeme.io/API/GetVideosBySearchValue/'+search;
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetVideosBySearchValue/'+search;
     const requestMetadata = {
         method: 'GET',
         headers: {

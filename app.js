@@ -3,8 +3,7 @@ const express = require('express');
 const app = express(); 
 const path = require("path")
 const cors = require('cors');
-const UserDB = require("./Models/Views")
-const users = new UserDB();
+
 app.use(cors({
   // origin: 'http://localhost:3000'
   origin: ['https://degreeme.io',
@@ -68,22 +67,12 @@ app.use([
 ]); 
 app.use(function(req, res, next){
   res.header("Acces-Control-Allow_Origin",
-  "https://degreeme.io")
+  ["https://degreeme.io", "https://www.degreeme.io"])
   res.header("Acces-Control-Allow_Origin", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 })
-//redirect to https
-// app.use((req, res, next) => {
-//   if (req.secure) {
-//       next();
-//   } else {
-//       console.log("redirect")
-//       res.redirect('https://' + req.headers.host + req.url);
-//   }
-// });
 //render the react app
 app.get('*', function(req, res) {
-  console.log("Not found")
     console.log(__dirname)
     res.sendFile(path.join(__dirname, './my-app/build/index.html'), function(err) {
       if (err) {

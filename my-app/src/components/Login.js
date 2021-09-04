@@ -81,7 +81,7 @@ class LoginForm extends Component {
             this.showError();
         }
         else {
-            const api_route = 'https://degreeme.io/API/Login';
+            const api_route = process.env.REACT_APP_REQUEST_URL+'/API/Login';
             const postBody = {
                 Email: this.state.email,
                 Password: this.state.password

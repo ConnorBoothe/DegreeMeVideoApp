@@ -46,7 +46,7 @@ router.post('/API/AttachPaymentMethod',
                 stripe.subscriptions.create({
                   customer: user.Stripe_Customer_Id,
                   items: [
-                    { price: 'price_1JUiDZEKHHXXF01H7GN0BXLH' },
+                    { price: process.env.STRIPE_PRO_ACCESS_PRICE },
                   ],
                   coupon: 'YmOr6RLs',
                 })

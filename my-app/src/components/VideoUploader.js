@@ -158,7 +158,7 @@ class VideoUploader extends Component {
   addVideoToDatabase(videoUrl) {
     var user = JSON.parse(Cookies.get("user"));
     if (user._id !== undefined) {
-      const api_route = 'https://degreeme.io/API/AddVideo';
+      const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddVideo';
       this.createThumbnail(this.Link.current.files[0])
         .then((url) => {
           if (url === false) {

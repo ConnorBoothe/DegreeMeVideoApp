@@ -21,7 +21,7 @@ componentDidMount(){
 }
 getLikedVideos(){
     var user = JSON.parse(Cookies.get("user"));
-    const api_route = 'https://degreeme.io/GetLikedVideos/'+user._id;
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/GetLikedVideos/'+user._id;
     const requestMetadata = {
         method: 'GET',
         headers: {

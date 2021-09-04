@@ -23,7 +23,7 @@ class AddPaymentMethod extends Component {
     }
     submitPaymentMethod(user){
         return new Promise((resolve, reject)=>{
-        const api_route = 'https://degreeme.io/API/AddPaymentMethod';
+        const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddPaymentMethod';
         const postBody = {
           UserId: user._id,
           PaymentMethodId: this.state.paymentMethod.id

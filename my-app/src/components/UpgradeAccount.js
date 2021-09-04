@@ -34,7 +34,7 @@ class UpgradeAccount extends Component {
   }
   submitPaymentMethod(user) {
     this.setState({ progressText: "Adding subscription" })
-    const api_route = 'https://degreeme.io/API/AttachPaymentMethod';
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AttachPaymentMethod';
     const postBody = {
       UserId: user._id,
       PaymentMethodId: this.state.paymentMethod.id
@@ -103,7 +103,7 @@ class UpgradeAccount extends Component {
     });
   }
   loadStripe() {
-    return loadStripe('pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn');
+    return loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
   }
   addSubscription(){
    
@@ -114,7 +114,7 @@ class UpgradeAccount extends Component {
       paymentSubmitted: true
     })
     var user = JSON.parse(Cookies.get("user"));
-    const api_route = 'https://degreeme.io/API/AddSubscription';
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddSubscription';
         const postBody = {
             UserId: user._id
         };
@@ -213,7 +213,7 @@ class UpgradeAccount extends Component {
   getStripeCustomer() {
     return new Promise((resolve, reject) => {
       var user = JSON.parse(Cookies.get("user"));
-      const api_route = 'https://degreeme.io/API/GetStripeCustomer/' + user._id;
+      const api_route = process.env.REACT_APP_REQUEST_URL+'/API/GetStripeCustomer/' + user._id;
       const requestMetadata = {
         method: 'GET',
         headers: {

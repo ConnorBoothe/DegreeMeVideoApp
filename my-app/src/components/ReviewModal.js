@@ -33,7 +33,7 @@ class ReviewModal extends Component {
     this.setState({rating: e.target.value})
   }
   addReview(){
-    const api_route = 'https://degreeme.io/API/AddReview';
+    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddReview';
           const postBody = {
               Creator_Id: window.location.href.split("/")[4],
               User_Id: this.props.user._id,
