@@ -309,7 +309,7 @@ class CreateAccount extends Component {
     this.setState({ subscription: sub })
   }
   loadStripe(){
-    return loadStripe('pk_test_89vfyOdmTWo09jkpoyAnRy1l00ll36NLGn');
+    return loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
   }
   render() {
 

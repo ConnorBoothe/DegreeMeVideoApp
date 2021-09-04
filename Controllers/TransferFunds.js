@@ -3,13 +3,13 @@ const express = require('express');
 const router = express.Router();
 const CronJob = require('cron').CronJob;
 
-const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 const ViewsDB = require("../Models/Views");
 const views = new ViewsDB();
 async function transferToStripeAccounts(){
     //get all stripe subscriptions
     const subscriptions = await stripe.subscriptions.list({
-        price: 'price_1JUiDZEKHHXXF01H7GN0BXLH',
+        price: process.env.STRIPE_PRO_ACCESS_PRICE,
         limit: 100
       })
     //get user view count percentages

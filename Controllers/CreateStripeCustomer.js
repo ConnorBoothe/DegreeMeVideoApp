@@ -12,7 +12,7 @@ const {
     check,
     validationResult
   } = require('express-validator');
-const stripe = require('stripe')(process.env.STRIPE_TEST_KEY);
+const stripe = require('stripe')(process.env.STRIPE_KEY);
 const UserDB = require("../Models/User");
 const users = new UserDB();
 //error
