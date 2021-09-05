@@ -265,7 +265,7 @@ class SingleVideo extends Component {
                         />
                         </div>
                         <div>
-                        <p className="single-video-title">{this.state.video.Title} </p>
+                        <p className="single-video-title">{decode.htmlDecode(this.state.video.Title)} </p>
                         <div className="video-actions-list">
                             <p className="single-view-count">{this.state.views + " " + this.state.viewText} </p>
                             <VideoActions Likes={this.state.likeCount} 
