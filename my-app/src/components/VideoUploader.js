@@ -11,6 +11,8 @@ import Cookies from 'js-cookie';
 import CreateAccount from "../components/CreateAccount"
 import CreateSellerAccount from "../components/CreateSellerAccount"
 import 'bootstrap/dist/css/bootstrap.css';
+
+//create new config for test
 const config = {
   apiKey: "AIzaSyCdNXC20rfZy4WU_Yo0r1_jqurajcevaI0",
   authDomain: "degreeme-bd5c7.firebaseapp.com",

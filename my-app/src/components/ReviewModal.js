@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/ReviewModal.css";
+
+
 class ReviewModal extends Component {
   constructor(props){
     super(props)

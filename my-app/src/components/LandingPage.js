@@ -6,20 +6,84 @@ import person3 from "../images/person3.svg"
 import person4 from "../images/person4.svg"
 import person5 from "../images/person5.svg"
 import studentsStudying from "../images/students-studying.svg"
+import TagSelector from "../components/TagSelector"
+import VideoRow from "../components/VideoRow";
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+
 import { Link } from 'react-router-dom';
 
 class LandingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        tags: ["Java", "ITSC 1213", "Calc 1","Calc 2"],
+        tagsClass: "normal-tags-selector"
+    }
+    this.createTagsSelector = this.createTagsSelector.bind(this)
+    this.renderVideoRows = this.renderVideoRows.bind(this)
+    this.handleScroll = this.handleScroll.bind(this)
+}
+componentDidMount() {
+  window.addEventListener('scroll', this.handleScroll);
+}
+componentWillUnmount() {
+  window.removeEventListener('scroll', this.handleScroll);
+}
 
+handleScroll(event) {
+  let scrollTop = event.srcElement.body.scrollTop,
+      itemTranslate = Math.min(0, scrollTop/3 - 60);
+      console.log(window.pageYOffset)
+      if(window.pageYOffset > 55){
+        this.setState({
+          tagsClass: "sticky-tags-selector"
+        });
+      }
+      else{
+        this.setState({
+          tagsClass: "normal-tags-selector"
+        });
+      }
+  
+}
+    renderVideoRows(){
+        return (
+          <div className="videos-container">
+                {this.state.tags.map((keyword, index) => (
+                  <li key={index}>
+                    <section id={keyword}>
+                      <VideoRow category={keyword}/>
+                  </section>
+                  </li>
+              ))}
+              </div>
+        )
+    }
+    createTagsSelector(){
+      return(
+        <div className={"tags-selector " + this.state.tagsClass}>
+          <ul>
+          {this.state.tags.map((keyword, index) => (
+                  <li key={index}>
+                     <AnchorLink href={"#"+keyword} className="anchor-selector">
+                     <TagSelector name={keyword}/>
+                     </AnchorLink>
+                    
+                  </li>
+              ))}
+          </ul>
+        </div>
+      );
+    }
     render() {
         return (
-            <div className="landing-page">
+            <div className="landing-page" onScroll={this.toggleStickyTags}>
+              {this.createTagsSelector()}
                  <div className="landing"> 
+                 
                 <div className="landing--text--title landing--margin title--landing text-light">
                     How-to videos created for UNCC Comp Sci. Students <br />
                 </div>
-                <Link to="/CreateAccount">
-                   <button className="btn btn-primary landing-sign-up">Sign Up</button>
-                </Link>
                 <div className="landing--people" id="landing--animation--1">
                     <img
                       id="landing--person1--animation"
@@ -47,9 +111,12 @@ class LandingPage extends Component {
                       alt="Person 5"
                     ></img>
                 </div>
-                <svg className="landing--wave" width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs></defs><path id="wave1" d=""/></svg>
+                <Link to="/CreateAccount">
+                   <button className="btn btn-primary landing-sign-up">Sign Up</button>
+                </Link>
             </div>
-            <div className="feature1">
+            {this.renderVideoRows()}
+            {/* <div className="feature1">
                 <div>
                     <div className="font--curly">Monetize your knowledge</div>
                     <div className="landing--text--big">
@@ -81,7 +148,7 @@ class LandingPage extends Component {
           
     
           
-        </div>
+        </div> */}
             </div>
             
         );

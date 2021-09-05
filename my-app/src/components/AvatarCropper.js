@@ -5,6 +5,7 @@ import firebase from "firebase/app";
 import 'firebase/storage';
 import Cookies from 'js-cookie';
 
+
 class AvatarCropper extends Component {
 
     constructor(props) {

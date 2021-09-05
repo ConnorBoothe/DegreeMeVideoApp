@@ -7,7 +7,7 @@ import '../css/VideoRow.css';
 import '../css/LikedVideos.css';
 import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
-// import bootstrap from "bootstrap";
+
 class LikedVideos extends Component {
     constructor(props) {
         super(props);

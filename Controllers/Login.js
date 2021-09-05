@@ -36,6 +36,7 @@ router.post('/API/Login',
             return res.status(400).json({ errors: errors.array() });
         }
         else {
+            console.log("login")
             users.login(req.body.Email)
             .then((user)=>{
                 if(user) {

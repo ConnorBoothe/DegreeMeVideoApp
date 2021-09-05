@@ -9,6 +9,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {
   Redirect
 } from "react-router-dom";
+
+
 // import bootstrap from "bootstrap";
 class Home extends Component {
   constructor(props){

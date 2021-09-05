@@ -6,6 +6,38 @@
 html, body {
   overscroll-behavior: none;
 }
+.normal-tags-selector {
+  position: relative;
+  top:0;
+}
+.sticky-tags-selector {
+  position: fixed;
+  top:0;
+  z-index:2;
+}
+section {
+  padding-top: 55px;
+}
+.tags-selector {
+  width:100%;
+  height: 50px;
+  /* background-color: #202020; */
+  border-top: 1px solid #292929;
+  border-bottom: 1px solid #292929;
+  padding: 0% 7%;
+  text-align:center;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #181818;
+}
+.tags-selector li {
+  display: inline-block;
+  text-align:center;
+  vertical-align: middle;
+  height: 50px;
+  margin-top:8px;
+  
+}
 .button-1 {
   padding: .20em .40em .20em .45em;
   border-radius: 10px;
@@ -42,14 +74,15 @@ a:hover {
 .landing-sign-up {
   font-weight:bold;
   margin-top: 20px;
-  font-size:22px;
+  font-size:18px;
   border-radius: 10px;
 }
 .landing {
   display: flex;
   flex-direction: column;
-  padding-top: 100px;
-  background-color: #181818;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #121212;
   color: white;
   font-family: 'GT-Walsheim-Bold', Helvetica, Arial, sans-serif;
 }
@@ -71,7 +104,7 @@ a:hover {
   width:300px;
 }
 .landing--text--title {
-  font-size: 50px;
+  font-size: 32px;
   line-height: 1.09;
   font-weight: bold;
   font-family: 'GT-Walsheim-Bold';
@@ -143,12 +176,12 @@ a:hover {
 .landing--people {
   display: flex;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 0px;
   vertical-align: bottom !important;
 }
 
 .landing--people img {
-  max-width: calc(100% / 5);
+  max-width: calc(100% / 15);
   overflow: hidden;
   margin: 0px 5px;
   vertical-align: bottom !important;
@@ -491,7 +524,7 @@ hr {
   .landing {
     display: flex;
     flex-direction: column;
-    padding-top: 50px;
+    padding-top: 20px;
     align-items: center;
   }
 

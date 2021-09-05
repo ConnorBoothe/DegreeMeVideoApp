@@ -5,6 +5,7 @@ import CommentInput from "../components/CommentInput"
 import Comment from "../components/Comment"
 import CreateAccountModal from "../components/CreateAccountModal";
 import htmlDecode from "../GlobalFunctions/HTMLDecode";
+
 var decode = new htmlDecode();
 class CommentList extends Component {
     constructor(props) {

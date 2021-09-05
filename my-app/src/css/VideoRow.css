@@ -17,7 +17,7 @@
     vertical-align: top;
 }
 .video-item {
-    width:300px;
+    width:225px;
     border-radius:20px;
     text-align:left;
     margin-left:20px!important;
@@ -60,6 +60,8 @@
 .thumbnail {
     width: 320px;
     margin-bottom: 0;
+    width: 200px!important;
+    
 }
 .creator-name {
     position:relative;

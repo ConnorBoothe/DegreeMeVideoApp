@@ -7,6 +7,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+
 class UpgradeAccount extends Component {
   constructor(props) {
     super(props)
@@ -102,6 +103,7 @@ class UpgradeAccount extends Component {
 
     });
   }
+  //swap with env var
   loadStripe() {
     return loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
   }

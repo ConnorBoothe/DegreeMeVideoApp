@@ -40,7 +40,7 @@ class VideoUploadModal extends Component {
             <p className="video-modal-description">{this.props.Description}</p>
             <p className="video-modal-label">Share</p>
             <p>
-                http://localhost:3000/Video/{this.props.videoId}
+                https://localhost:3000/Video/{this.props.videoId}
                 <Tippy content="Copy To Clipboard">
                     <span className="copy-btn" onClick={this.props.copyToClipboard}>COPY</span>
                 </Tippy>

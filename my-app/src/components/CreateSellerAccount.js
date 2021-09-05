@@ -7,6 +7,7 @@ import 'react-phone-input-2/lib/style.css'
 import Cookies from "js-cookie"
 import { Link } from 'react-router-dom';
 
+
 // import bootstrap from "bootstrap";
 class CreateSellerAccount extends Component {
     constructor(props) {

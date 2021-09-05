@@ -1,4 +1,5 @@
 //add subscription if credit card is already added to account
+require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_KEY);
 const express = require('express');
 const router = express.Router();
@@ -26,12 +27,14 @@ router.post('/API/AddSubscription',
         else {
             users.getCustomerId(req.body.UserId)
                 .then((user) => {
+                    console.log(process.env.STRIPE_PRO_ACCESS_PRICE)
+                    console.log(process.env)
                     stripe.subscriptions.create({
                         customer: user.Stripe_Customer_Id,
                         items: [
                             { price: process.env.STRIPE_PRO_ACCESS_PRICE },
                         ],
-                        coupon: 'YmOr6RLs',
+                        // coupon: 'YmOr6RLs',
                     })
                         .then((sub) => {
                             users.updateSubscriptionLevel(user._id, "Pro Tier")

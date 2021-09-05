@@ -5,6 +5,7 @@ import "../css/EarningsChart.css"
 import { Line } from "react-chartjs-2";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
+
 class EarningsChart extends Component {
     constructor(props) {
         super(props)

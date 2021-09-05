@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import  "../css/SearchResults.css";
 import Video from "../components/SearchResultVideo";
 import { Link } from 'react-router-dom';
+
 import NoResultsImage from "../images/NoResults.svg";
 import HTMLDecode from "../GlobalFunctions/HTMLDecode";
 var htmlDecode = new HTMLDecode();

@@ -3,7 +3,8 @@ import HttpsRedirect from 'react-https-redirect';
 // import { AppContext } from "./libs/contextLib";
 import React from "react";
 import Routes from './components/Routes'
-
+// import dotenv from "./dotenv"
+require('dotenv').config();
 function App() {
 
   return (
@@ -11,9 +12,9 @@ function App() {
     <div className="App">
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       {/* <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}> */}
-      <HttpsRedirect>
+      {/* <HttpsRedirect> */}
         <Routes/>
-      </HttpsRedirect>
+      {/* </HttpsRedirect> */}
           
       {/* </AppContext.Provider> */}
     </div>

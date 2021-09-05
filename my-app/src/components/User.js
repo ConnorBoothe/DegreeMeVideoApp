@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import VideoList from "../components/VideoList";
 import ReviewModal from "../components/ReviewModal"
 import ReviewsList from "../components/ReviewsList"
+
 import 'bootstrap/dist/css/bootstrap.css';
 import htmlDecode from '../GlobalFunctions/HTMLDecode'
 var decode = new htmlDecode();

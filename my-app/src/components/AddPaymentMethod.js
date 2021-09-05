@@ -4,6 +4,7 @@ import "../css/AddCard.css"
 import { CardElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
+
 class AddPaymentMethod extends Component {
     constructor(props){
         super(props)

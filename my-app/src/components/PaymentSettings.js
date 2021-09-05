@@ -10,6 +10,7 @@ import AddPaymentMethod from "./AddPaymentMethod";
 import SubscriptionItem from "../components/Subscription_Item"
 import Cookies from 'js-cookie';
 
+
 const formatDate = new FormatDate()
 class PaymentSettings extends Component {
     mounted = false
