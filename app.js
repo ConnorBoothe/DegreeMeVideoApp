@@ -5,7 +5,7 @@ const path = require("path")
 const cors = require('cors');
 
 app.use(cors({
-  origin: ["https://degreeme.io", "https://www.degreeme.io"]
+  origin: [process.env.APP_URL, process.env.WWW_APP_URL]
 }));
 //use build directory for react app
 app.use(express.static(path.join(__dirname, "./my-app/build")))
