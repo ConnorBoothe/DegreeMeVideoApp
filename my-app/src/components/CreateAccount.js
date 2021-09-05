@@ -24,7 +24,7 @@ class CreateAccount extends Component {
       keywords: [],
       showCardInput: true,
       subscription: "Pro Tier",
-      stripePromise: loadStripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh'),
+      stripePromise: loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY),
       paymentMethod: "none",
       cardComplete: false,
       paymentSubmitted: false,
