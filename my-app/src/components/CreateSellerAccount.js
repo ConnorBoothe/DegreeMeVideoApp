@@ -234,14 +234,16 @@ class CreateSellerAccount extends Component {
             <div className="create-seller-account">
                 <h4 className="text-light create-seller-title">Create a seller account so you can be paid for your content</h4>
                 <div className="badge badge-warning create-seller-message">
-                    We do not save any of the below data on our servers.
+                    We do not store any sensitive data on our servers.
             </div>
                 <p className="text-light">Your data will be stored with our payments processor, Stripe.</p>
-                <a href="https://stripe.com/legal" className="stripe-link" target="_blank" rel="noreferrer">Stripe's terms and conditions</a>
+                <p className="text-light">Stripe is used by millions of businesses to accept payments online.</p>
+                <p>
+                    <a href="https://stripe.com/customers/all" target="_blank" rel="noreferrer">View other businesses using Stripe</a>
+                </p>
+                {/* <a href="https://stripe.com/legal" className="" target="_blank" rel="noreferrer">Stripe's terms and conditions</a> */}
                 <input type="hidden" autoComplete="false" />
                 <ul className="create-seller-list">
-
-
                     <li className="create-seller-li-1">
                         <div className="create-seller-input-container">
                             <p className="text-light create-seller-label">Street Number</p>
