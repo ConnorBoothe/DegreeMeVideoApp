@@ -37,7 +37,7 @@ class Video extends Component {
 
                     <p className="video-title">
 
-                        {this.props.Title}
+                        {decode.htmlDecode(this.props.Title)}
                     </p>
                     <div className="sub-details">
                         <p className="creator-name">

@@ -302,14 +302,14 @@ class CreateSellerAccount extends Component {
 
                 </ul>
                 <div>
-                    <Link to="/">
-                        Terms and Conditions
+                    <Link to="/TermsOfService">
+                        Terms of Service
               </Link>
                 </div>
                 <div className="terms-container">
 
                     <input onChange={this.setAgreedToTerms} type="checkbox" className="terms-checkbox" />
-                    <span className="agree-text text-light">I agree to DegreeMe's terms and conditions</span>
+                    <span className="agree-text text-light">I agree to DegreeMe's terms of service</span>
                 </div>
                 <br></br>
                 <button type="submit" className="btn btn-primary" onClick={this.createStripeAccount}
