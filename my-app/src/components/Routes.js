@@ -20,6 +20,8 @@ import LandingPage from "./LandingPage";
 import ForgotPassword from "./ForgotPassword";
 import UpdatePassword from "./UpdatePassword";
 import ContactUs from "./ContactUs";
+import TermsOfService from "./TermsOfService";
+
 
 
 
@@ -267,6 +269,8 @@ class Routes extends Component {
             keyword={this.keyword} keywords = {this.state.keywords}/>)} />
              <Route exact path="/CreateSellerAccount" render={props => 
             (<CreateSellerAccount {...props} setUser={this.setUser} />)} />
+             <Route exact path="/TermsOfService" render={props => 
+            (<TermsOfService {...props} setUser={this.setUser} />)} />
             <Route exact path="/Upgrade" render={props => 
             (<UpgradeAccount {...props} user={this.state.user}
                 setUser={this.setUser} />)} />

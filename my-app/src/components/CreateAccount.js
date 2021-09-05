@@ -149,11 +149,11 @@ class CreateAccount extends Component {
           <li className="text-light terms-li">
           <input onChange={this.setAgreedToTerms} type="checkbox" className="terms-checkbox"/>
              
-            <span className="agree-text">I agree to DegreeMe's terms and conditions</span>
+            <span className="agree-text">I agree to DegreeMe's terms of service</span>
           </li>
           <li className="terms-link">
-              <Link to="/">
-                Terms and Conditions
+              <Link to="/TermsOfService">
+                Terms of Service
               </Link>
           </li>
           <li>
@@ -187,11 +187,11 @@ class CreateAccount extends Component {
           
           <input onChange={this.setAgreedToTerms} type="checkbox" className="terms-checkbox"/>
              
-            <span className="agree-text">I agree to DegreeMe's terms and conditions</span>
+            <span className="agree-text">I agree to DegreeMe's terms of service</span>
           </li>
           <li className="terms-link">
-              <Link to="/">
-                Terms and Conditions
+              <Link to="/TermsOfService">
+                Terms of Service
               </Link>
           </li>
           <li>
