@@ -41,14 +41,14 @@
         font-size: 12px;
     }
     .creator-dashboard {
-        width: 80%!important;
+        width: 100%!important;
         background-color: #202020;
         min-height: 100px;
         margin-left:auto;
         margin-right: auto;
         text-align:center;
         margin-top:50px;
-        border-radius: 10px;
+        border-radius: 0px;
         padding-top:5px;
     }
     .creator-dashboard ul {
