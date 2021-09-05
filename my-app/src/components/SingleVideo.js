@@ -225,8 +225,12 @@ class SingleVideo extends Component {
         if(this.props.user._id!== undefined) {
             this.setState({user: this.props.user});
         }
-        else{
+        else if(Cookies.get("user")!== undefined){
             this.setState({user: JSON.parse(Cookies.get("user"))});
+        }
+        else {
+            this.setState({user: {}});
+
         }
     }
     renderVideo(){
@@ -237,7 +241,8 @@ class SingleVideo extends Component {
         }
         if(user._id === undefined) {
             return(
-                <Redirect to="/CreateAccount" />            )
+                <Redirect to="/CreateAccount" />           
+            )
         }
         else if(this.state.video._id === undefined && this.state.videoLoaded){
             return (<h2 className="text-light oops-video">Oops! Video not found</h2>)
