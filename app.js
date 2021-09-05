@@ -6,8 +6,7 @@ const cors = require('cors');
 const UserDB = require("./Models/Views")
 const users = new UserDB();
 app.use(cors({
-  origin: ['http://localhost:8080',
-  'http://localhost:3000']
+  origin: [process.env.APP_URL, process.env.WWW_APP_URL]
 }));
 //use build directory for react app
 app.use(express.static(path.join(__dirname, "./my-app/build")))
