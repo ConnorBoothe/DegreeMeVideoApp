@@ -178,7 +178,7 @@ unfocusBio(){
 
 renderBio(){
    var bio = "Write a bit about yourself";
-    if(this.state.user.Bio !== undefined) {
+    if(this.state.bio !== undefined) {
       bio = this.state.bio;
     }
   if(this.props.user._id === this.props.match.params.id) {
