@@ -107,10 +107,13 @@ class AvatarCropper extends Component {
             this.postImageToDB(user._id, url)
             .then((user)=>{
               this.props.setUser(user)
+              this.props.getUser();
               this.setState({uploadingText: "Avatar updated"})
-              setTimeout(()=>{
-                this.setState({showUploadingText: "none"})
-              }, 1200)
+              // setTimeout(()=>{
+              //   this.setState({showUploadingText: "none"})
+              // }, 1200)
+              this.props.hideModal()
+
             })
           });
         });
@@ -135,7 +138,7 @@ class AvatarCropper extends Component {
                 <br></br>
                 <button className="btn btn-primary" onClick={this.readImage}>Update Avatar</button>
                   <div className="updating-avatar" style={{"display": this.state.showUploadingText}}>
-                    <div className="loader"></div>
+                    {/* <div className="loader"></div> */}
                     <p className="updating-avatar-text">{this.state.uploadingText}</p>
                   </div>
             </div>
