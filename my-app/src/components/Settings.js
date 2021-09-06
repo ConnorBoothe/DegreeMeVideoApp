@@ -79,8 +79,8 @@ class Settings extends Component {
                 keyword = {this.props.keyword} />
            </div>
             
-            <h2 className="text-light update-avatar-title">Update your avatar</h2>
-            <AvatarCropper user={this.props.user} setUser={this.props.setUser}/>
+            {/* <h2 className="text-light update-avatar-title">Update your avatar</h2> */}
+            {/* <AvatarCropper user={this.props.user} setUser={this.props.setUser}/> */}
             <div className="update-bio">
               <h2 className="text-light update-avatar-title">Update Bio</h2>
             {this.createBioForm()}

@@ -261,7 +261,8 @@ class Routes extends Component {
             (<SingleVideo {...props} user={this.state.user} 
             showUnreadCount={this.showUnreadCount} setUser={this.setUser}/>)} />
             <Route exact path="/User/:id" render={props => 
-            (<User {...props} user={this.state.user}  />)} />
+            (<User {...props} user={this.state.user}
+            setUser = {this.setUser}  />)} />
             <Route exact path="/Settings" render={props => 
             (<Settings {...props} user={this.state.user}
             setUser={this.setUser} getKeywords = {this.getKeywords} 
