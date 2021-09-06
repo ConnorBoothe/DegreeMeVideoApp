@@ -210,7 +210,11 @@ class VideoUploader extends Component {
   readImage(file) {
     const id = uuid();
     const storageRef = firebase.storage().ref("videos/" + id).put(file)
-    this.setState({ uploadProgress: this.uploadProgress, show: true })
+    this.setState({ 
+      uploadProgress: this.uploadProgress, 
+      show: true,
+      uploadType: "Uploading video"
+     })
     storageRef.on(`state_changed`, snapshot => {
 
       this.uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes);
@@ -241,7 +245,10 @@ class VideoUploader extends Component {
       this.setState({ error: "File upload must be .mp4 format" })
     }
     else {
-      this.setState({ uploading: true })
+      this.setState({ 
+        uploading: true,
+        uploadType: "Checking file type",
+        show: true })
       const video = new Video(this.Link.current.files[0]);
       video.getThumbnails().then((thumbnails) => {
         if(thumbnails[0].blob === null){

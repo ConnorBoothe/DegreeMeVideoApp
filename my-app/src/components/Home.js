@@ -2,13 +2,15 @@ import React, {Component} from "react";
 import VideoRow from "../components/VideoRow";
 import CreatorDashboard from "../components/CreatorDashboard";
 import Cookies from 'js-cookie';
-
+import TagSelector from "../components/TagSelector"
 import "../css/Header.css";
 import "../css/Home.css";
 import 'bootstrap/dist/css/bootstrap.css';
 import {
   Redirect
 } from "react-router-dom";
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+
 
 
 // import bootstrap from "bootstrap";
@@ -16,9 +18,28 @@ class Home extends Component {
   constructor(props){
     super(props)
     this.state = {
-      keywords : []
+      keywords : [],
+      tagsClass: "normal-tags-selector"
     }
     this.getKeywords = this.getKeywords.bind(this)
+    this.createTagsSelector = this.createTagsSelector.bind(this)
+    this.handleScroll = this.handleScroll.bind(this)
+  }
+  createTagsSelector(){
+    return(
+      <div className={"tags-selector " + this.state.tagsClass}>
+        <ul>
+        {this.state.keywords.map((keyword, index) => (
+                <li key={index}>
+                   <AnchorLink href={"#"+keyword} className="anchor-selector">
+                      <TagSelector name={keyword}/>
+                   </AnchorLink>
+                  
+                </li>
+            ))}
+        </ul>
+      </div>
+    );
   }
   getKeywords(){
     if(Cookies.get("user") !== undefined) {
@@ -65,7 +86,27 @@ class Home extends Component {
     }
   }
   componentDidMount(){
+    window.addEventListener('scroll', this.handleScroll);
     this.getKeywords();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+  handleScroll(event) {
+    let scrollTop = event.srcElement.body.scrollTop,
+        itemTranslate = Math.min(0, scrollTop/3 - 60);
+        console.log(window.pageYOffset)
+        if(window.pageYOffset > 55){
+          this.setState({
+            tagsClass: "sticky-tags-selector"
+          });
+        }
+        else{
+          this.setState({
+            tagsClass: "normal-tags-selector"
+          });
+        }
+    
   }
   renderVideoRows(){
     var user = Cookies.get("user");
@@ -74,7 +115,9 @@ class Home extends Component {
         <div className="videos-container">
               {this.state.keywords.map((keyword, index) => (
                 <li key={index}>
-                  <VideoRow category={keyword}/>
+                  <section id={keyword}>
+                    <VideoRow category={keyword}/>
+                  </section>
                 </li>
             ))}
             </div>
@@ -89,6 +132,7 @@ class Home extends Component {
   render(){
     return (
         <div>
+        {this.createTagsSelector()}
         {this.renderCreatorDashboard()}       
         {this.renderVideoRows()}
         </div>
