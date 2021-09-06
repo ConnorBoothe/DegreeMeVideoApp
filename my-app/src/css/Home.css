@@ -5,6 +5,15 @@
     width: 85%;
     margin-top: 30px!important;
 }
+.normal-tags-selector {
+    position: relative;
+    top:0;
+  }
+  .sticky-tags-selector {
+    position: fixed;
+    top:0;
+    z-index:2;
+  }
 .videos-container h1 {
     text-align:left;
 }

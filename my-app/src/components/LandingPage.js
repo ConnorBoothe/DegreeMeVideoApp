@@ -5,7 +5,6 @@ import person2 from "../images/person2.svg"
 import person3 from "../images/person3.svg"
 import person4 from "../images/person4.svg"
 import person5 from "../images/person5.svg"
-import studentsStudying from "../images/students-studying.svg"
 import TagSelector from "../components/TagSelector"
 import VideoRow from "../components/VideoRow";
 import AnchorLink from 'react-anchor-link-smooth-scroll'
@@ -31,9 +30,8 @@ componentWillUnmount() {
 }
 
 handleScroll(event) {
-  let scrollTop = event.srcElement.body.scrollTop,
-      itemTranslate = Math.min(0, scrollTop/3 - 60);
-      console.log(window.pageYOffset)
+  let scrollTop = event.srcElement.body.scrollTop;
+     
       if(window.pageYOffset > 55){
         this.setState({
           tagsClass: "sticky-tags-selector"
@@ -77,7 +75,7 @@ handleScroll(event) {
     }
     render() {
         return (
-            <div className="landing-page" onScroll={this.toggleStickyTags}>
+            <div className="landing-page">
               {this.createTagsSelector()}
                  <div className="landing"> 
                  
