@@ -31,7 +31,6 @@ class KeyWordsInput extends Component {
                             
                         ))}
                     </ul>
-                     <p className="keywords-helper-text">Keywords control the videos that populate your dashboard</p>
                 </div>
             </div>
         );

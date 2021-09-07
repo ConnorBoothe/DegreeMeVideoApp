@@ -28,12 +28,6 @@ class Settings extends Component {
         <div className="settings-wrapper">
             <h2 className="text-light settings-label">Settings</h2>
             {this.renderUpgradeBtn()}
-            <h2 className="text-light update-avatar-title">Add keywords to your profile</h2>
-           <div className="keywords-settings-wrapper">
-              <KeyWordsInput addKeyword = {this.props.addKeyword} 
-                removeKeyword = {this.props.removeKeyword} keywords = {this.props.keywords}
-                keyword = {this.props.keyword} />
-           </div> 
         </div>
     );
   }

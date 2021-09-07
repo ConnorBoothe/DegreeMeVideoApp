@@ -31,7 +31,6 @@ componentWillUnmount() {
 
 handleScroll(event) {
   let scrollTop = event.srcElement.body.scrollTop;
-     
       if(window.pageYOffset > 55){
         this.setState({
           tagsClass: "sticky-tags-selector"
