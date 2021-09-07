@@ -3,6 +3,10 @@ import VideoRow from "../components/VideoRow";
 import CreatorDashboard from "../components/CreatorDashboard";
 import Cookies from 'js-cookie';
 import TagSelector from "../components/TagSelector"
+import AddKeywordsModal from "../components/AddKeywordsModal"
+
+import Tippy from "@tippy.js/react";
+
 import "../css/Header.css";
 import "../css/Home.css";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,17 +23,20 @@ class Home extends Component {
     super(props)
     this.state = {
       keywords : [],
-      tagsClass: "normal-tags-selector"
+      tagsClass: "normal-tags-selector",
+      isOpen: false
     }
-    this.getKeywords = this.getKeywords.bind(this)
     this.createTagsSelector = this.createTagsSelector.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
+    this.showModal = this.showModal.bind(this)
+    this.hideModal = this.hideModal.bind(this)
+
   }
   createTagsSelector(){
     return(
       <div className={"tags-selector " + this.state.tagsClass}>
         <ul>
-        {this.state.keywords.map((keyword, index) => (
+        {this.props.keywords.map((keyword, index) => (
                 <li key={index}>
                    <AnchorLink href={"#"+keyword} className="anchor-selector">
                       <TagSelector name={keyword}/>
@@ -37,47 +44,34 @@ class Home extends Component {
                   
                 </li>
             ))}
+            <li>
+            <Tippy content="Edit Keywords">
+              <div className="tag-selector" onClick={this.showModal}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 16 16">
+              <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+            </svg>
+              </div>
+              
+              </Tippy>
+            </li>
         </ul>
+        <AddKeywordsModal showModal={this.showModal}
+              hideModal={this.hideModal}
+              getKeywords = {this.props.getKeywords} 
+              addKeyword={this.props.addKeyword} 
+              removeKeyword={this.props.removeKeyword}
+              keywords={this.props.keywords}
+              keyword={this.props.keyword}
+              isOpen={this.state.isOpen}/>
       </div>
     );
   }
-  getKeywords(){
-    if(Cookies.get("user") !== undefined) {
-      var user = {};
-      if(this.props.user._id === undefined) {
-        user = JSON.parse(Cookies.get("user"));
-    }
-    else {
-      user = this.props.user
-    }
-    const api_route = process.env.REACT_APP_REQUEST_URL+'/API/keywords/'+ user._id;
-    const requestMetadata = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-                };
-        fetch(api_route, requestMetadata)
-        .then(response => response.json())
-            .then(result => {
-              var keywords = [];
-              if(result.length > 0){
-              for(var i = 0; i < result.length; i++ ){
-                keywords.push(result[i].Word)
-              } 
-              this.setState({
-                keywords: keywords
-              }) 
-            }  
-            else{
-              this.setState({
-                keywords: ["ITSC 1212", "ITSC 1213", "Calc 1","Calc 2"]
-              }) 
-            }           
-            })
-    }
-    
-   }
+  showModal(){
+    this.setState({isOpen: true})
+  }
+  hideModal(){
+    this.setState({isOpen: false})
+  }
   renderCreatorDashboard(){
     if(this.props.user._id !== undefined) {
       return (
@@ -87,7 +81,8 @@ class Home extends Component {
   }
   componentDidMount(){
     window.addEventListener('scroll', this.handleScroll);
-    this.getKeywords();
+    this.props.getKeywords();
+
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -113,7 +108,7 @@ class Home extends Component {
     if(user !== undefined){
       return (
         <div className="videos-container">
-              {this.state.keywords.map((keyword, index) => (
+              {this.props.keywords.map((keyword, index) => (
                 <li key={index}>
                   <section id={keyword}>
                     <VideoRow category={keyword}/>

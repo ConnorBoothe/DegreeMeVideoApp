@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import '../css/TagSelector.css';
 import htmlDecode from "../GlobalFunctions/HTMLDecode";
 var decode = new htmlDecode()
-class TagsInput extends Component {
+class TagsSelector extends Component {
     
     render() {
         return (
@@ -13,4 +13,4 @@ class TagsInput extends Component {
     }
 }
 
-export default TagsInput;
+export default TagsSelector;

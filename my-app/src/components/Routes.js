@@ -237,7 +237,12 @@ class Routes extends Component {
               <Redirect to="/LandingPage" />
             </Route>
             <Route exact path="/Home" render={props => 
-            (<Home {...props} user={this.state.user} />)} />
+            (<Home {...props} user={this.state.user}
+                getKeywords = {this.getKeywords} 
+                addKeyword={this.addKeyword} 
+                removeKeyword={this.removeKeyword}
+                keyword={this.keyword}
+                keywords={this.state.keywords} />)} />
            <Route exact path="/LandingPage" render={props => 
             (<LandingPage {...props} />)} />
             <Route exact path="/ContactUs" render={props => 
