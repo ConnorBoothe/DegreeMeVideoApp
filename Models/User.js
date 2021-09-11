@@ -252,6 +252,7 @@ module.exports = class User {
           })
       })
     }
-    
-    
+    getAllUsers(){
+      return UserDB.find({},"_id First_Name Last_Name Email")
+    }
 }

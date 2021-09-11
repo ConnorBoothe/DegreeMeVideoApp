@@ -1,0 +1,25 @@
+.your-video-thumbnail {
+    width:200px;
+}
+.category {
+    margin-bottom: 30px;
+}
+.your-videos table {
+    border-collapse: separate;
+    border-spacing: 20px!important;
+}
+.your-videos {
+    margin-top:20px;
+}
+.your-videos table, .your-videos table tr {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: #181818!important;
+    
+}
+
+.videos-title {
+    margin-top: 50px;
+    font-size: 22px;
+}

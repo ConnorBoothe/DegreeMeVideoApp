@@ -60,7 +60,15 @@ app.use([
     require("./Controllers/GetAllEarnings"),
     require("./Controllers/GenerateResetPasswordLink"),
     require("./Controllers/GetPasswordUpdateRequest"),
-    require("./Controllers/UpdatePassword")
+    require("./Controllers/UpdatePassword"),
+    require("./Controllers/UpdateVideoTitle"),
+    require("./Controllers/UpdateVideoDescription"),
+    require("./Controllers/UpdateVideoTags"),
+    require("./Controllers/DeleteVideo"),
+
+
+
+
 
 ]); 
 app.use(function(req, res, next){
