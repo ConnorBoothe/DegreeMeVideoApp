@@ -21,9 +21,8 @@ import ForgotPassword from "./ForgotPassword";
 import UpdatePassword from "./UpdatePassword";
 import ContactUs from "./ContactUs";
 import TermsOfService from "./TermsOfService";
-
-
-
+import YourVideos from "./YourVideos";
+import EditVideo from "./EditVideo";
 
 class Routes extends Component {
     constructor(props) {
@@ -253,6 +252,12 @@ class Routes extends Component {
             (<VideoUploader {...props} user={this.state.user} setUser={this.setUser} />)} />
             <Route exact path="/Login" render={props => 
             (<Login {...props} user={this.state.user} setUser={this.setUser} getUnreadCount={this.getNotificationCount}
+            />)} />
+            <Route exact path="/EditVideo/:id" render={props => 
+            (<EditVideo {...props} user={this.state.user} setUser={this.setUser} getUnreadCount={this.getNotificationCount}
+            />)} />
+             <Route exact path="/YourVideos" render={props => 
+            (<YourVideos {...props} user={this.state.user} setUser={this.setUser}
             />)} />
             <Route exact path="/UpdatePassword/:id" render={props => 
             (<UpdatePassword {...props} 

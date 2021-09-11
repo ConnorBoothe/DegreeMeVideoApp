@@ -11,19 +11,20 @@ import Cookies from 'js-cookie';
 import CreateAccount from "../components/CreateAccount"
 import CreateSellerAccount from "../components/CreateSellerAccount"
 import 'bootstrap/dist/css/bootstrap.css';
+import '../config/firebase-config';
 
-//create new config for test
-const config = {
-  apiKey: "AIzaSyCdNXC20rfZy4WU_Yo0r1_jqurajcevaI0",
-  authDomain: "degreeme-bd5c7.firebaseapp.com",
-  databaseURL: "https://degreeme-bd5c7.firebaseio.com",
-  projectId: "degreeme-bd5c7",
-  storageBucket: "degreeme-bd5c7.appspot.com",
-  messagingSenderId: "52205869765",
-  appId: "1:52205869765:web:b577285fdc02f989616eac",
-  measurementId: "G-W912PS5JG0"
-};
-firebase.initializeApp(config);
+//firebase config
+// const config = {
+//   apiKey: "AIzaSyCdNXC20rfZy4WU_Yo0r1_jqurajcevaI0",
+//   authDomain: "degreeme-bd5c7.firebaseapp.com",
+//   databaseURL: "https://degreeme-bd5c7.firebaseio.com",
+//   projectId: "degreeme-bd5c7",
+//   storageBucket: "degreeme-bd5c7.appspot.com",
+//   messagingSenderId: "52205869765",
+//   appId: "1:52205869765:web:b577285fdc02f989616eac",
+//   measurementId: "G-W912PS5JG0"
+// };
+// firebase.initializeApp(config);
 class VideoUploader extends Component {
   constructor(props) {
     super(props);

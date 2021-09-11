@@ -1,13 +1,15 @@
 const { ifError } = require("assert");
 const mongoose = require("mongoose");
 const LikesDB = require("./Likes");
+const TagsDB = require("./Tags");
 const likes = new LikesDB();
+const tags = new TagsDB();
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
 });
 var Schema = mongoose.Schema;
-var TagsSchema = new Schema({
-  Name: {type: String, required: true}
-})
+// var TagsSchema = new Schema({
+//   Name: {type: String, required: true}
+// })
 var VideoSchema = new Schema({
     Creator_Id:{type:String, required: true},
     Creator:{type:String, required: true},
@@ -20,7 +22,7 @@ var VideoSchema = new Schema({
     Views: {type:Number, required:true},
     Likes: {type: Array},
     Date:{type: Date, required: true},
-    Tags: [TagsSchema],
+    Tags: {type: Array},
     ResultRank: {type:Number}
   }, {collection: 'Videos'});
 var VideosDB = mongoose.model('Videos',VideoSchema);
@@ -45,7 +47,7 @@ module.exports = class Videos {
             Thumbnail: Thumbnail,
             Views: 0,
             Date:new Date(),
-            Tags: tagsArray
+            // Tags: tagsArray
           })
           video.save()
           .then(()=>{
@@ -68,9 +70,16 @@ module.exports = class Videos {
           likes.getLikesByVideo(video._id)
           .then((likes)=>{
             video.Likes = likes;
-            resolve(video)
+            tags.getTagsByVideoId(video._id)
+            .then((tags)=>{
+              var tagsArray = [];
+              for(var x in tags) {
+                tagsArray.push([tags[x]._id, tags[x].Name])
+              }
+              video.Tags = tagsArray;
+              resolve(video)
+            })
           })
-          
         })
         .catch((err)=>{
           reject(err)
@@ -142,5 +151,17 @@ module.exports = class Videos {
     //get creator's videos
     getVideosByCreatorId(CreatorId){
       return VideosDB.find({Creator_Id: CreatorId})
+    }
+    //remove video by id
+    removeVideoById(id) {
+      return VideosDB.deleteOne({_id: id})
+    }
+    //update title
+    updateTitle(id, title){
+      return VideosDB.findOne({_id: id}).updateOne({Title: title})
+    }
+    //update Description
+    updateDescription(id, description){
+      return VideosDB.findOne({_id: id}).updateOne({Description: description})
     }
 }

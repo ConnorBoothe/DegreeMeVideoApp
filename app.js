@@ -3,8 +3,7 @@ const express = require('express');
 const app = express(); 
 const path = require("path")
 const cors = require('cors');
-const UserDB = require("./Models/Views")
-const users = new UserDB();
+
 app.use(cors({
   origin: [process.env.APP_URL, process.env.WWW_APP_URL]
 }));
@@ -61,7 +60,15 @@ app.use([
     require("./Controllers/GetAllEarnings"),
     require("./Controllers/GenerateResetPasswordLink"),
     require("./Controllers/GetPasswordUpdateRequest"),
-    require("./Controllers/UpdatePassword")
+    require("./Controllers/UpdatePassword"),
+    require("./Controllers/UpdateVideoTitle"),
+    require("./Controllers/UpdateVideoDescription"),
+    require("./Controllers/UpdateVideoTags"),
+    require("./Controllers/DeleteVideo"),
+
+
+
+
 
 ]); 
 app.use(function(req, res, next){

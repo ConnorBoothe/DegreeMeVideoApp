@@ -3,8 +3,6 @@ import '../css/VideoUploader.css';
 import '../css/Login.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Redirect, Link } from 'react-router-dom';
-import Cookies from 'js-cookie';
-// 
 // require('dotenv').config();
 class LoginForm extends Component {
     constructor(props) {

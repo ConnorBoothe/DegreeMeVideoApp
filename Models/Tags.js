@@ -38,4 +38,59 @@ module.exports = class Tags {
             $or: regexQueries
         }).sort({"_id": 1});
     }
+    getTagsByVideoId(VideoId){
+        return TagsDB.find({VideoId: VideoId});
+    }
+    //add single tag to video
+    addSingleTag(VideoId, Name){
+        return new Promise((resolve, reject)=>{
+            var tag = new TagsDB({
+                VideoId: VideoId,
+                Name: Name,
+                Date: new Date()
+            })
+            tag.save()
+            .then((result)=>{
+                console.log(result)
+                TagsDB.find({VideoId: VideoId})
+                .then((tags)=>{
+                    var tagsArray = [];
+                    for(var x in tags){
+                        tagsArray.push([tags[x]._id, tags[x].Name]);
+                    }
+                    console.log(tagsArray)
+                    resolve(tagsArray)
+                })
+            })
+            .catch((err)=>{
+                resolve(err)
+            })
+
+        })
+        
+    }
+    removeAllVideoTags(VideoId){
+        return TagsDB.find({VideoId: VideoId}).deleteMany()
+    }
+    removeSingleTag(videoId, id){
+        return new Promise((resolve, reject)=>
+        {
+            TagsDB.findOne({_id: id}).deleteOne()
+            .then((result)=>{
+                TagsDB.find({VideoId: videoId})
+                .then((tags)=>{
+                    var tagsArray = [];
+                    for(var x in tags){
+                        tagsArray.push([tags[x]._id, tags[x].Name])
+                    }
+                    console.log(tagsArray)
+                    resolve(tagsArray);
+                })
+            })
+            .catch((err)=>{
+                resolve(error)
+            })
+        })
+       
+    }
 }

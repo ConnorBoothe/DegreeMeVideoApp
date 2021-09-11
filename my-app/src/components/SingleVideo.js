@@ -275,7 +275,7 @@ class SingleVideo extends Component {
                             <div className="sub-details">
                                 <div className="single-creator-name">
                                     <Link to={"/User/"+this.state.video.Creator_Id}>
-                                        <img className="user-image" src={this.state.video.Creator_Image} alt="Creator"/>
+                                        <img className="user-image" src={decode.htmlDecode(this.state.video.Creator_Image)} alt="Creator"/>
                                         <span className="creator-text">{this.state.video.Creator}</span>
                                     </Link>
                                 </div>
