@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6838267d.chunk.css",
+    "main.js": "/static/js/main.dca191e4.chunk.js",
+    "main.js.map": "/static/js/main.dca191e4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a8de1cba.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a8de1cba.js.map",
+    "static/css/2.e0b28d21.chunk.css": "/static/css/2.e0b28d21.chunk.css",
+    "static/js/2.e74b9770.chunk.js": "/static/js/2.e74b9770.chunk.js",
+    "static/js/2.e74b9770.chunk.js.map": "/static/js/2.e74b9770.chunk.js.map",
+    "static/js/3.9c1eb8d5.chunk.js": "/static/js/3.9c1eb8d5.chunk.js",
+    "static/js/3.9c1eb8d5.chunk.js.map": "/static/js/3.9c1eb8d5.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.e0b28d21.chunk.css.map": "/static/css/2.e0b28d21.chunk.css.map",
+    "static/css/main.6838267d.chunk.css.map": "/static/css/main.6838267d.chunk.css.map",
+    "static/js/2.e74b9770.chunk.js.LICENSE.txt": "/static/js/2.e74b9770.chunk.js.LICENSE.txt",
+    "static/media/NoResults.3936f882.svg": "/static/media/NoResults.3936f882.svg",
+    "static/media/Video_Sub.11d3a8c4.svg": "/static/media/Video_Sub.11d3a8c4.svg",
+    "static/media/degreeMeHashTag.acec1592.svg": "/static/media/degreeMeHashTag.acec1592.svg",
+    "static/media/degreeMeLogo.6ee69b6c.svg": "/static/media/degreeMeLogo.6ee69b6c.svg",
+    "static/media/person1.41d70246.svg": "/static/media/person1.41d70246.svg",
+    "static/media/person2.22387971.svg": "/static/media/person2.22387971.svg",
+    "static/media/person3.6a72384c.svg": "/static/media/person3.6a72384c.svg",
+    "static/media/person4.d2d5982e.svg": "/static/media/person4.d2d5982e.svg",
+    "static/media/person5.4bccd7be.svg": "/static/media/person5.4bccd7be.svg",
+    "static/media/visa.1fae40ca.svg": "/static/media/visa.1fae40ca.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a8de1cba.js",
+    "static/css/2.e0b28d21.chunk.css",
+    "static/js/2.e74b9770.chunk.js",
+    "static/css/main.6838267d.chunk.css",
+    "static/js/main.dca191e4.chunk.js"
+  ]
+}
