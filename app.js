@@ -65,6 +65,7 @@ app.use([
     require("./Controllers/UpdateVideoDescription"),
     require("./Controllers/UpdateVideoTags"),
     require("./Controllers/DeleteVideo"),
+    require("./Controllers/DeleteAccount"),
 
 
 

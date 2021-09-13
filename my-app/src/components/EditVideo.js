@@ -76,6 +76,13 @@ class EditVideo extends Component {
          }
       }
     getVideo(){
+        var userId = this.props.user._id;
+        if(userId === undefined) {
+            userId = JSON.parse(Cookies.get("user"))._id
+        }
+        if(userId !== undefined) {
+
+       
         let id = this.props.match.params.id
         const api_route = process.env.REACT_APP_REQUEST_URL+'/API/Video/'+ id;
         const requestMetadata = {
@@ -87,8 +94,15 @@ class EditVideo extends Component {
         fetch(api_route, requestMetadata)
         .then(response => response.json())
             .then(result => {
-                console.log(result)
-                if(result._id !== undefined) {
+                console.log(result.Creator_Id)
+                console.log(userId)
+                if(userId === undefined) {
+                    this.setState({
+                        redirect: true
+                     })
+                }
+                else if(result._id !== undefined
+                    && result.Creator_Id === userId) {
                     this.setState({
                         title: result.Title,
                         description: result.Description,
@@ -105,6 +119,7 @@ class EditVideo extends Component {
                 }
                
             })
+        }
     }
 
     updateVideoTitle(){
@@ -139,7 +154,6 @@ class EditVideo extends Component {
             }, 1000);
     }
     focusTitle(){
-        console.log("Editting")
         this.setState({
             titleClass: "editing-border",
             titleEditingText: "block",
@@ -241,7 +255,17 @@ class EditVideo extends Component {
           this.setState({currTagInput: e.target.value})
       }
     renderEditVideo(){
-        if(!this.state.redirect) {
+        var userId = this.props.user._id;
+        if(userId === undefined) {
+            userId = JSON.parse(Cookies.get("user"))._id
+        }
+        if(userId === undefined) {
+            return (
+                <Redirect to="/LandingPage"></Redirect>
+            )
+        }
+        else if(!this.state.redirect) {
+
         return (
             <div className="edit-video">
 

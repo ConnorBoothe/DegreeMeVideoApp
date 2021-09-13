@@ -165,7 +165,9 @@ class Routes extends Component {
 
     }
     logout(){
-        this.setState({user: {}});
+        this.setState({user: {}}); 
+        Cookies.set("user", {}, {secure: true, sameSite: "strict"})
+
     }
     addKeyword(){
         //if keyword isn't empty, add it
@@ -277,7 +279,8 @@ class Routes extends Component {
             (<Settings {...props} user={this.state.user}
             setUser={this.setUser} getKeywords = {this.getKeywords} 
             addKeyword={this.addKeyword} removeKeyword={this.removeKeyword}
-            keyword={this.keyword} keywords = {this.state.keywords}/>)} />
+            keyword={this.keyword} keywords = {this.state.keywords}
+            logout={this.logout}/>)} />
              <Route exact path="/CreateSellerAccount" render={props => 
             (<CreateSellerAccount {...props} setUser={this.setUser} />)} />
              <Route exact path="/TermsOfService" render={props => 
