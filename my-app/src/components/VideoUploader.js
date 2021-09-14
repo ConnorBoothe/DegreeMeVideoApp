@@ -5,13 +5,16 @@ import 'firebase/storage';
 import ProgressBar from "./ProgressBar";
 import TagsInput from './TagsInput';
 import { v4 as uuid } from "uuid";
-import { Video } from 'video-metadata-thumbnails';
+import { Video, getThumbnails, getMetadata } from 'video-metadata-thumbnails';
 import VideoUploadModal from "./VideoUploadModal";
 import Cookies from 'js-cookie';
+import ReactPlayer from "react-player";
 import CreateAccount from "../components/CreateAccount"
 import CreateSellerAccount from "../components/CreateSellerAccount"
 import 'bootstrap/dist/css/bootstrap.css';
 import '../config/firebase-config';
+import { base64StringToBlob } from 'blob-util';
+
 
 //firebase config
 // const config = {
@@ -46,7 +49,8 @@ class VideoUploader extends Component {
       descCharLimit: 2000,
       titleCharCount: 0,
       descCharCount: 0,
-      filename: ""
+      filename: "",
+      filre: ""
     };
 
     this.handleChange = this.handleChange.bind(this)
@@ -91,7 +95,9 @@ class VideoUploader extends Component {
 
   setFileName(e) {
     var filename = e.target.value.split("\\")[2]
-    this.setState({ filename: filename })
+    this.setState({ filename: filename,
+    file:this.Link.current.files[0],
+    error: "" })
   }
   addTag() {
     //check if tag contains spaces
@@ -128,18 +134,19 @@ class VideoUploader extends Component {
   }
  
   //create thumbnail from video file
+  
   createThumbnail() {
     return new Promise((resolve, reject) => {
       this.setState({ uploadType: "Creating thumbnail" });
       const video = new Video(this.Link.current.files[0]);
-      
-      video.getThumbnails().then((thumbnails) => {
-        var reader = new FileReader();
+      var reader = new FileReader();
+     reader.readAsDataURL(this.Link.current.files[0])
+      video.getThumbnails(this.Link.current.files[0]).then((thumbnails) => {
         if (thumbnails[0].blob === null) {
           resolve(false)
         }
         else {
-          reader.readAsDataURL(thumbnails[0].blob);
+         // reader.readAsDataURL(thumbnails[0].blob);
           //get thumbnail from middle of video to ensure
           //picture isnt blank black screen
           this.postThumbnailToFirebase(thumbnails[parseInt(thumbnails.length / 2)].blob)
@@ -159,6 +166,9 @@ class VideoUploader extends Component {
     this.setState({ tags: newArray });
   }
   addVideoToDatabase(videoUrl) {
+    this.setState({
+      error: ""
+    })
     var user = JSON.parse(Cookies.get("user"));
     if (user._id !== undefined) {
       const api_route = process.env.REACT_APP_REQUEST_URL+'/API/AddVideo';
@@ -229,7 +239,7 @@ class VideoUploader extends Component {
         });
       });
   }
-  addVideo(e) {
+  async addVideo(e) {
     var validMp4 = this.validateMp4();
     if (
       this.state.title === "" ||
@@ -249,28 +259,52 @@ class VideoUploader extends Component {
       this.setState({ 
         uploading: true,
         uploadType: "Checking file type",
-        show: true })
+        show: true 
+      })
+
       const video = new Video(this.Link.current.files[0]);
-      video.getThumbnails().then((thumbnails) => {
-        if(thumbnails[0].blob === null){
-          this.setState({
-            error: "Please convert your video to mp4 (h.264 codec) and upload again.",
-            uploading: false,
+      getMetadata(this.Link.current.files[0])
+     .then((metadata)=>{
+       if(metadata.width !== 1280) {
+        getThumbnails(this.Link.current.files[0]).then((thumbnails) => {
 
-          })
-        }
-        else {
-          //process the thumbnail, then the video
-          this.readImage(this.Link.current.files[0])
-        }
+          if(thumbnails[0].blob === null){
+            this.setState({
+              error: "Please convert your video to mp4 (h.264 codec) and upload again.",
+              uploading: false,
+              show: false
+            })
+          }
+          else {
+            //process the thumbnail, then the video
+            this.readImage(this.Link.current.files[0])
+          }
+        
+      })
+       }
+       else {
+        if(video.thumbnails[0] === null) {
+                this.setState({ 
+                  uploading: false,
+                  uploadType: "Please convert your mp4 to h.264 codec",
+                  show: true 
+                })
+              }
+              else { 
+                //process the thumbnail, then the video
+                 this.readImage(this.Link.current.files[0])
+              }
+       }
+     })
       
-    })
-
+      
+        
+        
+    
   }
 }
   renderUploader() {
     //need to fix
-    console.log("USER: " ,this.props.user)
     if (this.props.user.hasBankAccount &&
       this.props.user._id !== undefined) {
 
@@ -332,6 +366,9 @@ class VideoUploader extends Component {
               <p className="error">{this.state.error}</p>
             </li>
           </ul>
+          <ReactPlayer 
+            url={this.state.file}
+          />
         </div>
 
       );
