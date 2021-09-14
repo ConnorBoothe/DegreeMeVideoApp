@@ -8,7 +8,6 @@ import { v4 as uuid } from "uuid";
 import { Video, getThumbnails, getMetadata } from 'video-metadata-thumbnails';
 import VideoUploadModal from "./VideoUploadModal";
 import Cookies from 'js-cookie';
-import ReactPlayer from "react-player";
 import CreateAccount from "../components/CreateAccount"
 import CreateSellerAccount from "../components/CreateSellerAccount"
 import 'bootstrap/dist/css/bootstrap.css';
@@ -366,9 +365,6 @@ class VideoUploader extends Component {
               <p className="error">{this.state.error}</p>
             </li>
           </ul>
-          <ReactPlayer 
-            url={this.state.file}
-          />
         </div>
 
       );
