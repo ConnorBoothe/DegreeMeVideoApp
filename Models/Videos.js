@@ -164,4 +164,7 @@ module.exports = class Videos {
     updateDescription(id, description){
       return VideosDB.findOne({_id: id}).updateOne({Description: description})
     }
+    removeVideosByCreatorId(Creator_Id){
+      return VideosDB.findOne({Creator_Id: Creator_Id}).deleteMany();
+    }
 }

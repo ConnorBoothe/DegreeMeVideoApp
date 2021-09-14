@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 var UserClass = require("../Classes/User")
+const VideosDB = require("./Videos")
+const videos = new VideosDB();
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,useUnifiedTopology: true },function(err){
     
 });
@@ -254,5 +256,20 @@ module.exports = class User {
     }
     getAllUsers(){
       return UserDB.find({},"_id First_Name Last_Name Email")
+    }
+    deleteAccount(id){
+      return new Promise((resolve, reject)=>{
+        UserDB.findOne({_id: id}).deleteOne()
+        .then((result)=>{
+          //delete all videos
+          videos.removeVideosByCreatorId(id)
+          .then((result1)=>{
+            resolve(true)
+          })
+        })
+        .catch((err)=>{
+          resolve(err)
+        })
+      })
     }
 }

@@ -17,6 +17,7 @@ router.get('/API/Video/:id',
     function(req, res){
         videos.getVideoById(req.params.id)
         .then((video)=>{
+            console.log(video)
             if(video !== null) {
                 views.getViewCountByVideoId(video._id)
                 .then((views)=>{
